@@ -1,32 +1,24 @@
 from setuptools import setup
 
 setup(
-    name='spatialtree',
-    version='0.1',
-    description='Module for building spatial spill trees (KD, PCA, RP, 2-means)',
-    author='Brian McFee',
-    author_email='bmcfee@cs.ucsd.edu',
-    url='http://www-cse.ucsd.edu/~bmcfee/code/spatialtree/',
-    packages=['spatialtree'],
-      long_description="""\
-        Module for building spatial spill trees.
-        Supported tree types:
-            * KD (maximum-variance)
-            * PCA (PD, principal direction)
-            * Random projection
-            * 2-means
+    name='increment',
+    version='1',
+    description='Module for incrementing an integer by 1',
+    author='Connor Smith',
+    author_email='cpsmith6@ncsu.edu',
+    url='https://github.com/ConnorS1110/CSC510_Homework2b_Group14.git',
+    packages=['increment'],
+    long_description="""\
+        Module for incrementing a number by 1
       """,
-      classifiers=[
-          "License :: OSI Approved :: GNU General Public License (GPL)",
-          "Programming Language :: Python",
-          "Development Status :: 3 - Alpha",
-          "Intended Audience :: Developers",
-          "Topic :: Data structures",
-      ],
-      keywords='kd-tree rp-tree nearest-neighbor',
-      license='GPL',
-      install_requires=[
-        'numpy',
-        'scipy',
-      ],
-      )
+    classifiers=[
+        "License :: OSI Approved :: MIT",
+        "Programming Language :: Python",
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Topic :: Data manipulation",
+    ],
+    keywords='',
+    license='MIT',
+    install_requires=[],
+)
