@@ -7,7 +7,7 @@ setup(
     author='Connor Smith',
     author_email='cpsmith6@ncsu.edu',
     url='https://github.com/ConnorS1110/CSC510_Homework2b_Group14.git',
-    packages=['increment'],
+    packages=[],
     long_description="""\
         Module for incrementing a number by 1
       """,
