@@ -1,0 +1,31 @@
+{
+  "command" : {
+    "schedule" : {
+      "description" : "Create an event at the specified date and time.",
+      "aliases" : ["schedule", "s"],
+      "args" : ["time", "weekday", "date", "type", "description"],
+      "behavior" : {
+        "No date or weekday" : "Assume today",
+        "More than one date or weekday" : "Schedule on soonest available.",
+        "No time specified" : "Show message asking for a date.",
+        "Specified time is not available" : "Search remaning specified days. If none remain, show message saying schedule is busy."
+      }
+    }
+  },
+  
+  "args" : {
+    "time" : {
+      "description" : "A period in time, in 24h format. Created from one or more times.",
+      "regex" : "\d{1,2}(:\d{1,2})?(\-\d{1,2}(:\d{1,2})?)?",
+      "examples" : ["8", "10:30", "12:45-14:56", "16-20:50"],
+      "counterexamples" : ["24", "27", "14:60", "3-29", "15-12", "12-", "13-14-19"],
+      "considerations" : [
+        "If only one hour is specified, assume 1 hour period. Ex: 12 -> 12:00-13:00",
+        "If no minutes are specified, assume from the hour o'clock. Ex: 12-13 -> 12:00-13:00"
+        "Hours are in 24h format. No 12pm",
+        "Hours must be between 0-23, and minutes should be between 0-59.",
+        "Hour on the left must be lower than hour on the right. No day overflow on events."
+      ]
+    }
+  }
+}
