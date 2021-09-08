@@ -5,7 +5,7 @@
       "aliases" : ["help", "h"],
       "args" : ["command"],
       "behavior" : {
-        "If command is specified" : "Send as a direct message an explenation of the command.",
+        "If command is specified" : "Send as a direct message an explanation of the command.",
         "Command does not exist" : "Send a message saying so.",
         "No command" : "Send as a direct message a list of all commands."
       }
@@ -14,7 +14,7 @@
     "schedule" : {
       "description" : "Create an event at the specified date and time.",
       "aliases" : ["schedule", "s"],
-      "args" : ["time", "weekday", "date", "type", "description"],
+      "args" : ["name", "time", "half", "weekday", "date", "type", "description"],
       "behavior" : {
         "No date or weekday" : "Assume today",
         "No date" : "Assume this week",
