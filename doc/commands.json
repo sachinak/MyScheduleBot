@@ -6,6 +6,7 @@
       "args" : ["time", "weekday", "date", "type", "description"],
       "behavior" : {
         "No date or weekday" : "Assume today",
+        "No date" : "Assume this week",
         "More than one date or weekday" : "Schedule on soonest available.",
         "No time specified" : "Show message asking for a date.",
         "Specified time is not available" : "Search remaning specified days. If none remain, show message saying schedule is busy."
@@ -16,15 +17,65 @@
   "args" : {
     "time" : {
       "description" : "A period in time, in 24h format. Created from one or more times.",
-      "regex" : "\d{1,2}(:\d{1,2})?(\-\d{1,2}(:\d{1,2})?)?",
+      "regex" : "^\\d{1,2}(:\\d{1,2})?(\\-\\d{1,2}(:\\d{1,2})?)?$",
       "examples" : ["8", "10:30", "12:45-14:56", "16-20:50"],
       "counterexamples" : ["24", "27", "14:60", "3-29", "15-12", "12-", "13-14-19"],
       "considerations" : [
         "If only one hour is specified, assume 1 hour period. Ex: 12 -> 12:00-13:00",
-        "If no minutes are specified, assume from the hour o'clock. Ex: 12-13 -> 12:00-13:00"
+        "If no minutes are specified, assume from the hour o'clock. Ex: 12-13 -> 12:00-13:00",
         "Hours are in 24h format. No 12pm",
         "Hours must be between 0-23, and minutes should be between 0-59.",
         "Hour on the left must be lower than hour on the right. No day overflow on events."
+      ]
+    },
+
+    "weekday" : {
+      "description" : "One or more days of the week, from sunday to saturday.",
+      "regex" : "^(S|M|T|W|Th|F|Sa)(((\\-(S|M|T|W|Th|F|Sa))|(S|M|T|W|Th|F|Sa)*))$",
+      "examples" : ["M", "TTh", "MWF", "M-F", "SaFThWTMS"],
+      "counterexamples" : ["D", "F-", "F-M"],
+      "considerations" : [
+        "Weeks start on sunday and end on saturday.",
+        "The weekday is either a concatenation (MWF), or range (M-F).",
+        "On cocatenations, repeated days are ignored.",
+        "On cocatenations, order of days does not matter.",
+        "On ranges, the first day must be before the second day. No week overflow."
+      ]
+    },
+
+    "date" : {
+      "description" : "One or more days of the calendar year, on dd/mm/yyyy.",
+      "regex" : "^^(\\d{1,2})(\\/\\d{1,2}(\\/\\d{4})?)?$$",
+      "examples" : ["20", "20/4", "20/4/2050"],
+      "counterexamples" : ["32", "30/2", "8/30", "13/6/1990", "4/2024"],
+      "considerations" : [
+        "If a date is given, the day must always be specified.",
+        "If month is missing, assume current month.",
+        "If year is missing, assume current year.",
+        "You can only schedule on future dates."
+      ]
+    },
+
+    "type" : {
+      "description" : "A type of event. Must be created first by user.",
+      "regex" : "^[A-Za-z\\-]{3,}$",
+      "examples" : ["class", "event", "Group-Meeting", "gAminG", "study"],
+      "counterexamples" : ["class0", "group meeting", "!@@$343341"],
+      "considerations" : [
+        "Only letters and hyphen.",
+        "Case insensitive. Everything is transformed to lowercase.",
+        "With the exception of type creation, the type must exist before usage."
+      ]
+    },
+
+    "description" : {
+      "description" : "Description of the event.",
+      "regex" : "^.*$",
+      "examples" : ["CSC 510", "Meeting with group.", "123"],
+      "counterexamples" : ["\\n"],
+      "considerations" : [
+        "Always at the end of a command.",
+        "Only for storing."
       ]
     }
   }
