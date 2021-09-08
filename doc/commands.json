@@ -1,5 +1,16 @@
 {
   "command" : {
+    "help" : {
+      "description" : "Shows a list of commands.",
+      "aliases" : ["help", "h"],
+      "args" : ["command"],
+      "behavior" : {
+        "If command is specified" : "Send as a direct message an explenation of the command.",
+        "Command does not exist" : "Send a message saying so.",
+        "No command" : "Send as a direct message a list of all commands."
+      }
+    },
+
     "schedule" : {
       "description" : "Create an event at the specified date and time.",
       "aliases" : ["schedule", "s"],
@@ -161,6 +172,10 @@
         "Only for storing.",
         "Allow emoji, and anything utf-8."
       ]
+    },
+
+    "command" : {
+      "description" : "Name of an existing command. Only used by help."
     }
   }
 }
