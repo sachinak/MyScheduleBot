@@ -1,0 +1,181 @@
+{
+  "command" : {
+    "help" : {
+      "description" : "Shows a list of commands.",
+      "aliases" : ["help", "h"],
+      "args" : ["command"],
+      "behavior" : {
+        "If command is specified" : "Send as a direct message an explenation of the command.",
+        "Command does not exist" : "Send a message saying so.",
+        "No command" : "Send as a direct message a list of all commands."
+      }
+    },
+
+    "schedule" : {
+      "description" : "Create an event at the specified date and time.",
+      "aliases" : ["schedule", "s"],
+      "args" : ["time", "weekday", "date", "type", "description"],
+      "behavior" : {
+        "No date or weekday" : "Assume today",
+        "No date" : "Assume this week",
+        "More than one date or weekday" : "Schedule on soonest available.",
+        "Both date and weekday specified" : "Search in the intersection",
+        "No time specified" : "Show message asking for a date.",
+        "No type specified" : "Make typeless (default).",
+        "Specified time is not available" : "Search remaning specified days. If none remain, show message saying schedule is busy.",
+        "Specified time is available" : "Create an event using the specified arguments."
+      }
+    },
+
+    "find" : {
+      "description" : "Find a time slot and show available times.",
+      "aliases" : ["find", "f"],
+      "args" : ["length", "time", "weekday", "date", "type"],
+      "behavior" : {
+        "No length" : "Assume 1h",
+        "No time, date, or weekday" : "Assume today.",
+        "Time specified" : "Search within time period.",
+        "More than one date or weekday" : "Search on all possible.",
+        "Both date and weekday specified" : "Search in the intersection",
+        "Type specified" : "Search within prefered hours for event type.",
+        "All arguments are valid" : "Show all available time slots within the constrains.",
+        "No slots available" : "Suggest searching with less constrains.",
+        "If there are too many results" : "Show in multiple pages. Pages can be handled using reactions."
+      }
+    },
+
+    "day" : {
+      "description" : "Have a glance at the events of your day.",
+      "aliases" : ["day", "d"],
+      "args" : ["date"],
+      "behavior" : {
+        "No date" : "Assume today",
+        "Date contains more than one day" : "Show warning and assume only first day.",
+        "All arguments are valid" : "Show a summary of the scheduled events for the date."
+      }
+    },
+
+    "type: create" : {
+      "description" : "Create a new type of event.",
+      "aliases" : ["typecreate", "tc"],
+      "args" : ["type", "description"],
+      "behavior" : {
+        "Type already exists." : "Show message saying so.",
+        "Type does not exist." : "Create new event type. No prefered hours."
+      }
+    },
+
+    "type: delete" : {
+      "description" : "Delete an existing type of event.",
+      "aliases" : ["typedelete", "td"],
+      "args" : ["type"],
+      "behavior" : {
+        "Type does not exist." : "Show message saying so.",
+        "Type exists." : "Ask for confirmation.",
+        "Confirmation given" : "Delete the type.",
+        "Events exist with that type" : "Set their type as typeless/default."
+      }
+    },
+
+    "type: set prefered hours" : {
+      "description" : "Set the prefered time for a type of event.",
+      "aliases" : ["typehours", "th"],
+      "args" : ["time", "type"],
+      "behavior" : {
+        "Type not specified" : "Show message asking for that argument.",
+        "Type does not exist" : "Show message saying so.",
+        "Time not specified" : "Remove prefered time. Assume all hours are prefered.",
+        "Both arguments specified" : "For the chosen event type, store the time as the prefered hours."
+      }
+    }
+  },
+  
+  "args" : {
+    "time" : {
+      "description" : "A period in time, in 24h format. Created from one or more times.",
+      "regex" : "^\\d{1,2}(:\\d{1,2})?(\\-\\d{1,2}(:\\d{1,2})?)?$",
+      "examples" : ["8", "10:30", "12:45-14:56", "16-20:50"],
+      "counterexamples" : ["24", "27", "14:60", "3-29", "15-12", "12-", "13-14-19"],
+      "considerations" : [
+        "If only one hour is specified, assume 1 hour period. Ex: 12 -> 12:00-13:00",
+        "If no minutes are specified, assume from the hour o'clock. Ex: 12-13 -> 12:00-13:00",
+        "Hours are in 24h format. No 12pm",
+        "Hours must be between 0-23, and minutes should be between 0-59.",
+        "Hour on the left must be lower than hour on the right. No day overflow on events."
+      ]
+    },
+
+    "length" : {
+      "description" : "A timespan, represent durations or time before an event. Ends with m(inutes), h(ours), or d(ays).",
+      "regex" : "^(\\d{1,2}(:\\d{1,2})?h)|(\\d{1,3}[md])$",
+      "examples" : ["1h", "3h", "0:00h", "0:30h", "30m", "90m", "24h", "72h", "3d", "365d"],
+      "counterexamples" : ["1000s", "-1d", "1:00:05h", "d"],
+      "considerations" : [
+        "In three scales: minutes, hours, or days.",
+        "Time span must end on the corresonding character: m, h, or d.",
+        "0 is allowed for notifications or reminders when an event is starting.",
+        "Hours allow minutes using colon (:) before h.",
+        "Minutes should be between 0-59. More than 24 is allowed for hours."
+      ]
+    },
+
+    "weekday" : {
+      "description" : "One or more days of the week, from sunday to saturday.",
+      "regex" : "^(S|M|T|W|Th|F|Sa)(((\\-(S|M|T|W|Th|F|Sa))|(S|M|T|W|Th|F|Sa)*))$",
+      "examples" : ["M", "TTh", "MWF", "M-F", "SaFThWTMS"],
+      "counterexamples" : ["D", "F-", "F-M"],
+      "considerations" : [
+        "Weeks start on sunday and end on saturday.",
+        "The weekday is either a concatenation (MWF), or range (M-F).",
+        "On cocatenations, repeated days are ignored.",
+        "On cocatenations, order of days does not matter.",
+        "On ranges, the first day must be before the second day. No week overflow."
+      ]
+    },
+
+    "date" : {
+      "description" : "One or more days of the calendar year, on dd/mm/yyyy. Can be specified as a sole date or as a range.",
+      "regex" : "^(\\d{1,2})(\\/\\d{1,2}(\\/\\d{4})?)?(\\-(\\d{1,2})(\\/\\d{1,2}(\\/\\d{4})?)?)?$",
+      "examples" : ["20", "20/4", "20/4/2050", "20-31", "1/7-31/7", "1/1/2022-1/1/2023"],
+      "counterexamples" : ["32", "30/2", "8/30", "13/6/1990", "4/2024"],
+      "considerations" : [
+        "If a date is given, the day must always be specified.",
+        "If month is missing, assume current month.",
+        "If year is missing, assume current year.",
+        "You can only schedule on future dates.",
+        "If a period is given, assume next valid period. Ex: if its currently Sept 31, and 20-30 is given, assume 20/10-30/10.",
+        "For ranges, first date must be earlier than second date.",
+        "For ranges, assume shortest possible. Ex: 3/3-2 -> 3/3-2/4.",
+        "Same applies to year. Ex: 31/12/2022-10/1 -> 31/12/2022-10/1/2023."
+      ]
+    },
+
+    "type" : {
+      "description" : "A type of event. Must be created first by user.",
+      "regex" : "^[A-Za-z\\-]{3,}$",
+      "examples" : ["class", "event", "Group-Meeting", "gAminG", "study"],
+      "counterexamples" : ["class0", "group meeting", "!@@$343341"],
+      "considerations" : [
+        "Only letters and hyphen.",
+        "Case insensitive. Everything is transformed to lowercase.",
+        "With the exception of type creation, the type must exist before usage."
+      ]
+    },
+
+    "description" : {
+      "description" : "Description of the event.",
+      "regex" : "^.*$",
+      "examples" : ["CSC 510", "Meeting with group.", "123"],
+      "counterexamples" : ["\\n"],
+      "considerations" : [
+        "Always at the end of a command.",
+        "Only for storing.",
+        "Allow emoji, and anything utf-8."
+      ]
+    },
+
+    "command" : {
+      "description" : "Name of an existing command. Only used by help."
+    }
+  }
+}
