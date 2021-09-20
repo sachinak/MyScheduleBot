@@ -1,6 +1,7 @@
 import discord  # type: ignore
 import os
 import json
+from config import TOKEN
 from functionality.AddEvent import add_event  # type: ignore
 
 # Loads data from commands json file
@@ -52,9 +53,6 @@ async def on_message(message):
         await add_event(client, message)
 
 # Runs the bot (local machine)
-# Stores bot key
-os.environ['TOKEN'] = 'ODg0ODY1MjY5ODY3MTAyMjQ5.YTetAA.q5aEfxD1_IcLkuNutetSfR_blgo'
-client.run(os.getenv('TOKEN'))
-
+client.run(TOKEN)
 
 # client.run(os.environ['TOKEN'])  # Runs the bot (repl.it)
