@@ -16,9 +16,9 @@ client = discord.Client()
 @client.event
 async def on_ready():
   print("We have logged in as {0.user}".format(client)) # Outputs bot name to console once bot is started
-  channel = client.get_channel(884864860859531347) # Gets the channel ID of the "schedule-manager channel"
-  await channel.send("Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n" +
-  "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!")
+  #channel = client.get_channel(884864860859531347) # Gets the channel ID of the "schedule-manager channel"
+  #await channel.send("Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n" +
+  #"React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!")
 
 @client.event
 async def on_reaction_add(reaction, user):
