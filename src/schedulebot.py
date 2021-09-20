@@ -1,7 +1,7 @@
 import discord  # type: ignore
 import os
 import json
-from AddEvent import add_event  # type: ignore
+from functionality.AddEvent import add_event  # type: ignore
 
 # Loads data from commands json file
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,4 +51,10 @@ async def on_message(message):
     if message.content.startswith("schedule") or message.content.startswith("s"):
         await add_event(client, message)
 
-client.run(os.environ['TOKEN'])  # Runs the bot
+# Runs the bot (local machine)
+# Stores bot key
+os.environ['TOKEN'] = 'ODg0ODY1MjY5ODY3MTAyMjQ5.YTetAA.q5aEfxD1_IcLkuNutetSfR_blgo'
+client.run(os.getenv('TOKEN'))
+
+
+# client.run(os.environ['TOKEN'])  # Runs the bot (repl.it)
