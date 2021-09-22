@@ -130,3 +130,6 @@ dmypy.json
 
 # Important Variables
 config.py
+
+# VSCode
+.vscode
