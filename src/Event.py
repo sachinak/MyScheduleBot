@@ -8,6 +8,15 @@ class Event:
 
     # Converts event object to a string
     def __str__(self):
-        output = self.name + " " + str(self.start_date) + " " + \
-            str(self.end_date) + " " + self.event_type + " " + self.description
+        output = (
+            self.name
+            + " "
+            + str(self.start_date)
+            + " "
+            + str(self.end_date)
+            + " "
+            + self.event_type
+            + " "
+            + self.description
+        )
         return output
