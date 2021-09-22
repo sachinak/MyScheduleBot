@@ -9,7 +9,7 @@ async def add_event(client, message):
     event_array = []
     await message.author.send("Lets add an event!\n" + "First give me the name of your event:")
     event_msg = await client.wait_for("message")  # Waits for user input
-    event_msg = event_msg.content  # Strips message to just the text the user entered
+    event_msg = "*" + event_msg.content + "*"  # Strips message to just the text the user entered
     event_array.append(event_msg)
     await message.author.send(
         "Now give me the start & end dates for you event.\n"
@@ -129,11 +129,49 @@ async def add_event(client, message):
     try:
         current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4])
         await message.author.send("Your event was successfully created!")
+
+        # Creates ScheduleBot directory in users Documents folder if it doesn't exist
         if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot")):
             Path(os.path.expanduser("~/Documents/ScheduleBot")).mkdir(parents=True, exist_ok=True)
-        calendar_file = open(os.path.expanduser("~/Documents") + "/ScheduleBot/calendar_file.txt", "a")
-        calendar_file.write(str(current) + "\n")
-        calendar_file.close()
+
+        # Checks if the calendar text file exists, and creates it if it doesn't
+        if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/calendar_file.txt"):
+            open(os.path.expanduser("~/Documents") + "/ScheduleBot/calendar_file.txt", "x")
+
+        calendar_file = open(os.path.expanduser("~/Documents") + "/ScheduleBot/calendar_file.txt", "r")
+        calendar_lines = calendar_file.readlines()  # Stores all lines from calendar file as an array
+        line_number = 0
+
+        # Loop if the file is not empty
+        if len(calendar_lines) > 0:
+            for i in calendar_lines:
+                tstr = re.split("\s", i)  # Splits the string representation of an Event object
+
+                # Converts the split string array into an Event object
+                temp_event = Event(
+                    tstr[0],
+                    datetime.strptime(tstr[1] + " " + tstr[2], "%Y-%m-%d %H:%M:%S"),
+                    datetime.strptime(tstr[3] + " " + tstr[4], "%Y-%m-%d %H:%M:%S"),
+                    "",
+                    "",
+                )
+                # If the Event we want to add comes before the Event from current line in the file, insert it at that spot
+                if current < temp_event:
+                    calendar_lines.insert(line_number, str(current) + "\n")
+                    break
+                # If the end of the file is reached and the Event has not been added, insert it to the end of the file
+                if line_number == len(calendar_lines) - 1:
+                    calendar_lines.insert(len(calendar_lines), str(current) + "\n")
+                    break
+                line_number += 1
+            calendar_file = open(os.path.expanduser("~/Documents") + "/ScheduleBot/calendar_file.txt", "w")
+            calendar_file.writelines(calendar_lines)  # Rewrite the calendar back to the file with the new Event
+            calendar_file.close()
+        # If the file is empty, add the Event to the beginning of the file
+        else:
+            calendar_file = open(os.path.expanduser("~/Documents") + "/ScheduleBot/calendar_file.txt", "w")
+            calendar_file.write(str(current))
+            calendar_file.close()
     except Exception as e:
         # Outputs an error message if the event could not be created
         print(e)

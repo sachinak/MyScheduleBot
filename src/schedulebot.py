@@ -3,7 +3,8 @@ import os
 import json
 from config import TOKEN
 from functionality.AddEvent import add_event  # type: ignore
-from functionality.FindAvailableTime import find_availableTime
+
+# from functionality.FindAvailableTime import find_availableTime
 
 # Loads data from commands json file
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -67,7 +68,8 @@ async def on_message(message):
 
     # "find" command Recommendation based on Event Type
     if message.content.startswith("find") or message.content.startswith("f"):
-        await find_availableTime(client, message)
+        return
+        # await find_availableTime(client, message)
 
 
 # Runs the bot (local machine)
