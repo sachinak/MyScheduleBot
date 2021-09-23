@@ -32,4 +32,5 @@ async def get_highlight(ctx, bot):
             # Is date in event today?
             # how?
     else:
-        print("You have no events scheduled for today")
+        # print("You have no events scheduled for today")
+        await channel.send("You have no events scheduled for today")
