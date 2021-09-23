@@ -1,9 +1,12 @@
 import discord  # type: ignore
-from discord.ext import commands # type: ignore
+from discord.ext import commands  # type: ignore
 import os
 import json
+
+from discord.ext.commands.help import MinimalHelpCommand
 from config import TOKEN
 from functionality.AddEvent import add_event  # type: ignore
+from functionality.highlights import get_highlight
 
 # from functionality.FindAvailableTime import find_availableTime
 
@@ -13,6 +16,8 @@ json_file = open(root_dir + "/doc/commands.json")
 json_data = json.load(json_file)
 
 bot = commands.Bot(command_prefix="!")
+# bot.remove_command("help")
+
 
 @bot.event
 async def on_ready():
@@ -26,6 +31,11 @@ async def on_ready():
 @bot.command()
 async def schedule(ctx):
     await add_event(ctx, bot)
+
+
+@bot.command()
+async def highlights(ctx):
+    await get_highlight(ctx, bot)
 
 
 # Runs the bot (local machine)
