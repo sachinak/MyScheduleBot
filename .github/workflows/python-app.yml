@@ -36,5 +36,9 @@ jobs:
         pytest -s test/ --cov src/
     - name: Generate coverage badge
       run: |
-        coverage-badge -o doc/img/coverage.svg
+        coverage-badge -o doc/img/coverage.svg |
+        git add doc/img/coverage.svg |
+        git commit -m "Update coverage badge." |
+        git fetch origin main
+        git push origin HEAD:main
         
