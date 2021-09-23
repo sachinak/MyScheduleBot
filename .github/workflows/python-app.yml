@@ -16,6 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
@@ -37,8 +40,17 @@ jobs:
     - name: Generate coverage badge
       run: |
         coverage-badge -o ./doc/img/coverage.svg |
+    - name: Commit badge to repo
+      run: |
+        git config --local user.email "420420420+github-actions[bot]@users.noreply.github.com" |
+        git config --local user.name "github-actions[bot]" |
         git add ./doc/img/coverage.svg |
         git commit -m "Update coverage badge." |
         git fetch origin main |
         git push origin HEAD:main
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
         
