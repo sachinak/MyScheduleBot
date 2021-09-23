@@ -1,4 +1,4 @@
 # discord
-pytest
+pytest>=3.9
 pytest-cov
-coverage
+coverage>=5.0.1
