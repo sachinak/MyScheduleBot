@@ -130,6 +130,7 @@ dmypy.json
 
 # Important Variables
 config.py
+schedulebot\ copy.py
 
 # VSCode
 .vscode

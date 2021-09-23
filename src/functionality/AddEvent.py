@@ -5,13 +5,16 @@ from pathlib import Path
 from Event import Event
 
 
-async def add_event(client, message):
+async def add_event(ctx, client):
+    channel = await ctx.author.create_dm()
+    def check(m):
+        return m.content is not None and m.channel == channel and m.author == ctx.author
     event_array = []
-    await message.author.send("Lets add an event!\n" + "First give me the name of your event:")
-    event_msg = await client.wait_for("message")  # Waits for user input
+    await channel.send("Lets add an event!\n" + "First give me the name of your event:")
+    event_msg = await client.wait_for("message", check = check)  # Waits for user input
     event_msg = "*" + event_msg.content + "*"  # Strips message to just the text the user entered
     event_array.append(event_msg)
-    await message.author.send(
+    await channel.send(
         "Now give me the start & end dates for you event.\n"
         + "If you don't use military time, make sure you include 'am' or 'pm' so I know when to schedule your event, otherwise I will assume am\n\n"
         + "Here is the format you should follow (Start is first, end is second):\n"
@@ -26,9 +29,9 @@ async def add_event(client, message):
         msg_content = ""
         start_complete = False
         end_complete = True
-        if message.author != client.user:
+        if ctx.message.author != client.user:
             # Waits for user input
-            event_msg = await client.wait_for("message")
+            event_msg = await client.wait_for("message", check = check)
             # Strips message to just the text the user entered
             msg_content = event_msg.content
             # Splits response to prepare data to be appended to event_array
@@ -72,7 +75,7 @@ async def add_event(client, message):
                 print("Created start_date object: " + str(start_date))
         except Exception as e:
             print(e)
-            await message.author.send("Looks like you didn't enter your start dates correctly.")
+            await channel.send("Looks like you didn't enter your start dates correctly.")
             start_complete = False
             date_array = []
             event_msg = ""
@@ -93,7 +96,7 @@ async def add_event(client, message):
                 print("Created end_date object: " + str(end_date))
         except Exception as e:
             print(e)
-            await message.author.send("Looks like you didn't enter your end dates correctly.")
+            await channel.send("Looks like you didn't enter your end dates correctly.")
             end_complete = False
             date_array = []
             event_msg = ""
@@ -107,18 +110,18 @@ async def add_event(client, message):
 
         # If both objects were unsuccessfully created, the bot notifies the user and the loop starts again
         else:
-            await message.author.send(
+            await channel.send(
                 "Make sure you follow this format(Start is first, end is second): mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm"
             )
             date_array = []
             msg_content = ""
 
-    await message.author.send("Tell me what type of event this is. Here are a list of event types I currently know:")
-    event_msg = await client.wait_for("message")  # Waits for user input
+    await channel.send("Tell me what type of event this is. Here are a list of event types I currently know:")
+    event_msg = await client.wait_for("message", check = check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
     event_array.append(event_msg)
-    await message.author.send("Any additional description you want me to add about the event? If not, enter 'done'")
-    event_msg = await client.wait_for("message")  # Waits for user input
+    await channel.send("Any additional description you want me to add about the event? If not, enter 'done'")
+    event_msg = await client.wait_for("message", check = check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
     if event_msg.lower() == "done":
         event_array.append("")
@@ -128,7 +131,7 @@ async def add_event(client, message):
     # Tries to create an Event object from the user input
     try:
         current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4])
-        await message.author.send("Your event was successfully created!")
+        await channel.send("Your event was successfully created!")
 
         # Creates ScheduleBot directory in users Documents folder if it doesn't exist
         if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot")):
@@ -175,6 +178,6 @@ async def add_event(client, message):
     except Exception as e:
         # Outputs an error message if the event could not be created
         print(e)
-        await message.author.send(
+        await channel.send(
             "There was an error creating your event. Make sure your formatting is correct and try creating the event again."
         )
