@@ -35,5 +35,6 @@ jobs:
       run: |
         pytest -s test/ --cov src/
     - name: Generate coverage badge
+      run: |
         coverage-badge -o doc/img/coverage.svg
         
