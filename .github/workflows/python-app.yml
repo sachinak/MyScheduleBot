@@ -36,6 +36,6 @@ jobs:
         pytest --cov -s test/
     - name: Code coverage
       run : |
-        coverage combine test/.coverage |
+        coverage combine .coverage |
         coverage report
         
