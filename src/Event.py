@@ -58,3 +58,7 @@ class Event:
                 and self.start_date <= other.start_date
             )
         )
+
+    def to_list(self):
+        array = [self.name, str(self.start_date), str(self.end_date), self.event_type, self.description]
+        return array
