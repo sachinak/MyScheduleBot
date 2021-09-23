@@ -160,14 +160,10 @@ async def add_event(ctx, client):
                     if len(i) > 0:
                         temp_event = Event("", datetime.strptime(i[2], "%d/%m/%Y %H:%M"), datetime.strptime(i[3], "%d/%m/%Y %H:%M"), "", "")
                         if current < temp_event:
-                            print(str(current))
                             rows.insert(line_number, [''] + current.to_list())
-                            print(rows)
                             break
                         if line_number == len(rows) - 1:
-                            print(str(current))
                             rows.insert(len(rows), [''] + current.to_list())
-                            print(rows)
                             break
                         line_number += 1
                 with open(os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(ctx.author.id) + ".csv", "w") as calendar_file:
@@ -178,8 +174,6 @@ async def add_event(ctx, client):
                 print("Else")
                 with open(os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(ctx.author.id) + ".csv", "w") as calendar_file:
                     csvwriter = csv.writer(calendar_file)
-                    print(str(current))
-                    print("I am here")
                     csvwriter.writerow(fields)
                     csvwriter.writerow([''] + current.to_list())
 
