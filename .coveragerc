@@ -1,4 +1,0 @@
-[paths]
-source =
-    src/
-    **/site-packages/mypackage
