@@ -39,7 +39,7 @@ jobs:
         pytest -s test/ --cov src/
     - name: Generate coverage badge
       run: |
-        coverage-badge -o ./doc/img/coverage.svg |
+        coverage-badge -o ./doc/img/coverage.svg
     - name: Commit badge to repo
       run: |
         git config --local user.email "420420420+github-actions[bot]@users.noreply.github.com" |
