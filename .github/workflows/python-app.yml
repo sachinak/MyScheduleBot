@@ -34,7 +34,6 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -s test/ --cov src/
-    - uses: actions/checkout@v2
     - name: Generate and commit badge to repo
       run: |
         coverage-badge -o ./doc/img/coverage.svg
