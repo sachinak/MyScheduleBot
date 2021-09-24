@@ -38,6 +38,7 @@ jobs:
       run: |
         coverage-badge -o ./doc/img/coverage.svg -f
     - name: Commit badge to repo
+      run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add ./doc/img/coverage.svg
