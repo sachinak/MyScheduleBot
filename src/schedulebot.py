@@ -41,6 +41,10 @@ async def schedule(ctx):
 async def highlights(ctx):
     await get_highlight(ctx, bot)
 
+# creating new event type
+@bot.command()
+async def event_type(ctx):
+    await create_event_type(ctx, bot)
 
 # Runs the bot (local machine)
 bot.run(TOKEN)
