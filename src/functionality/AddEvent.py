@@ -5,7 +5,7 @@ from datetime import datetime
 from pathlib import Path
 from types import TracebackType
 from Event import Event
-
+from parse import parse_period
 
 async def add_event(ctx, client):
     channel = await ctx.author.create_dm()
@@ -39,62 +39,23 @@ async def add_event(ctx, client):
             # Strips message to just the text the user entered
             msg_content = event_msg.content
             # Splits response to prepare data to be appended to event_array
-            date_array = re.split("\s", msg_content)
-
-        # Adds a leading 0 if the user forgets to add one for single digit hour times for start date
-        # if ":" in date_array[1][0:2]:
-        #     date_array[1] = "0" + date_array[1]
-
-        # Checks to see if user entered am/pm for start/end dates and assumes am if nothing was entered and user isn't using military time
-        # If military time was used, it adds an empty string into the array in the place of an am/pm
-        # if date_array[2].lower() == 'am' or date_array[2].lower() == 'pm':
-        #     date_array[1] = convert24(date_array[1] + " " + date_array[2])
-        # else:
-        #     convert24(date_array[1])
 
         print(date_array)
 
-        # Adds a leading 0 if the user forgets to add one for single digit hour times for end date
-        # if ":" in date_array[4][0:2]:
-        #     date_array[4] = "0" + date_array[4]
-
-        # if len(date_array) != 6:
-        #     if int(date_array[4][0:2]) < 12:
-        #         date_array.append("AM")
-        #     else:
-        #         date_array.append("PM")
-
-        # Tries to create the state_date datetime object
         try:
-            start_date = datetime.strptime(
-                date_array[0] + " " + date_array[1] + " " + date_array[2], "%m/%d/%y %I:%M %p"
-            )
-            start_complete = True
-            print("Created start_date object: " + str(start_date))
+            parse_result = parse_period(msg_content)
         except Exception as e:
-            print(e)
             await channel.send(
-                "Looks like you didn't enter your start date correctly. Please re-enter your dates.\n"
+                "Looks like " + str(e) + ". Please re-enter your dates.\n"
                 + "Here is the format you should follow (Start is first, end is second):\n"
                 + "mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm"
             )
             start_complete = False
             continue
 
-        # Tries to create the end_date datetime object
-        try:
-            end_date = datetime.strptime(date_array[3] + " " + date_array[4] + " " + date_array[5], "%m/%d/%y %I:%M %p")
-            end_complete = True
-            print("Created end_date object: " + str(end_date))
-        except Exception as e:
-            print(e)
-            await channel.send(
-                "Looks like you didn't enter your end date correctly. Please re-enter your dates.\n"
-                + "Here is the format you should follow (Start is first, end is second):\n"
-                + "mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm"
-            )
-            end_complete = False
-            continue
+        start_complete = True
+        start_date = parse_result[0]
+        end_date = parse_result[1]
 
         # If both datetime objects were successfully created, they get appended to the list and exits the while loop
         if start_complete and end_complete:

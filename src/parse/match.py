@@ -42,22 +42,29 @@ class _PeriodTree(Transformer):
     def period(self, t):
         initial = t[0]
         end = t[1]
-        if t[1] < t[0]:
-            raise Exception("Ending time before start time")
+        if t[1] <= t[0]:
+            raise Exception("your starting date is after your ending date")
         return [t[0], t[1]]
 
     def datetime(self, t):
         mm, dd, yy = t[0]
         h, m = t[1]
-        return datetime(yy, mm, dd, h, m)
+        try:
+            return datetime(yy, mm, dd, h, m)
+        except:
+            raise Exception("your entered date is not possible")
 
     def time(self, t):
         h = t[0]
         m = t[1]
-        if len(t) == 3 and t[2] == "pm" and h != 12:
-            h += 12
+        if len(t) == 3:
+            if not( 1 <= h and h <= 12 ):
+                raise Exception("you entered the time incorrectly")
+            h %= 12
+            if t[2] == "pm":
+                h += 12
         if not( 0 <= h and h <= 23 and 0 <= m and m <= 59 ):
-            raise Exception("Incorrect time")
+            raise Exception("you entered the time incorrectly")
         return [h, m]
     
     def date(self, t):
@@ -67,7 +74,7 @@ class _PeriodTree(Transformer):
         if len(str(y)) == 2:
             y = int("20" + str(y))
         if not( 1 <= m and m <= 12 and 1 <= d and d <= 31 ):
-            raise Exception("Incorrect date")
+            raise Exception("you entered the date incorrectly")
         return [m, d, y]
     
     def hour(self, t):
@@ -91,13 +98,13 @@ period_grammar = period_parser.parse
 #s = input('> ')
 # print( dt(s) )
 
-def parse_period(period):
-    try:
-        return period_grammar(period)
-    except:
-        None
+# def parse_period(period):
+#     try:
+#         return period_grammar(period)
+#     except:
+#         None
 
-def parse_period_unsafe(period):
+def parse_period(period):
     return period_grammar(period)
 
 if __name__ == "__main__":
