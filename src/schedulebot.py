@@ -4,6 +4,7 @@ import os
 import json
 
 from discord.ext.commands.help import MinimalHelpCommand
+from pretty_help import PrettyHelp, DefaultMenu  # type: ignore
 from config import TOKEN
 from functionality.AddEvent import add_event  # type: ignore
 from functionality.highlights import get_highlight
@@ -15,8 +16,7 @@ root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 json_file = open(root_dir + "/doc/commands.json")
 json_data = json.load(json_file)
 
-bot = commands.Bot(command_prefix="!")
-# bot.remove_command("help")
+bot = commands.Bot(command_prefix="!", help_command=PrettyHelp())
 
 
 @bot.event
@@ -26,6 +26,10 @@ async def on_ready():
     # channel = bot.get_channel(884864860859531347) # Gets the channel ID of the "schedule-manager channel"
     # await channel.send("Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n" +
     # "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!")
+
+
+menu = DefaultMenu(page_left="\U0001F44D", page_right="👎", active_time=5)
+bot.help_command = PrettyHelp(menu=menu, no_category="ScheduleBot Commands", index_title="ScheduleBot Commands")
 
 
 @bot.command()

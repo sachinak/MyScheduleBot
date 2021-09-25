@@ -1,4 +1,5 @@
-# discord
+discord
+discord-pretty-help
 pytest>=3.9
 pytest-cov
 coverage>=5.0.1
