@@ -8,6 +8,7 @@ from pretty_help import PrettyHelp, DefaultMenu  # type: ignore
 from config import TOKEN
 from functionality.AddEvent import add_event  # type: ignore
 from functionality.highlights import get_highlight
+from functionality.create_event_type import create_event_type
 
 # from functionality.FindAvailableTime import find_availableTime
 
