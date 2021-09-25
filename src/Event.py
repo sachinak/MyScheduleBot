@@ -23,19 +23,19 @@ class Event:
 
     # Returns whether the current event comes before another
     def __lt__(self, other):
-        return self.end_date < other.start_date
+        return self.start_date < other.start_date
 
     # Returns whether the current event comes before or at the same time of another
     def __le__(self, other):
-        return self.end_date <= other.start_date
+        return self.start_date <= other.start_date
 
     # Returns whether the current event comes after another
     def __gt__(self, other):
-        return self.end_date > other.start_date
+        return self.start_date > other.start_date
 
     # Returns whether the current event comes after or at the same time of another
     def __ge__(self, other):
-        return self.end_date >= other.start_date
+        return self.start_date >= other.start_date
 
     # Returns whether the current event intersects with another event
     # Case 1: The start and end dates for the event occur inside another event
