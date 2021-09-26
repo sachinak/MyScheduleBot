@@ -117,14 +117,37 @@ async def create_event_type(ctx, client):
             # Stores the current row in an array of rows if the row is not a new-line character
             # This check prevents an accidental empty lines from being kept in the updated file
             for line in calendar_lines:
+                 
                 if len(line) > 0:
-                    rows.append(line)
-                    line_number = line_number + 1
+                    print (line)
             # If the file already has the same event type then inform user and exit loop
                     if line[0]==current.event_name:
                         flag=1
-                        await channel.send("Event type: "+ str(line[0]) + " already exist. Its time range is " + str(line[1]) + " " + str(line[2]))
-                        continue
+                        if str(line[1]) == current.get_start_time() and str(line[2]) == current.get_end_time():
+                            rows.append(line)
+                            line_number = line_number + 1
+                            await channel.send("Event type: "+ str(line[0]) + " already exist in the given time range")
+                            continue
+                        await channel.send("Event type: "+ str(line[0]) + " already exist.\n Existing time range for this event type is " + str(line[1]) + " " + str(line[2]) + "\n The new time range entered now is " + current.get_start_time() +" " + current.get_end_time() +". \n Please type 'change' for updating the time range or 'exit' for keeping existing time range.")
+                        # Waits for user input
+                        event_msg = await client.wait_for("message", check=check)
+                        # Strips message to just the text the user entered
+                        msg_content = event_msg.content
+                        if msg_content == 'change':
+                            rows.append(current.to_list_event())
+                            await channel.send("The time range for your event was successfully updated!")
+                            line_number = line_number + 1
+                        elif msg_content == 'exit':
+                            rows.append(line)
+                            continue
+                        else:
+                            await channel.send("Inalid input, Time range is not changed.")
+                            rows.append(line)
+                            continue
+                    else:
+                        rows.append(line)
+                        line_number = line_number + 1
+
 
             #If this is a new even type then append it to rows
             if flag==0:
