@@ -119,7 +119,7 @@ async def create_event_type(ctx, client):
             for line in calendar_lines:
                  
                 if len(line) > 0:
-                    print (line)
+                    
             # If the file already has the same event type then inform user and exit loop
                     if line[0]==current.event_name:
                         flag=1
