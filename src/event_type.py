@@ -14,6 +14,13 @@ class event_type:
             + str(self.end_time)
         )
         return output
+    
+    def get_start_time(self):
+        return str(self.start_time.strftime('%I:%M %p'))
+
+    def get_end_time(self):
+        return str(self.end_time.strftime('%I:%M %p'))
+
 
 # Converts event object to a list
     def to_list_event(self):
