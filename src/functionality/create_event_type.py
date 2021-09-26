@@ -124,7 +124,7 @@ async def create_event_type(ctx, client):
                     if line[0]==current.event_name:
                         flag=1
                         await channel.send("Event type: "+ str(line[0]) + " already exist. Its time range is " + str(line[1]) + " " + str(line[2]))
-                        break
+                        continue
 
             #If this is a new even type then append it to rows
             if flag==0:
