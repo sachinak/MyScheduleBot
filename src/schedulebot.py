@@ -10,6 +10,7 @@ from functionality.AddEvent import add_event  # type: ignore
 from functionality.highlights import get_highlight
 from functionality.create_event_type import create_event_type
 from functionality.FindAvailableTime import find_avaialbleTime
+from functionality.delete_event_type import delete_event_type
 
 # from functionality.FindAvailableTime import find_availableTime
 
@@ -48,8 +49,13 @@ async def day(ctx):
 
 # creating new event type
 @bot.command()
-async def event_type(ctx):
+async def typecreate(ctx):
     await create_event_type(ctx, bot)
+
+# deleting event type
+@bot.command()
+async def typedelete(ctx):
+    await delete_event_type(ctx, bot)
 
 # Runs the bot (local machine)
 bot.run(TOKEN)
