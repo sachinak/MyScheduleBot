@@ -167,7 +167,7 @@ async def create_event_type(ctx, client):
                 if line_number > 1:
                     csvwriter.writerows(rows)
                 elif line_number==1:
-                    csvwriter.writerow(rows)
+                    csvwriter.writerow(rows[0])
             
 
             
