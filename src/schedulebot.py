@@ -39,7 +39,7 @@ async def schedule(ctx):
 
 
 @bot.command()
-async def highlights(ctx):
+async def day(ctx):
     await get_highlight(ctx, bot)
 
 # creating new event type
