@@ -9,6 +9,7 @@ from config import TOKEN
 from functionality.AddEvent import add_event  # type: ignore
 from functionality.highlights import get_highlight
 from functionality.create_event_type import create_event_type
+from functionality.FindAvailableTime import find_avaialbleTime
 
 # from functionality.FindAvailableTime import find_availableTime
 
@@ -37,7 +38,10 @@ bot.help_command = PrettyHelp(menu=menu, no_category="ScheduleBot Commands", ind
 async def schedule(ctx):
     await add_event(ctx, bot)
 
-
+@bot.command()
+async def find_time(ctx):
+    await find_avaialbleTime(ctx,bot)
+    
 @bot.command()
 async def day(ctx):
     await get_highlight(ctx, bot)
