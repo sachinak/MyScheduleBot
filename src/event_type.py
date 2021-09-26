@@ -24,5 +24,5 @@ class event_type:
 
 # Converts event object to a list
     def to_list_event(self):
-        array = [self.event_name, str(self.start_time.strftime('%I:%M %p')), str(self.end_time.strftime('%I:%M %p'))]
+        array = [self.event_name, self.get_start_time(), self.get_end_time()]
         return array
