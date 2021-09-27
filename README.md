@@ -39,17 +39,23 @@ The bot will show you what you have scheduled for the day. This includes events 
 #### When do I have spare time?
 ScheduleBot will help you find a time for that meeting or thing you have been meaning to do. Just write:
 ```
-find
+!find
 ```
 
 The bot will show you your available times. If you need to find time for another date, try:
 ```
-find mm/dd/yyyy
+!find mm/dd/yyyy
 ```
 To see your available times at that date.
 
 #### I don't really want to work at 3 a.m.
+You can create custom event types to further organize your schedule. You can define your preferred times by creating a new event type:
+```
+!typecreate
+```
+The bot will ask you for the name of the type and your preferred times.
 
+When you look for available times, you now can use ``!find type`` to find only the available times in your preferred hours.
 
 
 \[Brief description of the workings of the bot\]
