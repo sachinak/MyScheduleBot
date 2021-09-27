@@ -65,11 +65,22 @@ async def create_event_type(ctx, client):
         except Exception as e:
             print(e)
             await channel.send(
-                "Looks like you didn't enter your end date correctly. Please re-enter your dates.\n"
+                "Looks like you didn't enter your end time correctly. Please re-enter your time.\n"
                 + "Here is the format you should follow (Start is first, end is second):\n"
-                + "mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm"
+                + "hh:mm am/pm hh:mm am/pm"
             )
             end_complete = False
+            continue
+        
+        # Tries to create the end_time datetime object
+        if end_time <=start_time:
+            await channel.send(
+                "Looks like your end time is before your start time. Please re-enter your time.\n"
+                + "Here is the format you should follow (Start is first, end is second):\n"
+                + "hh:mm am/pm hh:mm am/pm"
+            )
+            end_complete = False
+            start_complete= False
             continue
 
       # If both datetime objects were successfully created, they get appended to the list and exits the while loop
