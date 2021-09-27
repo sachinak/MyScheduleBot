@@ -28,7 +28,28 @@ ScheduleBot's unit of work is the **event**. When you use ScheduleBot to organiz
 ```
 The bot will ask you the details of your new event.
 
+#### I forgot my agenda for the day
+You can take a look at your events scheduled for the day with the command:
+```
+!day
+```
+
+The bot will show you what you have scheduled for the day. This includes events that start before, or end after today.
+
 #### When do I have spare time?
+ScheduleBot will help you find a time for that meeting or thing you have been meaning to do. Just write:
+```
+find
+```
+
+The bot will show you your available times. If you need to find time for another date, try:
+```
+find mm/dd/yyyy
+```
+To see your available times at that date.
+
+#### I don't really want to work at 3 a.m.
+
 
 
 \[Brief description of the workings of the bot\]
