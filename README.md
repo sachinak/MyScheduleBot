@@ -81,10 +81,15 @@ It will find and schedule the first available X contiguous hours, on your prefer
 \[Screenshot\]
 
 ## Releases
+ - [All releases](https://github.com/lyonva/ScheduleBot/releases)
+ - Latest: [v0](https://github.com/lyonva/ScheduleBot/releases/tag/v0)
 
 ## Documentation
 
 ## Getting involved
+Thank you for caring for this project and getting involved. To start, please check out [contributing](https://github.com/lyonva/ScheduleBot/blob/main/CONTRIBUTING.md) and [code of conduct](https://github.com/lyonva/ScheduleBot/blob/main/CODE_OF_CONDUCT.md). For more technical detail of implementation of code, you can check out the documentation. When you want to get your hands on the project, take a peek into the [github project](https://github.com/lyonva/ScheduleBot/projects/1), assign yourself a task, move it to To-Do, and convert it into an issue and assign it to yourself.
+
 \[How does it work? More to the point/code detail\]
 
+#### Future features
 \[Future functionality\]
