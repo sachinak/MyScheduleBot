@@ -1,6 +1,6 @@
 from lark import Lark, Transformer, v_args
 from lark import logger
-from lark.exceptions import UnexpectedInput
+from lark.exceptions import UnexpectedInput, LarkError
 import logging
 
 from datetime import datetime
@@ -56,13 +56,14 @@ class _PeriodTree(Transformer):
             raise Exception("your entered date is not possible")
 
     def time(self, t):
+        print(t)
         h = t[0]
         m = t[1]
         if len(t) == 3:
             if not( 1 <= h and h <= 12 ):
                 raise Exception("you entered the time incorrectly")
             h %= 12
-            if t[2] == "pm":
+            if t[2].upper() == "PM":
                 h += 12
         if not( 0 <= h and h <= 23 and 0 <= m and m <= 59 ):
             raise Exception("you entered the time incorrectly")
@@ -108,7 +109,7 @@ period_grammar = period_parser.parse
 def parse_period(period):
     try:
         return period_grammar(period)
-    except UnexpectedInput:
+    except (UnexpectedInput, LarkError):
         raise Exception("your dates were not in the requested format")
     except Exception as e:
         raise e

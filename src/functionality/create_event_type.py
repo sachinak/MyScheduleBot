@@ -104,21 +104,21 @@ async def create_event_type(ctx, client):
         current = event_type(event_array[0], event_array[1], event_array[2])
         
         # Creates ScheduleBot directory in users Documents folder if it doesn't exist
-        if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot")):
-            Path(os.path.expanduser("~/Documents/ScheduleBot")).mkdir(parents=True, exist_ok=True)
+        if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot/Type")):
+            Path(os.path.expanduser("~/Documents/ScheduleBot/Type")).mkdir(parents=True, exist_ok=True)
         filename=str(ctx.author.id) + 'event_types'
 
         # Checks if the calendar csv file exists, and creates it if it doesn't
-        if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(filename) + ".csv"):
+        if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Type" + str(filename) + ".csv"):
             with open(
-                os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(filename) + ".csv", "x", newline=""
+                os.path.expanduser("~/Documents") + "/ScheduleBot/Type" + str(filename) + ".csv", "x", newline=""
             ) as new_file:
                 csvwriter = csv.writer(new_file, delimiter=",")
                 csvwriter.writerow(["Event Type", "Start time", "End time"])
     
         # Opens the current user's csv calendar file
         with open(
-            os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(filename) + ".csv", "r"
+            os.path.expanduser("~/Documents") + "/ScheduleBot/Type" + str(filename) + ".csv", "r"
         ) as calendar_lines:
             calendar_lines = csv.reader(calendar_lines, delimiter=",")
             fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
@@ -170,7 +170,7 @@ async def create_event_type(ctx, client):
 
              # Open current user's calendar file for writing
             with open(
-                os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(filename) + ".csv", "w", newline=""
+                os.path.expanduser("~/Documents") + "/ScheduleBot/Type" + str(filename) + ".csv", "w", newline=""
             ) as calendar_file:
                 # Write to column headers and array of rows back to the calendar file
                 csvwriter = csv.writer(calendar_file)
