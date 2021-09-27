@@ -14,11 +14,22 @@
 
 ScheduleBot is a Python application that helps you calendarize events and work through a Discord bot. Want to try it out? [Invite the bot into a server](https://discord.com/api/oauth2/authorize?client_id=884865269867102249&permissions=534723951680&scope=bot), and afterward you can DM the bot.
 
+## How can I use the bot?
 To get a list of commands, DM the bot the command:
 ```
-help
+!help
 ```
 The bot will reply back you with the list of available commands.
+
+#### Scheduling an event
+ScheduleBot's unit of work is the **event**. When you use ScheduleBot to organize your activities, it keeps track of your registered events. Each event consists of a period of time, comprised between a starting and ending date/time. When ScheduleBot tries to find time for a new event, it makes sure it does not overlap with any other events you have. To schedule a new event, just DM the bot:
+```
+!schedule
+```
+The bot will ask you the details of your new event.
+
+#### When do I have spare time?
+
 
 \[Brief description of the workings of the bot\]
 
