@@ -19,7 +19,22 @@ root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 json_file = open(root_dir + "/doc/commands.json")
 json_data = json.load(json_file)
 
-bot = commands.Bot(command_prefix="!", help_command=PrettyHelp())
+bot = commands.Bot(command_prefix="!")
+bot.remove_command("help")
+
+
+@bot.group(invoke_without_command=True)
+async def help(ctx):
+    em = discord.Embed(
+        title="ScheduleBot Commands",
+        description="Here are all the commands to use ScheduleBot\nAll events are prefaced by an '!'",
+    )
+    em.add_field(name="help", value="Displays all commands and their descriptions", inline=False)
+    em.add_field(name="schedule", value="Creates an event", inline=False)
+    em.add_field(name="day", value="Shows everything on your schedule for today", inline=False)
+    em.add_field(name="typecreate", value="Creates a new event type", inline=True)
+    em.add_field(name="typedelete", value="Deletes an event type", inline=True)
+    await ctx.send(embed=em)
 
 
 @bot.event
@@ -31,31 +46,37 @@ async def on_ready():
     # "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!")
 
 
-menu = DefaultMenu(page_left="\U0001F44D", page_right="👎", active_time=5)
-bot.help_command = PrettyHelp(menu=menu, no_category="ScheduleBot Commands", index_title="ScheduleBot Commands")
+# menu = DefaultMenu(page_left="\U0001F44D", page_right="👎", active_time=5)
+# bot.help_command = PrettyHelp(menu=menu, index_title="ScheduleBot Commands")
 
 
 @bot.command()
-async def schedule(ctx):
+async def schedule(self, ctx: commands.Context):
     await add_event(ctx, bot)
+    await ctx.send("This is a test command")
+
 
 @bot.command()
 async def find_time(ctx):
-    await find_avaialbleTime(ctx,bot)
-    
+    await find_avaialbleTime(ctx, bot)
+
+
 @bot.command()
 async def day(ctx):
     await get_highlight(ctx, bot)
+
 
 # creating new event type
 @bot.command()
 async def typecreate(ctx):
     await create_event_type(ctx, bot)
 
+
 # deleting event type
 @bot.command()
 async def typedelete(ctx):
     await delete_event_type(ctx, bot)
+
 
 # Runs the bot (local machine)
 bot.run(TOKEN)
