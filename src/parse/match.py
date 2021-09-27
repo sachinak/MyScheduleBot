@@ -1,5 +1,6 @@
 from lark import Lark, Transformer, v_args
 from lark import logger
+from lark.exceptions import UnexpectedInput
 import logging
 
 from datetime import datetime
@@ -105,7 +106,12 @@ period_grammar = period_parser.parse
 #         None
 
 def parse_period(period):
-    return period_grammar(period)
+    try:
+        return period_grammar(period)
+    except UnexpectedInput:
+        raise Exception("your dates were not in the requested format")
+    except Exception as e:
+        raise e
 
 if __name__ == "__main__":
     # s = "4/20/2021 6:10 am 4/20/2021 12:10 pm"
