@@ -7,6 +7,7 @@ from types import TracebackType
 from Event import Event
 from parse import parse_period
 
+
 async def add_event(ctx, client):
     channel = await ctx.author.create_dm()
     # print(ctx.author.id)
@@ -46,7 +47,9 @@ async def add_event(ctx, client):
             parse_result = parse_period(msg_content)
         except Exception as e:
             await channel.send(
-                "Looks like " + str(e) + ". Please re-enter your dates.\n"
+                "Looks like "
+                + str(e)
+                + ". Please re-enter your dates.\n"
                 + "Here is the format you should follow (Start is first, end is second):\n"
                 + "mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm"
             )
@@ -71,8 +74,22 @@ async def add_event(ctx, client):
             )
             date_array = []
             msg_content = ""
-
-    await channel.send("Tell me what type of event this is. Here are a list of event types I currently know:")
+    output = ""
+    with open(
+        os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(ctx.author.id) + "event_types" ".csv", "r"
+    ) as type_lines:
+        type_lines = csv.reader(type_lines, delimiter=",")
+        fields = next(type_lines)
+        space = [10, 5, 5]
+        current_line = []
+        for line in type_lines:
+            for text in line:
+                current_line.append(text)
+            output += f"{current_line[0]:<{space[0]}} Preferred range of {current_line[1]:<{space[1]}}{current_line[2]:<{space[2]}}"
+            current_line = []
+    await channel.send(
+        "Tell me what type of event this is. Here are a list of event types I currently know:\n" + output
+    )
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
     event_array.append(event_msg)
@@ -168,25 +185,3 @@ async def add_event(ctx, client):
         await channel.send(
             "There was an error creating your event. Make sure your formatting is correct and try creating the event again."
         )
-
-
-def convert24(str1):
-
-    # Checking if last two elements of time
-    # is AM and first two elements are 12
-    if str1[-2:] == "AM" and str1[:2] == "12":
-        return "00" + str1[2:-2]
-
-    # remove the AM
-    elif str1[-2:] == "AM":
-        return str1[:-2]
-
-    # Checking if last two elements of time
-    # is PM and first two elements are 12
-    elif str1[-2:] == "PM" and str1[:2] == "12":
-        return str1[:-2]
-
-    else:
-
-        # add 12 to hours and remove PM
-        return str(int(str1[:2]) + 12) + str1[2:8]

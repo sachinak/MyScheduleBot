@@ -46,9 +46,8 @@ async def on_ready():
 
 
 @bot.command()
-async def schedule(self, ctx: commands.Context):
+async def schedule(ctx):
     await add_event(ctx, bot)
-    await ctx.send("This is a test command")
 
 
 @bot.command()
