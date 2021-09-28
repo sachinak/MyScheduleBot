@@ -92,4 +92,13 @@
 | Q14.2 | Do you have a contributions policy? | 3 | [contributing.md](https://github.com/lyonva/ScheduleBot/blob/main/CONTRIBUTING.md) |
 | Q14.3 | Is your contributions' policy publicly available? | 3 | [contributing.md](https://github.com/lyonva/ScheduleBot/blob/main/CONTRIBUTING.md) |
 | Q14.4 | Do contributors keep the copyright/IP of their contributions? | 1 | [maybe? MIT license is not specific](https://github.com/lyonva/ScheduleBot/blob/main/LICENSE) |
-
+| Q15.1 | Does your website and documentation clearly state the copyright owners of your software and documentation? | 3 | [Yes](https://github.com/lyonva/ScheduleBot/blob/main/LICENSE) |
+| Q15.2 | Does each of your source code files include a copyright statement? | 0 | No |
+| Q15.3 | Does your website and documentation clearly state the licence of your software? | 3 | [Yes](https://github.com/lyonva/ScheduleBot/blob/main/LICENSE) |
+| Q15.4 | Is your software released under an open source licence? | 3 | [Yes](https://github.com/lyonva/ScheduleBot/blob/main/LICENSE) |
+| Q15.5 | Is your software released under an OSI-approved open-source licence? | 3 | [Yes, MIT](https://github.com/lyonva/ScheduleBot/blob/main/LICENSE) |
+| Q15.6 | Does each of your source code files include a licence header? | 0 | No |
+| Q15.7 | Do you have a recommended citation for your software? | 2 | A DOI |
+| Q16.1 | Does your website or documentation include a project roadmap (a list of project and development milestones for the next 3, 6 and 12 months)? | 3 | In the [Readme.md](https://github.com/lyonva/ScheduleBot/blob/main/README.md) and [GH projects](https://github.com/lyonva/ScheduleBot/projects/1) |
+| Q16.2 | Does your website or documentation describe how your project is funded, and the period over which funding is guaranteed? | 3 | Its funded by all contributors ;) |
+| Q16.3 | Do you make timely announcements of the deprecation of components, APIs, etc.? | NA | No rollbacks |
