@@ -51,11 +51,6 @@ async def schedule(ctx):
 
 
 @bot.command()
-async def find_time(ctx):
-    await find_avaialbleTime(ctx, bot)
-
-
-@bot.command()
 async def day(ctx):
     await get_highlight(ctx, bot)
 
