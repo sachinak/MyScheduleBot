@@ -55,4 +55,24 @@
  | Q5.4 | Are e-mails to your support e-mail address received by more than one person? | 0 | |
  | Q5.5 | Does your project have a ticketing system to manage bug reports and feature requests? | 2 | Issues can be publicly opened in the [repo](https://github.com/lyonva/ScheduleBot/issues) |
  | Q5.6 | Is your project's ticketing system publicly visible to your users, so they can view bug reports and feature requests? | 3 | Issues can be publicly opened in the [repo](https://github.com/lyonva/ScheduleBot/issues) |
- 
+| Q6.1 | Is your software’s architecture and design modular? | 2 | Some packages in [src](https://github.com/lyonva/ScheduleBot/tree/main/src) |
+| Q6.2 |  Does your software use an accepted coding standard or convention? | 3 | Pep8, check [contributing.md](https://github.com/lyonva/ScheduleBot/blob/main/CONTRIBUTING.md) |
+| Q7.1 | Does your software allow data to be imported and exported using open data formats? | 0 | Not yet |
+| Q7.2 | Does your software allow communications using open communications protocols? | 1 | Discord |
+| Q8.1 | Is your software cross-platform compatible? | 3 | Multi-platform through Discord, either native or online clients |
+| Q9.1 | Does your software adhere to appropriate accessibility conventions or standards? | 3 | [code of conduct](https://github.com/lyonva/ScheduleBot/blob/main/CODE_OF_CONDUCT.md) |
+| Q9.2 | Does your documentation adhere to appropriate accessibility conventions or standards? | 0 | |
+| Q10.1 | Is your source code stored in a repository under revision control? | 3 | [Yes](https://github.com/lyonva/ScheduleBot/issues) |
+| Q10.2 | Is each source code release a snapshot of the repository? | 3 | Every release is stored in [Zenodo](https://zenodo.org/record/5523462) |
+| Q10.3 | Are releases tagged in the repository? | 3 | Check [releases](https://github.com/lyonva/ScheduleBot/releases) |
+| Q10.4 | Is there a branch of the repository that is always stable? (i.e. tests always pass, code always builds successfully) | 2 | main, but not 100% of the time, check the [action log](https://github.com/lyonva/ScheduleBot/actions) |
+| Q10.5 | Do you back-up your repository? | 3 | Each contributor constantly pulls from the repo, every release is stored in [Zenodo](https://zenodo.org/record/5523462) |
+| Q11.1 | Do you provide publicly-available instructions for building your software from the source code? | 3 | Python is scripted, and all required packages are available on [requirements.txt](https://github.com/lyonva/ScheduleBot/blob/main/requirements.txt) |
+| Q11.2 | Can you build, or package, your software using an automated tool? | 0 | |
+| Q11.3 | Do you provide publicly-available instructions for deploying your software? | 0 | |
+| Q11.4 | Does your documentation list all third-party dependencies? | 3 | All required packages are available on [requirements.txt](https://github.com/lyonva/ScheduleBot/blob/main/requirements.txt) |
+| Q11.5 | Does your documentation list the version number for all third-party dependencies? | 2 | [Most of the cases](https://github.com/lyonva/ScheduleBot/blob/main/requirements.txt) |
+| Q11.6 | Does your software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional? | 0 | |
+| Q11.7 | Can you download dependencies using a dependency management tool or package manager? | 3 | run pip install -r requirements.txt |
+| Q11.8 | Do you have tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful? | 3 | All in the [test directory](https://github.com/lyonva/ScheduleBot/tree/main/test) |
+
