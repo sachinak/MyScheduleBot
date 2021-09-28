@@ -5,6 +5,16 @@ import csv
 from datetime import timedelta
 from datetime import time
 
+"""
+Function: get_free_time
+Description: giving the user the free time today according to the registered events
+Input:
+    ctx - Discord context window
+    bot - Discord bot user
+Output:
+    - A message sent to the user channel stating every free time slot that is avaliable today 
+"""
+
 
 async def get_free_time(ctx, bot):
     channel = await ctx.author.create_dm()
