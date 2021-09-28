@@ -49,4 +49,10 @@
  | Q4.6 | If your software can be used as a library, package or service by other software, do you provide comprehensive API documentation? | NA | |
  | Q4.7 | Do you store your documentation under revision control with your source code? | 3 | [Documentation](https://github.com/lyonva/ScheduleBot/tree/main/doc) on the repo |
  | Q4.8 | Do you publish your release history e.g. release data, version numbers, key features of each release etc. on your web site or in your documentation? | 2 | We have the space for it on [Readme.md](https://github.com/lyonva/ScheduleBot/blob/main/README.md), but no releases so far |
- | 
+ | Q5.1 | Does your website and documentation describe what support, if any, you provide to users and developers? | 3 | [Readme.md](https://github.com/lyonva/ScheduleBot/blob/main/README.md), and our bot has a !help command. |
+ | Q5.2 | Does your website and documentation describe what support, if any, you provide to users and developers? | 2 | Issues can be publicly opened in the [repo](https://github.com/lyonva/ScheduleBot/issues) |
+ | Q5.3 | Does your project have an e-mail address or forum that is solely for supporting users? | 0 | |
+ | Q5.4 | Are e-mails to your support e-mail address received by more than one person? | 0 | |
+ | Q5.5 | Does your project have a ticketing system to manage bug reports and feature requests? | 2 | Issues can be publicly opened in the [repo](https://github.com/lyonva/ScheduleBot/issues) |
+ | Q5.6 | Is your project's ticketing system publicly visible to your users, so they can view bug reports and feature requests? | 3 | Issues can be publicly opened in the [repo](https://github.com/lyonva/ScheduleBot/issues) |
+ 
