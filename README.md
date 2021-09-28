@@ -1,3 +1,5 @@
+![ScheduleBot logo](https://raw.githubusercontent.com/lyonva/ScheduleBot/main/doc/img/banner.png)
+
 ![Python v3.9](https://img.shields.io/badge/python-v3.9-blue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://zenodo.org/badge/403393616.svg)](https://zenodo.org/badge/latestdoi/403393616)
