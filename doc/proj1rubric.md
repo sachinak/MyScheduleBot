@@ -75,4 +75,21 @@
 | Q11.6 | Does your software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional? | 0 | |
 | Q11.7 | Can you download dependencies using a dependency management tool or package manager? | 3 | run pip install -r requirements.txt |
 | Q11.8 | Do you have tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful? | 3 | All in the [test directory](https://github.com/lyonva/ScheduleBot/tree/main/test) |
+| Q12.1 | Do you have an automated test suite for your software? | 3 | Through [github actions](https://github.com/lyonva/ScheduleBot/blob/main/.github/workflows/python-app.yml) |
+| Q12.2 | Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code? | 3 | Through [github actions](https://github.com/lyonva/ScheduleBot/blob/main/.github/workflows/python-app.yml) |
+| Q12.3 | Do you use continuous integration, automatically running tests whenever changes are made to your source code? | 3 | Through [github actions](https://github.com/lyonva/ScheduleBot/blob/main/.github/workflows/python-app.yml) |
+| Q12.4 | Are your test results publicly visible? | 3 | [Yes](https://github.com/lyonva/ScheduleBot/tree/main/test) |
+| Q12.5 | Are all manually-run tests documented? | 1 | No manual tests |
+| Q13.1 | Does your project have resources (e.g. blog, Twitter, RSS feed, Facebook page, wiki, mailing list) that are regularly updated with information about your software? | 0 | |
+| Q13.2 | Does your website state how many projects and users are associated with your project? | 2 | [Readme.md](https://github.com/lyonva/ScheduleBot/blob/main/README.md) shows the amount of downloads for all releases |
+| Q13.3 | Do you provide success stories on your website? | 0 | |
+| Q13.4 | Do you list your important partners and collaborators on your website | 0 | |
+| Q13.5 | Do you list your project's publications on your website or link to a resource where these are available? | 0 | |
+| Q13.6 | Do you list third-party publications that refer to your software on your website or link to a resource where these are available? | 0 | |
+| Q13.7 | Can users subscribe to notifications to changes to your source code repository? | 0 | |
+| Q13.8 |  If your software is developed as an open source project (and, not just a project developing open source software), do you have a governance model? | 1 | Discussion in [issues](https://github.com/lyonva/ScheduleBot/issues), decisions taken by majority vote |
+| Q14.1 | Do you accept contributions (e.g. bug fixes, enhancements, documentation updates, tutorials) from people who are not part of your project? | 3 | Issues are open, repo is open |
+| Q14.2 | Do you have a contributions policy? | 3 | [contributing.md](https://github.com/lyonva/ScheduleBot/blob/main/CONTRIBUTING.md) |
+| Q14.3 | Is your contributions' policy publicly available? | 3 | [contributing.md](https://github.com/lyonva/ScheduleBot/blob/main/CONTRIBUTING.md) |
+| Q14.4 | Do contributors keep the copyright/IP of their contributions? | 1 | [maybe? MIT license is not specific](https://github.com/lyonva/ScheduleBot/blob/main/LICENSE) |
 
