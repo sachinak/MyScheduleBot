@@ -49,4 +49,4 @@
  | Q4.6 | If your software can be used as a library, package or service by other software, do you provide comprehensive API documentation? | NA | |
  | Q4.7 | Do you store your documentation under revision control with your source code? | 3 | [Documentation](https://github.com/lyonva/ScheduleBot/tree/main/doc) on the repo |
  | Q4.8 | Do you publish your release history e.g. release data, version numbers, key features of each release etc. on your web site or in your documentation? | 2 | We have the space for it on [Readme.md](https://github.com/lyonva/ScheduleBot/blob/main/README.md), but no releases so far |
- 
+ | 
