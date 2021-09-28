@@ -17,6 +17,8 @@ Output:
     - A new event added to the user's calendar file
     - A message sent to the context saying an event was successfully created
 """
+
+
 async def add_event(ctx, client):
     channel = await ctx.author.create_dm()
     # print(ctx.author.id)
@@ -171,7 +173,9 @@ async def add_event(ctx, client):
 
                 # Open current user's calendar file for writing
                 with open(
-                    os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + str(ctx.author.id) + ".csv", "w", newline=""
+                    os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + str(ctx.author.id) + ".csv",
+                    "w",
+                    newline="",
                 ) as calendar_file:
                     # Write to column headers and array of rows back to the calendar file
                     csvwriter = csv.writer(calendar_file)
@@ -181,7 +185,9 @@ async def add_event(ctx, client):
             # If the file has no events, add the current Event to the file
             else:
                 with open(
-                    os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + str(ctx.author.id) + ".csv", "w", newline=""
+                    os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + str(ctx.author.id) + ".csv",
+                    "w",
+                    newline="",
                 ) as calendar_file:
                     csvwriter = csv.writer(calendar_file)
                     csvwriter.writerow(fields)
