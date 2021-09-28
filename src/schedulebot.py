@@ -18,10 +18,16 @@ root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 json_file = open(root_dir + "/doc/commands.json")
 json_data = json.load(json_file)
 
-bot = commands.Bot(command_prefix="!")
-bot.remove_command("help")
+bot = commands.Bot(command_prefix="!") # Creates the bot with a command prefix of '!'
+bot.remove_command("help") # Removes the help command, so it can be created using Discord embed pages later
 
-
+"""
+Function: help
+Description: A command that allows the user to see all usable commands and their descriptions
+Input:
+    ctx - Discord context window
+Output: An embed window sent to the context with all commands/descriptions
+"""
 @bot.group(invoke_without_command=True)
 async def help(ctx):
     em = discord.Embed(
@@ -35,7 +41,13 @@ async def help(ctx):
     em.add_field(name="typedelete", value="Deletes an event type", inline=True)
     await ctx.send(embed=em)
 
-
+"""
+Function: on_ready
+Description: Displays a welcome message to the ScheduleBot server and allows user to receive
+a direct message from the bot by reacting to the welcome message with an alarm_clock reaction
+Input: None
+Output: The welcome message sent to the ScheduleBot server
+"""
 @bot.event
 async def on_ready():
     # Outputs bot name to console once bot is started
@@ -44,7 +56,15 @@ async def on_ready():
     # await channel.send("Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n" +
     # "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!")
 
-
+"""
+Function: schedule
+Description: Calls the add_event function to walk a user through the event creation process
+Input:
+    ctx - Discord context window
+Output:
+    - A new event added to the user's calendar file
+    - A message sent to the context saying an event was successfully created
+"""
 @bot.command()
 async def schedule(ctx):
     await add_event(ctx, bot)

@@ -7,7 +7,16 @@ from types import TracebackType
 from Event import Event
 from parse import parse_period
 
-
+"""
+Function: add_event
+Description: Walks a user through the event creation process
+Input:
+    ctx - Discord context window
+    client - Discord bot user
+Output:
+    - A new event added to the user's calendar file
+    - A message sent to the context saying an event was successfully created
+"""
 async def add_event(ctx, client):
     channel = await ctx.author.create_dm()
     # print(ctx.author.id)
