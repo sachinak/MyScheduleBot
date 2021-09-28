@@ -74,10 +74,14 @@ async def get_free_time(ctx, bot):
     # sorting today's events
     today_events.sort()
 
-    # removing the first event if it occurs at exactly 00:00 as there is no free time before it
+    # removing the first event if it occurs exactly at 00:00 as there is no free time before it
+    # if not , it will print the first free time which occurs exactly at 00:00
+
     if today_events[0] == start_time:
         today_events.pop(0)
-
+    else:
+        print('Free time from 00:00 until ', today_events[0].start_date.time())
+        
     # showing free time by iterating through the list of events ignoring the last one as it needs a special case
 
     for i in range(len(today_events) - 1):
