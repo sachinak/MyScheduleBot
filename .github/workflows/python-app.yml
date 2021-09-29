@@ -39,7 +39,7 @@ jobs:
         coverage-badge -o ./doc/img/coverage.svg -f
     - name: Generate documentation
       run: |
-        cd ./src/ |-
+        cd ./src/ |
         pdoc3 --html . -o ../doc/ --force --template-dir ../doc/
         mv /doc/src/* /doc/
     - name: Commit to repo
