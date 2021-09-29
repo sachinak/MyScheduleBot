@@ -36,17 +36,17 @@ jobs:
         pytest -s test/ --cov src/
     - name: Generate code coverage badge
       run: |
-        coverage-badge -o ./doc/img/coverage.svg -f
+        coverage-badge -o ./docs/img/coverage.svg -f
     - name: Generate documentation
       run: |
         cd ${{ github.workspace }}/src ; \
-        pdoc3 --html . -o ${{ github.workspace }}/doc --force --template-dir ${{ github.workspace }}/doc ; \
-        mv ${{ github.workspace }}/doc/src/* ${{ github.workspace }}/doc/
+        pdoc3 --html . -o ${{ github.workspace }}/docs --force --template-dir ${{ github.workspace }}/docs ; \
+        mv ${{ github.workspace }}/docs/src/* ${{ github.workspace }}/docs/
     - name: Commit to repo
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
-        git add ./doc/*
+        git add ./docs/*
         if ! git diff-index --quiet HEAD; then
            git commit -m "Update documentation and coverage badge."
            git fetch origin main

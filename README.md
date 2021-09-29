@@ -9,7 +9,7 @@
 [![GitHub all releases](https://img.shields.io/github/downloads/lyonva/ScheduleBot/total)](https://github.com/lyonva/ScheduleBot/releases)
 [![Platform](https://img.shields.io/badge/platform-discord-blue)](https://discord.com/)
 [![Test cases](https://github.com/lyonva/ScheduleBot/actions/workflows/python-app.yml/badge.svg)](https://github.com/lyonva/ScheduleBot/actions/workflows/python-app.yml)
-[![Code coverage](https://raw.githubusercontent.com/lyonva/ScheduleBot/main/doc/img/coverage.svg)](https://github.com/lyonva/ScheduleBot/actions/workflows/python-app.yml)
+[![Code coverage](https://raw.githubusercontent.com/lyonva/ScheduleBot/main/docs/img/coverage.svg)](https://github.com/lyonva/ScheduleBot/actions/workflows/python-app.yml)
 
 # ScheduleBot
 
@@ -19,7 +19,7 @@ ScheduleBot is a Python application that helps you calendarize events and work t
 
 With ScheduleBot you can quickly schedule events, state your prefered times for certain types of activities (exercise, homework, meetings, etc.) and quickly find out which times you have available to do more stuff.
 
-![Setup](doc/img/Startup.gif)
+![Setup](docs/img/Startup.gif)
 
 ## Getting started
 
@@ -41,7 +41,7 @@ ScheduleBot's unit of work is the **event**. When you use ScheduleBot to organiz
 
 The bot will ask you the details of your new event.
 
-![Schedule](doc/img/Schedule.gif)
+![Schedule](docs/img/Schedule.gif)
 
 ### **I forgot my agenda for the day**
 
@@ -53,7 +53,7 @@ You can take a look at your events scheduled for the day with the command:
 
 The bot will show you what you have scheduled for the day. This includes events that start before, or end after today.
 
-![Day](doc/img/Day.gif)
+![Day](docs/img/Day.gif)
 
 ### **When do I have spare time?**
 
@@ -83,7 +83,7 @@ You can create custom event types to further organize your schedule. You can def
 
 The bot will ask you for the name of the type and your preferred times.
 
-![Type Create](doc/img/Type%20Create.gif)
+![Type Create](docs/img/Type%20Create.gif)
 
 When you look for available times, you now can use `!find type` to find only the available times in your preferred hours. You still can create events of that type outside your preferred hours.
 
