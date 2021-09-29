@@ -116,8 +116,23 @@ async def add_event(ctx, client):
             date_array = []
             msg_content = &#34;&#34;
     output = &#34;&#34;
+    # Creates ScheduleBot directory in users Documents folder if it doesn&#39;t exist
+    if not os.path.exists(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type&#34;)):
+        Path(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type&#34;)).mkdir(parents=True, exist_ok=True)
+    # Checks if the event type file exists, and creates it if it doesn&#39;t
+    if not os.path.exists(
+        os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;
+    ):
+        with open(
+            os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;,
+            &#34;x&#34;,
+            newline=&#34;&#34;,
+        ) as new_file:
+            csvwriter = csv.writer(new_file, delimiter=&#34;,&#34;)
+            csvwriter.writerow([&#34;Event Type&#34;, &#34;Start time&#34;, &#34;End time&#34;])
+    # Opens the event type file
     with open(
-        os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types&#34; &#34;.csv&#34;, &#34;r&#34;
+        os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;, &#34;r&#34;
     ) as type_lines:
         type_lines = csv.reader(type_lines, delimiter=&#34;,&#34;)
         fields = next(type_lines)
@@ -147,7 +162,7 @@ async def add_event(ctx, client):
         current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4])
         await channel.send(&#34;Your event was successfully created!&#34;)
 
-        # Creates ScheduleBot directory in users Documents folder if it doesn&#39;t exist
+        # Creates ScheduleBot Event directory in users Documents folder if it doesn&#39;t exist
         if not os.path.exists(os.path.expanduser(&#34;~/Documents/ScheduleBot/Event&#34;)):
             Path(os.path.expanduser(&#34;~/Documents/ScheduleBot/Event&#34;)).mkdir(parents=True, exist_ok=True)
 
@@ -339,8 +354,23 @@ client - Discord bot user</p>
             date_array = []
             msg_content = &#34;&#34;
     output = &#34;&#34;
+    # Creates ScheduleBot directory in users Documents folder if it doesn&#39;t exist
+    if not os.path.exists(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type&#34;)):
+        Path(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type&#34;)).mkdir(parents=True, exist_ok=True)
+    # Checks if the event type file exists, and creates it if it doesn&#39;t
+    if not os.path.exists(
+        os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;
+    ):
+        with open(
+            os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;,
+            &#34;x&#34;,
+            newline=&#34;&#34;,
+        ) as new_file:
+            csvwriter = csv.writer(new_file, delimiter=&#34;,&#34;)
+            csvwriter.writerow([&#34;Event Type&#34;, &#34;Start time&#34;, &#34;End time&#34;])
+    # Opens the event type file
     with open(
-        os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types&#34; &#34;.csv&#34;, &#34;r&#34;
+        os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;, &#34;r&#34;
     ) as type_lines:
         type_lines = csv.reader(type_lines, delimiter=&#34;,&#34;)
         fields = next(type_lines)
@@ -370,7 +400,7 @@ client - Discord bot user</p>
         current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4])
         await channel.send(&#34;Your event was successfully created!&#34;)
 
-        # Creates ScheduleBot directory in users Documents folder if it doesn&#39;t exist
+        # Creates ScheduleBot Event directory in users Documents folder if it doesn&#39;t exist
         if not os.path.exists(os.path.expanduser(&#34;~/Documents/ScheduleBot/Event&#34;)):
             Path(os.path.expanduser(&#34;~/Documents/ScheduleBot/Event&#34;)).mkdir(parents=True, exist_ok=True)
 
