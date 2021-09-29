@@ -39,6 +39,7 @@ jobs:
         coverage-badge -o ./docs/img/coverage.svg -f
     - name: Generate documentation
       run: |
+        rm -r *.html ; \
         cd ${{ github.workspace }}/src ; \
         pdoc3 --html . -o ${{ github.workspace }}/docs --force --template-dir ${{ github.workspace }}/docs ; \
         mv ${{ github.workspace }}/docs/src/* ${{ github.workspace }}/docs/
