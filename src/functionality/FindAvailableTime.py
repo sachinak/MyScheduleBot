@@ -21,7 +21,7 @@ def readfile(ctx):
         - A csv_reader with the content of user's event_types
     """
         # Open the calendar file for user
-    with open(os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(ctx.author.id) + "event_types" + ".csv", "r") as event_file:
+    with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv", "r") as event_file:
         # Read the calendar file
         csv_reader = csv.reader(event_file, delimiter=',')
         # First line is just the headers
@@ -105,7 +105,7 @@ def getEventsOnDate(ctx,yourdate):
         - Provides a list of events associated with that day
     """
     stdate = yourdate.date()
-    with open(os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(ctx.author.id) + ".csv", "r") as calendar_lines:
+    with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Event" + str(ctx.author.id) + ".csv", "r") as calendar_lines:
         calendar_lines = csv.reader(calendar_lines, delimiter=",")
         fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
         rows = []
