@@ -27,13 +27,38 @@
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class event_type:
+    
     def __init__(self, event_name, start_time, end_time):
+        
+        &#34;&#34;&#34;
+        Function:
+            __init__
+        Description:
+            Creates a new event_type object instance
+        Input:
+            self - The current type object instance
+            name - String representing the type of event
+            start_time - datetime object representing the start time of preferred time range
+            end_time - datetime object representing the end time of preferred time range
+        Output:
+            - A new event_type object instance
+        &#34;&#34;&#34;
         self.event_name = event_name
         self.start_time = start_time
         self.end_time = end_time
      
     # Converts event object to a string
     def __str__(self):
+        &#34;&#34;&#34;
+        Function:
+            __str__
+        Description:
+            Converts an event_type object into a string
+        Input:
+            self - The current event_type object instance
+        Output:
+            A formatted string that represents all the information about an type instance
+        &#34;&#34;&#34;
         output = (
             self.event_name 
             + &#34; &#34;
@@ -44,14 +69,44 @@
         return output
     
     def get_start_time(self):
+        &#34;&#34;&#34;
+        Function:
+            get_start_time
+        Description:
+            Converts an start time in event_type object  into a string
+        Input:
+            self - The current event_type object instance
+        Output:
+            A formatted string of the start time
+        &#34;&#34;&#34;
         return str(self.start_time.strftime(&#39;%I:%M %p&#39;))
 
     def get_end_time(self):
+        &#34;&#34;&#34;
+        Function:
+            get_end_time
+        Description:
+            Converts an end time in event_type object  into a string
+        Input:
+            self - The current event_type object instance
+        Output:
+            A formatted string of end time
+        &#34;&#34;&#34;
         return str(self.end_time.strftime(&#39;%I:%M %p&#39;))
 
 
 # Converts event object to a list
     def to_list_event(self):
+        &#34;&#34;&#34;
+        Function:
+            to_list_event
+        Description:
+            Converts an event_type object into a list
+        Input:
+            self - The current event_type object instance
+        Output:
+            array - A list with each index being an attribute of the self event_type object
+        &#34;&#34;&#34;
         array = [self.event_name, self.get_start_time(), self.get_end_time()]
         return array</code></pre>
 </details>
@@ -70,19 +125,56 @@
 <span>(</span><span>event_name, start_time, end_time)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><h2 id="function">Function</h2>
+<p><strong>init</strong></p>
+<h2 id="description">Description</h2>
+<p>Creates a new event_type object instance</p>
+<h2 id="input">Input</h2>
+<p>self - The current type object instance
+name - String representing the type of event
+start_time - datetime object representing the start time of preferred time range
+end_time - datetime object representing the end time of preferred time range</p>
+<h2 id="output">Output</h2>
+<ul>
+<li>A new event_type object instance</li>
+</ul></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class event_type:
+    
     def __init__(self, event_name, start_time, end_time):
+        
+        &#34;&#34;&#34;
+        Function:
+            __init__
+        Description:
+            Creates a new event_type object instance
+        Input:
+            self - The current type object instance
+            name - String representing the type of event
+            start_time - datetime object representing the start time of preferred time range
+            end_time - datetime object representing the end time of preferred time range
+        Output:
+            - A new event_type object instance
+        &#34;&#34;&#34;
         self.event_name = event_name
         self.start_time = start_time
         self.end_time = end_time
      
     # Converts event object to a string
     def __str__(self):
+        &#34;&#34;&#34;
+        Function:
+            __str__
+        Description:
+            Converts an event_type object into a string
+        Input:
+            self - The current event_type object instance
+        Output:
+            A formatted string that represents all the information about an type instance
+        &#34;&#34;&#34;
         output = (
             self.event_name 
             + &#34; &#34;
@@ -93,14 +185,44 @@
         return output
     
     def get_start_time(self):
+        &#34;&#34;&#34;
+        Function:
+            get_start_time
+        Description:
+            Converts an start time in event_type object  into a string
+        Input:
+            self - The current event_type object instance
+        Output:
+            A formatted string of the start time
+        &#34;&#34;&#34;
         return str(self.start_time.strftime(&#39;%I:%M %p&#39;))
 
     def get_end_time(self):
+        &#34;&#34;&#34;
+        Function:
+            get_end_time
+        Description:
+            Converts an end time in event_type object  into a string
+        Input:
+            self - The current event_type object instance
+        Output:
+            A formatted string of end time
+        &#34;&#34;&#34;
         return str(self.end_time.strftime(&#39;%I:%M %p&#39;))
 
 
 # Converts event object to a list
     def to_list_event(self):
+        &#34;&#34;&#34;
+        Function:
+            to_list_event
+        Description:
+            Converts an event_type object into a list
+        Input:
+            self - The current event_type object instance
+        Output:
+            array - A list with each index being an attribute of the self event_type object
+        &#34;&#34;&#34;
         array = [self.event_name, self.get_start_time(), self.get_end_time()]
         return array</code></pre>
 </details>
@@ -110,12 +232,30 @@
 <span>def <span class="ident">get_end_time</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><h2 id="function">Function</h2>
+<p>get_end_time</p>
+<h2 id="description">Description</h2>
+<p>Converts an end time in event_type object
+into a string</p>
+<h2 id="input">Input</h2>
+<p>self - The current event_type object instance</p>
+<h2 id="output">Output</h2>
+<p>A formatted string of end time</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_end_time(self):
+    &#34;&#34;&#34;
+    Function:
+        get_end_time
+    Description:
+        Converts an end time in event_type object  into a string
+    Input:
+        self - The current event_type object instance
+    Output:
+        A formatted string of end time
+    &#34;&#34;&#34;
     return str(self.end_time.strftime(&#39;%I:%M %p&#39;))</code></pre>
 </details>
 </dd>
@@ -123,12 +263,30 @@
 <span>def <span class="ident">get_start_time</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><h2 id="function">Function</h2>
+<p>get_start_time</p>
+<h2 id="description">Description</h2>
+<p>Converts an start time in event_type object
+into a string</p>
+<h2 id="input">Input</h2>
+<p>self - The current event_type object instance</p>
+<h2 id="output">Output</h2>
+<p>A formatted string of the start time</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_start_time(self):
+    &#34;&#34;&#34;
+    Function:
+        get_start_time
+    Description:
+        Converts an start time in event_type object  into a string
+    Input:
+        self - The current event_type object instance
+    Output:
+        A formatted string of the start time
+    &#34;&#34;&#34;
     return str(self.start_time.strftime(&#39;%I:%M %p&#39;))</code></pre>
 </details>
 </dd>
@@ -136,12 +294,29 @@
 <span>def <span class="ident">to_list_event</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><h2 id="function">Function</h2>
+<p>to_list_event</p>
+<h2 id="description">Description</h2>
+<p>Converts an event_type object into a list</p>
+<h2 id="input">Input</h2>
+<p>self - The current event_type object instance</p>
+<h2 id="output">Output</h2>
+<p>array - A list with each index being an attribute of the self event_type object</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def to_list_event(self):
+    &#34;&#34;&#34;
+    Function:
+        to_list_event
+    Description:
+        Converts an event_type object into a list
+    Input:
+        self - The current event_type object instance
+    Output:
+        array - A list with each index being an attribute of the self event_type object
+    &#34;&#34;&#34;
     array = [self.event_name, self.get_start_time(), self.get_end_time()]
     return array</code></pre>
 </details>
