@@ -57,6 +57,7 @@ async def on_ready():
     # await channel.send("Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n" +
     # "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!")
 
+
 """
 Function: schedule
 Description: Calls the add_event function to walk a user through the event creation process
@@ -70,6 +71,8 @@ Output:
 async def schedule(ctx):
     await add_event(ctx, bot)
 
+
+
 """
 Function: find
 Description: Calls the find_avaialbleTime function to walk a user through the range associated with the given event
@@ -82,10 +85,23 @@ Output:
 @bot.command()
 async def find(ctx):
     await find_avaialbleTime(ctx,bot)
-    
+
+
+
+"""
+Function: get_highlight
+Description: Shows the events planned for the day by the user
+Input:
+    ctx - Discord context window
+Output:
+    - A message sent to the context with all the events that start and/or end today
+"""    
 @bot.command()
 async def day(ctx):
-    await get_highlight(ctx, bot)
+    await get_highlight(ctx)
+
+
+
 
 # creating new event type
 @bot.command()
