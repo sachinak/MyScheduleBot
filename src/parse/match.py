@@ -40,6 +40,13 @@ _period_grammar = """
 """
 
 class _PeriodTree(Transformer):
+    """
+    Class:
+        _PeriodTree
+    Description:
+        Converts a parsed grammar of 2 date and times into datetime objects
+        Grammar is handled by lark library, and this object just manages conversion.
+    """
     def period(self, t):
         initial = t[0]
         end = t[1]
@@ -107,6 +114,17 @@ period_grammar = period_parser.parse
 #         None
 
 def parse_period(period):
+    """
+    Function:
+        parse_period
+    Description:
+        Converts and validates two user inputs into 2 datetime objects
+    Input:
+        period - a string that may contain 2 dates
+    Output:
+        A list with two datetime object if conversion is successful
+        An exception if conversion fails
+    """
     try:
         return period_grammar(period)
     except (UnexpectedInput, LarkError):
