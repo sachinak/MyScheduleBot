@@ -37,13 +37,19 @@ jobs:
     - name: Generate code coverage badge
       run: |
         coverage-badge -o ./doc/img/coverage.svg -f
-    - name: Commit badge to repo
+    - name: Generate documentation
+      run: |
+        cd ./doc/
+        pdoc3 --html . -o ../doc/ --force --template-dir ../doc/
+        cd ..
+        mv -r /doc/src/* /doc/
+    - name: Commit to repo
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add ./doc/img/coverage.svg
         if ! git diff-index --quiet HEAD; then
-           git commit -m "Update coverage badge."
+           git commit -m "Update documentation and coverage badge."
            git fetch origin main
            git push origin HEAD:main
         fi
