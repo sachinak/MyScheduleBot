@@ -3,21 +3,20 @@ from datetime import datetime
 import csv
 
 
-"""
-Function: get_highlight
-Description: Shows the events planned for the day by the user
-Input:
-    ctx - Discord context window
-Output:
-    - A message sent to the context with all the events that start and/or end today
-"""
+
 
 async def get_highlight(ctx):
     """
-    Returns the events scheduled by user for today.
-
-    Future implementation can take date/week/month as argument
-    to show scheduled events as asked by user.
+    Function:
+        get_highlight
+    Description:
+        Shows the events planned for the day by the user.
+        Future implementation can take date/week/month as argument
+        to show scheduled events as asked by user.
+    Input:
+        ctx - Discord context window
+    Output:
+        - A message sent to the context with all the events that start and/or end today
     """
     channel = await ctx.author.create_dm()
 
@@ -92,20 +91,22 @@ async def get_highlight(ctx):
 
 # Helper Functions 
 
-"""
-Function: check_start_or_end
-Description: checks if given date starts or ends today
-Input:
-    dates - a list containing start and end date (strings) for an event
-    today - today's date (string)
-Output:
-    - 0 if no event starts or ends today
-    - 1 if event starts and ends today
-    - 2 if event starts and ends on a later date
-    - 3 if event started on a previous date and ends today
-"""
+
 def check_start_or_end(dates, today):
-    
+    """
+    Function:
+        check_start_or_end
+    Description:
+        checks if given date starts or ends today
+    Input:
+        dates - a list containing start and end date (strings) for an event
+        today - today's date (string)
+    Output:
+        - 0 if no event starts or ends today
+        - 1 if event starts and ends today
+        - 2 if event starts and ends on a later date
+        - 3 if event started on a previous date and ends today
+    """
     if today == dates[0]:
         if today == dates[1]:
             return 1
@@ -117,16 +118,18 @@ def check_start_or_end(dates, today):
         return 0
 
 
-"""
-Function: conver_to_12
-Description: Converts 24 hour time to 12 hour format
-Input:
-    time - time string in 24 hour format
-Output:
-    - time string converted to 12 hour format
-"""
-def convert_to_12(time):
 
+def convert_to_12(time):
+    """
+    Function:
+        conver_to_12
+    Description:
+        Converts 24 hour time to 12 hour format
+    Input:
+        time - time string in 24 hour format
+    Output:
+        - time string converted to 12 hour format
+    """
     if int(time[:2]) > 12:
         new_time = "0" + str(int(time[:2]) - 12) + ":" + time[3:] + " PM"
     elif int(time[:2]) == 0:

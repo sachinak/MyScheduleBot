@@ -22,17 +22,19 @@ json_data = json.load(json_file)
 bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
 
-"""
-Function: help
-Description: A command that allows the user to see all usable commands and their descriptions
-Input:
-    ctx - Discord context window
-Output: An embed window sent to the context with all commands/descriptions
-"""
-
 
 @bot.group(invoke_without_command=True)
 async def help(ctx):
+    """
+    Function:
+        help
+    Description:
+        A command that allows the user to see all usable commands and their descriptions
+    Input:
+        ctx - Discord context window
+    Output:
+        An embed window sent to the context with all commands/descriptions
+    """
     em = discord.Embed(
         title="ScheduleBot Commands",
         description="Here are all the commands to use ScheduleBot\nAll events are prefaced by an '!'",
@@ -46,17 +48,19 @@ async def help(ctx):
     await ctx.send(embed=em)
 
 
-"""
-Function: on_ready
-Description: Displays a welcome message to the ScheduleBot server and allows user to receive
-a direct message from the bot by reacting to the welcome message with an alarm_clock reaction
-Input: None
-Output: The welcome message sent to the ScheduleBot server
-"""
-
-
 @bot.event
 async def on_ready():
+    """
+    Function:
+        on_ready
+    Description:
+        Displays a welcome message to the ScheduleBot server and allows user to receive
+    a direct message from the bot by reacting to the welcome message with an alarm_clock reaction
+    Input:
+        None
+    Output:
+        The welcome message sent to the ScheduleBot server
+    """
     # Outputs bot name to console once bot is started
     print("We have logged in as {0.user}".format(bot))
     channel = bot.get_channel(884864860859531347)  # Gets the channel ID of the "schedule-manager channel"
@@ -84,50 +88,55 @@ async def on_reaction_add(reaction, user):
             pass
 
 
-"""
-Function: schedule
-Description: Calls the add_event function to walk a user through the event creation process
-Input:
-    ctx - Discord context window
-Output:
-    - A new event added to the user's calendar file
-    - A message sent to the context saying an event was successfully created
-"""
-
 
 @bot.command()
 async def schedule(ctx):
+    """
+    Function:
+        schedule
+    Description:
+        Calls the add_event function to walk a user through the event creation process
+    Input:
+        ctx - Discord context window
+    Output:
+        - A new event added to the user's calendar file
+        - A message sent to the context saying an event was successfully created
+    """
     await add_event(ctx, bot)
 
 
-"""
-Function: find
-Description: Calls the find_avaialbleTime function to walk a user through the range associated with the given event
-Input:
-    ctx - Discord context window
-Output:
-    - A new event type is added to the users event_type file
-    - Provides users with the time range for the given event
-"""
 
 
 @bot.command()
 async def find(ctx):
-    await find_avaialbleTime(ctx, bot)
+    """
+    Function:
+        find
+    Description:
+        Calls the find_avaialbleTime function to walk a user through the range associated with the given event
+    Input:
+        ctx - Discord context window
+    Output:
+        - A new event type is added to the users event_type file
+        - Provides users with the time range for the given event
+    """
+    await find_avaialbleTime(ctx,bot)
 
 
-"""
-Function: get_highlight
-Description: Shows the events planned for the day by the user
-Input:
-    ctx - Discord context window
-Output:
-    - A message sent to the context with all the events that start and/or end today
-"""
 
-
+ 
 @bot.command()
 async def day(ctx):
+    """
+    Function:
+        get_highlight
+    Description:
+        Shows the events planned for the day by the user
+    Input:
+        ctx - Discord context window
+    Output:
+        - A message sent to the context with all the events that start and/or end today
+    """   
     await get_highlight(ctx)
 
 
@@ -170,6 +179,7 @@ async def freetime(ctx):
 
 
 # Runs the bot (local machine)
-bot.run(TOKEN)
+if __name__ == "__main__":
+    bot.run(TOKEN)
 
 # client.run(os.environ['TOKEN'])  # Runs the bot (repl.it)
