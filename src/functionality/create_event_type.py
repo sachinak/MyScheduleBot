@@ -7,16 +7,16 @@ from types import TracebackType
 from event_type import event_type
 
 
-async def create_event_type(ctx, client):
+async def create_event_type(ctx, client,event_msg):
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
     def check(m):
         return m.content is not None and m.channel == channel and m.author == ctx.author
 
     event_array = []
-    await channel.send("First give me the type of your event:")
-    event_msg = await client.wait_for("message", check=check)  # Waits for user input
-    event_msg = event_msg.content  # Strips message to just the text the user entered
+    #await channel.send("First give me the type of your event:")
+    #event_msg = await client.wait_for("message", check=check)  # Waits for user input
+    #event_msg = event_msg.content  # Strips message to just the text the user entered
     event_array.append(event_msg)
     await channel.send(
         "Now give me your perefered time range this event type.\n"
@@ -180,7 +180,7 @@ async def create_event_type(ctx, client):
                 elif line_number==1:
                     csvwriter.writerow(rows[0])
             
-
+        return True
             
     except Exception as e:
         # Outputs an error message if the event could not be created
@@ -189,4 +189,5 @@ async def create_event_type(ctx, client):
         await channel.send(
             "There was an error creating your event. Make sure your formatting is correct and try creating the event again."
         )
+        return False
         
