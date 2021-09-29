@@ -44,7 +44,7 @@ from functionality.DisplayFreeTime import get_free_time
 
 # Loads data from commands json file
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-json_file = open(root_dir + &#34;/doc/commands.json&#34;)
+json_file = open(root_dir + &#34;/docs/commands.json&#34;)
 json_data = json.load(json_file)
 
 bot = commands.Bot(command_prefix=&#34;!&#34;)  # Creates the bot with a command prefix of &#39;!&#39;
