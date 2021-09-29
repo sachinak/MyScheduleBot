@@ -5,6 +5,19 @@ from pathlib import Path
 from types import TracebackType
 
 async def delete_event_type(ctx, client):
+    """
+    Function:
+        delete_event_type
+    Description:
+        Walks a user through deleting the existing event types in the calender file
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A existing event type is deleted from the user's calendar file 
+        - A message sent to the context saying an event type was successfully deleted
+    """
+    
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
     def check(m):
