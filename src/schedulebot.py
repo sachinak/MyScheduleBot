@@ -39,6 +39,7 @@ async def help(ctx):
     )
     em.add_field(name="help", value="Displays all commands and their descriptions", inline=False)
     em.add_field(name="schedule", value="Creates an event", inline=False)
+    em.add_field(name="freetime", value="Displays when you are available today", inline=False)
     em.add_field(name="day", value="Shows everything on your schedule for today", inline=False)
     em.add_field(name="typecreate", value="Creates a new event type", inline=True)
     em.add_field(name="typedelete", value="Deletes an event type", inline=True)
