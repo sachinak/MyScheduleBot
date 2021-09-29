@@ -8,6 +8,20 @@ from event_type import event_type
 
 
 async def create_event_type(ctx, client,event_msg):
+    
+    """
+    Function:
+        create_event_type
+    Description:
+        Walks a user through the creation of types of event or updating time range for existing event types
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A new event type added to the user's calendar file or the time range will be update for the existing event type
+        - A message sent to the context saying an event type was successfully added or updated
+    """
+        
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
     def check(m):
@@ -187,7 +201,7 @@ async def create_event_type(ctx, client,event_msg):
         print(e)
         TracebackType.print_exc()
         await channel.send(
-            "There was an error creating your event. Make sure your formatting is correct and try creating the event again."
+            "There was an error while adding this event type. Make sure your formatting is correct and try creating the event type again."
         )
         return False
         
