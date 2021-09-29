@@ -69,16 +69,37 @@ Output:
 async def schedule(ctx):
     await add_event(ctx, bot)
 
-
+"""
+Function: find
+Description: Calls the find_avaialbleTime function to walk a user through the range associated with the given event
+Input:
+    ctx - Discord context window
+Output:
+    - A new event type is added to the users event_type file
+    - Provides users with the time range for the given event
+"""
+@bot.command()
+async def find(ctx):
+    await find_avaialbleTime(ctx,bot)
+    
 @bot.command()
 async def day(ctx):
     await get_highlight(ctx, bot)
 
-
 # creating new event type
 @bot.command()
 async def typecreate(ctx):
-    await create_event_type(ctx, bot)
+    
+    channel = await ctx.author.create_dm()
+    # print(ctx.author.id)
+    def check(m):
+        return m.content is not None and m.channel == channel and m.author == ctx.author
+
+    await channel.send("First give me the type of your event:")
+    event_msg = await bot.wait_for("message", check=check)  # Waits for user input
+    event_msg = event_msg.content  # Strips message to just the text the user entered
+
+    await create_event_type(ctx, bot,event_msg)
 
 
 # deleting event type
