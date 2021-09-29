@@ -6,6 +6,16 @@ from discord.ext.commands import bot
 from functionality.highlights import convert_to_12
 from functionality.create_event_type import create_event_type
 
+
+"""
+Function: readfile
+Description: fetches the event_types file contents
+Input:
+    ctx - Discord context window
+Output:
+    - A csv_reader with the content of user's event_types
+"""
+
 def readfile(ctx):
         # Open the calendar file for user
     with open(os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(ctx.author.id) + "event_types" + ".csv", "r") as event_file:
@@ -16,16 +26,27 @@ def readfile(ctx):
 
     return  csv_reader 
 
-async def find_avaialbleTime(ctx, client,event):
+"""
+Function: find_avaialbleTime
+Description: Lets the user know about entered time range for event_type
+Input:
+    ctx - Discord context window
+    client - Discord bot user
+Output:
+    - A new event type is added to the users event_type file
+    - Provides users with the time range for the given event
+"""
+
+async def find_avaialbleTime(ctx, client):
 
     channel = await ctx.author.create_dm()
     # print(ctx.author.id)
     def check(m):
         return m.content is not None and m.channel == channel and m.author == ctx.author
 
-    #await channel.send("Let's find time for your event. Enter the Event Type :-")
-    #event_msg = await client.wait_for("message", check=check)  # Waits for user input
-    #event_msg = event_msg.content  # Strips message to just the text the user entered
+    await channel.send("Let's find time for your event. Enter the Event Type :-")
+    event_msg = await client.wait_for("message", check=check)  # Waits for user input
+    event = event_msg.content  # Strips message to just the text the user entered
 
     try:
 
@@ -47,7 +68,7 @@ async def find_avaialbleTime(ctx, client,event):
             event_msg1 = await client.wait_for("message", check=check)  # Waits for user input
             event_msg1 = event_msg1.content  # Strips message to just the text the user entered
             if event_msg1 == 'y':
-                event_created = await create_event_type(ctx,client,event.event_type)
+                event_created = await create_event_type(ctx,client,event)
 
             if event_created == True:
                 csv_reader = readfile(ctx)
@@ -55,20 +76,26 @@ async def find_avaialbleTime(ctx, client,event):
         if event_created == True:
             for row in csv_reader:
             # Get event details
-                if row[0] == event.event_type:
+                if row[0] == event:
                     flag = True                    
                     await channel.send("You have a time range from "+row[1]+' to '+row[2]+' for events of type '+row[0])
                     break
                 
-        matchedrows = getEventsOnDate(ctx,event.start_date)         
-
-        rangestart = Event()
-
-
+        #matchedrows = getEventsOnDate(ctx,event.start_date)
 
     except FileNotFoundError as err:
         await channel.send("Looks like I cannot find your event types. Try adding event types using the '!event' command!")
 
+
+"""
+Function: getEventsOnDate
+Description: Fetches the events on a particular day
+Input:
+    ctx - Discord context window
+    yourdate - Date for which events to be pulled
+Output:
+    - Provides a list of events associated with that day
+"""
 
 def getEventsOnDate(ctx,yourdate):
 
@@ -90,6 +117,3 @@ def getEventsOnDate(ctx,yourdate):
             Events.append(eve)
         
         return Events
-
-
-
