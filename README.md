@@ -68,10 +68,6 @@ The bot will ask you for the name of the type and your preferred times.
 ![Type Create](docs/img/Type%20Create.gif)
 
 
-It will find and schedule the first available X contiguous hours, on your preferred hours of the specified `type`.
-
-\[Screenshot\]
-
 ## Releases
 
 -   [All releases](https://github.com/lyonva/ScheduleBot/releases)
@@ -118,6 +114,10 @@ You can quickly create a new event with the command
 ```
 !schedulefind type X
 ```
+
+\[Screenshot\]
+
+It will find and schedule the first available X contiguous hours, on your preferred hours of the specified `type`.
 
 \[Screenshot\]
 
