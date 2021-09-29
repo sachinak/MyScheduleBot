@@ -42,7 +42,7 @@ async def get_highlight(ctx):
         Future implementation can take date/week/month as argument
         to show scheduled events as asked by user.
     Input:
-        ctx - Discord context window
+        - ctx - Discord context window
     Output:
         - A message sent to the context with all the events that start and/or end today
     &#34;&#34;&#34;
@@ -127,8 +127,8 @@ def check_start_or_end(dates, today):
     Description:
         checks if given date starts or ends today
     Input:
-        dates - a list containing start and end date (strings) for an event
-        today - today&#39;s date (string)
+        - dates - a list containing start and end date (strings) for an event
+        - today - today&#39;s date (string)
     Output:
         - 0 if no event starts or ends today
         - 1 if event starts and ends today
@@ -154,7 +154,7 @@ def convert_to_12(time):
     Description:
         Converts 24 hour time to 12 hour format
     Input:
-        time - time string in 24 hour format
+        - time - time string in 24 hour format
     Output:
         - time string converted to 12 hour format
     &#34;&#34;&#34;
@@ -186,8 +186,10 @@ def convert_to_12(time):
 <h2 id="description">Description</h2>
 <p>checks if given date starts or ends today</p>
 <h2 id="input">Input</h2>
-<p>dates - a list containing start and end date (strings) for an event
-today - today's date (string)</p>
+<ul>
+<li>dates - a list containing start and end date (strings) for an event</li>
+<li>today - today's date (string)</li>
+</ul>
 <h2 id="output">Output</h2>
 <ul>
 <li>0 if no event starts or ends today</li>
@@ -206,8 +208,8 @@ today - today's date (string)</p>
     Description:
         checks if given date starts or ends today
     Input:
-        dates - a list containing start and end date (strings) for an event
-        today - today&#39;s date (string)
+        - dates - a list containing start and end date (strings) for an event
+        - today - today&#39;s date (string)
     Output:
         - 0 if no event starts or ends today
         - 1 if event starts and ends today
@@ -234,7 +236,9 @@ today - today's date (string)</p>
 <h2 id="description">Description</h2>
 <p>Converts 24 hour time to 12 hour format</p>
 <h2 id="input">Input</h2>
-<p>time - time string in 24 hour format</p>
+<ul>
+<li>time - time string in 24 hour format</li>
+</ul>
 <h2 id="output">Output</h2>
 <ul>
 <li>time string converted to 12 hour format</li>
@@ -250,7 +254,7 @@ today - today's date (string)</p>
     Description:
         Converts 24 hour time to 12 hour format
     Input:
-        time - time string in 24 hour format
+        - time - time string in 24 hour format
     Output:
         - time string converted to 12 hour format
     &#34;&#34;&#34;
@@ -277,7 +281,9 @@ today - today's date (string)</p>
 Future implementation can take date/week/month as argument
 to show scheduled events as asked by user.</p>
 <h2 id="input">Input</h2>
-<p>ctx - Discord context window</p>
+<ul>
+<li>ctx - Discord context window</li>
+</ul>
 <h2 id="output">Output</h2>
 <ul>
 <li>A message sent to the context with all the events that start and/or end today</li>
@@ -295,7 +301,7 @@ to show scheduled events as asked by user.</p>
         Future implementation can take date/week/month as argument
         to show scheduled events as asked by user.
     Input:
-        ctx - Discord context window
+        - ctx - Discord context window
     Output:
         - A message sent to the context with all the events that start and/or end today
     &#34;&#34;&#34;

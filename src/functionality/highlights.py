@@ -14,7 +14,7 @@ async def get_highlight(ctx):
         Future implementation can take date/week/month as argument
         to show scheduled events as asked by user.
     Input:
-        ctx - Discord context window
+        - ctx - Discord context window
     Output:
         - A message sent to the context with all the events that start and/or end today
     """
@@ -99,8 +99,8 @@ def check_start_or_end(dates, today):
     Description:
         checks if given date starts or ends today
     Input:
-        dates - a list containing start and end date (strings) for an event
-        today - today's date (string)
+        - dates - a list containing start and end date (strings) for an event
+        - today - today's date (string)
     Output:
         - 0 if no event starts or ends today
         - 1 if event starts and ends today
@@ -126,7 +126,7 @@ def convert_to_12(time):
     Description:
         Converts 24 hour time to 12 hour format
     Input:
-        time - time string in 24 hour format
+        - time - time string in 24 hour format
     Output:
         - time string converted to 12 hour format
     """
