@@ -39,9 +39,10 @@ jobs:
         coverage-badge -o ./doc/img/coverage.svg -f
     - name: Generate documentation
       run: |
-        cd ./src/ |
-        pdoc3 --html . -o ../doc/ --force --template-dir ../doc/
-        mv /doc/src/* /doc/
+        cd ./src/; \
+        pdoc3 --html . -o ../doc/ --force --template-dir ../doc/; \
+        cd ..; \
+        mv ./doc/src/* ./doc/
     - name: Commit to repo
       run: |
         git config user.name github-actions
