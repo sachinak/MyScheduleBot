@@ -71,6 +71,12 @@ async def get_free_time(ctx, bot):
         if e.start_date.date() == today.date() or e.end_date.date() == today.date():
             today_events.append(e)
 
+    # check if the user has no event for today
+
+    if len(today_events) == 0:
+        await channel.send('You do not have any event for today')
+        return
+    
     # sorting today's events
     today_events.sort()
 
