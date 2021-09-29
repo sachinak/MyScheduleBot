@@ -36,6 +36,20 @@ from event_type import event_type
 
 
 async def create_event_type(ctx, client,event_msg):
+    
+    &#34;&#34;&#34;
+    Function:
+        create_event_type
+    Description:
+        Walks a user through the creation of types of event or updating time range for existing event types
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A new event type added to the user&#39;s calendar file or the time range will be update for the existing event type
+        - A message sent to the context saying an event type was successfully added or updated
+    &#34;&#34;&#34;
+        
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
     def check(m):
@@ -215,7 +229,7 @@ async def create_event_type(ctx, client,event_msg):
         print(e)
         TracebackType.print_exc()
         await channel.send(
-            &#34;There was an error creating your event. Make sure your formatting is correct and try creating the event again.&#34;
+            &#34;There was an error while adding this event type. Make sure your formatting is correct and try creating the event type again.&#34;
         )
         return False
         </code></pre>
@@ -232,12 +246,37 @@ async def create_event_type(ctx, client,event_msg):
 <span>async def <span class="ident">create_event_type</span></span>(<span>ctx, client, event_msg)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><h2 id="function">Function</h2>
+<p>create_event_type</p>
+<h2 id="description">Description</h2>
+<p>Walks a user through the creation of types of event or updating time range for existing event types</p>
+<h2 id="input">Input</h2>
+<p>ctx - Discord context window
+client - Discord bot user</p>
+<h2 id="output">Output</h2>
+<ul>
+<li>A new event type added to the user's calendar file or the time range will be update for the existing event type</li>
+<li>A message sent to the context saying an event type was successfully added or updated</li>
+</ul></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">async def create_event_type(ctx, client,event_msg):
+    
+    &#34;&#34;&#34;
+    Function:
+        create_event_type
+    Description:
+        Walks a user through the creation of types of event or updating time range for existing event types
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A new event type added to the user&#39;s calendar file or the time range will be update for the existing event type
+        - A message sent to the context saying an event type was successfully added or updated
+    &#34;&#34;&#34;
+        
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
     def check(m):
@@ -417,7 +456,7 @@ async def create_event_type(ctx, client,event_msg):
         print(e)
         TracebackType.print_exc()
         await channel.send(
-            &#34;There was an error creating your event. Make sure your formatting is correct and try creating the event again.&#34;
+            &#34;There was an error while adding this event type. Make sure your formatting is correct and try creating the event type again.&#34;
         )
         return False</code></pre>
 </details>
