@@ -10,6 +10,7 @@ from functionality.highlights import get_highlight
 from functionality.create_event_type import create_event_type
 from functionality.FindAvailableTime import find_avaialbleTime
 from functionality.delete_event_type import delete_event_type
+from functionality.DisplayFreeTime import get_free_time
 
 # from functionality.FindAvailableTime import find_availableTime
 
@@ -107,6 +108,10 @@ async def typecreate(ctx):
 async def typedelete(ctx):
     await delete_event_type(ctx, bot)
 
+# showing the free time that the user has today
+@bot.command()
+async def freetime(ctx):
+    await get_free_time(ctx, bot)
 
 # Runs the bot (local machine)
 bot.run(TOKEN)
