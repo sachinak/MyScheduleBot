@@ -124,6 +124,17 @@ async def typecreate(ctx):
 async def typedelete(ctx):
     await delete_event_type(ctx, bot)
 
+
+"""
+Function: get_free_time
+Description: giving the user the free time today according to the registered events
+Input:
+    ctx - Discord context window
+    bot - Discord bot user
+Output:
+    - A message sent to the user channel stating every free time slot that is avaliable today 
+"""
+
 # showing the free time that the user has today
 @bot.command()
 async def freetime(ctx):
