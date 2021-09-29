@@ -70,10 +70,17 @@ async def on_ready():
 @bot.event
 async def on_reaction_add(reaction, user):
     emoji = reaction.emoji
-    if emoji == "⏰":
-        await user.send(
-            "Nice to meet you " + user.name + "! I am ScheduleBot and I am here to make managing your schedule easier!"
-        )
+    if emoji == "⏰" and user.id != 884865269867102249:
+        try:
+            await user.send(
+                "Nice to meet you "
+                + user.name
+                + "! I am ScheduleBot and I am here to make managing your schedule easier!"
+            )
+            await help(user)
+        except:
+            print(user.name + " (" + user.id + ") does not have DM permissions set correctly")
+            pass
 
 
 """
