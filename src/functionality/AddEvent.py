@@ -96,7 +96,7 @@ async def add_event(ctx, client):
         for line in type_lines:
             for text in line:
                 current_line.append(text)
-            output += f"{current_line[0]:<{space[0]}} Preferred range of {current_line[1]:<{space[1]}}{current_line[2]:<{space[2]}}"
+            output += f"{current_line[0]:<{space[0]}} Preferred range of {current_line[1]:<{space[1]}} - {current_line[2]:<{space[2]}}"
             current_line = []
     await channel.send(
         "Tell me what type of event this is. Here are a list of event types I currently know:\n" + output
