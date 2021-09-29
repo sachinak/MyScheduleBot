@@ -4,7 +4,7 @@ import os
 import json
 
 from discord.ext.commands.help import MinimalHelpCommand
-from config import TOKEN
+
 from functionality.AddEvent import add_event  # type: ignore
 from functionality.highlights import get_highlight
 from functionality.create_event_type import create_event_type
@@ -64,12 +64,12 @@ async def on_ready():
     # Outputs bot name to console once bot is started
     print("We have logged in as {0.user}".format(bot))
     channel = bot.get_channel(884864860859531347)  # Gets the channel ID of the "schedule-manager channel"
-    msg = await channel.send(
-        "Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n"
-        + "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!"
-        + "Make sure you have allowed non-friends to direct message you or I can't help you."
-    )
-    await msg.add_reaction("⏰")
+    # msg = await channel.send(
+    #     "Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n"
+    #     + "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!"
+    #     + "Make sure you have allowed non-friends to direct message you or I can't help you."
+    # )
+    # await msg.add_reaction("⏰")
 
 
 @bot.event
@@ -186,6 +186,7 @@ async def freetime(ctx):
 
 # Runs the bot (local machine)
 if __name__ == "__main__":
+    from config import TOKEN
     bot.run(TOKEN)
 
 # client.run(os.environ['TOKEN'])  # Runs the bot (repl.it)

@@ -88,8 +88,23 @@ async def add_event(ctx, client):
             date_array = []
             msg_content = ""
     output = ""
+    # Creates ScheduleBot directory in users Documents folder if it doesn't exist
+    if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot/Type")):
+        Path(os.path.expanduser("~/Documents/ScheduleBot/Type")).mkdir(parents=True, exist_ok=True)
+    # Checks if the event type file exists, and creates it if it doesn't
+    if not os.path.exists(
+        os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types.csv"
+    ):
+        with open(
+            os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types.csv",
+            "x",
+            newline="",
+        ) as new_file:
+            csvwriter = csv.writer(new_file, delimiter=",")
+            csvwriter.writerow(["Event Type", "Start time", "End time"])
+    # Opens the event type file
     with open(
-        os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" ".csv", "r"
+        os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types.csv", "r"
     ) as type_lines:
         type_lines = csv.reader(type_lines, delimiter=",")
         fields = next(type_lines)
@@ -119,7 +134,7 @@ async def add_event(ctx, client):
         current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4])
         await channel.send("Your event was successfully created!")
 
-        # Creates ScheduleBot directory in users Documents folder if it doesn't exist
+        # Creates ScheduleBot Event directory in users Documents folder if it doesn't exist
         if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot/Event")):
             Path(os.path.expanduser("~/Documents/ScheduleBot/Event")).mkdir(parents=True, exist_ok=True)
 
