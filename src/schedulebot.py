@@ -62,8 +62,18 @@ async def on_ready():
     msg = await channel.send(
         "Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n"
         + "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!"
+        + "Make sure you have allowed non-friends to direct message you or I can't help you."
     )
     await msg.add_reaction("⏰")
+
+
+@bot.event
+async def on_reaction_add(reaction, user):
+    emoji = reaction.emoji
+    if emoji == "⏰":
+        await user.send(
+            "Nice to meet you " + user.name + "! I am ScheduleBot and I am here to make managing your schedule easier!"
+        )
 
 
 """
