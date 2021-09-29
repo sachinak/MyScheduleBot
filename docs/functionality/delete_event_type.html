@@ -33,6 +33,19 @@ from pathlib import Path
 from types import TracebackType
 
 async def delete_event_type(ctx, client):
+    &#34;&#34;&#34;
+    Function:
+        delete_event_type
+    Description:
+        Walks a user through deleting the existing event types in the calender file
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A existing event type is deleted from the user&#39;s calendar file 
+        - A message sent to the context saying an event type was successfully deleted
+    &#34;&#34;&#34;
+    
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
     def check(m):
@@ -118,12 +131,36 @@ async def delete_event_type(ctx, client):
 <span>async def <span class="ident">delete_event_type</span></span>(<span>ctx, client)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><h2 id="function">Function</h2>
+<p>delete_event_type</p>
+<h2 id="description">Description</h2>
+<p>Walks a user through deleting the existing event types in the calender file</p>
+<h2 id="input">Input</h2>
+<p>ctx - Discord context window
+client - Discord bot user</p>
+<h2 id="output">Output</h2>
+<ul>
+<li>A existing event type is deleted from the user's calendar file </li>
+<li>A message sent to the context saying an event type was successfully deleted</li>
+</ul></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">async def delete_event_type(ctx, client):
+    &#34;&#34;&#34;
+    Function:
+        delete_event_type
+    Description:
+        Walks a user through deleting the existing event types in the calender file
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A existing event type is deleted from the user&#39;s calendar file 
+        - A message sent to the context saying an event type was successfully deleted
+    &#34;&#34;&#34;
+    
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
     def check(m):
