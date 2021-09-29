@@ -49,7 +49,7 @@ def readfile(ctx):
         - A csv_reader with the content of user&#39;s event_types
     &#34;&#34;&#34;
         # Open the calendar file for user
-    with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/&#34; + str(ctx.author.id) + &#34;event_types&#34; + &#34;.csv&#34;, &#34;r&#34;) as event_file:
+    with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types&#34; + &#34;.csv&#34;, &#34;r&#34;) as event_file:
         # Read the calendar file
         csv_reader = csv.reader(event_file, delimiter=&#39;,&#39;)
         # First line is just the headers
@@ -133,7 +133,7 @@ def getEventsOnDate(ctx,yourdate):
         - Provides a list of events associated with that day
     &#34;&#34;&#34;
     stdate = yourdate.date()
-    with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/&#34; + str(ctx.author.id) + &#34;.csv&#34;, &#34;r&#34;) as calendar_lines:
+    with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event&#34; + str(ctx.author.id) + &#34;.csv&#34;, &#34;r&#34;) as calendar_lines:
         calendar_lines = csv.reader(calendar_lines, delimiter=&#34;,&#34;)
         fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
         rows = []
@@ -272,7 +272,7 @@ yourdate - Date for which events to be pulled</p>
         - Provides a list of events associated with that day
     &#34;&#34;&#34;
     stdate = yourdate.date()
-    with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/&#34; + str(ctx.author.id) + &#34;.csv&#34;, &#34;r&#34;) as calendar_lines:
+    with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event&#34; + str(ctx.author.id) + &#34;.csv&#34;, &#34;r&#34;) as calendar_lines:
         calendar_lines = csv.reader(calendar_lines, delimiter=&#34;,&#34;)
         fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
         rows = []
@@ -321,7 +321,7 @@ yourdate - Date for which events to be pulled</p>
         - A csv_reader with the content of user&#39;s event_types
     &#34;&#34;&#34;
         # Open the calendar file for user
-    with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/&#34; + str(ctx.author.id) + &#34;event_types&#34; + &#34;.csv&#34;, &#34;r&#34;) as event_file:
+    with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types&#34; + &#34;.csv&#34;, &#34;r&#34;) as event_file:
         # Read the calendar file
         csv_reader = csv.reader(event_file, delimiter=&#39;,&#39;)
         # First line is just the headers
