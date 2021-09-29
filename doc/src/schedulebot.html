@@ -102,6 +102,17 @@ async def on_ready():
 
 @bot.event
 async def on_reaction_add(reaction, user):
+    &#34;&#34;&#34;
+    Function: on_reaction_add
+    Description: The bot sends a message to the user when reacting to the server startup message
+    and runs the &#39;help&#39; command
+    Input:
+        reaction - The emoji the user reacted to the message with
+        user - The user who reacted to the post
+    Output:
+        - A welcome message received as a direct message from the bot
+        - The &#39;help&#39; command is automatically run
+    &#34;&#34;&#34;
     emoji = reaction.emoji
     if emoji == &#34;⏰&#34; and user.id != 884865269867102249:
         try:
@@ -114,7 +125,6 @@ async def on_reaction_add(reaction, user):
         except:
             print(user.name + &#34; (&#34; + user.id + &#34;) does not have DM permissions set correctly&#34;)
             pass
-
 
 
 @bot.command()
@@ -133,8 +143,6 @@ async def schedule(ctx):
     await add_event(ctx, bot)
 
 
-
-
 @bot.command()
 async def find(ctx):
     &#34;&#34;&#34;
@@ -148,11 +156,9 @@ async def find(ctx):
         - A new event type is added to the users event_type file
         - Provides users with the time range for the given event
     &#34;&#34;&#34;
-    await find_avaialbleTime(ctx,bot)
+    await find_avaialbleTime(ctx, bot)
 
 
-
- 
 @bot.command()
 async def day(ctx):
     &#34;&#34;&#34;
@@ -164,7 +170,7 @@ async def day(ctx):
         ctx - Discord context window
     Output:
         - A message sent to the context with all the events that start and/or end today
-    &#34;&#34;&#34;   
+    &#34;&#34;&#34;
     await get_highlight(ctx)
 
 
@@ -224,13 +230,34 @@ if __name__ == &#34;__main__&#34;:
 <span>async def <span class="ident">on_reaction_add</span></span>(<span>reaction, user)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Function: on_reaction_add
+Description: The bot sends a message to the user when reacting to the server startup message
+and runs the 'help' command</p>
+<h2 id="input">Input</h2>
+<p>reaction - The emoji the user reacted to the message with
+user - The user who reacted to the post</p>
+<h2 id="output">Output</h2>
+<ul>
+<li>A welcome message received as a direct message from the bot</li>
+<li>The 'help' command is automatically run</li>
+</ul></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@bot.event
 async def on_reaction_add(reaction, user):
+    &#34;&#34;&#34;
+    Function: on_reaction_add
+    Description: The bot sends a message to the user when reacting to the server startup message
+    and runs the &#39;help&#39; command
+    Input:
+        reaction - The emoji the user reacted to the message with
+        user - The user who reacted to the post
+    Output:
+        - A welcome message received as a direct message from the bot
+        - The &#39;help&#39; command is automatically run
+    &#34;&#34;&#34;
     emoji = reaction.emoji
     if emoji == &#34;⏰&#34; and user.id != 884865269867102249:
         try:
