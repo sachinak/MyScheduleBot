@@ -19,8 +19,8 @@ root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 json_file = open(root_dir + "/doc/commands.json")
 json_data = json.load(json_file)
 
-bot = commands.Bot(command_prefix="!") # Creates the bot with a command prefix of '!'
-bot.remove_command("help") # Removes the help command, so it can be created using Discord embed pages later
+bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
+bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
 
 """
 Function: help
@@ -29,6 +29,8 @@ Input:
     ctx - Discord context window
 Output: An embed window sent to the context with all commands/descriptions
 """
+
+
 @bot.group(invoke_without_command=True)
 async def help(ctx):
     em = discord.Embed(
@@ -42,6 +44,7 @@ async def help(ctx):
     em.add_field(name="typedelete", value="Deletes an event type", inline=True)
     await ctx.send(embed=em)
 
+
 """
 Function: on_ready
 Description: Displays a welcome message to the ScheduleBot server and allows user to receive
@@ -49,13 +52,18 @@ a direct message from the bot by reacting to the welcome message with an alarm_c
 Input: None
 Output: The welcome message sent to the ScheduleBot server
 """
+
+
 @bot.event
 async def on_ready():
     # Outputs bot name to console once bot is started
     print("We have logged in as {0.user}".format(bot))
-    # channel = bot.get_channel(884864860859531347) # Gets the channel ID of the "schedule-manager channel"
-    # await channel.send("Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n" +
-    # "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!")
+    channel = bot.get_channel(884864860859531347)  # Gets the channel ID of the "schedule-manager channel"
+    msg = await channel.send(
+        "Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n"
+        + "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!"
+    )
+    await msg.add_reaction("⏰")
 
 
 """
@@ -67,10 +75,11 @@ Output:
     - A new event added to the user's calendar file
     - A message sent to the context saying an event was successfully created
 """
+
+
 @bot.command()
 async def schedule(ctx):
     await add_event(ctx, bot)
-
 
 
 """
@@ -82,10 +91,11 @@ Output:
     - A new event type is added to the users event_type file
     - Provides users with the time range for the given event
 """
+
+
 @bot.command()
 async def find(ctx):
-    await find_avaialbleTime(ctx,bot)
-
+    await find_avaialbleTime(ctx, bot)
 
 
 """
@@ -95,18 +105,18 @@ Input:
     ctx - Discord context window
 Output:
     - A message sent to the context with all the events that start and/or end today
-"""    
+"""
+
+
 @bot.command()
 async def day(ctx):
     await get_highlight(ctx)
 
 
-
-
 # creating new event type
 @bot.command()
 async def typecreate(ctx):
-    
+
     channel = await ctx.author.create_dm()
     # print(ctx.author.id)
     def check(m):
@@ -116,7 +126,7 @@ async def typecreate(ctx):
     event_msg = await bot.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
 
-    await create_event_type(ctx, bot,event_msg)
+    await create_event_type(ctx, bot, event_msg)
 
 
 # deleting event type
@@ -132,13 +142,14 @@ Input:
     ctx - Discord context window
     bot - Discord bot user
 Output:
-    - A message sent to the user channel stating every free time slot that is avaliable today 
+    - A message sent to the user channel stating every free time slot that is avaliable today
 """
 
 # showing the free time that the user has today
 @bot.command()
 async def freetime(ctx):
     await get_free_time(ctx, bot)
+
 
 # Runs the bot (local machine)
 bot.run(TOKEN)
