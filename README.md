@@ -55,6 +55,38 @@ The bot will show you what you have scheduled for the day. This includes events 
 
 ![Day](docs/img/Day.gif)
 
+### **I don't really want to work at 3 a.m.**
+
+You can create custom event types to further organize your schedule. You can define your preferred times by creating a new event type:
+
+```
+!typecreate
+```
+
+The bot will ask you for the name of the type and your preferred times.
+
+![Type Create](docs/img/Type%20Create.gif)
+
+
+It will find and schedule the first available X contiguous hours, on your preferred hours of the specified `type`.
+
+\[Screenshot\]
+
+## Releases
+
+-   [All releases](https://github.com/lyonva/ScheduleBot/releases)
+-   Latest: [v0](https://github.com/lyonva/ScheduleBot/releases/tag/v0)
+
+## Documentation
+
+## Getting involved
+
+Thank you for caring for this project and getting involved. To start, please check out [contributing](https://github.com/lyonva/ScheduleBot/blob/main/CONTRIBUTING.md) and [code of conduct](https://github.com/lyonva/ScheduleBot/blob/main/CODE_OF_CONDUCT.md). For more technical detail of implementation of code, you can check out the documentation. When you want to get your hands on the project, take a peek into the [github project](https://github.com/lyonva/ScheduleBot/projects/1), assign yourself a task, move it to To-Do, and convert it into an issue and assign it to yourself.
+
+Check out the [online documentation](https://lyonva.github.io/ScheduleBot/) if you want to contribute or find out about the inner workings of ScheduleBot.
+
+## Future features
+
 ### **When do I have spare time?**
 
 ScheduleBot will help you find a time for that meeting or thing you have been meaning to do. Just write:
@@ -73,23 +105,13 @@ To see your available times at that date.
 
 \[Screenshot\]
 
-### **I don't really want to work at 3 a.m.**
 
-You can create custom event types to further organize your schedule. You can define your preferred times by creating a new event type:
-
-```
-!typecreate
-```
-
-The bot will ask you for the name of the type and your preferred times.
-
-![Type Create](docs/img/Type%20Create.gif)
-
+### Find available times for a type of event
 When you look for available times, you now can use `!find type` to find only the available times in your preferred hours. You still can create events of that type outside your preferred hours.
 
 \[Screenshot\]
 
-### **Too much work?**
+### Quick event creation
 
 You can quickly create a new event with the command
 
@@ -97,23 +119,6 @@ You can quickly create a new event with the command
 !schedulefind type X
 ```
 
-It will find and schedule the first available X contiguous hours, on your preferred hours of the specified `type`.
-
 \[Screenshot\]
 
-## Releases
-
--   [All releases](https://github.com/lyonva/ScheduleBot/releases)
--   Latest: [v0](https://github.com/lyonva/ScheduleBot/releases/tag/v0)
-
-## Documentation
-
-## Getting involved
-
-Thank you for caring for this project and getting involved. To start, please check out [contributing](https://github.com/lyonva/ScheduleBot/blob/main/CONTRIBUTING.md) and [code of conduct](https://github.com/lyonva/ScheduleBot/blob/main/CODE_OF_CONDUCT.md). For more technical detail of implementation of code, you can check out the documentation. When you want to get your hands on the project, take a peek into the [github project](https://github.com/lyonva/ScheduleBot/projects/1), assign yourself a task, move it to To-Do, and convert it into an issue and assign it to yourself.
-
-\[How does it work? More to the point/code detail\]
-
-#### Future features
-
-\[Future functionality\]
+\[Add more future functionality\]
