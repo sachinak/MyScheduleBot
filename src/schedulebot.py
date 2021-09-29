@@ -74,6 +74,17 @@ async def on_ready():
 
 @bot.event
 async def on_reaction_add(reaction, user):
+    """
+    Function: on_reaction_add
+    Description: The bot sends a message to the user when reacting to the server startup message
+    and runs the 'help' command
+    Input:
+        reaction - The emoji the user reacted to the message with
+        user - The user who reacted to the post
+    Output:
+        - A welcome message received as a direct message from the bot
+        - The 'help' command is automatically run
+    """
     emoji = reaction.emoji
     if emoji == "⏰" and user.id != 884865269867102249:
         try:
@@ -86,7 +97,6 @@ async def on_reaction_add(reaction, user):
         except:
             print(user.name + " (" + user.id + ") does not have DM permissions set correctly")
             pass
-
 
 
 @bot.command()
@@ -105,8 +115,6 @@ async def schedule(ctx):
     await add_event(ctx, bot)
 
 
-
-
 @bot.command()
 async def find(ctx):
     """
@@ -120,11 +128,9 @@ async def find(ctx):
         - A new event type is added to the users event_type file
         - Provides users with the time range for the given event
     """
-    await find_avaialbleTime(ctx,bot)
+    await find_avaialbleTime(ctx, bot)
 
 
-
- 
 @bot.command()
 async def day(ctx):
     """
@@ -136,7 +142,7 @@ async def day(ctx):
         ctx - Discord context window
     Output:
         - A message sent to the context with all the events that start and/or end today
-    """   
+    """
     await get_highlight(ctx)
 
 
