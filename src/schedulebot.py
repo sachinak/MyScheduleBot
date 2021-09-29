@@ -19,8 +19,8 @@ root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 json_file = open(root_dir + "/doc/commands.json")
 json_data = json.load(json_file)
 
-bot = commands.Bot(command_prefix="!") # Creates the bot with a command prefix of '!'
-bot.remove_command("help") # Removes the help command, so it can be created using Discord embed pages later
+bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
+bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
 
 
 @bot.group(invoke_without_command=True)
@@ -62,9 +62,29 @@ async def on_ready():
     """
     # Outputs bot name to console once bot is started
     print("We have logged in as {0.user}".format(bot))
-    # channel = bot.get_channel(884864860859531347) # Gets the channel ID of the "schedule-manager channel"
-    # await channel.send("Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n" +
-    # "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!")
+    channel = bot.get_channel(884864860859531347)  # Gets the channel ID of the "schedule-manager channel"
+    msg = await channel.send(
+        "Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n"
+        + "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!"
+        + "Make sure you have allowed non-friends to direct message you or I can't help you."
+    )
+    await msg.add_reaction("⏰")
+
+
+@bot.event
+async def on_reaction_add(reaction, user):
+    emoji = reaction.emoji
+    if emoji == "⏰" and user.id != 884865269867102249:
+        try:
+            await user.send(
+                "Nice to meet you "
+                + user.name
+                + "! I am ScheduleBot and I am here to make managing your schedule easier!"
+            )
+            await help(user)
+        except:
+            print(user.name + " (" + user.id + ") does not have DM permissions set correctly")
+            pass
 
 
 
@@ -119,12 +139,10 @@ async def day(ctx):
     await get_highlight(ctx)
 
 
-
-
 # creating new event type
 @bot.command()
 async def typecreate(ctx):
-    
+
     channel = await ctx.author.create_dm()
     # print(ctx.author.id)
     def check(m):
@@ -134,7 +152,7 @@ async def typecreate(ctx):
     event_msg = await bot.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
 
-    await create_event_type(ctx, bot,event_msg)
+    await create_event_type(ctx, bot, event_msg)
 
 
 # deleting event type
@@ -142,10 +160,22 @@ async def typecreate(ctx):
 async def typedelete(ctx):
     await delete_event_type(ctx, bot)
 
+
+"""
+Function: get_free_time
+Description: giving the user the free time today according to the registered events
+Input:
+    ctx - Discord context window
+    bot - Discord bot user
+Output:
+    - A message sent to the user channel stating every free time slot that is avaliable today
+"""
+
 # showing the free time that the user has today
 @bot.command()
 async def freetime(ctx):
     await get_free_time(ctx, bot)
+
 
 # Runs the bot (local machine)
 if __name__ == "__main__":
