@@ -53,7 +53,7 @@ You can take a look at your events scheduled for the day with the command:
 
 The bot will show you what you have scheduled for the day. This includes events that start before, or end after today.
 
-![Day](img/day.gif)
+![Day](img/Day.gif)
 
 ### **When do I have spare time?**
 
