@@ -7,16 +7,19 @@ from functionality.highlights import convert_to_12
 from functionality.create_event_type import create_event_type
 
 
-"""
-Function: readfile
-Description: fetches the event_types file contents
-Input:
-    ctx - Discord context window
-Output:
-    - A csv_reader with the content of user's event_types
-"""
+
 
 def readfile(ctx):
+    """
+    Function:
+        readfile
+    Description:
+        fetches the event_types file contents
+    Input:
+        ctx - Discord context window
+    Output:
+        - A csv_reader with the content of user's event_types
+    """
         # Open the calendar file for user
     with open(os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(ctx.author.id) + "event_types" + ".csv", "r") as event_file:
         # Read the calendar file
@@ -26,19 +29,21 @@ def readfile(ctx):
 
     return  csv_reader 
 
-"""
-Function: find_avaialbleTime
-Description: Lets the user know about entered time range for event_type
-Input:
-    ctx - Discord context window
-    client - Discord bot user
-Output:
-    - A new event type is added to the users event_type file
-    - Provides users with the time range for the given event
-"""
+
 
 async def find_avaialbleTime(ctx, client):
-
+    """
+    Function:
+        find_avaialbleTime
+    Description:
+        Lets the user know about entered time range for event_type
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A new event type is added to the users event_type file
+        - Provides users with the time range for the given event
+    """
     channel = await ctx.author.create_dm()
     # print(ctx.author.id)
     def check(m):
@@ -87,18 +92,18 @@ async def find_avaialbleTime(ctx, client):
         await channel.send("Looks like I cannot find your event types. Try adding event types using the '!event' command!")
 
 
-"""
-Function: getEventsOnDate
-Description: Fetches the events on a particular day
-Input:
-    ctx - Discord context window
-    yourdate - Date for which events to be pulled
-Output:
-    - Provides a list of events associated with that day
-"""
-
 def getEventsOnDate(ctx,yourdate):
-
+    """
+    Function:
+        getEventsOnDate
+    Description:
+        Fetches the events on a particular day
+    Input:
+        ctx - Discord context window
+        yourdate - Date for which events to be pulled
+    Output:
+        - Provides a list of events associated with that day
+    """
     stdate = yourdate.date()
     with open(os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(ctx.author.id) + ".csv", "r") as calendar_lines:
         calendar_lines = csv.reader(calendar_lines, delimiter=",")
