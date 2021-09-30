@@ -44,7 +44,7 @@ def test_get_end_time():
     actual_data= end.strftime('%I:%M %p')
     assert actual_data == temp_type.get_end_time()
         
-def test_get_start_time():
+def atest_get_start_time():
     start = random_datetime()
     end = random_datetime()
     temp_type = event_type("Homework", start, end)
