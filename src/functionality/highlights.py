@@ -131,12 +131,12 @@ def convert_to_12(time):
         - time string converted to 12 hour format
     """
     if int(time[:2]) > 12:
-        new_time = "0" + str(int(time[:2]) - 12) + ":" + time[3:] + " PM"
+        new_time = str(int(time[:2]) - 12) + ":" + time[3:] + " PM"
     elif int(time[:2]) == 0:
         new_time = "12:" + time[3:] + " AM"
     elif int(time[:2]) == 12:
         new_time = time + " PM"
     else:
-        new_time = time + " AM"
+        new_time = time[1:] + " AM"
 
     return new_time
