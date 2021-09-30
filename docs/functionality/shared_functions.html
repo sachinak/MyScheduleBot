@@ -78,27 +78,45 @@ def create_type_tree(user_id):
 def read_type_file(user_id):
     &#34;&#34;&#34;
     Function: read_type_file
-    Description: Reads the event type file and displays all event types and preferred time ranges
+    Description: Reads the event type file
     for those event types
     Input:
         user_id - String representing the Discord ID of the user
     Output:
-        output - Formatted string of all the event types and their preferred time ranges
+        rows - List of rows
     &#34;&#34;&#34;
-    output = &#34;&#34;
     # Opens the event type file
     with open(
         os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + user_id + &#34;event_types.csv&#34;, &#34;r&#34;
     ) as type_lines:
         type_lines = csv.reader(type_lines, delimiter=&#34;,&#34;)
-        fields = next(type_lines)
-        space = [10, 5, 5]
-        current_line = []
+        current_row = []
+        rows = []
         for line in type_lines:
             for text in line:
-                current_line.append(text)
-            output += f&#34;{current_line[0]:&lt;{space[0]}} Preferred range of {current_line[1]:&lt;{space[1]}} - {current_line[2]:&lt;{space[2]}}&#34;
-            current_line = []
+                current_row.append(text)
+            rows.append(current_row)
+            current_row = []
+    return rows
+
+
+def turn_types_to_string(user_id):
+    &#34;&#34;&#34;
+    Function: turn_types_to_string
+    Description: Reads the event types file and turns all of them into a formatted string
+    Input:
+        user_id - String representing the Discord ID of the user
+    Output:
+        output - Formatted string of rows in event types file
+    &#34;&#34;&#34;
+    output = &#34;&#34;
+    space = [10, 5, 5]
+    rows = read_type_file(user_id)
+    line_number = 0
+    for i in rows:
+        if line_number != 0:
+            output += f&#34;{i[0]:&lt;{space[0]}} Preferred range of {i[1]:&lt;{space[1]}} - {i[2]:&lt;{space[2]}}&#34;
+        line_number += 1
     return output
 
 
@@ -144,19 +162,18 @@ def create_event_tree(user_id):
     create_event_file(user_id)
 
 
-def read_event_file(user_id, current):
+def read_event_file(user_id):
     &#34;&#34;&#34;
     Function: read_event_file
-    Description: Reads the calendar file and adds an Event into the file in chronological order
+    Description: Reads the calendar file and creates a list of rows
     Input:
         user_id - String representing the Discord ID of the user
     Output:
-        output - Formatted string of all the event types and their preferred time ranges
+        rows - List of rows
     &#34;&#34;&#34;
     # Opens the current user&#39;s csv calendar file
     with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + user_id + &#34;.csv&#34;, &#34;r&#34;) as calendar_lines:
         calendar_lines = csv.reader(calendar_lines, delimiter=&#34;,&#34;)
-        fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
         rows = []
 
         # Stores the current row in an array of rows if the row is not a new-line character
@@ -164,55 +181,65 @@ def read_event_file(user_id, current):
         for row in calendar_lines:
             if len(row) &gt; 0:
                 rows.append(row)
-        line_number = 0
+        return rows
 
-        # If the file already has events
-        if len(rows) &gt; 0:
-            for i in rows:
 
-                # Skips check with empty lines
-                if len(i) &gt; 0:
+def add_event_to_file(user_id, current):
+    &#34;&#34;&#34;
+    Function: add_event_to_file
+    Description: Adds an event to the calendar file in chronological order
+    Input:
+        user_id - String representing the Discord ID of the user
+        current - Event to be added to calendar
+    Output: None
+    &#34;&#34;&#34;
+    line_number = 0
+    rows = read_event_file(user_id)
+    # If the file already has events
+    if len(rows) &gt; 0:
+        for i in rows:
 
-                    # Temporarily turn each line into an Event object to compare with the object we are trying to add
-                    temp_event = Event(
-                        &#34;&#34;,
-                        datetime.strptime(i[2], &#34;%Y-%m-%d %H:%M:%S&#34;),
-                        datetime.strptime(i[3], &#34;%Y-%m-%d %H:%M:%S&#34;),
-                        &#34;&#34;,
-                        &#34;&#34;,
-                    )
+            # Skips check with empty lines
+            if len(i) &gt; 0 and line_number != 0:
 
-                    # If the current Event occurs before the temp Event, insert the current at that position
-                    if current &lt; temp_event:
-                        rows.insert(line_number, [&#34;&#34;] + current.to_list())
-                        break
+                # Temporarily turn each line into an Event object to compare with the object we are trying to add
+                temp_event = Event(
+                    &#34;&#34;,
+                    datetime.strptime(i[2], &#34;%Y-%m-%d %H:%M:%S&#34;),
+                    datetime.strptime(i[3], &#34;%Y-%m-%d %H:%M:%S&#34;),
+                    &#34;&#34;,
+                    &#34;&#34;,
+                )
 
-                    # If we have reached the end of the array and not inserted, append the current Event to the array
-                    if line_number == len(rows) - 1:
-                        rows.insert(len(rows), [&#34;&#34;] + current.to_list())
-                        break
-                    line_number += 1
+                # If the current Event occurs before the temp Event, insert the current at that position
+                if current &lt; temp_event:
+                    rows.insert(line_number, [&#34;&#34;] + current.to_list())
+                    break
 
-            # Open current user&#39;s calendar file for writing
-            with open(
-                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + user_id + &#34;.csv&#34;,
-                &#34;w&#34;,
-                newline=&#34;&#34;,
-            ) as calendar_file:
-                # Write to column headers and array of rows back to the calendar file
-                csvwriter = csv.writer(calendar_file)
-                csvwriter.writerow(fields)
-                csvwriter.writerows(rows)
-        # If the file has no events, add the current Event to the file
-        else:
-            with open(
-                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + user_id + &#34;.csv&#34;,
-                &#34;w&#34;,
-                newline=&#34;&#34;,
-            ) as calendar_file:
-                csvwriter = csv.writer(calendar_file)
-                csvwriter.writerow(fields)
-                csvwriter.writerow([&#34;&#34;] + current.to_list())</code></pre>
+                # If we have reached the end of the array and not inserted, append the current Event to the array
+                if line_number == len(rows) - 1:
+                    rows.insert(len(rows), [&#34;&#34;] + current.to_list())
+                    break
+            line_number += 1
+
+        # Open current user&#39;s calendar file for writing
+        with open(
+            os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + user_id + &#34;.csv&#34;,
+            &#34;w&#34;,
+            newline=&#34;&#34;,
+        ) as calendar_file:
+            # Write to column headers and array of rows back to the calendar file
+            csvwriter = csv.writer(calendar_file)
+            csvwriter.writerows(rows)
+    # If the file has no events, add the current Event to the file
+    else:
+        with open(
+            os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + user_id + &#34;.csv&#34;,
+            &#34;w&#34;,
+            newline=&#34;&#34;,
+        ) as calendar_file:
+            csvwriter = csv.writer(calendar_file)
+            csvwriter.writerow([&#34;&#34;] + current.to_list())</code></pre>
 </details>
 </section>
 <section>
@@ -222,6 +249,78 @@ def read_event_file(user_id, current):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="src.functionality.shared_functions.add_event_to_file"><code class="name flex">
+<span>def <span class="ident">add_event_to_file</span></span>(<span>user_id, current)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function: add_event_to_file
+Description: Adds an event to the calendar file in chronological order</p>
+<h2 id="input">Input</h2>
+<p>user_id - String representing the Discord ID of the user
+current - Event to be added to calendar
+Output: None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_event_to_file(user_id, current):
+    &#34;&#34;&#34;
+    Function: add_event_to_file
+    Description: Adds an event to the calendar file in chronological order
+    Input:
+        user_id - String representing the Discord ID of the user
+        current - Event to be added to calendar
+    Output: None
+    &#34;&#34;&#34;
+    line_number = 0
+    rows = read_event_file(user_id)
+    # If the file already has events
+    if len(rows) &gt; 0:
+        for i in rows:
+
+            # Skips check with empty lines
+            if len(i) &gt; 0 and line_number != 0:
+
+                # Temporarily turn each line into an Event object to compare with the object we are trying to add
+                temp_event = Event(
+                    &#34;&#34;,
+                    datetime.strptime(i[2], &#34;%Y-%m-%d %H:%M:%S&#34;),
+                    datetime.strptime(i[3], &#34;%Y-%m-%d %H:%M:%S&#34;),
+                    &#34;&#34;,
+                    &#34;&#34;,
+                )
+
+                # If the current Event occurs before the temp Event, insert the current at that position
+                if current &lt; temp_event:
+                    rows.insert(line_number, [&#34;&#34;] + current.to_list())
+                    break
+
+                # If we have reached the end of the array and not inserted, append the current Event to the array
+                if line_number == len(rows) - 1:
+                    rows.insert(len(rows), [&#34;&#34;] + current.to_list())
+                    break
+            line_number += 1
+
+        # Open current user&#39;s calendar file for writing
+        with open(
+            os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + user_id + &#34;.csv&#34;,
+            &#34;w&#34;,
+            newline=&#34;&#34;,
+        ) as calendar_file:
+            # Write to column headers and array of rows back to the calendar file
+            csvwriter = csv.writer(calendar_file)
+            csvwriter.writerows(rows)
+    # If the file has no events, add the current Event to the file
+    else:
+        with open(
+            os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + user_id + &#34;.csv&#34;,
+            &#34;w&#34;,
+            newline=&#34;&#34;,
+        ) as calendar_file:
+            csvwriter = csv.writer(calendar_file)
+            csvwriter.writerow([&#34;&#34;] + current.to_list())</code></pre>
+</details>
+</dd>
 <dt id="src.functionality.shared_functions.create_event_directory"><code class="name flex">
 <span>def <span class="ident">create_event_directory</span></span>(<span>)</span>
 </code></dt>
@@ -383,32 +482,31 @@ Output: Creates the event type folder and file if they don't exist</p></div>
 </details>
 </dd>
 <dt id="src.functionality.shared_functions.read_event_file"><code class="name flex">
-<span>def <span class="ident">read_event_file</span></span>(<span>user_id, current)</span>
+<span>def <span class="ident">read_event_file</span></span>(<span>user_id)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Function: read_event_file
-Description: Reads the calendar file and adds an Event into the file in chronological order</p>
+Description: Reads the calendar file and creates a list of rows</p>
 <h2 id="input">Input</h2>
 <p>user_id - String representing the Discord ID of the user</p>
 <h2 id="output">Output</h2>
-<p>output - Formatted string of all the event types and their preferred time ranges</p></div>
+<p>rows - List of rows</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def read_event_file(user_id, current):
+<pre><code class="python">def read_event_file(user_id):
     &#34;&#34;&#34;
     Function: read_event_file
-    Description: Reads the calendar file and adds an Event into the file in chronological order
+    Description: Reads the calendar file and creates a list of rows
     Input:
         user_id - String representing the Discord ID of the user
     Output:
-        output - Formatted string of all the event types and their preferred time ranges
+        rows - List of rows
     &#34;&#34;&#34;
     # Opens the current user&#39;s csv calendar file
     with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + user_id + &#34;.csv&#34;, &#34;r&#34;) as calendar_lines:
         calendar_lines = csv.reader(calendar_lines, delimiter=&#34;,&#34;)
-        fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
         rows = []
 
         # Stores the current row in an array of rows if the row is not a new-line character
@@ -416,55 +514,7 @@ Description: Reads the calendar file and adds an Event into the file in chronolo
         for row in calendar_lines:
             if len(row) &gt; 0:
                 rows.append(row)
-        line_number = 0
-
-        # If the file already has events
-        if len(rows) &gt; 0:
-            for i in rows:
-
-                # Skips check with empty lines
-                if len(i) &gt; 0:
-
-                    # Temporarily turn each line into an Event object to compare with the object we are trying to add
-                    temp_event = Event(
-                        &#34;&#34;,
-                        datetime.strptime(i[2], &#34;%Y-%m-%d %H:%M:%S&#34;),
-                        datetime.strptime(i[3], &#34;%Y-%m-%d %H:%M:%S&#34;),
-                        &#34;&#34;,
-                        &#34;&#34;,
-                    )
-
-                    # If the current Event occurs before the temp Event, insert the current at that position
-                    if current &lt; temp_event:
-                        rows.insert(line_number, [&#34;&#34;] + current.to_list())
-                        break
-
-                    # If we have reached the end of the array and not inserted, append the current Event to the array
-                    if line_number == len(rows) - 1:
-                        rows.insert(len(rows), [&#34;&#34;] + current.to_list())
-                        break
-                    line_number += 1
-
-            # Open current user&#39;s calendar file for writing
-            with open(
-                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + user_id + &#34;.csv&#34;,
-                &#34;w&#34;,
-                newline=&#34;&#34;,
-            ) as calendar_file:
-                # Write to column headers and array of rows back to the calendar file
-                csvwriter = csv.writer(calendar_file)
-                csvwriter.writerow(fields)
-                csvwriter.writerows(rows)
-        # If the file has no events, add the current Event to the file
-        else:
-            with open(
-                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + user_id + &#34;.csv&#34;,
-                &#34;w&#34;,
-                newline=&#34;&#34;,
-            ) as calendar_file:
-                csvwriter = csv.writer(calendar_file)
-                csvwriter.writerow(fields)
-                csvwriter.writerow([&#34;&#34;] + current.to_list())</code></pre>
+        return rows</code></pre>
 </details>
 </dd>
 <dt id="src.functionality.shared_functions.read_type_file"><code class="name flex">
@@ -472,12 +522,12 @@ Description: Reads the calendar file and adds an Event into the file in chronolo
 </code></dt>
 <dd>
 <div class="desc"><p>Function: read_type_file
-Description: Reads the event type file and displays all event types and preferred time ranges
+Description: Reads the event type file
 for those event types</p>
 <h2 id="input">Input</h2>
 <p>user_id - String representing the Discord ID of the user</p>
 <h2 id="output">Output</h2>
-<p>output - Formatted string of all the event types and their preferred time ranges</p></div>
+<p>rows - List of rows</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -485,27 +535,59 @@ for those event types</p>
 <pre><code class="python">def read_type_file(user_id):
     &#34;&#34;&#34;
     Function: read_type_file
-    Description: Reads the event type file and displays all event types and preferred time ranges
+    Description: Reads the event type file
     for those event types
     Input:
         user_id - String representing the Discord ID of the user
     Output:
-        output - Formatted string of all the event types and their preferred time ranges
+        rows - List of rows
     &#34;&#34;&#34;
-    output = &#34;&#34;
     # Opens the event type file
     with open(
         os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + user_id + &#34;event_types.csv&#34;, &#34;r&#34;
     ) as type_lines:
         type_lines = csv.reader(type_lines, delimiter=&#34;,&#34;)
-        fields = next(type_lines)
-        space = [10, 5, 5]
-        current_line = []
+        current_row = []
+        rows = []
         for line in type_lines:
             for text in line:
-                current_line.append(text)
-            output += f&#34;{current_line[0]:&lt;{space[0]}} Preferred range of {current_line[1]:&lt;{space[1]}} - {current_line[2]:&lt;{space[2]}}&#34;
-            current_line = []
+                current_row.append(text)
+            rows.append(current_row)
+            current_row = []
+    return rows</code></pre>
+</details>
+</dd>
+<dt id="src.functionality.shared_functions.turn_types_to_string"><code class="name flex">
+<span>def <span class="ident">turn_types_to_string</span></span>(<span>user_id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function: turn_types_to_string
+Description: Reads the event types file and turns all of them into a formatted string</p>
+<h2 id="input">Input</h2>
+<p>user_id - String representing the Discord ID of the user</p>
+<h2 id="output">Output</h2>
+<p>output - Formatted string of rows in event types file</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def turn_types_to_string(user_id):
+    &#34;&#34;&#34;
+    Function: turn_types_to_string
+    Description: Reads the event types file and turns all of them into a formatted string
+    Input:
+        user_id - String representing the Discord ID of the user
+    Output:
+        output - Formatted string of rows in event types file
+    &#34;&#34;&#34;
+    output = &#34;&#34;
+    space = [10, 5, 5]
+    rows = read_type_file(user_id)
+    line_number = 0
+    for i in rows:
+        if line_number != 0:
+            output += f&#34;{i[0]:&lt;{space[0]}} Preferred range of {i[1]:&lt;{space[1]}} - {i[2]:&lt;{space[2]}}&#34;
+        line_number += 1
     return output</code></pre>
 </details>
 </dd>
@@ -540,6 +622,7 @@ for those event types</p>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="src.functionality.shared_functions.add_event_to_file" href="#src.functionality.shared_functions.add_event_to_file">add_event_to_file</a></code></li>
 <li><code><a title="src.functionality.shared_functions.create_event_directory" href="#src.functionality.shared_functions.create_event_directory">create_event_directory</a></code></li>
 <li><code><a title="src.functionality.shared_functions.create_event_file" href="#src.functionality.shared_functions.create_event_file">create_event_file</a></code></li>
 <li><code><a title="src.functionality.shared_functions.create_event_tree" href="#src.functionality.shared_functions.create_event_tree">create_event_tree</a></code></li>
@@ -548,6 +631,7 @@ for those event types</p>
 <li><code><a title="src.functionality.shared_functions.create_type_tree" href="#src.functionality.shared_functions.create_type_tree">create_type_tree</a></code></li>
 <li><code><a title="src.functionality.shared_functions.read_event_file" href="#src.functionality.shared_functions.read_event_file">read_event_file</a></code></li>
 <li><code><a title="src.functionality.shared_functions.read_type_file" href="#src.functionality.shared_functions.read_type_file">read_type_file</a></code></li>
+<li><code><a title="src.functionality.shared_functions.turn_types_to_string" href="#src.functionality.shared_functions.turn_types_to_string">turn_types_to_string</a></code></li>
 </ul>
 </li>
 </ul>
