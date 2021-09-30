@@ -37,6 +37,8 @@ def random_date(start=2020, end=2025):
 
 # Test if event starts and ends on the same day
 def test_start_and_end():
+
+    # Iterate test NUM_ITER times
     for i in range(NUM_ITER):
         # pick a random date
         day1 = random_date()
@@ -51,6 +53,7 @@ def test_start_and_end():
 # Test if event starts today but ends later
 def test_ends_later():
 
+    # Iterate test NUM_ITER times
     for i in range(NUM_ITER):
         # Pick two random dates
         day1 = ""
@@ -71,10 +74,15 @@ def test_ends_later():
 
 # Test if event started on an earlier date but ends today
 def test_started_earlier():
+
+    # Iterate test NUM_ITER times
     for i in range(NUM_ITER):
         # pick two random dates
-        day1 = random_date()
-        day2 = random_date()
+        day1 = ""
+        day2 = ""
+        while day1 == day2:
+            day1 = random_date()
+            day2 = random_date()
 
         # day 1 is the minimum of the two, day 2 is the maximum
         day1, day2 = min(day1, day2), max(day1, day2)
@@ -87,10 +95,15 @@ def test_started_earlier():
 
 # Test if no event is scheduled for today
 def test_no_event():
+
+    # Iterate test NUM_ITER times
     for i in range(NUM_ITER):
         # pick two random dates
-        day1 = random_date()
-        day2 = random_date()
+        day1 = ""
+        day2 = ""
+        while day1 == day2:
+            day1 = random_date()
+            day2 = random_date()
 
         day1, day2 = min(day1, day2), max(day1, day2)
 
@@ -125,13 +138,13 @@ def to_12hour(d):
 
 # Testing the conversion function in file
 def test_time_conversion():
-    # get random time
-    time = random_time()
+    
+    # Iterate test NUM_ITER times
+    for i in range(NUM_ITER):
+        # get random time
+        time = random_time()
 
-    # get time string for testing
-    str_time = str(time).split()[1][:5]
+        # get time string for testing
+        str_time = str(time).split()[1][:5]
 
-    assert convert_to_12(str_time) == to_12hour(time)
-
-
-print(random_time())
+        assert convert_to_12(str_time) == to_12hour(time)
