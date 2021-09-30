@@ -5,6 +5,7 @@ from datetime import datetime
 from pathlib import Path
 from types import TracebackType
 from event_type import event_type
+from functionality.shared_functions import create_type_directory, create_type_file
 
 
 async def create_event_type(ctx, client,event_msg):
