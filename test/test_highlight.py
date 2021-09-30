@@ -13,6 +13,10 @@ from functionality.highlights import check_start_or_end, convert_to_12
 NUM_ITER = 1000
 
 
+"""
+TESTING DATE CHECKING
+"""
+
 # Generate one random datetime object between an uniform range
 def random_date(start = 2020, end = 2025):
     # Determine all posible days between the start and end
@@ -31,55 +35,93 @@ def random_date(start = 2020, end = 2025):
 
 # Test if event starts and ends on the same day
 def test_start_and_end():
-    # pick a random date
-    day1 = random_date()
-    # ending date is the same
-    day2 = day1
+    for i in range(NUM_ITER):
+        # pick a random date
+        day1 = random_date()
+        # ending date is the same
+        day2 = day1
 
-    # for testing porpose, assume today is the same day
-    today = day1
-    assert check_start_or_end([day1, day2], today) == 1
+        # for testing porpose, assume today is the same day
+        today = day1
+        assert check_start_or_end([day1, day2], today) == 1
 
 
 # Test if event starts today but ends later
 def test_ends_later():
-    # Pick two random dates
-    day1 = random_date()
-    day2 = random_date()
 
-    # day 1 should be the minimum of the two dates
-    # day 2 should be the maximum
-    day1, day2 = min(day1, day2), max(day1, day2)
+    for i in range(NUM_ITER):
+        # Pick two random dates
+        day1 = random_date()
+        day2 = random_date()
 
-    # For testing, assume today is the first day
-    today = day1
+        # day 1 should be the minimum of the two dates
+        # day 2 should be the maximum
+        day1, day2 = min(day1, day2), max(day1, day2)
 
-    assert check_start_or_end([day1, day2], today) == 2
+        # For testing, assume today is the first day
+        today = day1
+
+        assert check_start_or_end([day1, day2], today) == 2
 
 # Test if event started on an earlier date but ends today
 def test_started_earlier():
-    # pick two random dates
-    day1 = random_date()
-    day2 = random_date()
+    for i in range(NUM_ITER):
+        # pick two random dates
+        day1 = random_date()
+        day2 = random_date()
 
-    # day 1 is the minimum of the two, day 2 is the maximum
-    day1, day2 = min(day1, day2), max(day1, day2)
+        # day 1 is the minimum of the two, day 2 is the maximum
+        day1, day2 = min(day1, day2), max(day1, day2)
 
-    # for testing, assume day 2 is today
-    today = day2
+        # for testing, assume day 2 is today
+        today = day2
 
-    assert check_start_or_end([day1, day2], today) == 3
+        assert check_start_or_end([day1, day2], today) == 3
 
 # Test if no event is scheduled for today
 def test_no_event():
-    # pick two random dates
-    day1 = random_date()
-    day2 = random_date()
+    for i in range(NUM_ITER):
+        # pick two random dates
+        day1 = random_date()
+        day2 = random_date()
 
-    day1, day2 = min(day1, day2), max(day1, day2)
+        day1, day2 = min(day1, day2), max(day1, day2)
 
-    # for testing, assume today to be a random date in the
-    # range of year 2018-2019
-    today = random_date(2018, 2019)
+        # for testing, assume today to be a random date in the
+        # range of year 2018-2019
+        today = random_date(2018, 2019)
 
-    assert check_start_or_end([day1, day2], today) == 0
+        assert check_start_or_end([day1, day2], today) == 0
+
+
+"""
+TESTING TIME CONVERSION
+"""
+# returns a datetime object with a random time
+def random_time():
+    # get a random hour and minute value
+    h = randint(0, 23)
+    m = randint(0, 59)
+
+    # return datetime object with a fixed date and variable time
+    return datetime.datetime(2020, 12, 6, h, m)
+
+# Function to convert time to 12 hour format
+def to_12hour(d):
+    ampm = "AM" if d.hour < 12 else "PM"
+    hour = d.hour % 12
+    if hour == 0: hour += 12
+    return f"{hour}:{d.minute:02.0f} {ampm}"
+    
+
+# Testing the conversion function in file
+def test_time_conversion():
+    # get random time
+    time = random_time()
+
+    # get time string for testing
+    str_time = str(time).split()[1][:5]
+    
+    assert convert_to_12(str_time) == to_12hour(time)
+
+print(random_time())
