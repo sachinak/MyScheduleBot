@@ -12,13 +12,6 @@ from functionality.FindAvailableTime import find_avaialbleTime
 from functionality.delete_event_type import delete_event_type
 from functionality.DisplayFreeTime import get_free_time
 
-# from functionality.FindAvailableTime import find_availableTime
-
-# Loads data from commands json file
-root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-json_file = open(root_dir + "/docs/commands.json")
-json_data = json.load(json_file)
-
 bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
 
@@ -187,6 +180,7 @@ async def freetime(ctx):
 # Runs the bot (local machine)
 if __name__ == "__main__":
     from config import TOKEN
+
     bot.run(TOKEN)
 
 # client.run(os.environ['TOKEN'])  # Runs the bot (repl.it)
