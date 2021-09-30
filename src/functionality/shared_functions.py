@@ -50,29 +50,37 @@ def create_type_tree(user_id):
 def read_type_file(user_id):
     """
     Function: read_type_file
-    Description: Reads the event type file and displays all event types and preferred time ranges
+    Description: Reads the event type file
     for those event types
     Input:
         user_id - String representing the Discord ID of the user
     Output:
-        output - Formatted string of all the event types and their preferred time ranges
+        output - List of rows
     """
-    output = ""
     # Opens the event type file
     with open(
         os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv", "r"
     ) as type_lines:
         type_lines = csv.reader(type_lines, delimiter=",")
-        fields = next(type_lines)
-        space = [10, 5, 5]
-        current_line = []
+        current_row = []
+        rows = []
         for line in type_lines:
             for text in line:
-                current_line.append(text)
-            output += f"{current_line[0]:<{space[0]}} Preferred range of {current_line[1]:<{space[1]}} - {current_line[2]:<{space[2]}}"
-            current_line = []
-    return output
+                current_row.append(text)
+            rows.append(current_row)
+            current_row = []
+    return rows
 
+def turn_types_to_string(user_id):
+    output = ""
+    space = [10, 5, 5]
+    rows = read_type_file(user_id)
+    line_number = 0
+    for i in rows:
+        if line_number != 0:
+            output += f"{i[0]:<{space[0]}} Preferred range of {i[1]:<{space[1]}} - {i[2]:<{space[2]}}"
+        line_number += 1
+    return output
 
 def create_event_directory():
     """
