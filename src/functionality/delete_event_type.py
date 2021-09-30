@@ -27,13 +27,13 @@ async def delete_event_type(ctx, client):
     try:
 
         # Checks if the calendar csv file exists
-        if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Type" + str(filename) + ".csv"):
+        if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv"):
             await channel.send("You have not created any events type yet!!")
         else:
             
             # Opens the current user's csv calendar file
             with open(
-                os.path.expanduser("~/Documents") + "/ScheduleBot/Type" + str(filename) + ".csv", "r"
+                os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv", "r"
             ) as calendar_lines:
                 calendar_lines = csv.reader(calendar_lines, delimiter=",")
                 fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
@@ -71,7 +71,7 @@ async def delete_event_type(ctx, client):
                         await channel.send("Event type does not exist")
                  # Open current user's calendar file for writing
                 with open(
-                    os.path.expanduser("~/Documents") + "/ScheduleBot/Type" + str(filename) + ".csv", "w", newline=""
+                    os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv", "w", newline=""
                 ) as calendar_file:
                     # Write to column headers and array of rows back to the calendar file
                     csvwriter = csv.writer(calendar_file)
