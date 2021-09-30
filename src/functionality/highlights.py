@@ -104,7 +104,7 @@ def check_start_or_end(dates, today):
     Output:
         - 0 if no event starts or ends today
         - 1 if event starts and ends today
-        - 2 if event starts and ends on a later date
+        - 2 if event starts today and ends on a later date
         - 3 if event started on a previous date and ends today
     """
     if today == dates[0]:
