@@ -55,13 +55,13 @@ async def delete_event_type(ctx, client):
     try:
 
         # Checks if the calendar csv file exists
-        if not os.path.exists(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type&#34; + str(filename) + &#34;.csv&#34;):
+        if not os.path.exists(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(filename) + &#34;.csv&#34;):
             await channel.send(&#34;You have not created any events type yet!!&#34;)
         else:
             
             # Opens the current user&#39;s csv calendar file
             with open(
-                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type&#34; + str(filename) + &#34;.csv&#34;, &#34;r&#34;
+                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(filename) + &#34;.csv&#34;, &#34;r&#34;
             ) as calendar_lines:
                 calendar_lines = csv.reader(calendar_lines, delimiter=&#34;,&#34;)
                 fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
@@ -99,7 +99,7 @@ async def delete_event_type(ctx, client):
                         await channel.send(&#34;Event type does not exist&#34;)
                  # Open current user&#39;s calendar file for writing
                 with open(
-                    os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type&#34; + str(filename) + &#34;.csv&#34;, &#34;w&#34;, newline=&#34;&#34;
+                    os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(filename) + &#34;.csv&#34;, &#34;w&#34;, newline=&#34;&#34;
                 ) as calendar_file:
                     # Write to column headers and array of rows back to the calendar file
                     csvwriter = csv.writer(calendar_file)
@@ -170,13 +170,13 @@ client - Discord bot user</p>
     try:
 
         # Checks if the calendar csv file exists
-        if not os.path.exists(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type&#34; + str(filename) + &#34;.csv&#34;):
+        if not os.path.exists(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(filename) + &#34;.csv&#34;):
             await channel.send(&#34;You have not created any events type yet!!&#34;)
         else:
             
             # Opens the current user&#39;s csv calendar file
             with open(
-                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type&#34; + str(filename) + &#34;.csv&#34;, &#34;r&#34;
+                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(filename) + &#34;.csv&#34;, &#34;r&#34;
             ) as calendar_lines:
                 calendar_lines = csv.reader(calendar_lines, delimiter=&#34;,&#34;)
                 fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
@@ -214,7 +214,7 @@ client - Discord bot user</p>
                         await channel.send(&#34;Event type does not exist&#34;)
                  # Open current user&#39;s calendar file for writing
                 with open(
-                    os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type&#34; + str(filename) + &#34;.csv&#34;, &#34;w&#34;, newline=&#34;&#34;
+                    os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(filename) + &#34;.csv&#34;, &#34;w&#34;, newline=&#34;&#34;
                 ) as calendar_file:
                     # Write to column headers and array of rows back to the calendar file
                     csvwriter = csv.writer(calendar_file)
