@@ -5,8 +5,6 @@ import sys, os
 sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/../src"))
 
 import os
-import csv
-from pathlib import Path
 from Event import Event
 from datetime import datetime
 from functionality.shared_functions import (
