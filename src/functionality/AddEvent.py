@@ -8,10 +8,9 @@ from Event import Event
 from parse.match import parse_period
 
 
-def check_complete(start, start_date, end, end_date, complete, array):
+def check_complete(start, start_date, end, end_date, array):
     if start and end:
         print("Both date objects created")
-        complete = True
         array.append(start_date)
         array.append(end_date)
         return True
@@ -84,7 +83,7 @@ async def add_event(ctx, client):
         end_date = parse_result[1]
 
         # If both datetime objects were successfully created, they get appended to the list and exits the while loop
-        if not check_complete(start_complete, start_date, end_complete, end_date, event_dates, event_array):
+        if not (event_dates := check_complete(start_complete, start_date, end_complete, end_date, event_array)):
             # If both objects were unsuccessfully created, the bot notifies the user and the loop starts again
             await channel.send(
                 "Make sure you follow this format(Start is first, end is second): mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm"
