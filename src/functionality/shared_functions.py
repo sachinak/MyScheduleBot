@@ -6,13 +6,25 @@ from datetime import datetime
 
 
 def create_type_directory():
-    # Creates ScheduleBot type directory in users Documents folder if it doesn't exist
+    """
+    Function: create_type_directory
+    Description: Creates ScheduleBot type directory in users Documents folder if it doesn't exist
+    Input: None
+    Output: Creates Type folder if it doesn't exist
+    """
+    #
     if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot/Type")):
         Path(os.path.expanduser("~/Documents/ScheduleBot/Type")).mkdir(parents=True, exist_ok=True)
 
 
 def create_type_file(user_id):
-    # Checks if the event type file exists, and creates it if it doesn't
+    """
+    Function: create_type_file
+    Description: Checks if the event type file exists, and creates it if it doesn't
+    Input:
+        user_id - String representing the Discord ID of the user
+    Output: Creates the event type file if it doesn't exist
+    """
     if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv"):
         with open(
             os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv",
@@ -24,11 +36,27 @@ def create_type_file(user_id):
 
 
 def create_type_tree(user_id):
+    """
+    Function: create_type_tree
+    Description: Checks if the event type directory and file exists, and creates them if they don't
+    Input:
+        user_id - String representing the Discord ID of the user
+    Output: Creates the event type folder and file if they don't exist
+    """
     create_type_directory()
     create_type_file(user_id)
 
 
 def read_type_file(user_id):
+    """
+    Function: read_type_file
+    Description: Reads the event type file and displays all event types and preferred time ranges
+    for those event types
+    Input:
+        user_id - String representing the Discord ID of the user
+    Output:
+        output - Formatted string of all the event types and their preferred time ranges
+    """
     output = ""
     # Opens the event type file
     with open(
@@ -47,12 +75,24 @@ def read_type_file(user_id):
 
 
 def create_event_directory():
-    # Creates ScheduleBot calendar directory in users Documents folder if it doesn't exist
+    """
+    Function: create_event_directory
+    Description: Creates ScheduleBot event directory in users Documents folder if it doesn't exist
+    Input: None
+    Output: Creates Event folder if it doesn't exist
+    """
     if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot/Event")):
         Path(os.path.expanduser("~/Documents/ScheduleBot/Event")).mkdir(parents=True, exist_ok=True)
 
 
 def create_event_file(user_id):
+    """
+    Function: create_event_file
+    Description: Checks if the calendar file exists, and creates it if it doesn't
+    Input:
+        user_id - String representing the Discord ID of the user
+    Output: Creates the calendar file if it doesn't exist
+    """
     # Checks if the calendar file exists, and creates it if it doesn't
     if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv"):
         with open(
@@ -65,11 +105,26 @@ def create_event_file(user_id):
 
 
 def create_event_tree(user_id):
+    """
+    Function: create_event_tree
+    Description: Checks if the calendar directory and file exists, and creates them if they don't
+    Input:
+        user_id - String representing the Discord ID of the user
+    Output: Creates the calendar folder and file if they don't exist
+    """
     create_event_directory()
     create_event_file(user_id)
 
 
 def read_event_file(user_id, current):
+    """
+    Function: read_event_file
+    Description: Reads the calendar file and adds an Event into the file in chronological order
+    Input:
+        user_id - String representing the Discord ID of the user
+    Output:
+        output - Formatted string of all the event types and their preferred time ranges
+    """
     # Opens the current user's csv calendar file
     with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv", "r") as calendar_lines:
         calendar_lines = csv.reader(calendar_lines, delimiter=",")
@@ -130,4 +185,3 @@ def read_event_file(user_id, current):
                 csvwriter = csv.writer(calendar_file)
                 csvwriter.writerow(fields)
                 csvwriter.writerow([""] + current.to_list())
-    return current
