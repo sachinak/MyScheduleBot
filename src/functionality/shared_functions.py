@@ -55,7 +55,7 @@ def read_type_file(user_id):
     Input:
         user_id - String representing the Discord ID of the user
     Output:
-        output - List of rows
+        rows - List of rows
     """
     # Opens the event type file
     with open(
@@ -71,7 +71,16 @@ def read_type_file(user_id):
             current_row = []
     return rows
 
+
 def turn_types_to_string(user_id):
+    """
+    Function: turn_types_to_string
+    Description: Reads the event types file and turns all of them into a formatted string
+    Input:
+        user_id - String representing the Discord ID of the user
+    Output:
+        output - Formatted string of rows in event types file
+    """
     output = ""
     space = [10, 5, 5]
     rows = read_type_file(user_id)
@@ -81,6 +90,7 @@ def turn_types_to_string(user_id):
             output += f"{i[0]:<{space[0]}} Preferred range of {i[1]:<{space[1]}} - {i[2]:<{space[2]}}"
         line_number += 1
     return output
+
 
 def create_event_directory():
     """
@@ -124,19 +134,18 @@ def create_event_tree(user_id):
     create_event_file(user_id)
 
 
-def read_event_file(user_id, current):
+def read_event_file(user_id):
     """
     Function: read_event_file
-    Description: Reads the calendar file and adds an Event into the file in chronological order
+    Description: Reads the calendar file and creates a list of rows
     Input:
         user_id - String representing the Discord ID of the user
     Output:
-        output - Formatted string of all the event types and their preferred time ranges
+        rows - List of rows
     """
     # Opens the current user's csv calendar file
     with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv", "r") as calendar_lines:
         calendar_lines = csv.reader(calendar_lines, delimiter=",")
-        fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
         rows = []
 
         # Stores the current row in an array of rows if the row is not a new-line character
@@ -144,52 +153,62 @@ def read_event_file(user_id, current):
         for row in calendar_lines:
             if len(row) > 0:
                 rows.append(row)
-        line_number = 0
+        return rows
 
-        # If the file already has events
-        if len(rows) > 0:
-            for i in rows:
 
-                # Skips check with empty lines
-                if len(i) > 0:
+def add_event_to_file(user_id, current):
+    """
+    Function: add_event_to_file
+    Description: Adds an event to the calendar file in chronological order
+    Input:
+        user_id - String representing the Discord ID of the user
+        current - Event to be added to calendar
+    Output: None
+    """
+    line_number = 0
+    rows = read_event_file(user_id)
+    # If the file already has events
+    if len(rows) > 0:
+        for i in rows:
 
-                    # Temporarily turn each line into an Event object to compare with the object we are trying to add
-                    temp_event = Event(
-                        "",
-                        datetime.strptime(i[2], "%Y-%m-%d %H:%M:%S"),
-                        datetime.strptime(i[3], "%Y-%m-%d %H:%M:%S"),
-                        "",
-                        "",
-                    )
+            # Skips check with empty lines
+            if len(i) > 0 and line_number != 0:
 
-                    # If the current Event occurs before the temp Event, insert the current at that position
-                    if current < temp_event:
-                        rows.insert(line_number, [""] + current.to_list())
-                        break
+                # Temporarily turn each line into an Event object to compare with the object we are trying to add
+                temp_event = Event(
+                    "",
+                    datetime.strptime(i[2], "%Y-%m-%d %H:%M:%S"),
+                    datetime.strptime(i[3], "%Y-%m-%d %H:%M:%S"),
+                    "",
+                    "",
+                )
 
-                    # If we have reached the end of the array and not inserted, append the current Event to the array
-                    if line_number == len(rows) - 1:
-                        rows.insert(len(rows), [""] + current.to_list())
-                        break
-                    line_number += 1
+                # If the current Event occurs before the temp Event, insert the current at that position
+                if current < temp_event:
+                    rows.insert(line_number, [""] + current.to_list())
+                    break
 
-            # Open current user's calendar file for writing
-            with open(
-                os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv",
-                "w",
-                newline="",
-            ) as calendar_file:
-                # Write to column headers and array of rows back to the calendar file
-                csvwriter = csv.writer(calendar_file)
-                csvwriter.writerow(fields)
-                csvwriter.writerows(rows)
-        # If the file has no events, add the current Event to the file
-        else:
-            with open(
-                os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv",
-                "w",
-                newline="",
-            ) as calendar_file:
-                csvwriter = csv.writer(calendar_file)
-                csvwriter.writerow(fields)
-                csvwriter.writerow([""] + current.to_list())
+                # If we have reached the end of the array and not inserted, append the current Event to the array
+                if line_number == len(rows) - 1:
+                    rows.insert(len(rows), [""] + current.to_list())
+                    break
+            line_number += 1
+
+        # Open current user's calendar file for writing
+        with open(
+            os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv",
+            "w",
+            newline="",
+        ) as calendar_file:
+            # Write to column headers and array of rows back to the calendar file
+            csvwriter = csv.writer(calendar_file)
+            csvwriter.writerows(rows)
+    # If the file has no events, add the current Event to the file
+    else:
+        with open(
+            os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv",
+            "w",
+            newline="",
+        ) as calendar_file:
+            csvwriter = csv.writer(calendar_file)
+            csvwriter.writerow([""] + current.to_list())
