@@ -33,6 +33,7 @@ from datetime import datetime
 from pathlib import Path
 from types import TracebackType
 from event_type import event_type
+from functionality.shared_functions import create_type_directory, create_type_file
 
 
 async def create_event_type(ctx, client,event_msg):
@@ -146,17 +147,12 @@ async def create_event_type(ctx, client,event_msg):
         current = event_type(event_array[0], event_array[1], event_array[2])
         
         # Creates ScheduleBot directory in users Documents folder if it doesn&#39;t exist
-        if not os.path.exists(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type/&#34;)):
-            Path(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type/&#34;)).mkdir(parents=True, exist_ok=True)
+        create_type_directory()
+        
         filename=str(ctx.author.id) + &#39;event_types&#39;
 
         # Checks if the calendar csv file exists, and creates it if it doesn&#39;t
-        if not os.path.exists(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(filename) + &#34;.csv&#34;):
-            with open(
-                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(filename) + &#34;.csv&#34;, &#34;x&#34;, newline=&#34;&#34;
-            ) as new_file:
-                csvwriter = csv.writer(new_file, delimiter=&#34;,&#34;)
-                csvwriter.writerow([&#34;Event Type&#34;, &#34;Start time&#34;, &#34;End time&#34;])
+        create_type_file(str(ctx.author.id))
     
         # Opens the current user&#39;s csv calendar file
         with open(
@@ -373,17 +369,12 @@ client - Discord bot user</p>
         current = event_type(event_array[0], event_array[1], event_array[2])
         
         # Creates ScheduleBot directory in users Documents folder if it doesn&#39;t exist
-        if not os.path.exists(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type/&#34;)):
-            Path(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type/&#34;)).mkdir(parents=True, exist_ok=True)
+        create_type_directory()
+        
         filename=str(ctx.author.id) + &#39;event_types&#39;
 
         # Checks if the calendar csv file exists, and creates it if it doesn&#39;t
-        if not os.path.exists(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(filename) + &#34;.csv&#34;):
-            with open(
-                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(filename) + &#34;.csv&#34;, &#34;x&#34;, newline=&#34;&#34;
-            ) as new_file:
-                csvwriter = csv.writer(new_file, delimiter=&#34;,&#34;)
-                csvwriter.writerow([&#34;Event Type&#34;, &#34;Start time&#34;, &#34;End time&#34;])
+        create_type_file(str(ctx.author.id))
     
         # Opens the current user&#39;s csv calendar file
         with open(
