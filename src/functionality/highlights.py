@@ -136,7 +136,10 @@ def convert_to_12(time):
         new_time = "12:" + time[3:] + " AM"
     elif int(time[:2]) == 12:
         new_time = time + " PM"
+    elif int(time[:2]) > 9 and int(time[:2]) < 12:
+            new_time = time + " AM"
     else:
         new_time = time[1:] + " AM"
-
     return new_time
+
+print(convert_to_12("11:11"))
