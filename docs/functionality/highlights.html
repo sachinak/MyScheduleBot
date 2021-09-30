@@ -26,14 +26,12 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import os
-from datetime import datetime
-import csv
-
-
+<pre><code class="python">from datetime import datetime
+from functionality.shared_functions import read_event_file, create_event_tree
 
 
 async def get_highlight(ctx):
+
     &#34;&#34;&#34;
     Function:
         get_highlight
@@ -46,75 +44,66 @@ async def get_highlight(ctx):
     Output:
         - A message sent to the context with all the events that start and/or end today
     &#34;&#34;&#34;
+
+    # Open and read user&#39;s calendar file
+    create_event_tree(str(ctx.author.id))
+    rows = read_event_file(str(ctx.author.id))
+
+    # Initialize variables
     channel = await ctx.author.create_dm()
+    event = {&#39;name&#39;: &#39;&#39;, &#39;startDate&#39;: &#39;&#39;, &#39;startTime&#39;: &#39;&#39;, &#39;endDate&#39;: &#39;&#39;, &#39;endTime&#39;: &#39;&#39;, &#39;type&#39;: &#39;&#39;, &#39;desc&#39;: &#39;&#39;}
+    events = []
+    today = str(datetime.today()).split()[0]
 
-    try:
-        # Open the calendar file for user
-        with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;, &#34;r&#34;) as calendar_file:
-            # create reader object
-            csv_reader = csv.reader(calendar_file, delimiter=&#39;,&#39;)
-            # First line is just the headers
-            fields = next(csv_reader)
+    # If there are events in the file
+    if len(rows) &gt; 1:
+        # For every row in calendar file
+        for row in rows[1:]:
+            # Get event details
+            event[&#39;name&#39;] = row[1]
+            start = row[2].split()
+            event[&#39;startDate&#39;] = start[0]
+            event[&#39;startTime&#39;] = convert_to_12(start[1][:-3]) # Convert to 12 hour format
+            end = row[3].split()
+            event[&#39;endDate&#39;] = end[0]
+            event[&#39;endTime&#39;] = convert_to_12(end[1][:-3]) # Convert to 12 hour format
+            event[&#39;type&#39;] = row[4]
+            event[&#39;desc&#39;] = row[5]
+            dates = [event[&#39;startDate&#39;], event[&#39;endDate&#39;]]
 
-            # Initialize variables
+            flag = check_start_or_end(dates, today)
+
+            if flag == 1:
+                # If event starts and ends today
+                event[&#39;flag&#39;] = 1
+                events.append(event)
+            elif flag == 2:
+                # If event starts today but ends on a later date
+                event[&#39;endDate&#39;] = event[&#39;endDate&#39;].split(&#39;-&#39;)
+                event[&#39;endDate&#39;] = event[&#39;endDate&#39;][1] + &#39;/&#39; + event[&#39;endDate&#39;][2] + &#39;/&#39; + event[&#39;endDate&#39;][0]
+                event[&#39;flag&#39;] = 2
+                events.append(event)
+            elif flag == 3:
+                # If event is already in process and ends today
+                event[&#39;flag&#39;] = 3
+                events.append(event)
+
+            # reset event
             event = {&#39;name&#39;: &#39;&#39;, &#39;startDate&#39;: &#39;&#39;, &#39;startTime&#39;: &#39;&#39;, &#39;endDate&#39;: &#39;&#39;, &#39;endTime&#39;: &#39;&#39;, &#39;type&#39;: &#39;&#39;, &#39;desc&#39;: &#39;&#39;}
-            events = []
-            rows = []
-            today = str(datetime.today()).split()[0]
 
-            # Read rows and store in list
-            for row in csv_reader:
-                if len(row) &gt; 0:    
-                    rows.append(row)
-
-            # If events exist
-            if len(rows) &gt; 0:
-                # For every row in calendar file
-                for row in rows:
-                    # Get event details
-                    event[&#39;name&#39;] = row[1]
-                    start = row[2].split()
-                    event[&#39;startDate&#39;] = start[0]
-                    event[&#39;startTime&#39;] = convert_to_12(start[1][:-3]) # Convert to 12 hour format
-                    end = row[3].split()
-                    event[&#39;endDate&#39;] = end[0]
-                    event[&#39;endTime&#39;] = convert_to_12(end[1][:-3]) # Convert to 12 hour format
-                    event[&#39;type&#39;] = row[4]
-                    event[&#39;desc&#39;] = row[5]
-                    dates = [event[&#39;startDate&#39;], event[&#39;endDate&#39;]]
-
-                    flag = check_start_or_end(dates, today)
-
-                    if flag == 1:
-                        # If event starts and ends today
-                        event[&#39;flag&#39;] = 1
-                        events.append(event)
-                    elif flag == 2:
-                        # If event starts today but ends on a later date
-                        event[&#39;endDate&#39;] = event[&#39;endDate&#39;].split(&#39;-&#39;)
-                        event[&#39;endDate&#39;] = event[&#39;endDate&#39;][1] + &#39;/&#39; + event[&#39;endDate&#39;][2] + &#39;/&#39; + event[&#39;endDate&#39;][0]
-                        event[&#39;flag&#39;] = 2
-                        events.append(event)
-                    elif flag == 3:
-                        # If event is already in process and ends today
-                        event[&#39;flag&#39;] = 3
-                        events.append(event)
-
-                    event = {&#39;name&#39;: &#39;&#39;, &#39;startDate&#39;: &#39;&#39;, &#39;startTime&#39;: &#39;&#39;, &#39;endDate&#39;: &#39;&#39;, &#39;endTime&#39;: &#39;&#39;, &#39;type&#39;: &#39;&#39;, &#39;desc&#39;: &#39;&#39;}
-
-            # If events are on schedule for today
-            if len(events) != 0:
-                for e in events:
-                    if e[&#39;flag&#39;] == 1:
-                        await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, from {e[&#39;startTime&#39;]} to {e[&#39;endTime&#39;]}&#34;)
-                    elif e[&#39;flag&#39;] == 2:
-                        await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, from {e[&#39;startTime&#39;]} to {e[&#39;endTime&#39;]} on {e[&#39;endDate&#39;]}&#34;)
-                    elif e[&#39;flag&#39;] == 3:
-                        await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, till {e[&#39;endTime&#39;]}&#34;)
-            else:
-                await channel.send(f&#34;You don&#39;t have any events scheduled for today&#34;)
-    except FileNotFoundError as err:
-        await channel.send(&#34;Looks like I cannot find your schedule. Try adding events using the &#39;!schedule&#39; command!&#34;)
+        # If events are on schedule for today
+        if len(events) != 0:
+            for e in events:
+                if e[&#39;flag&#39;] == 1:
+                    await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, from {e[&#39;startTime&#39;]} to {e[&#39;endTime&#39;]}&#34;)
+                elif e[&#39;flag&#39;] == 2:
+                    await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, from {e[&#39;startTime&#39;]} to {e[&#39;endTime&#39;]} on {e[&#39;endDate&#39;]}&#34;)
+                elif e[&#39;flag&#39;] == 3:
+                    await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, till {e[&#39;endTime&#39;]}&#34;)
+        else:
+            await channel.send(&#34;You don&#39;t have any event scheduled for today!&#34;)    
+    else:
+        await channel.send(&#34;Looks like your schedule is empty. You can add events using the &#39;!schedule&#39; command!&#34;)
 
 
 # Helper Functions 
@@ -170,7 +159,7 @@ def convert_to_12(time):
         new_time = time[1:] + &#34; AM&#34;
     return new_time
 
-print(convert_to_12(&#34;11:11&#34;))</code></pre>
+# test()</code></pre>
 </details>
 </section>
 <section>
@@ -297,6 +286,7 @@ to show scheduled events as asked by user.</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">async def get_highlight(ctx):
+
     &#34;&#34;&#34;
     Function:
         get_highlight
@@ -309,75 +299,66 @@ to show scheduled events as asked by user.</p>
     Output:
         - A message sent to the context with all the events that start and/or end today
     &#34;&#34;&#34;
+
+    # Open and read user&#39;s calendar file
+    create_event_tree(str(ctx.author.id))
+    rows = read_event_file(str(ctx.author.id))
+
+    # Initialize variables
     channel = await ctx.author.create_dm()
+    event = {&#39;name&#39;: &#39;&#39;, &#39;startDate&#39;: &#39;&#39;, &#39;startTime&#39;: &#39;&#39;, &#39;endDate&#39;: &#39;&#39;, &#39;endTime&#39;: &#39;&#39;, &#39;type&#39;: &#39;&#39;, &#39;desc&#39;: &#39;&#39;}
+    events = []
+    today = str(datetime.today()).split()[0]
 
-    try:
-        # Open the calendar file for user
-        with open(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;, &#34;r&#34;) as calendar_file:
-            # create reader object
-            csv_reader = csv.reader(calendar_file, delimiter=&#39;,&#39;)
-            # First line is just the headers
-            fields = next(csv_reader)
+    # If there are events in the file
+    if len(rows) &gt; 1:
+        # For every row in calendar file
+        for row in rows[1:]:
+            # Get event details
+            event[&#39;name&#39;] = row[1]
+            start = row[2].split()
+            event[&#39;startDate&#39;] = start[0]
+            event[&#39;startTime&#39;] = convert_to_12(start[1][:-3]) # Convert to 12 hour format
+            end = row[3].split()
+            event[&#39;endDate&#39;] = end[0]
+            event[&#39;endTime&#39;] = convert_to_12(end[1][:-3]) # Convert to 12 hour format
+            event[&#39;type&#39;] = row[4]
+            event[&#39;desc&#39;] = row[5]
+            dates = [event[&#39;startDate&#39;], event[&#39;endDate&#39;]]
 
-            # Initialize variables
+            flag = check_start_or_end(dates, today)
+
+            if flag == 1:
+                # If event starts and ends today
+                event[&#39;flag&#39;] = 1
+                events.append(event)
+            elif flag == 2:
+                # If event starts today but ends on a later date
+                event[&#39;endDate&#39;] = event[&#39;endDate&#39;].split(&#39;-&#39;)
+                event[&#39;endDate&#39;] = event[&#39;endDate&#39;][1] + &#39;/&#39; + event[&#39;endDate&#39;][2] + &#39;/&#39; + event[&#39;endDate&#39;][0]
+                event[&#39;flag&#39;] = 2
+                events.append(event)
+            elif flag == 3:
+                # If event is already in process and ends today
+                event[&#39;flag&#39;] = 3
+                events.append(event)
+
+            # reset event
             event = {&#39;name&#39;: &#39;&#39;, &#39;startDate&#39;: &#39;&#39;, &#39;startTime&#39;: &#39;&#39;, &#39;endDate&#39;: &#39;&#39;, &#39;endTime&#39;: &#39;&#39;, &#39;type&#39;: &#39;&#39;, &#39;desc&#39;: &#39;&#39;}
-            events = []
-            rows = []
-            today = str(datetime.today()).split()[0]
 
-            # Read rows and store in list
-            for row in csv_reader:
-                if len(row) &gt; 0:    
-                    rows.append(row)
-
-            # If events exist
-            if len(rows) &gt; 0:
-                # For every row in calendar file
-                for row in rows:
-                    # Get event details
-                    event[&#39;name&#39;] = row[1]
-                    start = row[2].split()
-                    event[&#39;startDate&#39;] = start[0]
-                    event[&#39;startTime&#39;] = convert_to_12(start[1][:-3]) # Convert to 12 hour format
-                    end = row[3].split()
-                    event[&#39;endDate&#39;] = end[0]
-                    event[&#39;endTime&#39;] = convert_to_12(end[1][:-3]) # Convert to 12 hour format
-                    event[&#39;type&#39;] = row[4]
-                    event[&#39;desc&#39;] = row[5]
-                    dates = [event[&#39;startDate&#39;], event[&#39;endDate&#39;]]
-
-                    flag = check_start_or_end(dates, today)
-
-                    if flag == 1:
-                        # If event starts and ends today
-                        event[&#39;flag&#39;] = 1
-                        events.append(event)
-                    elif flag == 2:
-                        # If event starts today but ends on a later date
-                        event[&#39;endDate&#39;] = event[&#39;endDate&#39;].split(&#39;-&#39;)
-                        event[&#39;endDate&#39;] = event[&#39;endDate&#39;][1] + &#39;/&#39; + event[&#39;endDate&#39;][2] + &#39;/&#39; + event[&#39;endDate&#39;][0]
-                        event[&#39;flag&#39;] = 2
-                        events.append(event)
-                    elif flag == 3:
-                        # If event is already in process and ends today
-                        event[&#39;flag&#39;] = 3
-                        events.append(event)
-
-                    event = {&#39;name&#39;: &#39;&#39;, &#39;startDate&#39;: &#39;&#39;, &#39;startTime&#39;: &#39;&#39;, &#39;endDate&#39;: &#39;&#39;, &#39;endTime&#39;: &#39;&#39;, &#39;type&#39;: &#39;&#39;, &#39;desc&#39;: &#39;&#39;}
-
-            # If events are on schedule for today
-            if len(events) != 0:
-                for e in events:
-                    if e[&#39;flag&#39;] == 1:
-                        await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, from {e[&#39;startTime&#39;]} to {e[&#39;endTime&#39;]}&#34;)
-                    elif e[&#39;flag&#39;] == 2:
-                        await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, from {e[&#39;startTime&#39;]} to {e[&#39;endTime&#39;]} on {e[&#39;endDate&#39;]}&#34;)
-                    elif e[&#39;flag&#39;] == 3:
-                        await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, till {e[&#39;endTime&#39;]}&#34;)
-            else:
-                await channel.send(f&#34;You don&#39;t have any events scheduled for today&#34;)
-    except FileNotFoundError as err:
-        await channel.send(&#34;Looks like I cannot find your schedule. Try adding events using the &#39;!schedule&#39; command!&#34;)</code></pre>
+        # If events are on schedule for today
+        if len(events) != 0:
+            for e in events:
+                if e[&#39;flag&#39;] == 1:
+                    await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, from {e[&#39;startTime&#39;]} to {e[&#39;endTime&#39;]}&#34;)
+                elif e[&#39;flag&#39;] == 2:
+                    await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, from {e[&#39;startTime&#39;]} to {e[&#39;endTime&#39;]} on {e[&#39;endDate&#39;]}&#34;)
+                elif e[&#39;flag&#39;] == 3:
+                    await channel.send(f&#34;You have {e[&#39;name&#39;]} scheduled today, till {e[&#39;endTime&#39;]}&#34;)
+        else:
+            await channel.send(&#34;You don&#39;t have any event scheduled for today!&#34;)    
+    else:
+        await channel.send(&#34;Looks like your schedule is empty. You can add events using the &#39;!schedule&#39; command!&#34;)</code></pre>
 </details>
 </dd>
 </dl>
