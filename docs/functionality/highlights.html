@@ -164,10 +164,13 @@ def convert_to_12(time):
         new_time = &#34;12:&#34; + time[3:] + &#34; AM&#34;
     elif int(time[:2]) == 12:
         new_time = time + &#34; PM&#34;
+    elif int(time[:2]) &gt; 9 and int(time[:2]) &lt; 12:
+            new_time = time + &#34; AM&#34;
     else:
         new_time = time[1:] + &#34; AM&#34;
+    return new_time
 
-    return new_time</code></pre>
+print(convert_to_12(&#34;11:11&#34;))</code></pre>
 </details>
 </section>
 <section>
@@ -264,9 +267,10 @@ def convert_to_12(time):
         new_time = &#34;12:&#34; + time[3:] + &#34; AM&#34;
     elif int(time[:2]) == 12:
         new_time = time + &#34; PM&#34;
+    elif int(time[:2]) &gt; 9 and int(time[:2]) &lt; 12:
+            new_time = time + &#34; AM&#34;
     else:
         new_time = time[1:] + &#34; AM&#34;
-
     return new_time</code></pre>
 </details>
 </dd>
