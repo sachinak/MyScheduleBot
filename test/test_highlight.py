@@ -1,7 +1,8 @@
 # From https://stackoverflow.com/questions/25827160/importing-correctly-with-pytest
 # Change current working directory so test case can find the source files
 import sys, os
-sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/../src"))
+
+sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/../src"))
 
 import pytest
 import datetime
@@ -18,20 +19,21 @@ TESTING DATE CHECKING
 """
 
 # Generate one random datetime object between an uniform range
-def random_date(start = 2020, end = 2025):
+def random_date(start=2020, end=2025):
     # Determine all posible days between the start and end
     start = datetime.date(start, 1, 1)
     end = datetime.date(end, 12, 31)
 
     # Give me one of them at random
     choices = end - start
-    chosen_day = randint( 0, choices.days )
+    chosen_day = randint(0, choices.days)
 
     # Get the random date
-    date = start + datetime.timedelta(days = chosen_day)
+    date = start + datetime.timedelta(days=chosen_day)
 
     # add time
     return str(datetime.datetime(date.year, date.month, date.day)).split()[0]
+
 
 # Test if event starts and ends on the same day
 def test_start_and_end():
@@ -51,8 +53,11 @@ def test_ends_later():
 
     for i in range(NUM_ITER):
         # Pick two random dates
-        day1 = random_date()
-        day2 = random_date()
+        day1 = ""
+        day2 = ""
+        while day1 == day2:
+            day1 = random_date()
+            day2 = random_date()
 
         # day 1 should be the minimum of the two dates
         # day 2 should be the maximum
@@ -60,8 +65,9 @@ def test_ends_later():
 
         # For testing, assume today is the first day
         today = day1
-
+        print(str(day1) + " " + str(day2) + " " + str(today))
         assert check_start_or_end([day1, day2], today) == 2
+
 
 # Test if event started on an earlier date but ends today
 def test_started_earlier():
@@ -77,6 +83,7 @@ def test_started_earlier():
         today = day2
 
         assert check_start_or_end([day1, day2], today) == 3
+
 
 # Test if no event is scheduled for today
 def test_no_event():
@@ -106,13 +113,15 @@ def random_time():
     # return datetime object with a fixed date and variable time
     return datetime.datetime(2020, 12, 6, h, m)
 
+
 # Function to convert time to 12 hour format
 def to_12hour(d):
     ampm = "AM" if d.hour < 12 else "PM"
     hour = d.hour % 12
-    if hour == 0: hour += 12
+    if hour == 0:
+        hour += 12
     return f"{hour}:{d.minute:02.0f} {ampm}"
-    
+
 
 # Testing the conversion function in file
 def test_time_conversion():
@@ -121,7 +130,8 @@ def test_time_conversion():
 
     # get time string for testing
     str_time = str(time).split()[1][:5]
-    
+
     assert convert_to_12(str_time) == to_12hour(time)
+
 
 print(random_time())
