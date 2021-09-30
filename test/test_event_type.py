@@ -30,12 +30,6 @@ def random_datetime(start = 2020, end = 2025):
     return datetime.datetime(date.year, date.month, date.day, h, m)
 
 
-
-def create_type_event1():
-    start = random_datetime()
-    end = random_datetime()
-    return event_type("Homework", start, end)
-
 def test_str():
     start = random_datetime()
     end = random_datetime()
