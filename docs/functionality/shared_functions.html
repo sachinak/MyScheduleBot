@@ -110,12 +110,12 @@ def turn_types_to_string(user_id):
         output - Formatted string of rows in event types file
     &#34;&#34;&#34;
     output = &#34;&#34;
-    space = [10, 5, 5]
+    space = [12, 5, 5]
     rows = read_type_file(user_id)
     line_number = 0
     for i in rows:
         if line_number != 0:
-            output += f&#34;{i[0]:&lt;{space[0]}} Preferred range of {i[1]:&lt;{space[1]}} - {i[2]:&lt;{space[2]}}&#34;
+            output += f&#34;{i[0]:&lt;{space[0]}} Preferred range of {i[1]:&lt;{space[1]}} - {i[2]:&lt;{space[2]}}\n&#34;
         line_number += 1
     return output
 
@@ -581,12 +581,12 @@ Description: Reads the event types file and turns all of them into a formatted s
         output - Formatted string of rows in event types file
     &#34;&#34;&#34;
     output = &#34;&#34;
-    space = [10, 5, 5]
+    space = [12, 5, 5]
     rows = read_type_file(user_id)
     line_number = 0
     for i in rows:
         if line_number != 0:
-            output += f&#34;{i[0]:&lt;{space[0]}} Preferred range of {i[1]:&lt;{space[1]}} - {i[2]:&lt;{space[2]}}&#34;
+            output += f&#34;{i[0]:&lt;{space[0]}} Preferred range of {i[1]:&lt;{space[1]}} - {i[2]:&lt;{space[2]}}\n&#34;
         line_number += 1
     return output</code></pre>
 </details>
