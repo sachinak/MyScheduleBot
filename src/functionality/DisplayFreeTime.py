@@ -11,7 +11,7 @@ async def get_free_time(ctx, bot):
     Function:
         get_free_time
     Description:
-        giving the user the free time today according to the registered events
+        giving the user the free time today according to the registered events by calling the function compute_free_time
     Input:
         ctx - Discord context window
         bot - Discord bot user
@@ -51,6 +51,25 @@ async def get_free_time(ctx, bot):
                 "",
             )
             calendarDates.append(temp_event)
+    output = compute_free_time(calendarDates)
+    await channel.send(output)
+
+
+def compute_free_time(calendarDates):
+
+    """
+    Function:
+        compute_free_time
+    Description:
+        returning a string that contains the user the free time according to the registered events
+    Input:
+        calendarDates - list of the events that the user has in the calendar
+    Output:
+        - a string stating every free time slot that is avaliable today 
+    """
+
+    # defining  variable for the output string that the function will returns
+    output = ''
 
     # two constants for the time at the start and end of the day
     start_time = time(hour=0, minute=0)
@@ -75,36 +94,48 @@ async def get_free_time(ctx, bot):
     # check if the user has no event for today
 
     if len(today_events) == 0:
-        await channel.send('You do not have any event for today')
-        return
-    
+        return ('You do not have any event for today')
+
     # sorting today's events
     today_events.sort()
 
+
+    # setting up the first possible free time
+    #    
+    free_time_start = (today_events[0].end_date + one_min).time()
+    free_time_end = (today_events[1].start_date - one_min).time()
+
     # removing the first event if it occurs exactly at 00:00 as there is no free time before it
+    # and also showing the first free time if there is a time between the end of the first event and the start of the second event
     # if not , it will show the first free time which occurs exactly at 00:00
 
-    if today_events[0] == start_time:
+    if today_events[0].start_date.time() == start_time and free_time_start < free_time_end:
+        output += ('Free time from ' +
+                   str(free_time_start) +
+                   ' until ' +
+                   str(free_time_end) + '\n')
         today_events.pop(0)
     else:
-        await channel.send('Free time from 00:00 until ', today_events[0].start_date.time())
-        
+        output += ('Free time from 00:00 until ' + str((today_events[0].start_date - one_min).time()) + '\n')
+
     # showing free time by iterating through the list of events ignoring the last one as it needs a special case
 
     for i in range(len(today_events) - 1):
         free_time_start = (today_events[i].end_date + one_min).time()
-        free_time_end =  (today_events[i + 1].start_date - one_min).time()
+        free_time_end = (today_events[i + 1].start_date - one_min).time()
         # ignoring if the free time is actually one minute or less
         if free_time_start < free_time_end:
-            await channel.send("Free time from"
-            , free_time_start
-            , 'until',free_time_end)
+            output += ("Free time from " +
+                       str(free_time_start) +
+                       ' until ' + str(free_time_end) + '\n')
 
     # showing the last free time slot if the last event in the day doesn't end exactly at:23:59
     if today_events[-1].end_date.time() < end_time:
-        await channel.send('Free time from',
-            (today_events[-1].end_date + one_min).time()
-            , 'until 23:59 ')
+        output += ('Free time from ' +
+                   str((today_events[-1].end_date + one_min).time())
+                   + ' until 23:59 ')
+
+    return output
 
 
 
