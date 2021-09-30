@@ -31,6 +31,14 @@ import os
 import csv
 from datetime import datetime
 from pathlib import Path
+from functionality.shared_functions import (
+    create_event_tree,
+    create_type_directory,
+    create_type_file,
+    create_type_tree,
+    read_event_file,
+    read_type_file,
+)
 from types import TracebackType
 from Event import Event
 from parse.match import parse_period
@@ -119,34 +127,8 @@ async def add_event(ctx, client):
             date_array = []
             msg_content = &#34;&#34;
 
-    output = &#34;&#34;
-    # Creates ScheduleBot directory in users Documents folder if it doesn&#39;t exist
-    if not os.path.exists(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type&#34;)):
-        Path(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type&#34;)).mkdir(parents=True, exist_ok=True)
-    # Checks if the event type file exists, and creates it if it doesn&#39;t
-    if not os.path.exists(
-        os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;
-    ):
-        with open(
-            os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;,
-            &#34;x&#34;,
-            newline=&#34;&#34;,
-        ) as new_file:
-            csvwriter = csv.writer(new_file, delimiter=&#34;,&#34;)
-            csvwriter.writerow([&#34;Event Type&#34;, &#34;Start time&#34;, &#34;End time&#34;])
-    # Opens the event type file
-    with open(
-        os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;, &#34;r&#34;
-    ) as type_lines:
-        type_lines = csv.reader(type_lines, delimiter=&#34;,&#34;)
-        fields = next(type_lines)
-        space = [10, 5, 5]
-        current_line = []
-        for line in type_lines:
-            for text in line:
-                current_line.append(text)
-            output += f&#34;{current_line[0]:&lt;{space[0]}} Preferred range of {current_line[1]:&lt;{space[1]}} - {current_line[2]:&lt;{space[2]}}&#34;
-            current_line = []
+    create_type_tree(str(ctx.author.id))
+    output = read_type_file(str(ctx.author.id))
     await channel.send(
         &#34;Tell me what type of event this is. Here are a list of event types I currently know:\n&#34; + output
     )
@@ -165,83 +147,8 @@ async def add_event(ctx, client):
     try:
         current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4])
         await channel.send(&#34;Your event was successfully created!&#34;)
-
-        # Creates ScheduleBot Event directory in users Documents folder if it doesn&#39;t exist
-        if not os.path.exists(os.path.expanduser(&#34;~/Documents/ScheduleBot/Event&#34;)):
-            Path(os.path.expanduser(&#34;~/Documents/ScheduleBot/Event&#34;)).mkdir(parents=True, exist_ok=True)
-
-        # Checks if the calendar csv file exists, and creates it if it doesn&#39;t
-        if not os.path.exists(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;):
-            with open(
-                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;, &#34;x&#34;, newline=&#34;&#34;
-            ) as new_file:
-                csvwriter = csv.writer(new_file, delimiter=&#34;,&#34;)
-                csvwriter.writerow([&#34;ID&#34;, &#34;Name&#34;, &#34;Start Date&#34;, &#34;End Date&#34;, &#34;Type&#34;, &#34;Notes&#34;])
-
-        # Opens the current user&#39;s csv calendar file
-        with open(
-            os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;, &#34;r&#34;
-        ) as calendar_lines:
-            calendar_lines = csv.reader(calendar_lines, delimiter=&#34;,&#34;)
-            fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
-            rows = []
-
-            # Stores the current row in an array of rows if the row is not a new-line character
-            # This check prevents an accidental empty lines from being kept in the updated file
-            for row in calendar_lines:
-                if len(row) &gt; 0:
-                    rows.append(row)
-            line_number = 0
-
-            # If the file already has events
-            if len(rows) &gt; 0:
-                for i in rows:
-
-                    # Skips check with empty lines
-                    if len(i) &gt; 0:
-
-                        # Temporarily turn each line into an Event object to compare with the object we are trying to add
-                        temp_event = Event(
-                            &#34;&#34;,
-                            datetime.strptime(i[2], &#34;%Y-%m-%d %H:%M:%S&#34;),
-                            datetime.strptime(i[3], &#34;%Y-%m-%d %H:%M:%S&#34;),
-                            &#34;&#34;,
-                            &#34;&#34;,
-                        )
-
-                        # If the current Event occurs before the temp Event, insert the current at that position
-                        if current &lt; temp_event:
-                            rows.insert(line_number, [&#34;&#34;] + current.to_list())
-                            break
-
-                        # If we have reached the end of the array and not inserted, append the current Event to the array
-                        if line_number == len(rows) - 1:
-                            rows.insert(len(rows), [&#34;&#34;] + current.to_list())
-                            break
-                        line_number += 1
-
-                # Open current user&#39;s calendar file for writing
-                with open(
-                    os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;,
-                    &#34;w&#34;,
-                    newline=&#34;&#34;,
-                ) as calendar_file:
-                    # Write to column headers and array of rows back to the calendar file
-                    csvwriter = csv.writer(calendar_file)
-                    csvwriter.writerow(fields)
-                    csvwriter.writerows(rows)
-
-            # If the file has no events, add the current Event to the file
-            else:
-                with open(
-                    os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;,
-                    &#34;w&#34;,
-                    newline=&#34;&#34;,
-                ) as calendar_file:
-                    csvwriter = csv.writer(calendar_file)
-                    csvwriter.writerow(fields)
-                    csvwriter.writerow([&#34;&#34;] + current.to_list())
-
+        create_event_tree(str(ctx.author.id))
+        read_event_file(str(ctx.author.id), current)
     except Exception as e:
         # Outputs an error message if the event could not be created
         print(e)
@@ -351,34 +258,8 @@ client - Discord bot user</p>
             date_array = []
             msg_content = &#34;&#34;
 
-    output = &#34;&#34;
-    # Creates ScheduleBot directory in users Documents folder if it doesn&#39;t exist
-    if not os.path.exists(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type&#34;)):
-        Path(os.path.expanduser(&#34;~/Documents/ScheduleBot/Type&#34;)).mkdir(parents=True, exist_ok=True)
-    # Checks if the event type file exists, and creates it if it doesn&#39;t
-    if not os.path.exists(
-        os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;
-    ):
-        with open(
-            os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;,
-            &#34;x&#34;,
-            newline=&#34;&#34;,
-        ) as new_file:
-            csvwriter = csv.writer(new_file, delimiter=&#34;,&#34;)
-            csvwriter.writerow([&#34;Event Type&#34;, &#34;Start time&#34;, &#34;End time&#34;])
-    # Opens the event type file
-    with open(
-        os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Type/&#34; + str(ctx.author.id) + &#34;event_types.csv&#34;, &#34;r&#34;
-    ) as type_lines:
-        type_lines = csv.reader(type_lines, delimiter=&#34;,&#34;)
-        fields = next(type_lines)
-        space = [10, 5, 5]
-        current_line = []
-        for line in type_lines:
-            for text in line:
-                current_line.append(text)
-            output += f&#34;{current_line[0]:&lt;{space[0]}} Preferred range of {current_line[1]:&lt;{space[1]}} - {current_line[2]:&lt;{space[2]}}&#34;
-            current_line = []
+    create_type_tree(str(ctx.author.id))
+    output = read_type_file(str(ctx.author.id))
     await channel.send(
         &#34;Tell me what type of event this is. Here are a list of event types I currently know:\n&#34; + output
     )
@@ -397,83 +278,8 @@ client - Discord bot user</p>
     try:
         current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4])
         await channel.send(&#34;Your event was successfully created!&#34;)
-
-        # Creates ScheduleBot Event directory in users Documents folder if it doesn&#39;t exist
-        if not os.path.exists(os.path.expanduser(&#34;~/Documents/ScheduleBot/Event&#34;)):
-            Path(os.path.expanduser(&#34;~/Documents/ScheduleBot/Event&#34;)).mkdir(parents=True, exist_ok=True)
-
-        # Checks if the calendar csv file exists, and creates it if it doesn&#39;t
-        if not os.path.exists(os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;):
-            with open(
-                os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;, &#34;x&#34;, newline=&#34;&#34;
-            ) as new_file:
-                csvwriter = csv.writer(new_file, delimiter=&#34;,&#34;)
-                csvwriter.writerow([&#34;ID&#34;, &#34;Name&#34;, &#34;Start Date&#34;, &#34;End Date&#34;, &#34;Type&#34;, &#34;Notes&#34;])
-
-        # Opens the current user&#39;s csv calendar file
-        with open(
-            os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;, &#34;r&#34;
-        ) as calendar_lines:
-            calendar_lines = csv.reader(calendar_lines, delimiter=&#34;,&#34;)
-            fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
-            rows = []
-
-            # Stores the current row in an array of rows if the row is not a new-line character
-            # This check prevents an accidental empty lines from being kept in the updated file
-            for row in calendar_lines:
-                if len(row) &gt; 0:
-                    rows.append(row)
-            line_number = 0
-
-            # If the file already has events
-            if len(rows) &gt; 0:
-                for i in rows:
-
-                    # Skips check with empty lines
-                    if len(i) &gt; 0:
-
-                        # Temporarily turn each line into an Event object to compare with the object we are trying to add
-                        temp_event = Event(
-                            &#34;&#34;,
-                            datetime.strptime(i[2], &#34;%Y-%m-%d %H:%M:%S&#34;),
-                            datetime.strptime(i[3], &#34;%Y-%m-%d %H:%M:%S&#34;),
-                            &#34;&#34;,
-                            &#34;&#34;,
-                        )
-
-                        # If the current Event occurs before the temp Event, insert the current at that position
-                        if current &lt; temp_event:
-                            rows.insert(line_number, [&#34;&#34;] + current.to_list())
-                            break
-
-                        # If we have reached the end of the array and not inserted, append the current Event to the array
-                        if line_number == len(rows) - 1:
-                            rows.insert(len(rows), [&#34;&#34;] + current.to_list())
-                            break
-                        line_number += 1
-
-                # Open current user&#39;s calendar file for writing
-                with open(
-                    os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;,
-                    &#34;w&#34;,
-                    newline=&#34;&#34;,
-                ) as calendar_file:
-                    # Write to column headers and array of rows back to the calendar file
-                    csvwriter = csv.writer(calendar_file)
-                    csvwriter.writerow(fields)
-                    csvwriter.writerows(rows)
-
-            # If the file has no events, add the current Event to the file
-            else:
-                with open(
-                    os.path.expanduser(&#34;~/Documents&#34;) + &#34;/ScheduleBot/Event/&#34; + str(ctx.author.id) + &#34;.csv&#34;,
-                    &#34;w&#34;,
-                    newline=&#34;&#34;,
-                ) as calendar_file:
-                    csvwriter = csv.writer(calendar_file)
-                    csvwriter.writerow(fields)
-                    csvwriter.writerow([&#34;&#34;] + current.to_list())
-
+        create_event_tree(str(ctx.author.id))
+        read_event_file(str(ctx.author.id), current)
     except Exception as e:
         # Outputs an error message if the event could not be created
         print(e)
