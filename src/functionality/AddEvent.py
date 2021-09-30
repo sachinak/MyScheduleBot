@@ -1,16 +1,4 @@
-import re
-import os
-import csv
-from datetime import datetime
-from pathlib import Path
-from functionality.shared_functions import (
-    create_event_tree,
-    create_type_directory,
-    create_type_file,
-    create_type_tree,
-    read_event_file,
-    read_type_file,
-)
+from functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, turn_types_to_string
 from types import TracebackType
 from Event import Event
 from parse.match import parse_period
@@ -100,7 +88,7 @@ async def add_event(ctx, client):
             msg_content = ""
 
     create_type_tree(str(ctx.author.id))
-    output = read_type_file(str(ctx.author.id))
+    output = turn_types_to_string(str(ctx.author.id))
     await channel.send(
         "Tell me what type of event this is. Here are a list of event types I currently know:\n" + output
     )
@@ -120,7 +108,7 @@ async def add_event(ctx, client):
         current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4])
         await channel.send("Your event was successfully created!")
         create_event_tree(str(ctx.author.id))
-        read_event_file(str(ctx.author.id), current)
+        add_event_to_file(str(ctx.author.id), current)
     except Exception as e:
         # Outputs an error message if the event could not be created
         print(e)
