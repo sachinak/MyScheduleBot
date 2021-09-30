@@ -1,6 +1,6 @@
 | | Item | Self-Score | Evidence
 | ---- | ---- | ----: | ---- |
-| | Total of items overall | ??? | |
+| | Total of items overall | 201 | |
 | | Total of items in [rubic](https://github.com/txt/se21/blob/master/docs/proj1rubric.md) | 73 | |
 | 1 | Workload is spread over the whole team (one team member is often Xtimes more productive than the others... | 2 | [GitHub contributions](https://github.com/lyonva/ScheduleBot/graphs/contributors), although this is not the entire story. |
 | 2 | but nevertheless, here is a track record that everyone is contributing a lot) | 3 | [GitHub contributions](https://github.com/lyonva/ScheduleBot/graphs/contributors) |
@@ -31,7 +31,7 @@
 | 27 | evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer) | 3 | Statement of the team members. Also most of us have a personal test bot. |
 | 28 | evidence that the members of the team are working across multiple places in the code base | 2 | [Commits on main](https://github.com/lyonva/ScheduleBot/commits/main) |
 | 29 | short release cycles | 3 | [Frequency of commits](https://github.com/lyonva/ScheduleBot/graphs/contributors) |
-| | Total of items in [sustainability evaluation](https://docs.google.com/forms/d/e/1FAIpQLSf0ccsVdN-nXJCHLluJ-hANZlp8rDKgprJa0oTYiLZSDxh3DA/viewform) | ??? | |
+| | Total of items in [sustainability evaluation](https://docs.google.com/forms/d/e/1FAIpQLSf0ccsVdN-nXJCHLluJ-hANZlp8rDKgprJa0oTYiLZSDxh3DA/viewform) | 128 | |
 | Q1.1 | Does your website and documentation provide a clear, high-level overview of your software? | 3 | [Readme.md](https://github.com/lyonva/ScheduleBot/blob/main/README.md), [Documentation](https://github.com/lyonva/ScheduleBot/tree/main/doc) |
 | Q1.2 | Does your website and documentation clearly describe the type of user who should use your software? | 2 | [Readme.md](https://github.com/lyonva/ScheduleBot/blob/main/README.md) |
  | Q1.3 | Do you publish case studies to show how your software has been used by yourself and others? | 0 | - |
