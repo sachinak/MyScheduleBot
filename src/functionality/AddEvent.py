@@ -29,7 +29,7 @@ async def add_event(ctx, client):
     """
 
     channel = await ctx.author.create_dm()
-    # print(ctx.author.id)
+
     def check(m):
         return m.content is not None and m.channel == channel and m.author == ctx.author
 
@@ -58,8 +58,6 @@ async def add_event(ctx, client):
             event_msg = await client.wait_for("message", check=check)
             # Strips message to just the text the user entered
             msg_content = event_msg.content
-
-        print(date_array)
 
         try:
             parse_result = parse_period(msg_content)

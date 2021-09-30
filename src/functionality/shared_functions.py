@@ -82,12 +82,12 @@ def turn_types_to_string(user_id):
         output - Formatted string of rows in event types file
     """
     output = ""
-    space = [10, 5, 5]
+    space = [12, 5, 5]
     rows = read_type_file(user_id)
     line_number = 0
     for i in rows:
         if line_number != 0:
-            output += f"{i[0]:<{space[0]}} Preferred range of {i[1]:<{space[1]}} - {i[2]:<{space[2]}}"
+            output += f"{i[0]:<{space[0]}} Preferred range of {i[1]:<{space[1]}} - {i[2]:<{space[2]}}\n"
         line_number += 1
     return output
 
