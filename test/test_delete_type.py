@@ -15,7 +15,7 @@ def test_delete_type():
     msg_content1 = "hw1"
     msg_content2= "hw3"
     assert delete_type(rows, msg_content1)== [[['hw2', '11:10 am', '12:20 pm']], 1, 1]
-    assert delete_type(rows, msg_content2)== [[['hw2', '11:10 am', '12:20 pm'], ['hw2', '11:10 am', '12:20 pm']], 1, 1]
+    assert delete_type(rows, msg_content2)== [[['hw2', '11:10 am', '12:20 pm'], ['hw2', '11:10 am', '12:20 pm']], 0, 2]
 
 
 def test_print_type():
