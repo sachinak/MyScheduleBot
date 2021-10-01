@@ -73,7 +73,7 @@ def compute_free_time(calendarDates):
 
     # two constants for the time at the start and end of the day
     start_time = time(hour=0, minute=0)
-    end_time = time(hour=23, minute=59)
+    end_time = time(hour=23, minute=58)
 
     # constant = 1 minute in time
     one_min = timedelta(hours=0, minutes=1)
