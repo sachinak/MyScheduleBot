@@ -50,4 +50,4 @@ def test_EventsEndsAtMidNight():
     a.append(Event('',datetime(t.year, t.month,t.day , 0 , 0),datetime(t.year, t.month,t.day , 2 , 0) ,'','' ))
     o = compute_free_time(a)
     ex = 'Free time from 02:01:00 until 13:59:00\nFree time from 16:01:00 until 16:59:00'
-    assert o.strip() == ex.strip()()
+    assert o.strip() == ex.strip()
