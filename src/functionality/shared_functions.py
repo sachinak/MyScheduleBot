@@ -77,6 +77,8 @@ def read_type_file(user_id):
                 current_row.append(text)
             rows.append(current_row)
             current_row = []
+
+    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv")
     return rows
 
 
@@ -171,8 +173,10 @@ def read_event_file(user_id):
         for row in calendar_lines:
             if len(row) > 0:
                 rows.append(row)
-        return rows
 
+
+    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
+    return rows
 
 def add_event_to_file(user_id, current):
     """
