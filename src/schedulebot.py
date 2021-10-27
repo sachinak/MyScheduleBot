@@ -11,6 +11,7 @@ from functionality.create_event_type import create_event_type
 from functionality.FindAvailableTime import find_avaialbleTime
 from functionality.delete_event_type import delete_event_type
 from functionality.DisplayFreeTime import get_free_time
+from functionality.export_file import export_file
 
 bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
@@ -139,6 +140,20 @@ async def day(ctx):
     """
     await get_highlight(ctx)
 
+@bot.event
+async def exportfile(ctx):
+    """
+    Function:
+        exportfile
+    Description:
+        Sends the user a CSV file containing their scheduled events.
+    Input:
+        ctx - Discord context window
+    Output:
+        - A CSV file sent to the context that contains a user's scheduled events.
+    """
+
+    await export_file(ctx)
 
 # creating new event type
 @bot.command()
