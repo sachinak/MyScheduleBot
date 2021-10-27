@@ -11,6 +11,8 @@ from functionality.create_event_type import create_event_type
 from functionality.FindAvailableTime import find_avaialbleTime
 from functionality.delete_event_type import delete_event_type
 from functionality.DisplayFreeTime import get_free_time
+from functionality.export_file import export_file
+from functionality.import_file import import_file
 
 bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
@@ -38,6 +40,8 @@ async def help(ctx):
     em.add_field(name="day", value="Shows everything on your schedule for today", inline=False)
     em.add_field(name="typecreate", value="Creates a new event type", inline=True)
     em.add_field(name="typedelete", value="Deletes an event type", inline=True)
+    em.add_field(name="exportfile", value="Exports a CSV file of your events", inline=False)
+    em.add_field(name="importfile", value="Import events from a CSV file", inline=False)
     await ctx.send(embed=em)
 
 
@@ -138,6 +142,35 @@ async def day(ctx):
     """
     await get_highlight(ctx)
 
+@bot.command()
+async def exportfile(ctx):
+    """
+    Function:
+        exportfile
+    Description:
+        Sends the user a CSV file containing their scheduled events.
+    Input:
+        ctx - Discord context window
+    Output:
+        - A CSV file sent to the context that contains a user's scheduled events.
+    """
+
+    await export_file(ctx)
+
+@bot.command()
+async def importfile(ctx):
+    """
+    Function:
+        importfile
+    Description:
+        Reads a CSV file containing events submitted by the user, and adds those events
+    Input:
+        ctx - Discord context window
+    Output:
+        - Events are added to a users profile.
+    """
+
+    await import_file(ctx, bot)
 
 # creating new event type
 @bot.command()
