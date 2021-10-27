@@ -56,7 +56,7 @@ async def on_ready():
     """
     # Outputs bot name to console once bot is started
     print("We have logged in as {0.user}".format(bot))
-    channel = bot.get_channel(884864860859531347)  # Gets the channel ID of the "schedule-manager channel"
+    channel = bot.get_channel(903033043365822495)  # Gets the channel ID of the "schedule-manager channel"
     # msg = await channel.send(
     #     "Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n"
     #     + "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!"
@@ -179,7 +179,7 @@ async def freetime(ctx):
 
 # Runs the bot (local machine)
 if __name__ == "__main__":
-    from config import TOKEN
+    TOKEN = "OTAzMDM0MjAyNjU0NjY2Nzky.YXnGIw.atCr2_eCuqF2f5B2Yj-GxxBvMxY"
 
     bot.run(TOKEN)
 
