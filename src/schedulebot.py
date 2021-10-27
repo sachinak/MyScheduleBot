@@ -12,6 +12,7 @@ from functionality.FindAvailableTime import find_avaialbleTime
 from functionality.delete_event_type import delete_event_type
 from functionality.DisplayFreeTime import get_free_time
 from functionality.export_file import export_file
+from functionality.import_file import import_file
 
 bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
@@ -155,6 +156,21 @@ async def exportfile(ctx):
     """
 
     await export_file(ctx)
+
+@bot.command()
+async def importfile(ctx):
+    """
+    Function:
+        importfile
+    Description:
+        Reads a CSV file containing events submitted by the user, and adds those events
+    Input:
+        ctx - Discord context window
+    Output:
+        - Events are added to a users profile.
+    """
+
+    await import_file(ctx, bot)
 
 # creating new event type
 @bot.command()
