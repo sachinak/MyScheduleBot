@@ -1,20 +1,22 @@
 import os
 import csv
 import discord
-from functionality.shared_functions import create_event_file
+import pandas as pd
+from functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, turn_types_to_string
+from Event import Event
 
 
-async def export_file(ctx):
+async def import_file(ctx, client):
     channel = await ctx.author.create_dm()
-    print(ctx.author.id)
 
     def check(m):
-        return m.content is not None and m.channel == channel and m.author == ctx.author
+        return len(m.attachments) == 1 and m.channel == channel and m.author == ctx.author
 
     user_id = str(ctx.author.id)
 
     # Checks if the calendar csv file exists, and creates it if it does not
-    if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv"):
-        create_event_file(user_id)
+    await channel.send("Please provide your file below:")
+    event_msg = await client.wait_for("message", check=check)
 
-    await channel.send(file=discord.File(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv"))
+    print(event_msg.attachments[0])
+
