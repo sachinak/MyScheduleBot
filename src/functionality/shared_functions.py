@@ -1,7 +1,7 @@
 import os
 import csv
 from pathlib import Path
-from Event import Event
+from src.Event import Event
 from datetime import datetime
 
 
@@ -147,7 +147,6 @@ def read_event_file(user_id):
     with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv", "r") as calendar_lines:
         calendar_lines = csv.reader(calendar_lines, delimiter=",")
         rows = []
-
         # Stores the current row in an array of rows if the row is not a new-line character
         # This check prevents an accidental empty lines from being kept in the updated file
         for row in calendar_lines:
@@ -168,9 +167,8 @@ def add_event_to_file(user_id, current):
     line_number = 0
     rows = read_event_file(user_id)
     # If the file already has events
-    if len(rows) > 0:
+    if len(rows) > 1:
         for i in rows:
-
             # Skips check with empty lines
             if len(i) > 0 and line_number != 0:
 
@@ -182,7 +180,6 @@ def add_event_to_file(user_id, current):
                     "",
                     "",
                 )
-
                 # If the current Event occurs before the temp Event, insert the current at that position
                 if current < temp_event:
                     rows.insert(line_number, [""] + current.to_list())
@@ -193,22 +190,15 @@ def add_event_to_file(user_id, current):
                     rows.insert(len(rows), [""] + current.to_list())
                     break
             line_number += 1
-
-        # Open current user's calendar file for writing
-        with open(
-            os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv",
-            "w",
-            newline="",
-        ) as calendar_file:
-            # Write to column headers and array of rows back to the calendar file
-            csvwriter = csv.writer(calendar_file)
-            csvwriter.writerows(rows)
-    # If the file has no events, add the current Event to the file
     else:
-        with open(
-            os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv",
-            "w",
-            newline="",
-        ) as calendar_file:
-            csvwriter = csv.writer(calendar_file)
-            csvwriter.writerow([""] + current.to_list())
+        rows.insert(len(rows), [""] + current.to_list())
+    # Open current user's calendar file for writing
+    with open(
+        os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv",
+        "w",
+        newline="",
+    ) as calendar_file:
+        # Write to column headers and array of rows back to the calendar file
+        csvwriter = csv.writer(calendar_file)
+        csvwriter.writerows(rows)
+

@@ -162,7 +162,7 @@ async def create_event_type(ctx, client,event_msg):
                             rows.append(line)
                             continue
                         else:
-                            await channel.send("Inalid input, Time range is not changed.")
+                            await channel.send("Invalid input, Time range is not changed.")
                             rows.append(line)
                             continue
                     else:
