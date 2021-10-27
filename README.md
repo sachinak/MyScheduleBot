@@ -4,13 +4,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://zenodo.org/badge/419116957.svg)](https://zenodo.org/badge/latestdoi/419116957)
 [![Build Status](https://app.travis-ci.com/qchen59/ScheduleBot.svg?branch=main)](https://app.travis-ci.com/github/qchen59/ScheduleBot)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/lyonva/ScheduleBot)
-[![GitHub issues](https://img.shields.io/github/issues/lyonva/ScheduleBot)](https://github.com/lyonva/ScheduleBot/issues)
-[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/lyonva/ScheduleBot?include_prereleases)](https://github.com/lyonva/ScheduleBot/releases)
-[![GitHub all releases](https://img.shields.io/github/downloads/lyonva/ScheduleBot/total)](https://github.com/lyonva/ScheduleBot/releases)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/qchen59/ScheduleBot)
+[![GitHub issues](https://img.shields.io/github/issues/qchen59/ScheduleBot)](https://github.com/qchen59/ScheduleBot/issues)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/qchen59/ScheduleBot?include_prereleases)](https://github.com/qchen59/ScheduleBot/releases)
+[![GitHub all releases](https://img.shields.io/github/downloads/qchen59/ScheduleBot/total)](https://github.com/qchen59/ScheduleBot/releases)
 [![Platform](https://img.shields.io/badge/platform-discord-blue)](https://discord.com/)
-[![Test cases](https://github.com/lyonva/ScheduleBot/actions/workflows/python-app.yml/badge.svg)](https://github.com/lyonva/ScheduleBot/actions/workflows/python-app.yml)
-[![Code coverage](https://raw.githubusercontent.com/lyonva/ScheduleBot/main/docs/img/coverage.svg)](https://github.com/lyonva/ScheduleBot/actions/workflows/python-app.yml)
+[![Coverage Status](https://coveralls.io/repos/github/qchen59/ScheduleBot/badge.svg?branch=main)](https://coveralls.io/github/qchen59/ScheduleBot?branch=main)
 
 # ScheduleBot
 
@@ -71,7 +70,8 @@ The bot will ask you for the name of the type and your preferred times.
 
 ## Releases
 
--   [All releases](https://github.com/lyonva/ScheduleBot/releases)
+-   [All releases](https://github.com/
+/ScheduleBot/releases)
 -   Latest: [v0](https://github.com/lyonva/ScheduleBot/releases/tag/v0)
 
 ## Documentation
