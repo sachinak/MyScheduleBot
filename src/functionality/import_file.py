@@ -32,6 +32,35 @@ def verify_csv(data):
 
     return True
 
+def convert_time(old_str):
+    """
+    Function:
+        convert_time
+    Description:
+        Converts a time string from YYYY-MM-DD HH:MM:SS format to mm/dd/yy hh:mm am/pm format
+    Input:
+        old_str - The string to be converted
+    Output:
+        - the converted string
+    """
+
+    new_str = old_str[5:7] + '/' + old_str[8:10] + '/' + old_str[2:4] + ' '
+
+    hour_int = int(old_str[11:13])
+    if (hour_int >= 12):
+        ap = "pm"
+        hour_int = hour_int - 12
+    else:
+        ap = "am"
+
+    hour = str(hour_int)
+    if len(hour) == 1:
+        hour = '0' + hour
+
+    new_str = new_str + hour + ':' + old_str[14:16] + ap
+
+    return new_str
+
 async def import_file(ctx, client):
     channel = await ctx.author.create_dm()
 
