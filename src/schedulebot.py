@@ -140,7 +140,7 @@ async def day(ctx):
     """
     await get_highlight(ctx)
 
-@bot.event
+@bot.command()
 async def exportfile(ctx):
     """
     Function:
