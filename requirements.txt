@@ -1,8 +1,9 @@
-discord
+discord~=1.7.3
 discord-pretty-help
 pytest>=3.9
 pytest-cov
 coverage>=5.0.1
 coverage-badge
-lark
+lark~=0.11.3
 pdoc3
+cryptography~=35.0.0
