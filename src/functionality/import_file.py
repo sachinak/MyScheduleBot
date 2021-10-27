@@ -2,8 +2,11 @@ import os
 import csv
 import discord
 import pandas as pd
+import tempfile
+from discord import Attachment
 from functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, turn_types_to_string
 from Event import Event
+from parse.match import parse_period
 
 def verify_csv(data):
     """
@@ -65,13 +68,38 @@ async def import_file(ctx, client):
     channel = await ctx.author.create_dm()
 
     def check(m):
-        return len(m.attachments) == 1 and m.channel == channel and m.author == ctx.author
+        return m.content is not None and m.channel == channel and m.author == ctx.author
 
     user_id = str(ctx.author.id)
 
     # Checks if the calendar csv file exists, and creates it if it does not
-    await channel.send("Please provide your file below:")
-    event_msg = await client.wait_for("message", check=check)
+    await channel.send("Please upload your file below.")
 
-    print(event_msg.attachments[0])
+    # Loops until we receive a file.
+    while True:
+        event_msg = await client.wait_for("message", check=check)
+
+        if len(event_msg.attachments) != 1:
+            await channel.send("No file detected. Please upload your your file below.\nYou can do this by dropping "
+                               "the file directly into Discord. Do not write out the file contents in the message.")
+        else:
+            break
+
+    temp_file = tempfile.TemporaryFile()
+    await event_msg.attachments[0].save(fp=temp_file.file, seek_begin=True, use_cached=False)
+    data = pd.read_csv(temp_file)
+
+    if not verify_csv(data):
+        await channel.send("Unexpected CSV Format. Import has failed.")
+        return
+
+    # creates an event tree if one doesn't exist yet.
+    create_event_tree(str(ctx.author.id))
+
+    for index, row in data.iterrows():
+        time_period = parse_period(convert_time(row['Start Date']) + ' ' + convert_time(row['End Date']))
+        current = Event(row['Name'], time_period[0], time_period[1], row['Type'], row['Notes'])
+        add_event_to_file(str(ctx.author.id), current)
+
+    await channel.send("Your events were successfully added!")
 
