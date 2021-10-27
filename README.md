@@ -3,6 +3,7 @@
 ![Python v3.9](https://img.shields.io/badge/python-v3.9-blue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://zenodo.org/badge/419116957.svg)](https://zenodo.org/badge/latestdoi/419116957)
+[![Build Status](https://app.travis-ci.com/qchen59/ScheduleBot.svg?branch=main)](https://app.travis-ci.com/github/qchen59/ScheduleBot)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/lyonva/ScheduleBot)
 [![GitHub issues](https://img.shields.io/github/issues/lyonva/ScheduleBot)](https://github.com/lyonva/ScheduleBot/issues)
 [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/lyonva/ScheduleBot?include_prereleases)](https://github.com/lyonva/ScheduleBot/releases)
