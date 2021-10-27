@@ -1,6 +1,6 @@
 import os
 import csv
-from shared_functions import create_event_file
+from functionality.shared_functions import create_event_file
 
 
 async def export_file(ctx, client):
