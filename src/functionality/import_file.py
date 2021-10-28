@@ -42,7 +42,7 @@ def convert_time(old_str):
     Function:
         convert_time
     Description:
-        Converts a time string from YYYY-MM-DD HH:MM:SS format to mm/dd/yy hh:mm am/pm format
+        Converts a time string from the YYYY-MM-DD HH:MM:SS format to the mm/dd/yy hh:mm am/pm format
     Input:
         old_str - The string to be converted
     Output:
@@ -53,16 +53,16 @@ def convert_time(old_str):
 
     hour_int = int(old_str[11:13])
     if hour_int >= 12:
-        ap = "pm"
+        am_or_pm = "pm"
         hour_int = hour_int - 12
     else:
-        ap = "am"
+        am_or_pm = "am"
 
     hour = str(hour_int)
     if len(hour) == 1:
         hour = '0' + hour
 
-    new_str = new_str + hour + ':' + old_str[14:16] + ap
+    new_str = new_str + hour + ':' + old_str[14:16] + am_or_pm
 
     return new_str
 
