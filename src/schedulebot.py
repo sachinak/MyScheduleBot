@@ -142,6 +142,7 @@ async def day(ctx):
     """
     await get_highlight(ctx)
 
+
 @bot.command()
 async def exportfile(ctx):
     """
@@ -156,6 +157,7 @@ async def exportfile(ctx):
     """
 
     await export_file(ctx)
+
 
 @bot.command()
 async def importfile(ctx):
@@ -172,11 +174,12 @@ async def importfile(ctx):
 
     await import_file(ctx, bot)
 
+
 # creating new event type
 @bot.command()
 async def typecreate(ctx):
-
     channel = await ctx.author.create_dm()
+
     # print(ctx.author.id)
     def check(m):
         return m.content is not None and m.channel == channel and m.author == ctx.author
@@ -194,19 +197,17 @@ async def typedelete(ctx):
     await delete_event_type(ctx, bot)
 
 
-"""
-Function: get_free_time
-Description: giving the user the free time today according to the registered events
-Input:
-    ctx - Discord context window
-    bot - Discord bot user
-Output:
-    - A message sent to the user channel stating every free time slot that is avaliable today
-"""
-
-# showing the free time that the user has today
 @bot.command()
 async def freetime(ctx):
+    """
+    Function: freetime
+    Description: shows the user their free time today according to the registered events
+    Input:
+        ctx - Discord context window
+        bot - Discord bot user
+    Output:
+        - A message sent to the user channel stating every free time slot that is available today
+    """
     await get_free_time(ctx, bot)
 
 

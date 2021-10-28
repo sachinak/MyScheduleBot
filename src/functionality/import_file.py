@@ -68,6 +68,17 @@ def convert_time(old_str):
 
 
 async def import_file(ctx, client):
+    """
+    Function:
+        importfile
+    Description:
+        Reads a CSV file containing events submitted by the user, and adds those events
+    Input:
+        ctx - Discord context window
+        client - The Discord chat bot
+    Output:
+        - Events are added to a users profile.
+    """
     channel = await ctx.author.create_dm()
 
     def check(m):
