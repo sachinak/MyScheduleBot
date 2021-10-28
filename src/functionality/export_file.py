@@ -17,12 +17,9 @@ async def export_file(ctx):
     Output:
         - A CSV file sent to the context that contains a user's scheduled events.
     """
-    
+
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
-
-    def check(m):
-        return m.content is not None and m.channel == channel and m.author == ctx.author
 
     user_id = str(ctx.author.id)
 
