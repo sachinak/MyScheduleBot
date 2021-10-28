@@ -86,7 +86,10 @@ async def import_file(ctx, client):
             break
 
     temp_file = tempfile.TemporaryFile()
-    await event_msg.attachments[0].save(fp=temp_file.file, seek_begin=True, use_cached=False)
+
+
+    await event_msg.attachments[0].save(fp=temp_file, seek_begin=True, use_cached=False)
+
     data = pd.read_csv(temp_file)
 
     if not verify_csv(data):
