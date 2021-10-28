@@ -8,6 +8,7 @@ from functionality.shared_functions import create_event_tree, create_type_tree, 
 from Event import Event
 from parse.match import parse_period
 
+
 def verify_csv(data):
     """
     Function:
@@ -35,6 +36,7 @@ def verify_csv(data):
 
     return True
 
+
 def convert_time(old_str):
     """
     Function:
@@ -50,7 +52,7 @@ def convert_time(old_str):
     new_str = old_str[5:7] + '/' + old_str[8:10] + '/' + old_str[2:4] + ' '
 
     hour_int = int(old_str[11:13])
-    if (hour_int >= 12):
+    if hour_int >= 12:
         ap = "pm"
         hour_int = hour_int - 12
     else:
@@ -63,6 +65,7 @@ def convert_time(old_str):
     new_str = new_str + hour + ':' + old_str[14:16] + ap
 
     return new_str
+
 
 async def import_file(ctx, client):
     channel = await ctx.author.create_dm()
@@ -80,13 +83,12 @@ async def import_file(ctx, client):
         event_msg = await client.wait_for("message", check=check)
 
         if len(event_msg.attachments) != 1:
-            await channel.send("No file detected. Please upload your your file below.\nYou can do this by dropping "
-                               "the file directly into Discord. Do not write out the file contents in the message.")
+            await channel.send("No file detected. Please upload your file below.\nYou can do this by dropping "
+                               "the file directly into Discord. Do not write out the file contents in a message.")
         else:
             break
 
     temp_file = tempfile.TemporaryFile()
-
 
     await event_msg.attachments[0].save(fp=temp_file, seek_begin=True, use_cached=False)
 
@@ -105,4 +107,3 @@ async def import_file(ctx, client):
         add_event_to_file(str(ctx.author.id), current)
 
     await channel.send("Your events were successfully added!")
-
