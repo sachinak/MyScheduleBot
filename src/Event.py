@@ -1,5 +1,4 @@
 class Event:
-    
 
     def __init__(self, name, start_date, end_date, event_type, description):
         """
@@ -22,8 +21,6 @@ class Event:
         self.end_date = end_date
         self.event_type = event_type
         self.description = description
-
-    
 
     def __str__(self):
         """
@@ -49,8 +46,6 @@ class Event:
         )
         return output
 
-    
-
     def __lt__(self, other):
         """
         Function:
@@ -65,8 +60,6 @@ class Event:
             False - self starts after other
         """
         return self.start_date < other.start_date
-
-    
 
     def __le__(self, other):
         """
@@ -113,8 +106,6 @@ class Event:
         """
         return self.start_date >= other.start_date
 
-    
-
     def intersect(self, other):
         """
         Function:
@@ -135,8 +126,6 @@ class Event:
         return (self.start_date <= other.start_date <= self.end_date) or (
             other.start_date <= self.start_date <= other.end_date
         )
-
-    
 
     def to_list(self):
         """
