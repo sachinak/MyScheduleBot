@@ -12,7 +12,7 @@ def create_type_directory():
     Input: None
     Output: Creates Type folder if it doesn't exist
     """
-    #
+
     if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot/Type")):
         Path(os.path.expanduser("~/Documents/ScheduleBot/Type")).mkdir(parents=True, exist_ok=True)
 
@@ -33,9 +33,8 @@ def create_type_file(user_id):
         ) as new_file:
             csvwriter = csv.writer(new_file, delimiter=",")
             csvwriter.writerow(["Event Type", "Start time", "End time"])
-
-    key = check_key(user_id)
-    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv")
+        key = check_key(user_id)
+        encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv")
 
 
 def create_type_tree(user_id):
