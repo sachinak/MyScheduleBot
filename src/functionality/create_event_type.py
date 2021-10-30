@@ -2,11 +2,11 @@ import re
 import os
 import csv
 from datetime import datetime
-from pathlib import Path
 from types import TracebackType
 from event_type import event_type
 from functionality.shared_functions import create_type_directory, create_type_file
 from functionality.shared_functions import load_key, decrypt_file, encrypt_file
+
 
 async def create_event_type(ctx, client,event_msg):
     
