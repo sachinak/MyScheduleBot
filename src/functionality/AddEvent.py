@@ -2,6 +2,7 @@ from functionality.shared_functions import create_event_tree, create_type_tree, 
 from types import TracebackType
 from Event import Event
 from parse.match import parse_period
+from functionality.create_event_type import create_event_type
 
 
 def check_complete(start, start_date, end, end_date, array):
@@ -92,6 +93,7 @@ async def add_event(ctx, client):
     )
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
+    await create_event_type(ctx, client, event_msg)  # Running event_type creation subroutine
     event_array.append(event_msg)
     await channel.send("Any additional description you want me to add about the event? If not, enter 'done'")
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
