@@ -6,7 +6,7 @@ from pathlib import Path
 from types import TracebackType
 from event_type import event_type
 from functionality.shared_functions import create_type_directory, create_type_file
-
+from functionality.shared_functions import load_key, decrypt_file, encrypt_file
 
 async def create_event_type(ctx, client,event_msg):
     
@@ -125,6 +125,9 @@ async def create_event_type(ctx, client,event_msg):
 
         # Checks if the calendar csv file exists, and creates it if it doesn't
         create_type_file(str(ctx.author.id))
+
+        key = load_key(str(ctx.author.id))
+        decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv")
     
         # Opens the current user's csv calendar file
         with open(
@@ -178,18 +181,21 @@ async def create_event_type(ctx, client,event_msg):
             
 
 
-             # Open current user's calendar file for writing
-            with open(
-                os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv", "w", newline=""
-            ) as calendar_file:
-                # Write to column headers and array of rows back to the calendar file
-                csvwriter = csv.writer(calendar_file)
-                csvwriter.writerow(fields)
-                if line_number > 1:
-                    csvwriter.writerows(rows)
-                elif line_number==1:
-                    csvwriter.writerow(rows[0])
-            
+         # Open current user's calendar file for writing
+        with open(
+                    os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv", "w", newline=""
+                ) as calendar_file:
+            # Write to column headers and array of rows back to the calendar file
+            csvwriter = csv.writer(calendar_file)
+            csvwriter.writerow(fields)
+            if line_number > 1:
+                csvwriter.writerows(rows)
+            elif line_number==1:
+                csvwriter.writerow(rows[0])
+
+        key = load_key(str(ctx.author.id))
+        encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv")
+
         return True
             
     except Exception as e:
