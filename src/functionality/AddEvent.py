@@ -85,18 +85,33 @@ async def add_event(ctx, client):
             )
             date_array = []
             msg_content = ""
-    await channel.send(
-        "How important is this event? Enter a number between 1-5.\n\n" +
-        "5 - Highest priority.\n" +
-        "4 - High priority.\n" +
-        "3 - Medium priority.\n" +
-        "2 - Low priority.\n" +
-        "1 - Lowest priority.\n"
-    )
 
-    event_msg = await client.wait_for("message", check=check)  # Waits for user input
-    event_msg = event_msg.content  # Strips message to just the text the user entered
-    event_array.append(event_msg)
+    # A loop to error check when user enters priority value
+    event_priority_set = False
+    while not event_priority_set:
+        await channel.send(
+            "How important is this event? Enter a number between 1-5.\n\n" +
+            "5 - Highest priority.\n" +
+            "4 - High priority.\n" +
+            "3 - Medium priority.\n" +
+            "2 - Low priority.\n" +
+            "1 - Lowest priority.\n"
+        )
+
+        event_msg = await client.wait_for("message", check=check)  # Waits for user input
+        event_msg = event_msg.content  # Strips message to just the text the user entered
+
+        try:
+            if 1 <= int(event_msg) <= 5:
+                event_array.append(event_msg)
+                event_priority_set = True    # if entered value is in the range, loop exits
+            else:
+                await channel.send(
+                    "Please enter a number between 1-5\n")
+        except:
+            await channel.send(
+                "Please enter a number between 1-5\n")   # Handles when user enters non numeric entries
+            continue
 
     create_type_tree(str(ctx.author.id))
     output = turn_types_to_string(str(ctx.author.id))
