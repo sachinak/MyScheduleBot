@@ -1,7 +1,7 @@
 import os
 import csv
 import discord
-from functionality.shared_functions import create_event_file
+from functionality.shared_functions import create_event_file, create_event_directory
 
 from src.functionality.shared_functions import load_key, decrypt_file, encrypt_file
 
@@ -25,6 +25,7 @@ async def export_file(ctx):
 
     # Checks if the calendar csv file exists, and creates it if it does not
     if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv"):
+        create_event_directory()
         create_event_file(user_id)
 
     key = load_key(user_id)
