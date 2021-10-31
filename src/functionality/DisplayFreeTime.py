@@ -4,6 +4,7 @@ import os
 import csv
 from datetime import timedelta
 from datetime import time
+from functionality.export_file import load_key, encrypt_file, decrypt_file
 
 
 async def get_free_time(ctx, bot):
@@ -19,17 +20,21 @@ async def get_free_time(ctx, bot):
         - A message sent to the user channel stating every free time slot that is avaliable today 
     """
     channel = await ctx.author.create_dm()
-    
+
     # check if the user has a completely empty schedule
-    if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(ctx.author.id) + ".csv"):
+    if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + str(ctx.author.id) + ".csv"):
         await channel.send('You do not have any event at all')
         return
 
     rows = []
 
+    # decrypting the file
+    key = load_key(str(ctx.author.id))
+    decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + str(ctx.author.id) + ".csv")
+
     # open the calendar file and read the events
     with open(
-            os.path.expanduser("~/Documents") + "/ScheduleBot/" + str(ctx.author.id) + ".csv", "r"
+            os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + str(ctx.author.id) + ".csv", "r"
         ) as calendar_lines:
             calendar_lines = csv.reader(calendar_lines, delimiter=",")
     
@@ -49,9 +54,11 @@ async def get_free_time(ctx, bot):
                 datetime.strptime(i[3], "%Y-%m-%d %H:%M:%S"),
                 "",
                 "",
+                "",
             )
             calendarDates.append(temp_event)
     output = compute_free_time(calendarDates)
+    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + str(ctx.author.id) + ".csv")
     await channel.send(output)
 
 
