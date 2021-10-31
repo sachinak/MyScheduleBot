@@ -5,6 +5,7 @@ from src.Event import Event
 from datetime import datetime
 from cryptography.fernet import Fernet
 
+
 def create_type_directory():
     """
     Function: create_type_directory
@@ -128,7 +129,7 @@ def create_event_file(user_id):
             newline="",
         ) as new_file:
             csvwriter = csv.writer(new_file, delimiter=",")
-            csvwriter.writerow(["ID", "Name", "Start Date", "End Date", "Type", "Notes"])
+            csvwriter.writerow(["ID", "Name", "Start Date", "End Date", "Priority", "Type", "Notes"])
 
         key = check_key(user_id)
         encrypt_file(key , os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
