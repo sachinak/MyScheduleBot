@@ -101,7 +101,15 @@ def compute_free_time(calendarDates):
     # check if the user has no event for today
 
     if len(today_events) == 0:
-        return ('You do not have any event for today')
+        return 'You do not have any event for today'
+    # checks if the user only has one event for today and it starts at 00:00
+    elif len(today_events) == 1 and today_events[0].start_date.time() == start_time:
+        free_time_start = (today_events[0].end_date + one_min).time()
+        return 'Free time from ' + str(free_time_start) + ' until end of the day\n'
+    # Cases where the event doesn't start at 00:00
+    elif len(today_events) == 1:
+        return 'Free time from 00:00 until ' + str((today_events[0].start_date - one_min).time()) + ' and from ' +\
+               str((today_events[0].end_date + one_min).time()) + ' until end of the day\n'
 
     # sorting today's events
     today_events.sort()
