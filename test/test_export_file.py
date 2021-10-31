@@ -47,9 +47,4 @@ async def test_export_file(bot, client):
     channel = guild.text_channels[0]
     message = await channel.send("!exportfile")
 
-    assert len(bot.private_channels) == 0
-
-    thread = threading.Thread(target=export_file, args=(message, bot), daemon=True)
-    thread.start()
-
-    time.sleep(.5)
+    await export_file(message)
