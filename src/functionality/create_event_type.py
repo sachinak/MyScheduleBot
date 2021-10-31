@@ -25,7 +25,7 @@ async def create_event_type(ctx, client, event_msg):
         
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
-    
+
     def check(m):
         return m.content is not None and m.channel == channel and m.author == ctx.author
 
