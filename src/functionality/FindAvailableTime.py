@@ -2,8 +2,33 @@ import os
 import csv
 import re
 from Event import Event
+from discord.ext.commands import bot
+from functionality.highlights import convert_to_12
 from functionality.create_event_type import create_event_type
-from functionality.export_file import load_key, encrypt_file, decrypt_file
+
+
+
+
+def readfile(ctx):
+    """
+    Function:
+        readfile
+    Description:
+        fetches the event_types file contents
+    Input:
+        ctx - Discord context window
+    Output:
+        - A csv_reader with the content of user's event_types
+    """
+        # Open the calendar file for user
+    with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv", "r") as event_file:
+        # Read the calendar file
+        csv_reader = csv.reader(event_file, delimiter=',')
+        # First line is just the headers
+        fields = next(csv_reader)
+
+    return  csv_reader 
+
 
 
 async def find_avaialbleTime(ctx, client):
@@ -21,7 +46,6 @@ async def find_avaialbleTime(ctx, client):
     """
     channel = await ctx.author.create_dm()
     # print(ctx.author.id)
-
     def check(m):
         return m.content is not None and m.channel == channel and m.author == ctx.author
 
@@ -31,53 +55,41 @@ async def find_avaialbleTime(ctx, client):
 
     try:
 
-        key = load_key(str(ctx.author.id))
-        decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv")
-
-        # Open the calendar file for user
-        with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv", "r") as event_file:
-        # Read the calendar file
-            csv_reader = csv.reader(event_file, delimiter=',')
+        csv_reader = readfile(ctx)
         # For every row in calendar file
-            flag = False
-            for row in csv_reader:
-                # Get event details
-                if row[0] == event:
-                    flag = True
-                    await channel.send("You have a time range from "+row[1]+' to '+row[2]+' for events of type '+row[0])
-                    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv")
-                    break
+        flag = False
+        for row in csv_reader:
+        # Get event details
+            if row[0] == event.event_type:
+                flag = True                    
+                await channel.send("You have a time range from "+row[1]+' to '+row[2]+' for events of type '+row[0])
+                break
 
-        encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv")
         event_created = False
         if flag == False:
-            await channel.send("Looks like you currently don't have this event type." +
-                               "Would you like to specify a time range for it (y/n)\n")
+            await channel.send("Looks like you don't have this event type present in your current file."
+            + "Would you like to specify the time range for this event type?\n"
+            + "Press y/n")
             event_msg1 = await client.wait_for("message", check=check)  # Waits for user input
             event_msg1 = event_msg1.content  # Strips message to just the text the user entered
             if event_msg1 == 'y':
-                event_created = await create_event_type(ctx, client, event)
-            elif event_msg1 == 'n':
-                await channel.send("Event type creation is canceled")
+                event_created = await create_event_type(ctx,client,event)
 
-            if event_created:
-                decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv")
-                with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv", "r") as event_file:
-                    # Read the calendar file
-                    csv_reader = csv.reader(event_file, delimiter=',')
+            if event_created == True:
+                csv_reader = readfile(ctx)
 
-                    for row in csv_reader:
-                        # Get event details
-                        if row[0] == event:
-                            flag = True
-                            await channel.send("You have a time range from " + row[1] + ' to ' + row[2] + ' for events of type ' + row[0])
-                            encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv")
-                            break
-
-        # matchedrows = getEventsOnDate(ctx,event.start_date)
+        if event_created == True:
+            for row in csv_reader:
+            # Get event details
+                if row[0] == event:
+                    flag = True                    
+                    await channel.send("You have a time range from "+row[1]+' to '+row[2]+' for events of type '+row[0])
+                    break
+                
+        #matchedrows = getEventsOnDate(ctx,event.start_date)
 
     except FileNotFoundError as err:
-        await channel.send("Looks like I cannot find your event types. Try adding event types using the '!typecreate' command!")
+        await channel.send("Looks like I cannot find your event types. Try adding event types using the '!event' command!")
 
 
 def getEventsOnDate(ctx,yourdate):
@@ -103,10 +115,10 @@ def getEventsOnDate(ctx,yourdate):
                 temp=re.split("\s", line[2])
                 if str(temp[0]).__contains__(str(stdate)):
                     rows.append(line)
-
+        
         Events = []
         for l in line:
             eve = Event(line[0], line[1], line[2], line[3], line[4])
             Events.append(eve)
-
+        
         return Events

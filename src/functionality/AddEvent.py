@@ -2,7 +2,6 @@ from functionality.shared_functions import create_event_tree, create_type_tree, 
 from types import TracebackType
 from Event import Event
 from parse.match import parse_period
-from functionality.create_event_type import create_event_type
 
 
 def check_complete(start, start_date, end, end_date, array):
@@ -86,33 +85,6 @@ async def add_event(ctx, client):
             date_array = []
             msg_content = ""
 
-    # A loop to error check when user enters priority value
-    event_priority_set = False
-    while not event_priority_set:
-        await channel.send(
-            "How important is this event? Enter a number between 1-5.\n\n" +
-            "5 - Highest priority.\n" +
-            "4 - High priority.\n" +
-            "3 - Medium priority.\n" +
-            "2 - Low priority.\n" +
-            "1 - Lowest priority.\n"
-        )
-
-        event_msg = await client.wait_for("message", check=check)  # Waits for user input
-        event_msg = event_msg.content  # Strips message to just the text the user entered
-
-        try:
-            if 1 <= int(event_msg) <= 5:
-                event_array.append(event_msg)
-                event_priority_set = True    # if entered value is in the range, loop exits
-            else:
-                await channel.send(
-                    "Please enter a number between 1-5\n")
-        except:
-            await channel.send(
-                "Please enter a number between 1-5\n")   # Handles when user enters non numeric entries
-            continue
-
     create_type_tree(str(ctx.author.id))
     output = turn_types_to_string(str(ctx.author.id))
     await channel.send(
@@ -120,7 +92,6 @@ async def add_event(ctx, client):
     )
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
-    await create_event_type(ctx, client, event_msg)  # Running event_type creation subroutine
     event_array.append(event_msg)
     await channel.send("Any additional description you want me to add about the event? If not, enter 'done'")
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
@@ -132,7 +103,7 @@ async def add_event(ctx, client):
 
     # Tries to create an Event object from the user input
     try:
-        current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4], event_array[5])
+        current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4])
         await channel.send("Your event was successfully created!")
         create_event_tree(str(ctx.author.id))
         add_event_to_file(str(ctx.author.id), current)
