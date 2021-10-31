@@ -11,6 +11,7 @@ class Event:
             name - String name of the event
             start_date - datetime object representing the start of an event
             end_date - datetime object representing the end of an event
+            priority - priority value of an event
             event_type - String representing the type of event
             description - Optional text field that contains any additional notes about an event (can be blank)
         Output:
