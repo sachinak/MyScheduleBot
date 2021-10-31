@@ -3,7 +3,6 @@
 import sys, os
 import asyncio
 import discord
-import discord.ext.test as dpytest
 import discord.ext.commands as commands
 import discord.ext.test as test
 import threading
@@ -15,6 +14,7 @@ import pytest
 from datetime import datetime
 
 from functionality.AddEvent import check_complete, add_event  # type: ignore
+
 
 @pytest.fixture
 def client(event_loop):
@@ -42,15 +42,24 @@ def bot(request, event_loop):
     test.configure(b)
     return b
 
+
 @pytest.mark.asyncio
 async def test_add_event(bot, client):
     guild = bot.guilds[0]
     channel = guild.text_channels[0]
     message = await channel.send("!addevent")
 
+    def check_msg(msg): assert message.content.startswith("Lets add an")
+
+    bot.on_message = check_msg
+
     assert len(bot.private_channels) == 0
 
-    add_event(message, bot)
+    thread = threading.Thread(target=add_event, args=(message, bot), daemon=True)
+    thread.start()
+
+    time.sleep(.5)
+
 
 def check_variables1():
     output = {
