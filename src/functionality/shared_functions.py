@@ -201,6 +201,7 @@ def add_event_to_file(user_id, current):
                     datetime.strptime(i[3], "%Y-%m-%d %H:%M:%S"),
                     "",
                     "",
+                    "",
                 )
                 # If the current Event occurs before the temp Event, insert the current at that position
                 if current < temp_event:
