@@ -85,6 +85,18 @@ async def add_event(ctx, client):
             )
             date_array = []
             msg_content = ""
+    await channel.send(
+        "How important is this event? Enter a number between 1-5.\n\n" +
+        "5 - Highest priority.\n" +
+        "4 - High priority.\n" +
+        "3 - Medium priority.\n" +
+        "2 - Low priority.\n" +
+        "1 - Lowest priority.\n"
+    )
+
+    event_msg = await client.wait_for("message", check=check)  # Waits for user input
+    event_msg = event_msg.content  # Strips message to just the text the user entered
+    event_array.append(event_msg)
 
     create_type_tree(str(ctx.author.id))
     output = turn_types_to_string(str(ctx.author.id))
@@ -105,7 +117,7 @@ async def add_event(ctx, client):
 
     # Tries to create an Event object from the user input
     try:
-        current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4])
+        current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4], event_array[5])
         await channel.send("Your event was successfully created!")
         create_event_tree(str(ctx.author.id))
         add_event_to_file(str(ctx.author.id), current)
