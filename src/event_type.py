@@ -12,14 +12,14 @@ class event_type:
             name - String representing the type of event
             start_time - datetime object representing the start time of preferred time range
             end_time - datetime object representing the end time of preferred time range
+            priority - Priority value of the event (in a scale of 1-5)
         Output:
             - A new event_type object instance
         """
         self.event_name = event_name
         self.start_time = start_time
         self.end_time = end_time
-     
-    # Converts event object to a string
+
     def __str__(self):
         """
         Function:
@@ -37,6 +37,8 @@ class event_type:
             + str(self.start_time)
             + " "
             + str(self.end_time)
+            # + " "
+            # + str(self.priority)
         )
         return output
     
@@ -45,7 +47,7 @@ class event_type:
         Function:
             get_start_time
         Description:
-            Converts an start time in event_type object  into a string
+            Converts an start time in event_type object into a string
         Input:
             self - The current event_type object instance
         Output:
@@ -58,7 +60,7 @@ class event_type:
         Function:
             get_end_time
         Description:
-            Converts an end time in event_type object  into a string
+            Converts an end time in event_type object into a string
         Input:
             self - The current event_type object instance
         Output:
@@ -66,8 +68,6 @@ class event_type:
         """
         return str(self.end_time.strftime('%I:%M %p'))
 
-
-# Converts event object to a list
     def to_list_event(self):
         """
         Function:

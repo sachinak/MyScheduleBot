@@ -2,13 +2,13 @@ import re
 import os
 import csv
 from datetime import datetime
-from pathlib import Path
 from types import TracebackType
 from event_type import event_type
 from functionality.shared_functions import create_type_directory, create_type_file
+from functionality.shared_functions import load_key, decrypt_file, encrypt_file
 
 
-async def create_event_type(ctx, client,event_msg):
+async def create_event_type(ctx, client, event_msg):
     
     """
     Function:
@@ -25,13 +25,14 @@ async def create_event_type(ctx, client,event_msg):
         
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
+    
     def check(m):
         return m.content is not None and m.channel == channel and m.author == ctx.author
 
     event_array = []
-    #await channel.send("First give me the type of your event:")
-    #event_msg = await client.wait_for("message", check=check)  # Waits for user input
-    #event_msg = event_msg.content  # Strips message to just the text the user entered
+    # await channel.send("First give me the type of your event:")
+    # event_msg = await client.wait_for("message", check=check)  # Waits for user input
+    # event_msg = event_msg.content  # Strips message to just the text the user entered
     event_array.append(event_msg)
     await channel.send(
         "Now give me your perefered time range this event type.\n"
@@ -98,7 +99,7 @@ async def create_event_type(ctx, client,event_msg):
             start_complete= False
             continue
 
-      # If both datetime objects were successfully created, they get appended to the list and exits the while loop
+        # If both datetime objects were successfully created, they get appended to the list and exits the while loop
         if start_complete and end_complete:
             print("Both time objects created")
             time_range = True
@@ -125,6 +126,9 @@ async def create_event_type(ctx, client,event_msg):
 
         # Checks if the calendar csv file exists, and creates it if it doesn't
         create_type_file(str(ctx.author.id))
+
+        key = load_key(str(ctx.author.id))
+        decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv")
     
         # Opens the current user's csv calendar file
         with open(
@@ -141,7 +145,7 @@ async def create_event_type(ctx, client,event_msg):
                  
                 if len(line) > 0:
                     
-            # If the file already has the same event type then inform user and exit loop
+                    # If the file already has the same event type then inform user and exit loop
                     if line[0]==current.event_name:
                         flag=1
                         if str(line[1]) == current.get_start_time() and str(line[2]) == current.get_end_time():
@@ -169,31 +173,31 @@ async def create_event_type(ctx, client,event_msg):
                         rows.append(line)
                         line_number = line_number + 1
 
-
-            #If this is a new even type then append it to rows
+            # If this is a new even type then append it to rows
             if flag==0:
                 rows.append(current.to_list_event())
                 line_number = line_number+1
                 await channel.send("Your event was successfully created!")
-            
 
+        # Open current user's calendar file for writing
+        with open(
+                    os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv", "w", newline=""
+                ) as calendar_file:
+            # Write to column headers and array of rows back to the calendar file
+            csvwriter = csv.writer(calendar_file)
+            csvwriter.writerow(fields)
+            if line_number > 1:
+                csvwriter.writerows(rows)
+            elif line_number==1:
+                csvwriter.writerow(rows[0])
 
-             # Open current user's calendar file for writing
-            with open(
-                os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv", "w", newline=""
-            ) as calendar_file:
-                # Write to column headers and array of rows back to the calendar file
-                csvwriter = csv.writer(calendar_file)
-                csvwriter.writerow(fields)
-                if line_number > 1:
-                    csvwriter.writerows(rows)
-                elif line_number==1:
-                    csvwriter.writerow(rows[0])
-            
+        key = load_key(str(ctx.author.id))
+        encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv")
+
         return True
             
     except Exception as e:
-        # Outputs an error message if the event could not be created
+        # Outputs an error message if the event type could not be created
         print(e)
         TracebackType.print_exc()
         await channel.send(
