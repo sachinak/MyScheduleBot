@@ -9,6 +9,7 @@ import discord
 import discord.ext.commands as commands
 import discord.ext.test as test
 from functionality.DisplayFreeTime import compute_free_time, get_free_time
+from functionality.shared_functions import create_event_tree, add_event_to_file
 from Event import Event
 
 
@@ -38,12 +39,26 @@ def bot(request, event_loop):
     test.configure(b)
     return b
 
+@pytest.mark.asyncio
+async def test_get_free_time_empty(bot, client):
+    guild = bot.guilds[0]
+    channel = guild.text_channels[0]
+    message = await channel.send("!day")
+
+    await get_free_time(message, bot)
 
 @pytest.mark.asyncio
 async def test_get_free_time(bot, client):
     guild = bot.guilds[0]
     channel = guild.text_channels[0]
-    message = await channel.send("!exportfile")
+    message = await channel.send("!day")
+
+    start = datetime(2021, 9, 30, 0, 0)
+    end = datetime(2021, 9, 30, 23, 59)
+
+    current = Event("SE project", start, end, 2, "homework", "Finish it")
+    create_event_tree(str(message.author.id))
+    add_event_to_file(str(message.author.id), current)
 
     await get_free_time(message, bot)
 

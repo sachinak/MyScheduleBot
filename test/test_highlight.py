@@ -5,13 +5,15 @@ import sys, os
 sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/../src"))
 
 import pytest
-import datetime
+from datetime import datetime
 import discord
 import discord.ext.commands as commands
 import discord.ext.test as test
 
 from random import randint
 from functionality.highlights import check_start_or_end, convert_to_12, get_highlight
+from functionality.shared_functions import create_event_tree, add_event_to_file
+from Event import Event
 
 
 NUM_ITER = 1000
@@ -42,12 +44,26 @@ def bot(request, event_loop):
     test.configure(b)
     return b
 
+@pytest.mark.asyncio
+async def test_get_free_time_empty(bot, client):
+    guild = bot.guilds[0]
+    channel = guild.text_channels[0]
+    message = await channel.send("!day")
+
+    await get_highlight(message)
 
 @pytest.mark.asyncio
 async def test_get_free_time(bot, client):
     guild = bot.guilds[0]
     channel = guild.text_channels[0]
     message = await channel.send("!day")
+
+    start = datetime(2021, 9, 30, 0, 0)
+    end = datetime(2021, 9, 30, 23, 59)
+
+    current = Event("SE project", start, end, 2, "homework", "Finish it")
+    create_event_tree(str(message.author.id))
+    add_event_to_file(str(message.author.id), current)
 
     await get_highlight(message)
 
