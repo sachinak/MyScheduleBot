@@ -93,10 +93,11 @@ def getEventsOnDate(ctx,yourdate):
         - Provides a list of events associated with that day
     """
     stdate = yourdate.date()
-    with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Event" + str(ctx.author.id) + ".csv", "r") as calendar_lines:
+    with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + str(ctx.author.id) + ".csv", "r") as calendar_lines:
         calendar_lines = csv.reader(calendar_lines, delimiter=",")
         fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
         rows = []
+        line = []
         line_number = 0
         for line in calendar_lines:
             if len(line) > 0:
