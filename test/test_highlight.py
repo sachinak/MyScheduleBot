@@ -6,13 +6,50 @@ sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/../src"))
 
 import pytest
 import datetime
+import discord
+import discord.ext.commands as commands
+import discord.ext.test as test
 
 from random import randint
-from functionality.highlights import check_start_or_end, convert_to_12
+from functionality.highlights import check_start_or_end, convert_to_12, get_highlight
 
 
 NUM_ITER = 1000
 
+@pytest.fixture
+def client(event_loop):
+    c = discord.Client(loop=event_loop)
+    test.configure(c)
+    return c
+
+
+@pytest.fixture
+def bot(request, event_loop):
+    intents = discord.Intents.default()
+    intents.members = True
+    b = commands.Bot("!", loop=event_loop, intents=intents)
+
+    marks = request.function.pytestmark
+    mark = None
+    for mark in marks:
+        if mark.name == "cogs":
+            break
+
+    if mark is not None:
+        for extension in mark.args:
+            b.load_extension("tests.internal." + extension)
+
+    test.configure(b)
+    return b
+
+
+@pytest.mark.asyncio
+async def test_get_free_time(bot, client):
+    guild = bot.guilds[0]
+    channel = guild.text_channels[0]
+    message = await channel.send("!day")
+
+    await get_highlight(message)
 
 """
 TESTING DATE CHECKING

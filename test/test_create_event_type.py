@@ -31,6 +31,7 @@ def bot(request, event_loop):
     async def test_create(ctx):
         thread = threading.Thread(target=create_event_type, args=(ctx, b, "test_alert"), daemon=True)
         thread.start()
+        await asyncio.sleep(.25)
 
     marks = request.function.pytestmark
     mark = None
