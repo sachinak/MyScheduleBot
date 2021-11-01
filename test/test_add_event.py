@@ -27,8 +27,12 @@ def client(event_loop):
 def bot(request, event_loop):
     intents = discord.Intents.default()
     intents.members = True
-    b = commands.Bot("!", loop=event_loop, intents=intents)
+    b = commands.Bot(command_prefix="!", loop=event_loop, intents=intents)
 
+    @b.command()
+    async def test_add(ctx):
+        thread = threading.Thread(target=add_event, args=(ctx, b), daemon=True)
+        thread.start()
     marks = request.function.pytestmark
     mark = None
     for mark in marks:
@@ -44,21 +48,9 @@ def bot(request, event_loop):
 
 
 @pytest.mark.asyncio
-async def test_add_event(bot, client):
-    guild = bot.guilds[0]
-    channel = guild.text_channels[0]
-    message = await channel.send("!addevent")
-
-    def check_msg(msg): assert message.content.startswith("Lets add an")
-
-    bot.on_message = check_msg
-
-    assert len(bot.private_channels) == 0
-
-    thread = threading.Thread(target=add_event, args=(message, bot), daemon=True)
-    thread.start()
-
-    time.sleep(.5)
+async def test_add_event(bot):
+    await test.message("!test_add")
+    await asyncio.sleep(.25)
 
 
 def check_variables1():
