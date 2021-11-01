@@ -1,13 +1,56 @@
 # From https://stackoverflow.com/questions/25827160/importing-correctly-with-pytest
 # Change current working directory so test case can find the source files
 import sys, os
+import asyncio
+import discord
+import discord.ext.commands as commands
+import discord.ext.test as test
+import threading
+import time
 
 sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/../src"))
 
 import pytest
 from datetime import datetime
 
-from functionality.AddEvent import check_complete  # type: ignore
+from functionality.AddEvent import check_complete, add_event  # type: ignore
+
+
+@pytest.fixture
+def client(event_loop):
+    c = discord.Client(loop=event_loop)
+    test.configure(c)
+    return c
+
+
+@pytest.fixture
+def bot(request, event_loop):
+    intents = discord.Intents.default()
+    intents.members = True
+    b = commands.Bot(command_prefix="!", loop=event_loop, intents=intents)
+
+    @b.command()
+    async def test_add(ctx):
+        thread = threading.Thread(target=add_event, args=(ctx, b), daemon=True)
+        thread.start()
+    marks = request.function.pytestmark
+    mark = None
+    for mark in marks:
+        if mark.name == "cogs":
+            break
+
+    if mark is not None:
+        for extension in mark.args:
+            b.load_extension("tests.internal." + extension)
+
+    test.configure(b)
+    return b
+
+
+@pytest.mark.asyncio
+async def test_add_event(bot):
+    await test.message("!test_add")
+    await asyncio.sleep(.25)
 
 
 def check_variables1():
