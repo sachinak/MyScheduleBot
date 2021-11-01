@@ -4,7 +4,57 @@ sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/../src"))
 
 import pytest
 import pandas as pd
-from functionality.import_file import verify_csv, convert_time
+import discord
+import discord.ext.commands as commands
+import discord.ext.test as test
+import threading
+import time
+from schedulebot import importfile
+from functionality.import_file import verify_csv, convert_time, import_file
+
+'''
+bot_test = commands.Bot(command_prefix="!")
+
+@bot_test.command()
+def unit_import(ctx):
+    importfile(ctx)
+'''
+
+
+@pytest.fixture
+def client(event_loop):
+    c = discord.Client(loop=event_loop)
+    test.configure(c)
+    return c
+
+
+@pytest.fixture
+def bot(request, event_loop):
+    intents = discord.Intents.default()
+    intents.members = True
+    b = commands.Bot(command_prefix="!", loop=event_loop, intents=intents)
+
+    @b.command()
+    async def test_import(ctx):
+        import_file(ctx, b)
+
+    marks = request.function.pytestmark
+    mark = None
+    for mark in marks:
+        if mark.name == "cogs":
+            break
+
+    if mark is not None:
+        for extension in mark.args:
+            b.load_extension("tests.internal." + extension)
+
+    test.configure(b)
+    return b
+
+
+@pytest.mark.asyncio
+async def test_import_file(bot):
+    await test.message("!test_import")
 
 
 def test_time():
