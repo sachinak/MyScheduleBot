@@ -42,7 +42,7 @@ class Event:
             + " "
             + str(self.end_date)
             + " "
-            + self.priority
+            + str(self.priority)
             + " "
             + self.event_type
             + " "
