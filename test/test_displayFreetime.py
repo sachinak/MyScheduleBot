@@ -16,8 +16,8 @@ def test_EventsAfterMidNight():
     # Test case if all of the events are not at midnight
     t = datetime.today()
     a = []
-    a.append(Event('',datetime(t.year, t.month,t.day , 4 , 0),datetime(t.year, t.month,t.day , 5 , 0) ,'','' ))
-    a.append(Event('',datetime(t.year, t.month,t.day , 1 , 0),datetime(t.year, t.month,t.day , 2 , 0) ,'','' ))
+    a.append(Event('',datetime(t.year, t.month, t.day, 4, 0), datetime(t.year, t.month, t.day, 5, 0), '', '', ''))
+    a.append(Event('',datetime(t.year, t.month, t.day, 1, 0), datetime(t.year, t.month, t.day, 2, 0), '', '', ''))
     o = compute_free_time(a)
     ex = 'Free time from 00:00 until 00:59:00\nFree time from 02:01:00 until 03:59:00\nFree time from 05:01:00 until 23:59'
     assert o.strip() == ex.strip()
@@ -31,9 +31,9 @@ def test_EventsStartsAtMidNight():
 
     t = datetime.today()
     a = []
-    a.append(Event('',datetime(t.year, t.month,t.day , 4 , 0),datetime(t.year, t.month,t.day , 6 , 0) ,'','' ))
-    a.append(Event('',datetime(t.year, t.month,t.day , 7 , 0),datetime(t.year, t.month,t.day , 17 , 0) ,'','' ))
-    a.append(Event('',datetime(t.year, t.month,t.day , 0 , 0),datetime(t.year, t.month,t.day , 2 , 0) ,'','' ))
+    a.append(Event('', datetime(t.year, t.month, t.day, 4, 0), datetime(t.year, t.month, t.day, 6, 0), '', '', ''))
+    a.append(Event('', datetime(t.year, t.month, t.day, 7, 0), datetime(t.year, t.month, t.day, 17, 0), '', '', ''))
+    a.append(Event('', datetime(t.year, t.month, t.day, 0, 0), datetime(t.year, t.month, t.day, 2, 0), '', '', ''))
     o = compute_free_time(a)
     ex = 'Free time from 02:01:00 until 03:59:00\nFree time from 06:01:00 until 06:59:00\nFree time from 17:01:00 until 23:59'
     assert o.strip() == ex.strip()
@@ -45,9 +45,9 @@ def test_EventsEndsAtMidNight():
 
     t = datetime.today()
     a = []
-    a.append(Event('',datetime(t.year, t.month,t.day , 14 , 0),datetime(t.year, t.month,t.day , 16 , 0) ,'','' ))
-    a.append(Event('',datetime(t.year, t.month,t.day , 17 , 0),datetime(t.year, t.month,t.day , 23 , 59) ,'','' ))
-    a.append(Event('',datetime(t.year, t.month,t.day , 0 , 0),datetime(t.year, t.month,t.day , 2 , 0) ,'','' ))
+    a.append(Event('', datetime(t.year, t.month, t.day, 14, 0), datetime(t.year, t.month, t.day, 16, 0), '', '', ''))
+    a.append(Event('', datetime(t.year, t.month, t.day, 17, 0), datetime(t.year, t.month, t.day, 23, 59), '', '', ''))
+    a.append(Event('', datetime(t.year, t.month, t.day, 0, 0), datetime(t.year, t.month, t.day, 2, 0), '', '', ''))
     o = compute_free_time(a)
     ex = 'Free time from 02:01:00 until 13:59:00\nFree time from 16:01:00 until 16:59:00'
     assert o.strip() == ex.strip()
