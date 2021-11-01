@@ -3,6 +3,7 @@ import csv
 from pathlib import Path
 from src.Event import Event
 from datetime import datetime
+from cryptography.fernet import Fernet
 
 
 def create_type_directory():
@@ -12,7 +13,7 @@ def create_type_directory():
     Input: None
     Output: Creates Type folder if it doesn't exist
     """
-    #
+
     if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot/Type")):
         Path(os.path.expanduser("~/Documents/ScheduleBot/Type")).mkdir(parents=True, exist_ok=True)
 
@@ -33,6 +34,8 @@ def create_type_file(user_id):
         ) as new_file:
             csvwriter = csv.writer(new_file, delimiter=",")
             csvwriter.writerow(["Event Type", "Start time", "End time"])
+        key = check_key(user_id)
+        encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv")
 
 
 def create_type_tree(user_id):
@@ -57,6 +60,11 @@ def read_type_file(user_id):
     Output:
         rows - List of rows
     """
+
+    key = load_key(user_id)
+    decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv")
+
+
     # Opens the event type file
     with open(
         os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv", "r"
@@ -69,6 +77,8 @@ def read_type_file(user_id):
                 current_row.append(text)
             rows.append(current_row)
             current_row = []
+
+    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv")
     return rows
 
 
@@ -119,7 +129,14 @@ def create_event_file(user_id):
             newline="",
         ) as new_file:
             csvwriter = csv.writer(new_file, delimiter=",")
-            csvwriter.writerow(["ID", "Name", "Start Date", "End Date", "Type", "Notes"])
+            csvwriter.writerow(["ID", "Name", "Start Date", "End Date", "Priority", "Type", "Notes"])
+
+        key = check_key(user_id)
+        encrypt_file(key , os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
+
+
+
+
 
 
 def create_event_tree(user_id):
@@ -143,6 +160,10 @@ def read_event_file(user_id):
     Output:
         rows - List of rows
     """
+
+    key = load_key(user_id)
+    decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
+
     # Opens the current user's csv calendar file
     with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv", "r") as calendar_lines:
         calendar_lines = csv.reader(calendar_lines, delimiter=",")
@@ -152,8 +173,10 @@ def read_event_file(user_id):
         for row in calendar_lines:
             if len(row) > 0:
                 rows.append(row)
-        return rows
 
+
+    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
+    return rows
 
 def add_event_to_file(user_id, current):
     """
@@ -179,6 +202,7 @@ def add_event_to_file(user_id, current):
                     datetime.strptime(i[3], "%Y-%m-%d %H:%M:%S"),
                     "",
                     "",
+                    "",
                 )
                 # If the current Event occurs before the temp Event, insert the current at that position
                 if current < temp_event:
@@ -202,3 +226,89 @@ def add_event_to_file(user_id, current):
         csvwriter = csv.writer(calendar_file)
         csvwriter.writerows(rows)
 
+    key = load_key(user_id)
+    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
+
+
+
+def create_key_directory():
+    """
+    Function: create_event_directory
+    Description: Creates ScheduleBot event directory in users Documents folder if it doesn't exist
+    Input: None
+    Output: Creates Event folder if it doesn't exist
+    """
+    if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot/Key")):
+        Path(os.path.expanduser("~/Documents/ScheduleBot/Key")).mkdir(parents=True, exist_ok=True)
+
+
+
+def check_key(user_id):
+    create_key_directory()
+    if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Key/" + user_id + ".key"):
+        key = write_key(user_id)
+    else:
+        key = load_key(user_id)
+
+    return key
+
+
+def write_key(user_id):
+    """
+    Function: write_key
+    Description: Generate the key for the user
+    Input:
+        user_id - String representing the Discord ID of the user
+    Output: the writen key
+    """
+    #Generates a key and save it into a file
+    key = Fernet.generate_key()
+    with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Key/" + user_id + ".key", "wb") as key_file:
+        key_file.write(key)
+    return key
+
+
+def load_key(user_id):
+    """
+    Function: load_key
+    Description: read the key for the user
+    Input:
+        userid - String representing the Discord ID of the user
+    Output: None
+    """
+    with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Key/" + user_id + ".key","rb") as filekey:
+        key = filekey.read()
+
+    return key
+
+
+def encrypt_file(key, filepath):
+    # using the generated key
+    fernet = Fernet(key)
+    # opening the original file to encrypt
+    with open(filepath, 'rb') as file:
+        original = file.read()
+
+    # encrypting the file
+    encrypted = fernet.encrypt(original)
+
+    # opening the file in write mode and
+    # writing the encrypted data
+    with open(filepath, 'wb') as encrypted_file:
+        encrypted_file.write(encrypted)
+
+def decrypt_file(key, filepath):
+    # using the key
+    fernet = Fernet(key)
+
+    # opening the encrypted file
+    with open(filepath, 'rb') as enc_file:
+        encrypted = enc_file.read()
+
+    # decrypting the file
+    decrypted = fernet.decrypt(encrypted)
+
+    # opening the file in write mode and
+    # writing the decrypted data
+    with open(filepath, 'wb') as dec_file:
+        dec_file.write(decrypted)
