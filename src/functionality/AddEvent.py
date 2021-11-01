@@ -4,6 +4,8 @@ from Event import Event
 from parse.match import parse_period
 from functionality.create_event_type import create_event_type
 
+from src.parse.match import parse_period24
+
 
 def check_complete(start, start_date, end, end_date, array):
     if start and end:
@@ -43,7 +45,9 @@ async def add_event(ctx, client):
         "Now give me the start & end dates for you event. "
         + "Make sure you use 12-hour formatting\n\n"
         + "Here is the format you should follow (Start is first, end is second):\n"
-        + "mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm"
+        + "mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm\n"
+        + "Or mm/dd/yy hh:mm mm/dd/yy hh:mm"
+
     )
 
     event_dates = False
@@ -60,31 +64,67 @@ async def add_event(ctx, client):
             # Strips message to just the text the user entered
             msg_content = event_msg.content
 
-        try:
-            parse_result = parse_period(msg_content)
-        except Exception as e:
-            await channel.send(
-                "Looks like "
-                + str(e)
-                + ". Please re-enter your dates.\n"
-                + "Here is the format you should follow (Start is first, end is second):\n"
-                + "mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm"
-            )
-            start_complete = False
-            continue
+        print(" yesa  " + str(msg_content))
+        if msg_content.__contains__("am") or msg_content.__contains__("pm"):
+            try:
+                parse_result = parse_period(msg_content)
+            except Exception as e:
+                await channel.send(
+                    "Looks like "
+                    + str(e)
+                    + ". Please re-enter your dates.\n"
+                    + "Here is the format you should follow (Start is first, end is second):\n"
+                    + "mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm"
+                )
+                start_complete = False
+                continue
 
-        start_complete = True
-        start_date = parse_result[0]
-        end_date = parse_result[1]
+            start_complete = True
 
-        # If both datetime objects were successfully created, they get appended to the list and exits the while loop
-        if not (event_dates := check_complete(start_complete, start_date, end_complete, end_date, event_array)):
-            # If both objects were unsuccessfully created, the bot notifies the user and the loop starts again
-            await channel.send(
-                "Make sure you follow this format(Start is first, end is second): mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm"
-            )
-            date_array = []
-            msg_content = ""
+            print("Lets see for 12 hr it now " + str(parse_result))
+
+            start_date = parse_result[0]
+            end_date = parse_result[1]
+
+            # If both datetime objects were successfully created, they get appended to the list and exits the while loop
+            if not (event_dates := check_complete(start_complete, start_date, end_complete, end_date, event_array)):
+                # If both objects were unsuccessfully created, the bot notifies the user and the loop starts again
+                await channel.send(
+                    "Make sure you follow this format(Start is first, end is second): mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm"
+                )
+                date_array = []
+                msg_content = ""
+
+        # 24hr format
+        else:
+            try:
+                parse_result = parse_period24(msg_content)
+            except Exception as e:
+                await channel.send(
+                    "Looks like "
+                    + str(e)
+                    + ". Please re-enter your dates.\n"
+                    + "Here is the format you should follow (Start is first, end is second):\n"
+                    + "mm/dd/yy hh:mm mm/dd/yy hh:mm "
+                )
+                start_complete = False
+                continue
+
+            start_complete = True
+
+            print("Lets see it now " + str(parse_result))
+            start_date = parse_result[0]
+            end_date = parse_result[1]
+
+
+            # If both datetime objects were successfully created, they get appended to the list and exits the while loop
+            if not (event_dates := check_complete(start_complete, start_date, end_complete, end_date, event_array)):
+                # If both objects were unsuccessfully created, the bot notifies the user and the loop starts again
+                await channel.send(
+                    "Make sure you follow this format(Start is first, end is second): mm/dd/yy hh:mm mm/dd/yy hh:mm"
+                )
+                date_array = []
+                msg_content = ""
 
     # A loop to error check when user enters priority value
     event_priority_set = False
@@ -104,13 +144,13 @@ async def add_event(ctx, client):
         try:
             if 1 <= int(event_msg) <= 5:
                 event_array.append(event_msg)
-                event_priority_set = True    # if entered value is in the range, loop exits
+                event_priority_set = True  # if entered value is in the range, loop exits
             else:
                 await channel.send(
                     "Please enter a number between 1-5\n")
         except:
             await channel.send(
-                "Please enter a number between 1-5\n")   # Handles when user enters non numeric entries
+                "Please enter a number between 1-5\n")  # Handles when user enters non numeric entries
             continue
 
     create_type_tree(str(ctx.author.id))
