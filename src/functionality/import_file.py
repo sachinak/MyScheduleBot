@@ -7,6 +7,7 @@ from discord import Attachment
 from functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, turn_types_to_string
 from Event import Event
 from parse.match import parse_period
+import fnmatch
 
 
 def verify_csv(data):
@@ -102,6 +103,11 @@ async def import_file(ctx, client):
     temp_file = tempfile.TemporaryFile()
 
     await event_msg.attachments[0].save(fp=temp_file, seek_begin=True, use_cached=False)
+
+    for temp_file in os.listdir('.'):
+        if not fnmatch.fnmatch(temp_file, '*.csv'):
+            await channel.send("Not a CSV file. Import has failed.")
+            return
 
     data = pd.read_csv(temp_file)
 
