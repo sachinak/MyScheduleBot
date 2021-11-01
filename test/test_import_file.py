@@ -1,3 +1,4 @@
+import asyncio
 import sys, os
 
 sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/../src"))
@@ -36,7 +37,8 @@ def bot(request, event_loop):
 
     @b.command()
     async def test_import(ctx):
-        import_file(ctx, b)
+        thread = threading.Thread(target=importfile, args=(ctx, b), daemon=True)
+        thread.start()
 
     marks = request.function.pytestmark
     mark = None
@@ -55,6 +57,7 @@ def bot(request, event_loop):
 @pytest.mark.asyncio
 async def test_import_file(bot):
     await test.message("!test_import")
+    await asyncio.sleep(.25)
 
 
 def test_time():
