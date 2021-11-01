@@ -64,8 +64,6 @@ async def on_ready():
 
     text_channel_count = 0
     for channel in channels:
-        print(channel.id, channel.type)
-
         if str(channel.type) != 'text':
             continue
 
