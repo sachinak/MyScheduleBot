@@ -17,7 +17,7 @@ async def get_free_time(ctx, bot):
         ctx - Discord context window
         bot - Discord bot user
     Output:
-        - A message sent to the user channel stating every free time slot that is avaliable today 
+        - A message sent to the user channel stating every free time slot that is avaliable today
     """
     channel = await ctx.author.create_dm()
 
@@ -35,12 +35,12 @@ async def get_free_time(ctx, bot):
     # open the calendar file and read the events
     with open(
             os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + str(ctx.author.id) + ".csv", "r"
-        ) as calendar_lines:
-            calendar_lines = csv.reader(calendar_lines, delimiter=",")
-    
-            for row in calendar_lines:
-                if len(row) > 0:
-                    rows.append(row)
+    ) as calendar_lines:
+        calendar_lines = csv.reader(calendar_lines, delimiter=",")
+
+        for row in calendar_lines:
+            if len(row) > 0:
+                rows.append(row)
 
     calendarDates = []
     rows.pop(0)
@@ -63,7 +63,6 @@ async def get_free_time(ctx, bot):
 
 
 def compute_free_time(calendarDates):
-
     """
     Function:
         compute_free_time
@@ -72,7 +71,7 @@ def compute_free_time(calendarDates):
     Input:
         calendarDates - list of the events that the user has in the calendar
     Output:
-        - a string stating every free time slot that is avaliable today 
+        - a string stating every free time slot that is avaliable today
     """
 
     # defining  variable for the output string that the function will returns
@@ -108,15 +107,14 @@ def compute_free_time(calendarDates):
         return 'Free time from ' + str(free_time_start) + ' until end of the day\n'
     # Cases where the event doesn't start at 00:00
     elif len(today_events) == 1:
-        return 'Free time from 00:00 until ' + str((today_events[0].start_date - one_min).time()) + ' and from ' +\
+        return 'Free time from 00:00 until ' + str((today_events[0].start_date - one_min).time()) + ' and from ' + \
                str((today_events[0].end_date + one_min).time()) + ' until end of the day\n'
 
     # sorting today's events
     today_events.sort()
 
-
     # setting up the first possible free time
-    #    
+    #
     free_time_start = (today_events[0].end_date + one_min).time()
     free_time_end = (today_events[1].start_date - one_min).time()
 
@@ -154,7 +152,6 @@ def compute_free_time(calendarDates):
 
 
 
-    
 
 
 

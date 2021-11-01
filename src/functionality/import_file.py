@@ -92,7 +92,10 @@ async def import_file(ctx, client):
 
     # Loops until we receive a file.
     while True:
+
         event_msg = await client.wait_for("message", check=check)
+
+        return 0 #TODO: Delete this
 
         if len(event_msg.attachments) != 1:
             await channel.send("No file detected. Please upload your file below.\nYou can do this by dropping "

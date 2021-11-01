@@ -1,7 +1,6 @@
 class event_type:
-    
+
     def __init__(self, event_name, start_time, end_time):
-        
         """
         Function:
             __init__
@@ -32,16 +31,16 @@ class event_type:
             A formatted string that represents all the information about an type instance
         """
         output = (
-            self.event_name 
-            + " "
-            + str(self.start_time)
-            + " "
-            + str(self.end_time)
+                self.event_name
+                + " "
+                + str(self.start_time)
+                + " "
+                + str(self.end_time)
             # + " "
             # + str(self.priority)
         )
         return output
-    
+
     def get_start_time(self):
         """
         Function:
