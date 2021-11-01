@@ -5,6 +5,7 @@ from src.Event import Event
 from datetime import datetime
 from cryptography.fernet import Fernet
 
+
 def create_type_directory():
     """
     Function: create_type_directory
@@ -12,7 +13,7 @@ def create_type_directory():
     Input: None
     Output: Creates Type folder if it doesn't exist
     """
-    #
+
     if not os.path.exists(os.path.expanduser("~/Documents/ScheduleBot/Type")):
         Path(os.path.expanduser("~/Documents/ScheduleBot/Type")).mkdir(parents=True, exist_ok=True)
 
@@ -33,9 +34,8 @@ def create_type_file(user_id):
         ) as new_file:
             csvwriter = csv.writer(new_file, delimiter=",")
             csvwriter.writerow(["Event Type", "Start time", "End time"])
-
-    key = check_key(user_id)
-    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv")
+        key = check_key(user_id)
+        encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv")
 
 
 def create_type_tree(user_id):
@@ -129,7 +129,7 @@ def create_event_file(user_id):
             newline="",
         ) as new_file:
             csvwriter = csv.writer(new_file, delimiter=",")
-            csvwriter.writerow(["ID", "Name", "Start Date", "End Date", "Type", "Notes"])
+            csvwriter.writerow(["ID", "Name", "Start Date", "End Date", "Priority", "Type", "Notes"])
 
         key = check_key(user_id)
         encrypt_file(key , os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
@@ -200,6 +200,7 @@ def add_event_to_file(user_id, current):
                     "",
                     datetime.strptime(i[2], "%Y-%m-%d %H:%M:%S"),
                     datetime.strptime(i[3], "%Y-%m-%d %H:%M:%S"),
+                    "",
                     "",
                     "",
                 )

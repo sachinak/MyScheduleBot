@@ -1,7 +1,6 @@
 class Event:
-    
 
-    def __init__(self, name, start_date, end_date, event_type, description):
+    def __init__(self, name, start_date, end_date, priority, event_type, description):
         """
         Function:
             __init__
@@ -12,6 +11,7 @@ class Event:
             name - String name of the event
             start_date - datetime object representing the start of an event
             end_date - datetime object representing the end of an event
+            priority - priority value of an event
             event_type - String representing the type of event
             description - Optional text field that contains any additional notes about an event (can be blank)
         Output:
@@ -20,10 +20,9 @@ class Event:
         self.name = name
         self.start_date = start_date
         self.end_date = end_date
+        self.priority = priority
         self.event_type = event_type
         self.description = description
-
-    
 
     def __str__(self):
         """
@@ -51,8 +50,6 @@ class Event:
         )
         return output
 
-    
-
     def __lt__(self, other):
         """
         Function:
@@ -67,8 +64,6 @@ class Event:
             False - self starts after other
         """
         return self.start_date < other.start_date
-
-    
 
     def __le__(self, other):
         """
@@ -115,8 +110,6 @@ class Event:
         """
         return self.start_date >= other.start_date
 
-    
-
     def intersect(self, other):
         """
         Function:
@@ -138,8 +131,6 @@ class Event:
             other.start_date <= self.start_date <= other.end_date
         )
 
-    
-
     def to_list(self):
         """
         Function:
@@ -151,5 +142,5 @@ class Event:
         Output:
             array - A list with each index being an attribute of the self Event object
         """
-        array = [self.name, str(self.start_date), str(self.end_date), self.event_type, self.description]
+        array = [self.name, str(self.start_date), str(self.end_date), str(self.priority), self.event_type, self.description]
         return array
