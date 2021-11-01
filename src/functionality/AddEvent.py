@@ -64,7 +64,7 @@ async def add_event(ctx, client):
             # Strips message to just the text the user entered
             msg_content = event_msg.content
 
-        print(" yesa  " + str(msg_content))
+        #print(" yesa  " + str(msg_content))
         if msg_content.__contains__("am") or msg_content.__contains__("pm"):
             try:
                 parse_result = parse_period(msg_content)
@@ -81,7 +81,7 @@ async def add_event(ctx, client):
 
             start_complete = True
 
-            print("Lets see for 12 hr it now " + str(parse_result))
+            #print("Lets see for 12 hr it now " + str(parse_result))
 
             start_date = parse_result[0]
             end_date = parse_result[1]
@@ -112,7 +112,7 @@ async def add_event(ctx, client):
 
             start_complete = True
 
-            print("Lets see it now " + str(parse_result))
+            #print("Lets see it now " + str(parse_result))
             start_date = parse_result[0]
             end_date = parse_result[1]
 
