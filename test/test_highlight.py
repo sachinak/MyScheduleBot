@@ -5,7 +5,7 @@ import sys, os
 sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/../src"))
 
 import pytest
-from datetime import datetime
+import datetime
 import discord
 import discord.ext.commands as commands
 import discord.ext.test as test
@@ -58,8 +58,8 @@ async def test_get_free_time(bot, client):
     channel = guild.text_channels[0]
     message = await channel.send("!day")
 
-    start = datetime(2021, 9, 30, 0, 0)
-    end = datetime(2021, 9, 30, 23, 59)
+    start = datetime.datetime(2021, 9, 30, 0, 0)
+    end = datetime.datetime(2021, 9, 30, 23, 59)
 
     current = Event("SE project", start, end, 2, "homework", "Finish it")
     create_event_tree(str(message.author.id))
