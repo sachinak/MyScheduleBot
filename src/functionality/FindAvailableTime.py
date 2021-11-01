@@ -284,6 +284,7 @@ def getEventsOnDate(ctx,stdate):
         calendar_lines = csv.reader(calendar_lines, delimiter=",")
         fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
         rows = []
+        line = []
         line_number = 0
         for line in calendar_lines:
             if len(line) > 0:
@@ -297,4 +298,3 @@ def getEventsOnDate(ctx,stdate):
             Events.append(eve)
     encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + str(ctx.author.id) + ".csv")
     return Events
-
