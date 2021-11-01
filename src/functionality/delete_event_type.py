@@ -3,6 +3,7 @@ import re
 import csv
 from pathlib import Path
 from types import TracebackType
+from functionality.export_file import load_key, encrypt_file, decrypt_file
 
 def delete_type(rows, msg_content):
     """
@@ -64,9 +65,10 @@ async def delete_event_type(ctx, client):
         - A existing event type is deleted from the user's calendar file 
         - A message sent to the context saying an event type was successfully deleted
     """
-    
+    line_number = 0
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
+    key = load_key(str(ctx.author.id))
     def check(m):
         return m.content is not None and m.channel == channel and m.author == ctx.author
 
@@ -77,7 +79,9 @@ async def delete_event_type(ctx, client):
         if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv"):
             await channel.send("You have not created any events type yet!!")
         else:
-            
+            # Decrypt the file
+            decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv")
+            dec = True
             # Opens the current user's csv calendar file
             with open(
                 os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv", "r"
@@ -126,11 +130,13 @@ async def delete_event_type(ctx, client):
                         csvwriter.writerows(new_row)
                     elif line_number == 1:
                         csvwriter.writerow(new_row[0])
-
+            encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv")
     except Exception as e:
         # Outputs an error message if the event could not be created
         print(e)
-        TracebackType.print_exc()
+
+        if dec:
+            encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv")
         await channel.send(
             "There was an error deleting your event."
         )
