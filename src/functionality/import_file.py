@@ -160,8 +160,6 @@ async def import_file(ctx, client):
 
             data = get_ics_data(gcal)
 
-            print(data)
-
         else:
             await channel.send("File is not a CSV or ICS file. Import has failed.")
             return

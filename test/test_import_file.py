@@ -9,9 +9,10 @@ import discord
 import discord.ext.commands as commands
 import discord.ext.test as test
 import threading
+from icalendar import Calendar
 import time
 from schedulebot import importfile
-from functionality.import_file import verify_csv, convert_time, import_file
+from functionality.import_file import verify_csv, convert_time, import_file, get_ics_data
 
 '''
 bot_test = commands.Bot(command_prefix="!")
@@ -59,6 +60,23 @@ async def test_import_file(bot):
     await test.message("!test_import")
     await asyncio.sleep(.25)
 
+def test_import_ics():
+
+    file = open(r"../test/files/test.ics", "r")
+    gcal = Calendar.from_ical(file.read())
+    file.close()
+
+    data = get_ics_data(gcal)
+
+    assert verify_csv(data)
+
+def test_import_ics_empty():
+    gcal = Calendar.from_ical("BEGIN:VCALENDAR\n"
+                              "END:VCALENDAR")
+
+    data = get_ics_data(gcal)
+
+    assert verify_csv(data)
 
 def test_time():
     old_time = "1998-05-08 10:30:00"
@@ -93,6 +111,18 @@ def test_typo_csv():
             'Name': ['test'],
             'Stert Date': ["1998-05-08 18:30:00"],
             'End Date': ["1998-05-08 18:45:00"],
+            'Priority': '1',
+            'Type': '',
+            'Notes': ''}
+
+    table = pd.DataFrame(data=data)
+
+    assert not verify_csv(table)
+
+def test_missing_column_csv():
+    data = {'ID': [''],
+            'Name': ['test'],
+            'Stert Date': ["1998-05-08 18:30:00"],
             'Priority': '1',
             'Type': '',
             'Notes': ''}
