@@ -7,6 +7,8 @@ from discord import Attachment
 from functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, turn_types_to_string
 from Event import Event
 from parse.match import parse_period
+from icalendar import Calendar
+
 import fnmatch
 
 
@@ -54,6 +56,9 @@ def convert_time(old_str):
 
     new_str = old_str[5:7] + '/' + old_str[8:10] + '/' + old_str[2:4] + ' '
 
+    if(len(old_str)==10): #Doesn't include hours/minutes
+        return new_str + "12:00 am"
+
     hour_int = int(old_str[11:13])
     if hour_int >= 12:
         am_or_pm = "pm"
@@ -69,6 +74,42 @@ def convert_time(old_str):
     new_str = new_str + hour + ':' + old_str[14:16] + " " + am_or_pm
 
     return new_str
+
+
+def get_ics_data(calendar):
+    """
+    Function:
+        get_ics_data
+    Description:
+        Fethces relevant data from an ICS calendar
+    Input:
+        calendar - The string to be converted
+    Output:
+        - A pandas table containing the calendar data.
+    """
+
+    columns = ['ID',
+               'Name',
+               'Start Date',
+               'End Date',
+               'Priority',
+               'Type',
+               'Notes']
+
+    data = pd.DataFrame(columns=columns)
+
+    for component in calendar.walk():
+        if component.name == "VEVENT":
+            print("Adding Event....")
+            data = data.append({'ID': '',
+                         'Name': component.get('summary'),
+                         'Start Date': str(component.get('dtstart').dt),
+                         'End Date': str(component.get('dtend').dt),
+                         'Priority': '3',
+                         'Type': '',
+                         'Notes': component.get('description')}, ignore_index=True)
+
+    return data
 
 
 async def import_file(ctx, client):
@@ -109,7 +150,21 @@ async def import_file(ctx, client):
     temp_file.close()
     try:
         await event_msg.attachments[0].save(temp_path, seek_begin=True, use_cached=False)
-        data = pd.read_csv(temp_path)
+
+        if event_msg.attachments[0].filename.endswith(".csv"):
+            data = pd.read_csv(temp_path)
+        elif event_msg.attachments[0].filename.endswith(".ics"):
+            temp_file = open("import_temp_file", "r")
+            gcal = Calendar.from_ical(temp_file.read())
+            temp_file.close()
+
+            data = get_ics_data(gcal)
+
+            print(data)
+
+        else:
+            await channel.send("File is not a CSV or ICS file. Import has failed.")
+            return
 
         if not verify_csv(data):
             await channel.send("Unexpected CSV Format. Import has failed.")
@@ -122,6 +177,7 @@ async def import_file(ctx, client):
         await channel.send("File is not a CSV. Import has Failed.")
         return
     finally:
+        temp_file.close()
         os.remove(temp_path)
 
     if not verify_csv(data):
