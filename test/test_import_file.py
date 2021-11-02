@@ -79,6 +79,7 @@ def test_working_csv():
             'Name': ['test'],
             'Start Date': ["1998-05-08 18:30:00"],
             'End Date': ["1998-05-08 18:45:00"],
+            'Priority': '1',
             'Type': '',
             'Notes': ''}
 
@@ -92,6 +93,7 @@ def test_typo_csv():
             'Name': ['test'],
             'Stert Date': ["1998-05-08 18:30:00"],
             'End Date': ["1998-05-08 18:45:00"],
+            'Priority': '1',
             'Type': '',
             'Notes': ''}
 
