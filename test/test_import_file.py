@@ -64,14 +64,14 @@ def test_time():
     old_time = "1998-05-08 10:30:00"
     new_time = convert_time(old_time)
 
-    assert "05/08/98 10:30am" == new_time
+    assert "05/08/98 10:30 am" == new_time
 
 
 def test_time_pm():
     old_time = "1998-05-08 18:30:00"
     new_time = convert_time(old_time)
 
-    assert "05/08/98 06:30pm" == new_time
+    assert "05/08/98 06:30 pm" == new_time
 
 
 def test_working_csv():

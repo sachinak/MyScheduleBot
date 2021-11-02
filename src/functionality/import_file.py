@@ -30,9 +30,11 @@ def verify_csv(data):
         return False
     if data.columns[3] != "End Date":
         return False
-    if data.columns[4] != "Type":
+    if data.columns[4] != "Priority":
         return False
-    if data.columns[5] != "Notes":
+    if data.columns[5] != "Type":
+        return False
+    if data.columns[6] != "Notes":
         return False
 
     return True
@@ -55,7 +57,8 @@ def convert_time(old_str):
     hour_int = int(old_str[11:13])
     if hour_int >= 12:
         am_or_pm = "pm"
-        hour_int = hour_int - 12
+        if hour_int != 12:
+            hour_int = hour_int - 12
     else:
         am_or_pm = "am"
 
@@ -63,7 +66,7 @@ def convert_time(old_str):
     if len(hour) == 1:
         hour = '0' + hour
 
-    new_str = new_str + hour + ':' + old_str[14:16] + am_or_pm
+    new_str = new_str + hour + ':' + old_str[14:16] + " " + am_or_pm
 
     return new_str
 
@@ -101,14 +104,25 @@ async def import_file(ctx, client):
         else:
             break
 
-    temp_file = tempfile.NamedTemporaryFile()
-    await event_msg.attachments[0].save(fp=temp_file.file, seek_begin=True, use_cached=False)
+    temp_file = open("import_temp_file", "w")
+    temp_path = str(os.path.abspath(temp_file.name))
+    temp_file.close()
+    try:
+        await event_msg.attachments[0].save(temp_path, seek_begin=True, use_cached=False)
+        data = pd.read_csv(temp_path)
 
-    if not fnmatch.fnmatch(temp_file, '*.csv') or not fnmatch.fnmatch(temp_file, '*.ics'):
-        await channel.send("Not a CSV or ICS file. Import has failed.")
+        if not verify_csv(data):
+            await channel.send("Unexpected CSV Format. Import has failed.")
+            return
+
+    except pd.errors.EmptyDataError:
+        await channel.send("File is empty. Import has Failed.")
         return
-
-    data = pd.read_csv(temp_file)
+    except pd.errors.ParserError:
+        await channel.send("File is not a CSV. Import has Failed.")
+        return
+    finally:
+        os.remove(temp_path)
 
     if not verify_csv(data):
         await channel.send("Unexpected CSV Format. Import has failed.")
@@ -118,8 +132,9 @@ async def import_file(ctx, client):
     create_event_tree(str(ctx.author.id))
 
     for index, row in data.iterrows():
+        print(convert_time(row['Start Date']) + ' ' + convert_time(row['End Date']))
         time_period = parse_period(convert_time(row['Start Date']) + ' ' + convert_time(row['End Date']))
-        current = Event(row['Name'], time_period[0], time_period[1], row['Type'], row['Notes'])
+        current = Event(row['Name'], time_period[0], time_period[1], row['Priority'], row['Type'], row['Notes'])
         add_event_to_file(str(ctx.author.id), current)
 
     await channel.send("Your events were successfully added!")
