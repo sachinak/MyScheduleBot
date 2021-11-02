@@ -73,6 +73,12 @@ The bot will ask you for the name of the type and your preferred times.
 ![Type Create](docs/img/Type%20Create.gif)
 
 
+### Find available times for a type of event
+When you look for available times, you now can use `!find` to find only the available times in your preferred hours. 
+
+![Find Available times](docs/img/find.gif)
+
+
 ## Releases
 
 -   [All releases](https://github.com/
@@ -88,30 +94,6 @@ Thank you for caring for this project and getting involved. To start, please che
 Check out the [online documentation](https://lyonva.github.io/ScheduleBot/) if you want to contribute or find out about the inner workings of ScheduleBot.
 
 ## Future features
-
-### **When do I have spare time?**
-
-ScheduleBot will help you find a time for that meeting or thing you have been meaning to do. Just write:
-
-```
-!find
-```
-
-The bot will show you your available times. If you need to find time for another date, try:
-
-```
-!find mm/dd/yyyy
-```
-
-To see your available times at that date.
-
-\[Screenshot\]
-
-
-### Find available times for a type of event
-When you look for available times, you now can use `!find type` to find only the available times in your preferred hours. You still can create events of that type outside your preferred hours.
-
-\[Screenshot\]
 
 ### Quick event creation
 
