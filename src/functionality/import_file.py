@@ -95,22 +95,18 @@ async def import_file(ctx, client):
 
         event_msg = await client.wait_for("message", check=check)
 
-        return 0 #TODO: Delete this
-
         if len(event_msg.attachments) != 1:
             await channel.send("No file detected. Please upload your file below.\nYou can do this by dropping "
                                "the file directly into Discord. Do not write out the file contents in a message.")
         else:
             break
 
-    temp_file = tempfile.TemporaryFile()
+    temp_file = tempfile.NamedTemporaryFile()
+    await event_msg.attachments[0].save(fp=temp_file.file, seek_begin=True, use_cached=False)
 
-    await event_msg.attachments[0].save(fp=temp_file, seek_begin=True, use_cached=False)
-
-    for temp_file in os.listdir('.'):
-        if not fnmatch.fnmatch(temp_file, '*.csv'):
-            await channel.send("Not a CSV file. Import has failed.")
-            return
+    if not fnmatch.fnmatch(temp_file, '*.csv') or not fnmatch.fnmatch(temp_file, '*.ics'):
+        await channel.send("Not a CSV or ICS file. Import has failed.")
+        return
 
     data = pd.read_csv(temp_file)
 
