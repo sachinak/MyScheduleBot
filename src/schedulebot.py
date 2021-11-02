@@ -41,7 +41,7 @@ async def help(ctx):
     em.add_field(name="typecreate", value="Creates a new event type", inline=True)
     em.add_field(name="typedelete", value="Deletes an event type", inline=True)
     em.add_field(name="exportfile", value="Exports a CSV file of your events", inline=False)
-    em.add_field(name="importfile", value="Import events from a CSV file", inline=False)
+    em.add_field(name="importfile", value="Import events from a CSV or ICS file", inline=False)
     await ctx.send(embed=em)
 
 
@@ -174,7 +174,7 @@ async def importfile(ctx):
     Function:
         importfile
     Description:
-        Reads a CSV file containing events submitted by the user, and adds those events
+        Reads a CSV or ICS file containing events submitted by the user, and adds those events
     Input:
         ctx - Discord context window
     Output:
