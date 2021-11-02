@@ -15,6 +15,11 @@
 
 > Don't let the fear of the time it will take to accomplish something stand in the way of your doing it. The time will pass anyway; we might just as well put that passing time to the best possible use. - Earl Nightingale
 
+
+https://user-images.githubusercontent.com/34405372/139776326-722e8526-4977-4ffd-b00e-c86a8fd5f706.mp4
+
+
+
 ScheduleBot is a Python application that helps you calendarize events and work through a Discord bot. Want to try it out? ~~[Invite the bot into a server](https://discord.com/api/oauth2/authorize?client_id=884865269867102249&permissions=534723951680&scope=bot), and afterward you can DM the bot. (To be implemented in the future)~~ Join the [ScheduleBot server](https://discord.gg/xRaact5GmH) and DM the bot.
 
 With ScheduleBot you can quickly schedule events, state your prefered times for certain types of activities (exercise, homework, meetings, etc.) and quickly find out which times you have available to do more stuff.
@@ -68,6 +73,12 @@ The bot will ask you for the name of the type and your preferred times.
 ![Type Create](docs/img/Type%20Create.gif)
 
 
+### Find available times for a type of event
+When you look for available times, you now can use `!find` to find only the available times in your preferred hours. 
+
+![Find Available times](docs/img/find.gif)
+
+
 ## Releases
 
 -   [All releases](https://github.com/
@@ -83,30 +94,6 @@ Thank you for caring for this project and getting involved. To start, please che
 Check out the [online documentation](https://lyonva.github.io/ScheduleBot/) if you want to contribute or find out about the inner workings of ScheduleBot.
 
 ## Future features
-
-### **When do I have spare time?**
-
-ScheduleBot will help you find a time for that meeting or thing you have been meaning to do. Just write:
-
-```
-!find
-```
-
-The bot will show you your available times. If you need to find time for another date, try:
-
-```
-!find mm/dd/yyyy
-```
-
-To see your available times at that date.
-
-\[Screenshot\]
-
-
-### Find available times for a type of event
-When you look for available times, you now can use `!find type` to find only the available times in your preferred hours. You still can create events of that type outside your preferred hours.
-
-\[Screenshot\]
 
 ### Quick event creation
 

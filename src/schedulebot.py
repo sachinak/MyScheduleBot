@@ -60,13 +60,22 @@ async def on_ready():
     """
     # Outputs bot name to console once bot is started
     print("We have logged in as {0.user}".format(bot))
-    channel = bot.get_channel(884864860859531347)  # Gets the channel ID of the "schedule-manager channel"
-    # msg = await channel.send(
-    #     "Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n"
-    #     + "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!"
-    #     + "Make sure you have allowed non-friends to direct message you or I can't help you."
-    # )
-    # await msg.add_reaction("⏰")
+    channels = bot.get_all_channels()  # Gets the channels the bot is currently watching
+
+    text_channel_count = 0
+    for channel in channels:
+        if str(channel.type) != 'text':
+            continue
+
+        text_channel_count += 1
+        msg = await channel.send(
+            "Hello! My name is Schedule Bot and I am here to help you plan your schedule!\n\n"
+            + "React to this message with a '⏰' (\:alarm_clock\:) reaction so I can direct message you!"
+            + "Make sure you have allowed non-friends to direct message you or I can't help you."
+        )
+
+        await msg.add_reaction("⏰")
+    print("Sent Welcome Message to", text_channel_count, "Channel(s)")
 
 
 @bot.event
@@ -83,7 +92,7 @@ async def on_reaction_add(reaction, user):
         - The 'help' command is automatically run
     """
     emoji = reaction.emoji
-    if emoji == "⏰" and user.id != 884865269867102249:
+    if emoji == "⏰" and not user.bot:  # if user is not a bot...
         try:
             await user.send(
                 "Nice to meet you "

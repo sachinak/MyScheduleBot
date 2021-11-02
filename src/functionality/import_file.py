@@ -95,8 +95,6 @@ async def import_file(ctx, client):
 
         event_msg = await client.wait_for("message", check=check)
 
-        return 0 #TODO: Delete this
-
         if len(event_msg.attachments) != 1:
             await channel.send("No file detected. Please upload your file below.\nYou can do this by dropping "
                                "the file directly into Discord. Do not write out the file contents in a message.")
