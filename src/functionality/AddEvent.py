@@ -43,10 +43,10 @@ async def add_event(ctx, client):
     event_array.append(event_msg)
     await channel.send(
         "Now give me the start & end dates for you event. "
-        + "Make sure you use 12-hour formatting\n\n"
+        + "You can use 12-hour formatting or 24-hour formatting\n\n"
         + "Here is the format you should follow (Start is first, end is second):\n"
-        + "mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm\n"
-        + "Or mm/dd/yy hh:mm mm/dd/yy hh:mm"
+        + "mm/dd/yy hh:mm am/pm mm/dd/yy hh:mm am/pm (12-hour formatting)\n"
+        + "Or mm/dd/yy hh:mm mm/dd/yy hh:mm (24-hour formatting)"
 
     )
 
@@ -65,7 +65,7 @@ async def add_event(ctx, client):
             msg_content = event_msg.content
 
         #print(" yesa  " + str(msg_content))
-        if msg_content.__contains__("am") or msg_content.__contains__("pm"):
+        if msg_content.__contains__("am") or msg_content.__contains__("pm") or msg_content.__contains__("AM") or msg_content.__contains__("PM"):
             try:
                 parse_result = parse_period(msg_content)
             except Exception as e:
