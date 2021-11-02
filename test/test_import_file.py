@@ -62,7 +62,7 @@ async def test_import_file(bot):
 
 def test_import_ics():
 
-    file = open(r"../test/files/test.ics", "r")
+    file = open(r"test/files/test.ics", "r")
     gcal = Calendar.from_ical(file.read())
     file.close()
 
