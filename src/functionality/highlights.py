@@ -108,7 +108,7 @@ def get_date(arg):
         return str(datetime.date.today() - datetime.timedelta(days=int(arg))).split()[0]
     if re.fullmatch("\d\d/\d\d/\d\d", arg):
         return str(datetime.datetime.strptime(arg, "%m/%d/%y")).split()[0]
-    if arg == 'today':
+    if re.match("today", arg, re.I):
         return str(datetime.date.today()).split()[0]
     else:
         return None
