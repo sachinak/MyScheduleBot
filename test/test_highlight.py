@@ -210,7 +210,7 @@ def test_get_date():
     assert str(datetime.date.today() + datetime.timedelta(days=1)).split()[0] == get_date('tomorrow')
     assert str(datetime.date.today() - datetime.timedelta(days=1)).split()[0] == get_date('yesterday')
     assert str(datetime.date.today() - datetime.timedelta(days=1)).split()[0] == get_date('-1')
-    assert str(datetime.date.today() + datetime.timedelta(days=1)).split()[0] == get_date('s1')
+    assert str(datetime.date.today() + datetime.timedelta(days=1)).split()[0] == get_date('1')
     assert str(datetime.date.today()).split()[0] == get_date(datetime.date.today().strftime("%m/%d/%y"))
 
 
