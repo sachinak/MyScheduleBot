@@ -244,6 +244,12 @@ def create_key_directory():
 
 
 def check_key(user_id):
+    """
+    Function: check_key
+    Description: Creates ScheduleBot event key in users Documents folder if it doesn't exist
+    Input: user_id String representing the Discord ID of the user
+    Output: the key for the given user
+    """
     create_key_directory()
     if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Key/" + user_id + ".key"):
         key = write_key(user_id)
@@ -274,7 +280,7 @@ def load_key(user_id):
     Description: read the key for the user
     Input:
         userid - String representing the Discord ID of the user
-    Output: None
+    Output: the loaded key
     """
     with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Key/" + user_id + ".key","rb") as filekey:
         key = filekey.read()
@@ -283,6 +289,14 @@ def load_key(user_id):
 
 
 def encrypt_file(key, filepath):
+    """
+    Function: encrypt_file
+    Description: encrypt the given file with the given key
+    Input:
+        key - key to encrypt
+        filepath - filepath to encrypt
+    Output: None
+    """
     # using the generated key
     fernet = Fernet(key)
     # opening the original file to encrypt
@@ -298,6 +312,14 @@ def encrypt_file(key, filepath):
         encrypted_file.write(encrypted)
 
 def decrypt_file(key, filepath):
+    """
+    Function: decrypt_file
+    Description: decrypt the given file with the given key
+    Input:
+        key - key to decrypt
+        filepath - filepath to decrypt
+    Output: None
+    """
     # using the key
     fernet = Fernet(key)
 
