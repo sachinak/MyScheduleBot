@@ -11,7 +11,7 @@ import discord.ext.commands as commands
 import discord.ext.test as test
 
 from random import randint
-from functionality.highlights import check_start_or_end, convert_to_12, get_highlight
+from functionality.highlights import check_start_or_end, convert_to_12, get_highlight, get_date
 from functionality.shared_functions import create_event_tree, add_event_to_file
 from Event import Event
 
@@ -48,15 +48,15 @@ def bot(request, event_loop):
 async def test_get_free_time_empty(bot, client):
     guild = bot.guilds[0]
     channel = guild.text_channels[0]
-    message = await channel.send("!day")
+    message = await channel.send("!day today")
 
-    await get_highlight(message)
+    await get_highlight(message, 'today')
 
 @pytest.mark.asyncio
 async def test_get_free_time(bot, client):
     guild = bot.guilds[0]
     channel = guild.text_channels[0]
-    message = await channel.send("!day")
+    message = await channel.send("!day today")
 
     start = datetime.datetime(2021, 9, 30, 0, 0)
     end = datetime.datetime(2021, 9, 30, 23, 59)
@@ -65,7 +65,7 @@ async def test_get_free_time(bot, client):
     create_event_tree(str(message.author.id))
     add_event_to_file(str(message.author.id), current)
 
-    await get_highlight(message)
+    await get_highlight(message, 'today')
 
 """
 TESTING DATE CHECKING
@@ -201,3 +201,16 @@ def test_time_conversion():
         str_time = str(time).split()[1][:5]
 
         assert convert_to_12(str_time) == to_12hour(time)
+
+"""
+TESTING get date function
+"""
+def test_get_date():
+    assert str(datetime.date.today()).split()[0] == get_date('today')
+    assert str(datetime.date.today() + datetime.timedelta(days=1)).split()[0] == get_date('tomorrow')
+    assert str(datetime.date.today() - datetime.timedelta(days=1)).split()[0] == get_date('yesterday')
+    assert str(datetime.date.today() - datetime.timedelta(days=1)).split()[0] == get_date('-1')
+    assert str(datetime.date.today() + datetime.timedelta(days=1)).split()[0] == get_date('1')
+    assert str(datetime.date.today()).split()[0] == get_date(datetime.date.today().strftime("%m/%d/%y"))
+
+

@@ -37,7 +37,10 @@ async def help(ctx):
     em.add_field(name="help", value="Displays all commands and their descriptions", inline=False)
     em.add_field(name="schedule", value="Creates an event", inline=False)
     em.add_field(name="freetime", value="Displays when you are available today", inline=False)
-    em.add_field(name="day", value="Shows everything on your schedule for today", inline=False)
+    em.add_field(name="day", value="Shows everything on your schedule for a specific date\nHere is the format you "
+                                   "should follow:\n!day "
+                                   "today\\tomorrow\\yesterday\n!day 3 (3 days from now)\n!day -3 (3 days ago)\n!day "
+                                   "4/20/22 (On Apr 20, 2022)", inline=False)
     em.add_field(name="typecreate", value="Creates a new event type", inline=True)
     em.add_field(name="typedelete", value="Deletes an event type", inline=True)
     em.add_field(name="exportfile", value="Exports a CSV file of your events", inline=False)
@@ -138,7 +141,7 @@ async def find(ctx):
 
 
 @bot.command()
-async def day(ctx):
+async def day(ctx, arg):
     """
     Function:
         get_highlight
@@ -146,10 +149,11 @@ async def day(ctx):
         Shows the events planned for the day by the user
     Input:
         ctx - Discord context window
+        arg - User input argument
     Output:
         - A message sent to the context with all the events that start and/or end today
     """
-    await get_highlight(ctx)
+    await get_highlight(ctx, arg)
 
 
 @bot.command()

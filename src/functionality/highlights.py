@@ -1,21 +1,22 @@
-from datetime import datetime
+import re
+import datetime
 from functionality.shared_functions import read_event_file, create_event_tree
 
 
-async def get_highlight(ctx):
-
+async def get_highlight(ctx, arg):
     """
     Function:
         get_highlight
     Description:
         Shows the events planned for the day by the user.
-        Future implementation can take date/week/month as argument
-        to show scheduled events as asked by user.
     Input:
         - ctx - Discord context window
+        - arg - The input arguments which specify the date
     Output:
         - A message sent to the context with all the events that start and/or end today
     """
+    # Get the date
+    day = get_date(arg)
 
     # Open and read user's calendar file
     create_event_tree(str(ctx.author.id))
@@ -25,7 +26,6 @@ async def get_highlight(ctx):
     channel = await ctx.author.create_dm()
     event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
     events = []
-    today = str(datetime.today()).split()[0]
 
     # If there are events in the file
     if len(rows) > 1:
@@ -35,15 +35,15 @@ async def get_highlight(ctx):
             event['name'] = row[1]
             start = row[2].split()
             event['startDate'] = start[0]
-            event['startTime'] = convert_to_12(start[1][:-3]) # Convert to 12 hour format
+            event['startTime'] = convert_to_12(start[1][:-3])  # Convert to 12 hour format
             end = row[3].split()
             event['endDate'] = end[0]
-            event['endTime'] = convert_to_12(end[1][:-3]) # Convert to 12 hour format
+            event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
             event['type'] = row[4]
             event['desc'] = row[5]
             dates = [event['startDate'], event['endDate']]
 
-            flag = check_start_or_end(dates, today)
+            flag = check_start_or_end(dates, day)
 
             if flag == 1:
                 # If event starts and ends today
@@ -67,18 +67,52 @@ async def get_highlight(ctx):
         if len(events) != 0:
             for e in events:
                 if e['flag'] == 1:
-                    await channel.send(f"You have {e['name']} scheduled today, from {e['startTime']} to {e['endTime']}")
+                    await channel.send(f"You have {e['name']} scheduled , from {e['startTime']} to {e['endTime']}")
                 elif e['flag'] == 2:
-                    await channel.send(f"You have {e['name']} scheduled today, from {e['startTime']} to {e['endTime']} on {e['endDate']}")
+                    await channel.send(
+                        "You have {e['name']} scheduled, from {e['startTime']} to {e['endTime']} on {e['endDate']}")
                 elif e['flag'] == 3:
-                    await channel.send(f"You have {e['name']} scheduled today, till {e['endTime']}")
+                    await channel.send(f"You have {e['name']} scheduled, till {e['endTime']}")
         else:
-            await channel.send("You don't have any event scheduled for today!")    
+            if day is None:
+                await channel.send("Incorrect input format. \nHere is the format you should follow:\n!day "
+                                   "today\\tomorrow\\yesterday\n!day 3 (3 days from now)\n!day -3 (3 days ago)\n!day "
+                                   "4/20/22 (On Apr 20, 2022)")
+            else:
+                await channel.send("You don't have any event scheduled for " + day + "!")
     else:
         await channel.send("Looks like your schedule is empty. You can add events using the '!schedule' command!")
 
 
-# Helper Functions 
+# Helper Functions
+
+def get_date(arg):
+    """
+    Function:
+        get_date
+    Description:
+        Get the date from the argument
+    Input:
+        - arg - User input argument
+    Output:
+        - The date extract from the argument
+    """
+    if re.match("tomorrow", arg, re.I):
+        return str(datetime.date.today() + datetime.timedelta(days=1)).split()[0]
+    if re.match("yesterday", arg, re.I):
+        return str(datetime.date.today() - datetime.timedelta(days=1)).split()[0]
+    if re.fullmatch("\d", arg) is not None:
+        return str(datetime.date.today() + datetime.timedelta(days=int(arg))).split()[0]
+    if re.fullmatch("-\d", arg) is not None:
+        arg = arg.replace("-", "")
+        return str(datetime.date.today() - datetime.timedelta(days=int(arg))).split()[0]
+    if re.fullmatch("\d\d/\d\d/\d\d", arg):
+        return str(datetime.datetime.strptime(arg, "%m/%d/%y")).split()[0]
+    if re.match("today", arg, re.I):
+        return str(datetime.date.today()).split()[0]
+    else:
+        return None
+
 
 
 def check_start_or_end(dates, today):
@@ -107,7 +141,6 @@ def check_start_or_end(dates, today):
         return 0
 
 
-
 def convert_to_12(time):
     """
     Function:
@@ -126,7 +159,7 @@ def convert_to_12(time):
     elif int(time[:2]) == 12:
         new_time = time + " PM"
     elif int(time[:2]) > 9 and int(time[:2]) < 12:
-            new_time = time + " AM"
+        new_time = time + " AM"
     else:
         new_time = time[1:] + " AM"
     return new_time
