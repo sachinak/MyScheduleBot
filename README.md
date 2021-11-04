@@ -124,10 +124,10 @@ When you look for available times, you now can use `!find` to find only the avai
 
 ### Get your Discord bot 
 
- Follow the [tutorial](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/) to create your discord bot account.
+ Follow this [tutorial](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/) to create your discord bot account.
 
 ### Token
-  Place config.py file in the src directory with the content:
+  To "login" to your bot through our program, place a file named `config.py` in your src directory with the content:
   
   ```
   token = ************(your discord bot token)
@@ -194,9 +194,9 @@ At startup, the bot now sends an on_ready welcome message to all servers the bot
 
 ## Getting involved
 
-Thank you for caring for this project and getting involved. To start, please check out [contributing](https://github.com/lyonva/ScheduleBot/blob/main/CONTRIBUTING.md) and [code of conduct](https://github.com/lyonva/ScheduleBot/blob/main/CODE_OF_CONDUCT.md). For more technical detail of implementation of code, you can check out the documentation. When you want to get your hands on the project, take a peek into the [github project](https://github.com/lyonva/ScheduleBot/projects/1), assign yourself a task, move it to To-Do, and convert it into an issue and assign it to yourself.
+Thank you for caring for this project and getting involved. To start, please check out [contributing](https://github.com/qchen59/ScheduleBot/blob/main/CONTRIBUTING.md) and [code of conduct](https://github.com/qchen59/ScheduleBot/blob/main/CODE_OF_CONDUCT.md). For more technical detail of implementation of code, you can check out the documentation. When you want to get your hands on the project, take a peek into the [github project](https://github.com/qchen59/ScheduleBot/projects/1), assign yourself a task, move it to To-Do, and convert it into an issue and assign it to yourself.
 
-Check out the [online documentation](https://lyonva.github.io/ScheduleBot/) if you want to contribute or find out about the inner workings of ScheduleBot.
+Check out the [internal documentation](https://github.com/qchen59/ScheduleBot/tree/main/docs) if you want to contribute or find out about the inner workings of ScheduleBot.
 
 ## Future features
 
