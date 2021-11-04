@@ -36,9 +36,14 @@ To get a list of commands, DM the bot the command:
 
 The bot will reply back you with the list of available commands.
 
+<img width="481" alt="Screen Shot 2021-11-03 at 10 15 04 PM" src="https://user-images.githubusercontent.com/34405372/140246210-6e0f176e-bb49-47ad-88d4-0b9f04ae073d.png">
+
+
 ### **Scheduling an event**
 
-ScheduleBot's unit of work is the **event**. When you use ScheduleBot to organize your activities, it keeps track of your registered events. Each event consists of a period of time, comprised between a starting and ending date/time. When ScheduleBot tries to find time for a new event, it makes sure it does not overlap with any other events you have. To schedule a new event, just DM the bot:
+ScheduleBot's unit of work is the **event**. When you use ScheduleBot to organize your activities, it keeps track of your registered events. Each event consists of a period of time, comprised between a starting and ending date/time, event type, event priority and optional notes.  
+
+To schedule a new event, just DM the bot:
 
 ```
 !schedule
@@ -46,19 +51,31 @@ ScheduleBot's unit of work is the **event**. When you use ScheduleBot to organiz
 
 The bot will ask you the details of your new event.
 
-![Schedule](docs/img/Schedule.gif)
+![Schedule](docs/img/!schedul.gif)
 
 ### **I forgot my agenda for the day**
 
-You can take a look at your events scheduled for the day with the command:
+You can take a look at your events scheduled for a specfic date with the command:
 
 ```
-!day
+!day today(or tomorrow\yesterday)
 ```
 
-The bot will show you what you have scheduled for the day. This includes events that start before, or end after today.
+```
+!day 3 (3 days from now)
+```
 
-![Day](docs/img/Day.gif)
+```
+!day -3 (3 days ago)
+```
+
+```
+!day 4/20/22 (On Apr 20, 2022)
+```
+
+The bot will show you what you have scheduled for the date. This includes events that start before, or end after this date.
+
+![Day](docs/img/!day.gif)
 
 ### **I don't really want to work at 3 a.m.**
 
@@ -72,7 +89,14 @@ The bot will ask you for the name of the type and your preferred times.
 
 ![Type Create](docs/img/Type%20Create.gif)
 
+### Looking for the spare time?
 
+ScheduleBot will help you find your free times. Just write:
+
+```
+!freetime
+```
+![Freetime](docs/img/!freetime.gif)
 ### Find available times for a type of event
 When you look for available times, you now can use `!find` to find only the available times in your preferred hours. 
 
