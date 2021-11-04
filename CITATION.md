@@ -6,7 +6,7 @@ If citing our project, please use the following formats:
 
 ```
 bibtex
-@misc{ItemStockTracker,
+@misc{ScheduleBot,
   author = {L. Villalobos-Arias, C. Smith, Ashwith, R. Ramakrishnan, V. Agrawal, M. Alahmadi, Q. Chen, N. Rajapaksha, J. Wright, and J. Yang},
   title = {ScheduleBot},
   year = {2021},
