@@ -4,6 +4,29 @@ Thank you for taking your time for learning how to contribute. Below are some ge
 ## Code of Conduct
 Please follow the guidelines stated in our [code of conduct](https://github.com/ConnorS1110/CSC510_Homework2b_Group14/blob/main/CODE_OF_CONDUCT.md). You're expected to uphold this code when contributing.
 
+## Setting Up
+
+### Get your Discord bot 
+
+ Follow this [tutorial](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/) to create your discord bot account.
+
+### Token
+  To "login" to your bot through our program, place a file named `config.py` in your src directory with the content:
+  
+  ```
+  token = ************(your discord bot token)
+  ```
+  
+### Intall required packages
+  ```
+  pip install -r requirements.txt
+  ```
+### Run the schedulebot.py
+  ```
+  python3 schedulebot.py
+  ```
+  Then your scheduleBot should start working.
+
 ## Ways to Contribute
 
 ### Report bugs
