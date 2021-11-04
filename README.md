@@ -81,9 +81,52 @@ When you look for available times, you now can use `!find` to find only the avai
 
 ## Releases
 
--   [All releases](https://github.com/
-/ScheduleBot/releases)
--   Latest: [v0](https://github.com/lyonva/ScheduleBot/releases/tag/v0)
+-   [All releases](https://github.com/qchen59/ScheduleBot/releases)
+-   [v1.1](https://github.com/lyonva/ScheduleBot/releases/tag/v1.1): First functional release
+-   [v2.0](https://github.com/qchen59/ScheduleBot/releases/tag/v2.0.0): First version 2 release with import/export events function, find available time feature, also supports 24 hour time format and event priority.
+-   [v2.1] (): Finalized version 2, check what's new in V2
+
+# What's new in V2:
+
+Please note that this is not an exhaustive list, however it does include all major improvements. For a complete list of all changes and bug fixes, please see our closed github issues or commit history.
+
+#### Import & Export your calendar
+
+The user can now import or export their calendar events as a CSV file through the bot. The user can also import ICS files downloaded from Google Calendar.
+
+#### Find time based on schedule + preferred time
+
+ScheduleBot can help you find available times for a type of event based on your schedule and preferred time for the event type.
+
+#### Event types with priority
+
+Users can now assign a priority value for each event. This will help them keep track of important events. It also provides a foundation for future improvements, such as suggesting event removals based on the priority of events.
+
+#### Support 24-hour time format input
+
+We support 24-hour time format input now, in addition to the 12-hour format.
+
+#### User's files encryption/decryption
+
+User's data is now encrypted when it is stored in the host server, so the host will not be able to see other users\' schedules as easily. This improves user's privacy when using Schedulebot.
+
+#### Check schedule for arbitrary days 
+
+Users are able to check the schedule for any specific day in addition to today. Previously, only the events occurring today could be retrieved by the user.
+
+#### Code coverage improvement
+
+In this version, we improved the project's code coverage from 39% to 54%.
+
+Code coverage remains low in this project because many sections of code require a Discord channel, and responses from a non-bot user through Discord. However, we were able to create a mock discord channel and user for several tests by using the "dpytest" library.
+
+#### Fixed bugs related to the welcome message sent at startup
+
+At startup, the bot now sends an on_ready welcome message to all servers the bot is currently listening to, instead of just one specific server. The bot also no longer attempts to respond to reactions to the welcome message made by itself or other bots.
+
+#### Fixed bugs related to finding freetime
+
+!freetime function was not working under certain circumstances, such as when there was only one event in the schedule. This has been fixed in the latest version.
 
 ## Documentation
 
