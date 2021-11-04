@@ -20,7 +20,8 @@ https://user-images.githubusercontent.com/34405372/139776326-722e8526-4977-4ffd-
 
 
 
-ScheduleBot is a Python application that helps you calendarize events and work through a Discord bot. Want to try it out? ~~[Invite the bot into a server](https://discord.com/api/oauth2/authorize?client_id=884865269867102249&permissions=534723951680&scope=bot), and afterward you can DM the bot. (To be implemented in the future)~~ Join the [ScheduleBot server](https://discord.gg/xRaact5GmH) and DM the bot.
+ScheduleBot is a Python application that helps you calendarize events and work through a Discord bot. Want to try it out? Simply follow the steps outlined in the [For Developers](#For-Developers) section. ScheduleBot can be configured to run on your Discord server by adding just one line of code!
+
 
 With ScheduleBot you can quickly schedule events, state your prefered times for certain types of activities (exercise, homework, meetings, etc.) and quickly find out which times you have available to do more stuff.
 
@@ -191,8 +192,6 @@ At startup, the bot now sends an on_ready welcome message to all servers the bot
 
 !freetime function was not working under certain circumstances, such as when there was only one event in the schedule. This has been fixed in the latest version.
 
-## Documentation
-
 ## Getting involved
 
 Thank you for caring for this project and getting involved. To start, please check out [contributing](https://github.com/lyonva/ScheduleBot/blob/main/CONTRIBUTING.md) and [code of conduct](https://github.com/lyonva/ScheduleBot/blob/main/CODE_OF_CONDUCT.md). For more technical detail of implementation of code, you can check out the documentation. When you want to get your hands on the project, take a peek into the [github project](https://github.com/lyonva/ScheduleBot/projects/1), assign yourself a task, move it to To-Do, and convert it into an issue and assign it to yourself.
@@ -200,6 +199,8 @@ Thank you for caring for this project and getting involved. To start, please che
 Check out the [online documentation](https://lyonva.github.io/ScheduleBot/) if you want to contribute or find out about the inner workings of ScheduleBot.
 
 ## Future features
+
+These are example features that could be added to ScheduleBot in the future.
 
 ### Delete event
 Delete the event you don't want anymore:
@@ -229,10 +230,4 @@ You can quickly create a new event with the command
 !schedulefind type X
 ```
 
-\[Screenshot\]
-
 It will find and schedule the first available X contiguous hours, on your preferred hours of the specified `type`.
-
-\[Screenshot\]
-
-\[Add more future functionality\]
