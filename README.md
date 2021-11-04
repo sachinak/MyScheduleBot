@@ -89,6 +89,22 @@ The bot will ask you for the name of the type and your preferred times.
 
 ![Type Create](docs/img/Type%20Create.gif)
 
+### Import & Export your calendar
+
+You can import or export their calendar events as a CSV file through the bot. You can also import ICS files downloaded from Google Calendar.
+
+```
+!exportfile
+```
+![Export file](docs/img/!export.gif)
+
+```
+!importfile
+```
+Then drag the file to the Schedulebot.
+
+![Import file](docs/img/!import.gif)
+
 ### Looking for the spare time?
 
 ScheduleBot will help you find your free times. Just write:
@@ -97,12 +113,35 @@ ScheduleBot will help you find your free times. Just write:
 !freetime
 ```
 ![Freetime](docs/img/!freetime.gif)
+
 ### Find available times for a type of event
 When you look for available times, you now can use `!find` to find only the available times in your preferred hours. 
 
 ![Find Available times](docs/img/find.gif)
 
+## For Developers
 
+### Get your Discord bot 
+
+ Follow the [tutorial](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/) to create your discord bot account.
+
+### Token
+  Place config.py file in the src directory with the content:
+  
+  ```
+  token = ************(your discord bot token)
+  ```
+  
+### Intall required packages
+  ```
+  pip install -r requirements.txt
+  ```
+### Run the schedulebot.py
+  ```
+  python3 schedulebot.py
+  ```
+  Then your scheduleBot should start working.
+  
 ## Releases
 
 -   [All releases](https://github.com/qchen59/ScheduleBot/releases)
@@ -161,6 +200,26 @@ Thank you for caring for this project and getting involved. To start, please che
 Check out the [online documentation](https://lyonva.github.io/ScheduleBot/) if you want to contribute or find out about the inner workings of ScheduleBot.
 
 ## Future features
+
+### Delete event
+Delete the event you don't want anymore:
+
+```
+!eventdelete
+```
+
+### Suggest event removals
+When Your entire day is scheduled
+You have event 1 of priority 4
+You try to find time for another event of priority 3
+ScheduleBot should say there is no time, but can suggest replacing event 1 as it has less priority.
+
+### Edit event
+You can edit the event you created:
+
+```
+!eventedit
+```
 
 ### Quick event creation
 
