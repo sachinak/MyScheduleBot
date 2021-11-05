@@ -148,7 +148,7 @@ When you look for available times, you now can use `!find` to find only the avai
 -   [All releases](https://github.com/qchen59/ScheduleBot/releases)
 -   [v1.1](https://github.com/lyonva/ScheduleBot/releases/tag/v1.1): First functional release
 -   [v2.0](https://github.com/qchen59/ScheduleBot/releases/tag/v2.0.0): First version 2 release with import/export events function, find available time feature, also supports 24 hour time format and event priority.
--   [v2.1] (): Finalized version 2, check what's new in V2
+-   [v2.1] (https://github.com/qchen59/ScheduleBot/releases/tag/v2.1.0): Finalized version 2, check what's new in V2
 
 # What's new in V2:
 
