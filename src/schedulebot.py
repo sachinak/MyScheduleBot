@@ -215,7 +215,7 @@ async def typedelete(ctx):
 
 # connecting to google
 @bot.command()
-async def cg(ctx):
+async def ConnectGoogle(ctx):
     gflag=await connect_google(ctx)
 
 @bot.command()
