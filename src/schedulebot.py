@@ -17,7 +17,7 @@ from functionality.Google import connect_google
 
 bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
-
+g_flag=0
 
 @bot.group(invoke_without_command=True)
 async def help(ctx):
@@ -216,7 +216,7 @@ async def typedelete(ctx):
 # connecting to google
 @bot.command()
 async def cg(ctx):
-    await connect_google(ctx)
+    gflag=await connect_google(ctx)
 
 @bot.command()
 @commands.is_owner()
@@ -248,6 +248,6 @@ if __name__ == "__main__":
     from config import TOKEN
 
     bot.run(TOKEN)
-    print(ctx)
+    
 
 # client.run(os.environ['TOKEN'])  # Runs the bot (repl.it)
