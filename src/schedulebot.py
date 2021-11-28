@@ -13,6 +13,7 @@ from functionality.delete_event_type import delete_event_type
 from functionality.DisplayFreeTime import get_free_time
 from functionality.export_file import export_file
 from functionality.import_file import import_file
+from functionality.Google import connect_google
 
 bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
@@ -36,6 +37,7 @@ async def help(ctx):
     )
     em.add_field(name="help", value="Displays all commands and their descriptions", inline=False)
     em.add_field(name="schedule", value="Creates an event", inline=False)
+    em.add_field(name="ConnectGoogle", value="Connect to Google Calendar", inline=False)
     em.add_field(name="freetime", value="Displays when you are available today", inline=False)
     em.add_field(name="day", value="Shows everything on your schedule for a specific date\nHere is the format you "
                                    "should follow:\n!day "
@@ -45,6 +47,7 @@ async def help(ctx):
     em.add_field(name="typedelete", value="Deletes an event type", inline=True)
     em.add_field(name="exportfile", value="Exports a CSV file of your events", inline=False)
     em.add_field(name="importfile", value="Import events from a CSV or ICS file", inline=False)
+    em.add_field(name="stop", value="ExitBot", inline=False)
     await ctx.send(embed=em)
 
 
@@ -210,6 +213,22 @@ async def typedelete(ctx):
     await delete_event_type(ctx, bot)
 
 
+# connecting to google
+@bot.command()
+async def ConnectGoogle(ctx):
+    await connect_google(ctx)
+
+@bot.command()
+@commands.is_owner()
+async def stop(ctx):
+    channel = await ctx.author.create_dm()
+    await channel.send(
+        "Thank you for using ScheduleBot. See you again!"
+
+    )
+    await ctx.bot.logout()
+
+
 @bot.command()
 async def freetime(ctx):
     """
@@ -229,5 +248,6 @@ if __name__ == "__main__":
     from config import TOKEN
 
     bot.run(TOKEN)
+    print(ctx)
 
 # client.run(os.environ['TOKEN'])  # Runs the bot (repl.it)
