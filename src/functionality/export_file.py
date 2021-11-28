@@ -3,7 +3,7 @@ import csv
 import discord
 from functionality.shared_functions import create_event_file, create_event_directory
 
-from src.functionality.shared_functions import load_key, decrypt_file, encrypt_file
+from functionality.shared_functions import load_key, decrypt_file, encrypt_file
 
 
 async def export_file(ctx):
