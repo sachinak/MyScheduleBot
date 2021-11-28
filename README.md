@@ -130,7 +130,7 @@ When you look for available times, you now can use `!find` to find only the avai
   To "login" to your bot through our program, place a file named `config.py` in your src directory with the content:
   
   ```
-  token = ************(your discord bot token)
+  TOKEN = ************(your discord bot token)
   ```
   
 ### Intall required packages
