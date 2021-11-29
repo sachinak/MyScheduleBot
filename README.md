@@ -10,7 +10,6 @@
 [![GitHub all releases](https://img.shields.io/github/downloads/qchen59/ScheduleBot/total)](https://github.com/qchen59/ScheduleBot/releases)
 [![Platform](https://img.shields.io/badge/platform-discord-blue)](https://discord.com/)
 [![Coverage Status](https://coveralls.io/repos/github/qchen59/ScheduleBot/badge.svg?branch=main)](https://coveralls.io/github/qchen59/ScheduleBot?branch=main)
-[![Pylint](https://github.com/SEProjGrp5/ScheduleBot/actions/workflows/pylint.yml/badge.svg)](https://github.com/SEProjGrp5/ScheduleBot/actions/workflows/pylint.yml)
 
 # ScheduleBot
 
