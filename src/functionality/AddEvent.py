@@ -116,10 +116,16 @@ async def add_event(ctx, client):
             start_date = parse_result[0]
             end_date = parse_result[1]
 
-
+            flag=0
             # If both datetime objects were successfully created, they get appended to the list and exits the while loop
             if not (event_dates := check_complete(start_complete, start_date, end_complete, end_date, event_array)):
                 # If both objects were unsuccessfully created, the bot notifies the user and the loop starts again
+                flag+=1
+                if flag>3:
+                    await channel.send(
+                    "unable to create event due to incorrect time format"
+                )
+                    return
                 await channel.send(
                     "Make sure you follow this format(Start is first, end is second): mm/dd/yy hh:mm mm/dd/yy hh:mm"
                 )
@@ -162,6 +168,12 @@ async def add_event(ctx, client):
     event_msg = event_msg.content  # Strips message to just the text the user entered
     await create_event_type(ctx, client, event_msg)  # Running event_type creation subroutine
     event_array.append(event_msg)
+    await channel.send(
+        "What is the location of the event?(Type None for no location/online)"
+    )
+    event_msg = await client.wait_for("message", check=check)  # Waits for user input
+    event_msg = event_msg.content  # Strips message to just the text the user entered
+    event_array.append(event_msg)
     await channel.send("Any additional description you want me to add about the event? If not, enter 'done'")
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
@@ -169,10 +181,13 @@ async def add_event(ctx, client):
         event_array.append("")
     else:
         event_array.append(event_msg)
+    
+
+
 
     # Tries to create an Event object from the user input
     try:
-        current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4], event_array[5])
+        current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4], event_array[6],event_array[5])
         await channel.send("Your event was successfully created!")
         create_event_tree(str(ctx.author.id))
         add_event_to_file(str(ctx.author.id), current)

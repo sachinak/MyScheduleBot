@@ -24,7 +24,7 @@ async def get_highlight(ctx, arg):
 
     # Initialize variables
     channel = await ctx.author.create_dm()
-    event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
+    event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': '','loc': ''}
     events = []
 
     # If there are events in the file
@@ -41,6 +41,7 @@ async def get_highlight(ctx, arg):
             event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
             event['type'] = row[4]
             event['desc'] = row[5]
+            event['location']=row[6]
             dates = [event['startDate'], event['endDate']]
 
             flag = check_start_or_end(dates, day)

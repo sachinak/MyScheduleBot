@@ -129,7 +129,7 @@ def create_event_file(user_id):
             newline="",
         ) as new_file:
             csvwriter = csv.writer(new_file, delimiter=",")
-            csvwriter.writerow(["ID", "Name", "Start Date", "End Date", "Priority", "Type", "Notes"])
+            csvwriter.writerow(["ID", "Name", "Start Date", "End Date", "Priority", "Type", "Notes","Location"])
 
         key = check_key(user_id)
         encrypt_file(key , os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
@@ -200,6 +200,7 @@ def add_event_to_file(user_id, current):
                     "",
                     datetime.strptime(i[2], "%Y-%m-%d %H:%M:%S"),
                     datetime.strptime(i[3], "%Y-%m-%d %H:%M:%S"),
+                    "",
                     "",
                     "",
                     "",
