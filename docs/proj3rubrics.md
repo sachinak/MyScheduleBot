@@ -3,10 +3,10 @@
 
 Sr. No| Notes|Self-assement|Evidence|
 |----|--------|------|-------|
-1| short release cycles | 0.5 | Evidence in [Pulse](https://github.com/SEProjGrp5/slash/pulse) and [Commit History](https://github.com/SEProjGrp5/slash/commits/main) |
-2| workload is spread over the whole team (so one team member is often Xtimes more productive than the others| 0.5 | Evidence in [issue history](https://github.com/SEProjGrp5/slash/projects/1)|
-3| Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing|0.5| Evidence in [Readme](https://github.com/SEProjGrp5/slash#readme)|
-4| 	the files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up|0.5|Evidence in [Contributing.md File](https://github.com/SEProjGrp5/slash/blob/main/CONTRIBUTING.md)|
+1| short release cycles | 0.5 | Evidence in [Pulse](https://github.com/SEProjGrp5/ScheduleBot/pulse) and [Commit History](https://github.com/SEProjGrp5/ScheduleBot/commits/main) |
+2| workload is spread over the whole team (so one team member is often Xtimes more productive than the others| 0.5 | Evidence in [issue history](https://github.com/SEProjGrp5/ScheduleBot/projects/2)|
+3| Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing|0.5| Evidence in [Readme](https://github.com/SEProjGrp5/ScheduleBot#readme)|
+4| 	the files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up|0.5|Evidence in [Contributing.md File](https://github.com/SEProjGrp5/ScheduleBot/blob/main/CONTRIBUTING.md)|
 5| Docs: doco generated , format not ugly| 0.5 | Evidence in [docs](https://github.com/SEProjGrp5/slash/tree/main/docs) folder|
 6| evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)|0.5|Evidence in [requirements.txt](https://github.com/SEProjGrp5/slash/blob/main/requirements.txt). The whole team has configured their system using the requirements.txt file and are using the same tools as required by the project|
 7| evidence that the members of the team are working across multiple places in the code base |0.5| Evidence in [Commit History](https://github.com/SEProjGrp5/slash/commits/main)|
