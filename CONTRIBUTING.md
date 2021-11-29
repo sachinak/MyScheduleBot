@@ -1,8 +1,13 @@
-# Contributing to this project
+# Contributing to ScheduleBot ! 
 Thank you for taking your time for learning how to contribute. Below are some general guidelines and practices that you should keep in mind when contributing to this repository.
 
-## Code of Conduct
-Please follow the guidelines stated in our [code of conduct](https://github.com/ConnorS1110/CSC510_Homework2b_Group14/blob/main/CODE_OF_CONDUCT.md). You're expected to uphold this code when contributing.
+We request you to please follow the Code of Conduct that we have created which is located here : https://github.com/SEProjGrp5/ScheduleBot/blob/main/CODE_OF_CONDUCT.md
+
+## Before getting started
+Give the following links a read to understand the working of the project and setting up the requirements
+
+1. Check [README.md](https://github.com/SEProjGrp5/ScheduleBot/blob/main/README.md)
+2. Check [requirements.txt](https://github.com/SEProjGrp5/ScheduleBot/blob/main/requirements.txt)
 
 ## Setting Up
 
@@ -38,16 +43,32 @@ Report any issues you encounter while using or contributing to this repository a
 
 ### Suggest enhancements
 Suggestions are very much welcome. If you have a suggestion for this project, please report it as a github issue, using the Feature Request tag, and provide the following information:
-- Use a clear, descriptive title.
-- Provide as many details as posible on how do you envision this feature:
-  - Provide a step-by-step of any process.
-  - Attach a prototype if it requires an UI change.
-- Explain *why* you believe this contribution is worthwhile.
+
+*	Use a clear and descriptive title for the issue to identify the problem.
+*	Describe the exact steps which reproduce the problem in as many details as possible. Along with it, provide the details regarding the name and version of OS, Python version, configuration of the environment, if used any.
+*	Provide specific examples to demonstrate the steps. Include links to files or GitHub projects, or copy/paste able snippets, which you use in those examples. If you're providing snippets in the issue, use Markdown code blocks.
+*	Describe the behavior you observed after following the steps and point out what exactly is the problem with that behavior.
+*	Explain which behavior you expected to see instead and why.
+*	If the problem is related to performance or memory, include details of the errors encountered with your report.
+*	Can you reliably reproduce the issue? If not, provide details about how often the problem happens and under which conditions it normally happens.
+
+#### Before Submitting An Enhancement Suggestion
+- Check the Debugging guide for the corresponding project and look for the enhancement that is already available. 
+- Check the FAQs on the forum for a list of common questions and problems.
+- Determine which repository the enhancement should be suggested in.
+- Perform a cursory search to see if the enhancement has already been suggested. 
 
 ### Contribute code
 We use git flow in this repo. If you want to contribute through code, please fork an existing branch to work on your feature. If you're working on a current issue, respond to that issue with "I'm working on this". When you are done, submit a pull request to join your contribution to the branch you forked. Before submiting your request, please:
 - Implement functional, passing test cases that test your contribution
 - Check that all previous test cases and other status checks are passing.
+
+## Pull Requests<a name="requests"></a>
+The process described here has several goals:
+- Maintain the project’s quality
+- Fix problems that are important to users
+- Engage the community in working toward the best possible solution
+- Enable a sustainable system for the project’s maintainers to review contributions
 
 ## Style guidelines
 ### Git commit
