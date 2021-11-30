@@ -8,6 +8,7 @@ import os
 import requests
 import sys
 import json
+import config
 
 key_data = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname
                                         (os.path.abspath(__file__)))), "json", "key.json")
