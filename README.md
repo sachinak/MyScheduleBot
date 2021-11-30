@@ -202,3 +202,27 @@ Check out the [internal documentation](https://htmlpreview.github.io/?https://gi
 
 
 ## Future features
+These are example features that could be added to ScheduleBot in the future.
+
+### Quick event creation
+
+You can quickly create a new event with the command
+
+```
+!schedulefind type X
+```
+
+It will find and schedule the first available X contiguous hours, on your preferred hours of the specified `type`.
+
+### Suggest event removals
+When Your entire day is scheduled
+You have event 1 of priority 4
+You try to find time for another event of priority 3
+ScheduleBot should say there is no time, but can suggest replacing event 1 as it has less priority.
+
+### Edit event
+You can edit the event you created:
+
+```
+!eventedit
+```
