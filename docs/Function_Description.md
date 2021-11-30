@@ -92,4 +92,40 @@
     Output:
         - Events are added to a users profile.
     """
- 
+
+## event_type.py 
+
+### def get_start_time(self):
+        """
+        Function:
+            get_start_time
+        Description:
+            Converts an start time in event_type object into a string
+        Input:
+            self - The current event_type object instance
+        Output:
+            A formatted string of the start time
+        """
+ ### def get_end_time(self):
+        """
+        Function:
+            get_end_time
+        Description:
+            Converts an end time in event_type object into a string
+        Input:
+            self - The current event_type object instance
+        Output:
+            A formatted string of end time
+        """
+### def to_list_event(self):
+        """
+        Function:
+            to_list_event
+        Description:
+            Converts an event_type object into a list
+        Input:
+            self - The current event_type object instance
+        Output:
+            array - A list with each index being an attribute of the self event_type object
+        """
+        
