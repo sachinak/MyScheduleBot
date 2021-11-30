@@ -60,6 +60,7 @@ def check_variables1():
         "end": False,
         "end_date": datetime(2021, 9, 29, 23, 30),
         "array": [],
+        "location": "",
     }
     return output
 
@@ -71,6 +72,7 @@ def check_variables2():
         "end": False,
         "end_date": datetime(2021, 9, 29, 23, 30),
         "array": [],
+        "location": "None",
     }
     return output
 
@@ -82,6 +84,7 @@ def check_variables3():
         "end": True,
         "end_date": datetime(2021, 9, 29, 23, 30),
         "array": [],
+        "location": "None",
     }
     return output
 
@@ -93,6 +96,7 @@ def check_variables4():
         "end": True,
         "end_date": datetime(2021, 9, 29, 23, 30),
         "array": ["Hello"],
+        "location": "None",
     }
     return output
 
@@ -109,6 +113,7 @@ def test_check():
             example1["end"],
             example1["end_date"],
             example1["array"],
+            example1["location"],
         )
     )
     assert not (
@@ -118,6 +123,7 @@ def test_check():
             example2["end"],
             example2["end_date"],
             example2["array"],
+            example1["location"],
         )
     )
     assert check_complete(
@@ -126,6 +132,7 @@ def test_check():
         example3["end"],
         example3["end_date"],
         example3["array"],
+        example1["location"],
     )
     assert check_complete(
         example4["start"],
@@ -133,4 +140,5 @@ def test_check():
         example4["end"],
         example4["end_date"],
         example4["array"],
+        example1["location"],
     )
