@@ -21,10 +21,8 @@ with open(key_data) as json_file:
     
 def get_lat_log( address):
     """
-    This function converst a textual address to a set of coordinates
+    This function converts a textual address to a set of coordinates
 
-    Parameters
-    ----------
     address : String
         the location for which coordinates are needed.
 
@@ -49,19 +47,13 @@ def get_distance( dest, src,mode):
     """
     this gets the distace matrix which includes the travel time to the event
 
-    Parameters
-    ----------
-    dest : String
-        address of location for event.
-    src : list
-        coordinates of source address.
-    mode: String
-        Mode of transport
+    Input:
+    dest : Takes address of location for event as a string.
+    src : Takes coordinates of source address as a list.
+    mode: Takes Mode of transport as a string.
 
-    Returns
-    -------
-    int
-        travel time in seconds.
+    Returns:
+    travel time in seconds.
 
     """
     print(src)
