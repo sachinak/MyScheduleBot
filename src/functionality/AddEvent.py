@@ -9,6 +9,17 @@ from parse.match import parse_period24
 
 
 def check_complete(start, start_date, end, end_date, array):
+    """
+    Function:
+        check_complete
+    Description:
+        Boolean function to check if both the date objects are created
+    Input:
+        start_date - start date
+        end_date - end date
+    Output:
+        - True if both the date objects are created else False
+    """
     if start and end:
         print("Both date objects created")
         array.append(start_date)
