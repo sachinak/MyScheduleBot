@@ -38,11 +38,11 @@ def create_event_5():
 
 
 def test_str_1():
-    assert str(create_event_1()) == "Make test cases 2021-09-29 20:21:00 2021-09-29 22:21:00 1 homework Make test cases for my code in SE"
+    assert str(create_event_1()) == "Make test cases 2021-09-29 20:21:00 2021-09-29 22:21:00 1 homework Make test cases for my code in SE None"
 
 
 def test_str_2():
-    assert str(create_event_2()) == "SE project 2021-09-30 00:00:00 2021-09-30 23:59:00 2 homework Finish it"
+    assert str(create_event_2()) == "SE project 2021-09-30 00:00:00 2021-09-30 23:59:00 2 homework Finish it None"
 
 
 def test_less_than():
