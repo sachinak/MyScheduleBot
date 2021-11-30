@@ -1,6 +1,6 @@
 class Event:
 
-    def __init__(self, name, start_date, end_date, priority, event_type, description,location):
+    def __init__(self, name, start_date, end_date, priority, event_type, description,location="None"):
         """
         Function:
             __init__
