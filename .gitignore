@@ -140,3 +140,6 @@ schedulebot\ copy.py
 
 # VSCode
 .vscode
+
+# .gitignore 
+config.py
