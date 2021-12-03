@@ -10,7 +10,7 @@ Sr. No| Notes|Self-assement|Evidence|
 5| Docs: doco generated , format not ugly| 0.5 | Evidence in [docs](https://github.com/SEProjGrp5/ScheduleBot/tree/main/docs) folder|
 6| evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)|0.5|Evidence in [requirements.txt](https://github.com/SEProjGrp5/ScheduleBot/blob/main/requirements.txt). The whole team has configured their system using the requirements.txt file and are using the same tools as required by the project|
 7| evidence that the members of the team are working across multiple places in the code base |0.5| Evidence in [Commit History](https://github.com/SEProjGrp5/ScheduleBot/commits/main)|
-8**|Docs: what: point descriptions of each class/function (in isolation)| 1 | Function description is included in the code for every function with proper docstring mentioning the function objective, input parameters and return parameters. [Function description document](https://github.com/SEProjGrp5/ScheduleBot/blob/main/docs/Function_Description.md) is also created as evidence|
+8|Docs: what: point descriptions of each class/function (in isolation)| 1 | Function description is included in the code for every function with proper docstring mentioning the function objective, input parameters and return parameters. [Function description document]<<>> is also created as evidence|
 9|Number of commits: by different people |0.5| Evidence in [Pulse](https://github.com/SEProjGrp5/slash/pulse) and [Commit History](https://github.com/SEProjGrp5/ScheduleBot/commits/main)|
 10|issues are being closed|1|Evidence in [issue history](https://github.com/SEProjGrp5/ScheduleBot/projects/2)|
 11| issues are discussed before they are closed |0.5| Every issue was discussed before they are closed on our chat channel. Discussion summary is also provided. Evidence in [issue history](https://github.com/SEProjGrp5/ScheduleBot/projects/2)|
@@ -20,7 +20,7 @@ Sr. No| Notes|Self-assement|Evidence|
 15| Use of style checkers |0.5|Style checker implementation to check code style : Evidence in [Style checker yml file](https://github.com/SEProjGrp5/ScheduleBot/blob/main/checkers/PycharmStyleSyntax.xml)|
 16|	Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code. | 0.5 | Evidence in [readme.md](https://github.com/SEProjGrp5/ScheduleBot#schedulebot)|
 17| test cases exist |0.5| Test cases can be found in [test](https://github.com/SEProjGrp5/ScheduleBot/tree/main/test) folder|
-18**| Use of code coverage|0.5|Evidence in [code coverage yml file]<<>>|
+18| Use of code coverage|0.5|Evidence on [code coverage website](https://app.codecov.io/gh/SEProjGrp5/ScheduleBot) and badge added to readme|--
 19| other automated analysis tools|0.5| Used automation such as travis, code coverage, style checker etc |
 20| test cases:.a large proportion of the issues related to handling failing cases.|0.5|Evidence in [test](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/workflow.yml) folder|
 21| test cases are routinely executed|0.5 | [Travis.yml implementation](https://github.com/SEProjGrp5/ScheduleBot/blob/main/.travis.yml)|
