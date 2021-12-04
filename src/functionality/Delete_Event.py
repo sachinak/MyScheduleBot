@@ -17,7 +17,9 @@ async def delete_event(ctx, client):
     """
 
     channel = await ctx.author.create_dm()
-
+    await channel.send(
+                    "Enter the name of the event from the following to be deleted : "
+                )
     def check(m):
         return m.content is not None and m.channel == channel and m.author == ctx.author
 
@@ -91,3 +93,6 @@ async def delete_event(ctx, client):
                     await channel.send(f"The event: {e['name']} was deleted..!!")
                 else:
                     print("The entered event name does not exists..!! Please try again")
+                    await channel.send(
+                    "The entered event name does not exists..!! Please try again"
+                    )
