@@ -10,6 +10,7 @@
 [![GitHub all releases](https://img.shields.io/github/downloads/qchen59/ScheduleBot/total)](https://github.com/qchen59/ScheduleBot/releases)
 [![Platform](https://img.shields.io/badge/platform-discord-blue)](https://discord.com/)
 [![codecov](https://codecov.io/gh/SEProjGrp5/ScheduleBot/branch/main/graph/badge.svg?token=Z53J2ZN227)](https://codecov.io/gh/SEProjGrp5/ScheduleBot)
+[![Python Style Checker](https://github.com/SEProjGrp5/ScheduleBot/actions/workflows/style_checker.yml/badge.svg)](https://github.com/SEProjGrp5/ScheduleBot/actions/workflows/style_checker.yml)
 
 # ScheduleBot
 
