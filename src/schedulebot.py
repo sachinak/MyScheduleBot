@@ -14,6 +14,7 @@ from functionality.DisplayFreeTime import get_free_time
 from functionality.export_file import export_file
 from functionality.import_file import import_file
 from functionality.Google import connect_google
+from functionality.GoogleEvent import get_events
 
 bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
@@ -47,6 +48,7 @@ async def help(ctx):
     em.add_field(name="typedelete", value="Deletes an event type", inline=True)
     em.add_field(name="exportfile", value="Exports a CSV file of your events", inline=False)
     em.add_field(name="importfile", value="Import events from a CSV or ICS file", inline=False)
+    em.add_field(name="GoogleEvents", value="Import next 10 events from Google Calendar", inline=False)
     em.add_field(name="stop", value="ExitBot", inline=False)
     await ctx.send(embed=em)
 
@@ -125,6 +127,21 @@ async def schedule(ctx):
         - A message sent to the context saying an event was successfully created
     """
     await add_event(ctx, bot)
+
+@bot.command()
+async def GoogleEvents(ctx):
+    """
+    Function:
+        schedule
+    Description:
+        Calls the add_event function to walk a user through the event creation process
+    Input:
+        ctx - Discord context window
+    Output:
+        - A new event added to the user's calendar file
+        - A message sent to the context saying an event was successfully created
+    """
+    await get_events(ctx, bot)
 
 
 @bot.command()
