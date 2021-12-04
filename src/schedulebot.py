@@ -51,6 +51,7 @@ async def help(ctx):
     em.add_field(name="importfile", value="Import events from a CSV or ICS file", inline=False)
     em.add_field(name="GoogleEvents", value="Import next 10 events from Google Calendar", inline=False)
     em.add_field(name="deleteEvent", value = "Deletes selected event",inline = False)
+    em.add_field(name="summary", value="Get todays summary", inline=False)
     em.add_field(name="stop", value="ExitBot", inline=False)
     await ctx.send(embed=em)
 
@@ -113,7 +114,21 @@ async def on_reaction_add(reaction, user):
         except:
             print(user.name + " (" + user.id + ") does not have DM permissions set correctly")
             pass
-
+        
+@bot.command()
+async def summary(ctx):
+    """
+    Function:
+        get_highlight
+    Description:
+        Shows the events planned for the day by the user
+    Input:
+        ctx - Discord context window
+        arg - User input argument
+    Output:
+        - A message sent to the context with all the events that start and/or end today
+    """
+    await get_highlight(ctx, "today")
 
 @bot.command()
 async def schedule(ctx):
