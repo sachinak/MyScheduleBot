@@ -11,6 +11,14 @@ import json
 #import config
 
 def get_key():
+    '''
+    Function to extract API key
+
+    Returns
+    -------
+    api_key_1 : reutrns the api key for google connection
+
+    '''
     api_key_1=""
     key_data = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname
                                             (os.path.abspath(__file__)))), "json", "key.json")

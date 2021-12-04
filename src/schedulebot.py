@@ -130,17 +130,18 @@ async def schedule(ctx):
 
 @bot.command()
 async def GoogleEvents(ctx):
-    """
-    Function:
-        schedule
-    Description:
-        Calls the add_event function to walk a user through the event creation process
-    Input:
-        ctx - Discord context window
-    Output:
-        - A new event added to the user's calendar file
-        - A message sent to the context saying an event was successfully created
-    """
+    '''
+    extract next 10 events in google calendar
+
+    Parameters
+    ----------
+    ctx :  Discord Context Window.
+
+    Returns
+    -------
+    None.
+
+    '''
     await get_events(ctx, bot)
 
 
@@ -233,11 +234,35 @@ async def typedelete(ctx):
 # connecting to google
 @bot.command()
 async def ConnectGoogle(ctx):
+    '''
+    Connect to google
+
+    Parameters
+    ----------
+    ctx : Discord Context Window.
+
+    Returns
+    -------
+    None.
+
+    '''
     gflag=await connect_google(ctx)
 
 @bot.command()
 @commands.is_owner()
 async def stop(ctx):
+    '''
+    Function to stop bot
+
+    Parameters
+    ----------
+    ctx :  Discord Context Window.
+
+    Returns
+    -------
+    None.
+
+    '''
     channel = await ctx.author.create_dm()
     await channel.send(
         "Thank you for using ScheduleBot. See you again!"

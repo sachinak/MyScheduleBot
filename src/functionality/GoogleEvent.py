@@ -6,6 +6,19 @@ from googleapiclient.discovery import build
 
 
 async def get_events(ctx, arg):
+    '''
+    function oto extract events from google calendar
+
+    Parameters
+    ----------
+    ctx : Discord context window
+    arg : Discord bot user.
+
+    Returns
+    -------
+    None.
+
+    '''
     print("in events")
     channel = await ctx.author.create_dm()
     SCOPES = ['https://www.googleapis.com/auth/calendar']
