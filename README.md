@@ -199,7 +199,13 @@ Thank you for caring for this project and getting involved. To start, please che
 Check out the [internal documentation](https://htmlpreview.github.io/?https://github.com/qchen59/ScheduleBot/blob/main/docs/src/index.html) if you want to contribute or find out about the inner workings of ScheduleBot.
 
 # What's new in V3:
+Following are the new features that we have implemented for version 3 : 
 
+#### 1. Connection to Google
+#### 2. Adding location of an event
+#### 3. Adding travel time as a separate event before the actual event
+#### 4. Delete Event from schedule
+#### 5. Daily summary of scheduled events
 
 ## Future features
 These are example features that could be added to ScheduleBot in the future.
