@@ -207,7 +207,9 @@ Following are the new features that we have implemented for version 3 :
 #### 4. Delete Event from schedule
 #### 5. Daily summary of scheduled events
 #### 6. Code Coverage improvement
-For this version, we have improved the roject's code coverage from 54% to .
+For this version, we have improved the project's code coverage from 54% to .
+#### 7. Viewing Google Calender events
+
 
 ## Future features
 These are example features that could be added to ScheduleBot in the future.
