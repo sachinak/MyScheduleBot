@@ -16,6 +16,16 @@
 
 > Don't let the fear of the time it will take to accomplish something stand in the way of your doing it. The time will pass anyway; we might just as well put that passing time to the best possible use. - Earl Nightingale
 
+<p align="center">
+  <a href="#rocket-getting-started">Getting Started</a>
+  ::
+  <a href="#thought_balloon-for-developers">For Developers</a>
+  ::
+  <a href="#dizzy-whats-new-in-v2">What's new in V2</a>
+  ::
+  <a href="#muscle-whats-new-in-v3">What's new in V3</a>
+</p>
+
 
 https://user-images.githubusercontent.com/34405372/139776326-722e8526-4977-4ffd-b00e-c86a8fd5f706.mp4
 
@@ -28,8 +38,8 @@ With ScheduleBot you can quickly schedule events, state your prefered times for 
 
 ![Setup](docs/img/Startup.gif)
 
-## Getting started
-
+:rocket: Getting started
+---
 To get a list of commands, DM the bot the command:
 
 ```
@@ -121,7 +131,8 @@ When you look for available times, you now can use `!find` to find only the avai
 
 ![Find Available times](docs/img/find.gif)
 
-## For Developers
+:thought_balloon: For Developers
+---
 
 ### Get your Discord bot 
 
@@ -165,7 +176,8 @@ When you look for available times, you now can use `!find` to find only the avai
 -   [v2.1](https://github.com/qchen59/ScheduleBot/releases/tag/v2.1.0): Finalized version 2, check what's new in V2
 -   [v3.0](https://github.com/SEProjGrp5/ScheduleBot/releases) Finalized version 3, check out what's new in V3
 
-# What's new in V2:
+:dizzy: What's new in V2:
+---
 
 Please note that this is not an exhaustive list, however it does include all major improvements. For a complete list of all changes and bug fixes, please see our closed github issues or commit history.
 
@@ -213,7 +225,8 @@ Thank you for caring for this project and getting involved. To start, please che
 
 Check out the [internal documentation](https://htmlpreview.github.io/?https://github.com/qchen59/ScheduleBot/blob/main/docs/src/index.html) if you want to contribute or find out about the inner workings of ScheduleBot.
 
-# What's new in V3:
+:muscle: What's new in V3:
+---
 Following are the new features that we have implemented for version 3 : 
 
 #### 1. Connection to Google: 
