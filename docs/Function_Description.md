@@ -213,6 +213,37 @@
             self - The current Event object instance
         Output:
             array - A list with each index being an attribute of the self Event object
+            
+## AddEvent.py
+
+### def check_complete(start, start_date, end, end_date, array):
+    """
+    Function:
+        check_complete
+    Description:
+        Boolean function to check if both the date objects are created
+    Input:
+        start_date - start date
+        end_date - end date
+    Output:
+        - True if both the date objects are created else False
+    """
+    
+### async def add_event(ctx, client):
+    """
+    Function:
+        add_event
+    Description:
+        Walks a user through the event creation process
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A new event added to the user's calendar file
+        - A message sent to the context saying an event was successfully created
+    """
+    
+ 
         
         
 
