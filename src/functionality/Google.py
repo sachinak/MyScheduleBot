@@ -20,7 +20,9 @@ async def connect_google(ctx):
     key_data = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "json", "key.json")
     if not os.path.exists(key_data):
         print('''Api Key file does not exist. Please refer to readme to add key and restart program''')
-        sys.exit("Thank You for Using MapThat")
+        await channel.send('''Api Key file does not exist. Please refer to readme to add key and restart program''')
+        sys.exit("Thank You for Using ScheduleBot")
+        return 0
     with open(key_data) as json_file:
         data = json.load(json_file)
         api_key_1 = data["key"]
