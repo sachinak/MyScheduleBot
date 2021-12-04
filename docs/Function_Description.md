@@ -243,6 +243,48 @@
         - A message sent to the context saying an event was successfully created
     """
     
+## Delete_Event.py
+
+### async def delete_event(ctx, arg):
+    """
+    Function:
+        delete_event
+    Description:
+        A existing event is deleted from the user's schedule file
+    Input:
+        ctx: the current context
+        arg: the instance of the bot
+    Output:
+        - A reply saying whether the event was deleted or not
+    """
+## DisplayFreeTIme.py
+
+### async def get_free_time(ctx, bot):
+    """
+    Function:
+        get_free_time
+    Description:
+        giving the user the free time today according to the registered events by calling the function compute_free_time
+    Input:
+        ctx - Discord context window
+        bot - Discord bot user
+    Output:
+        - A message sent to the user channel stating every free time slot that is avaliable today
+    """
+### def compute_free_time(calendarDates):
+    """
+    Function:
+        compute_free_time
+    Description:
+        returning a string that contains the user the free time according to the registered events
+    Input:
+        calendarDates - list of the events that the user has in the calendar
+    Output:
+        - a string stating every free time slot that is avaliable today
+    """
+    
+    
+    
  
         
         
