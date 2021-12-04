@@ -206,6 +206,8 @@ Following are the new features that we have implemented for version 3 :
 #### 3. Adding travel time as a separate event before the actual event
 #### 4. Delete Event from schedule
 #### 5. Daily summary of scheduled events
+#### 6. Code Coverage improvement
+For this version, we have improved the roject's code coverage from 54% to .
 
 ## Future features
 These are example features that could be added to ScheduleBot in the future.
