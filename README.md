@@ -228,7 +228,7 @@ User can delete events from their schedule
 #### 5. Added a new functionality to check daily summary
 Ability to view the daily summary of events
 #### 6. Code Coverage improvement
-For this version, we have improved the project's code coverage from 54% to .
+For this version, we have improved the project's code coverage from 54% to 65%.
 #### 7. Viewing Google Calender events
 User can check their next 10 events in the google calendar
 
