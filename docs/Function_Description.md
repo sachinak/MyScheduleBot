@@ -282,6 +282,48 @@
     Output:
         - a string stating every free time slot that is avaliable today
     """
+## FinaAvailableTime.py
+
+### async def find_avaialbleTime(ctx, client):
+    """
+    Function:
+        find_avaialbleTime
+    Description:
+        Lets the user know about entered time range for event_type
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A new event type is added to the users event_type file
+        - Provides users with the time range for the given event
+    """
+### def findInter(next_event, event_atime, idx, end):
+    """
+    Function:
+        findInter
+    Description:
+        The helper iterator function to find the intersection
+    Input:
+        next_event - available time based on the next event
+        event_atime - a list of available time based on events on date
+        idx - index of the current available time in the list
+        end - lenght of the list
+    Output:
+        - A list of available time for the date
+    """
+### def getEventsOnDate(ctx, stdate):
+    """
+    Function:
+        getEventsOnDate
+    Description:
+        Fetches the events on a particular day
+    Input:
+        ctx - Discord context window
+        yourdate - Date for which events to be pulled
+    Output:
+        - Provides a list of events associated with that day
+    """
+    
     
     
     
