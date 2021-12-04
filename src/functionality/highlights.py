@@ -22,6 +22,10 @@ async def get_highlight(ctx, arg):
     create_event_tree(str(ctx.author.id))
     rows = read_event_file(str(ctx.author.id))
 
+    print(str(ctx.author.id))
+    print("\n\n\n\n\n")
+
+    
     # Initialize variables
     channel = await ctx.author.create_dm()
     event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': '','loc': ''}

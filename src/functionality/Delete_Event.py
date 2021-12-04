@@ -3,7 +3,7 @@ from functionality.highlights import convert_to_12
 from functionality.shared_functions import read_event_file, create_event_tree, delete_event_from_file
 
 
-async def delete_event(ctx, client):
+async def delete_event(ctx, arg):
     """
     Function:
         delete_event
@@ -11,11 +11,11 @@ async def delete_event(ctx, client):
         A existing event is deleted from the user's schedule file
     Input:
         ctx: the current context
-        client: the instance of the bot
+        arg: the instance of the bot
     Output:
         - A reply saying whether the event was deleted or not
     """
-
+ 
     channel = await ctx.author.create_dm()
     await channel.send(
                     "Enter the name of the event from the following to be deleted : "
@@ -26,10 +26,12 @@ async def delete_event(ctx, client):
     # Open and read user's calendar file
     create_event_tree(str(ctx.author.id))
     rows = read_event_file(str(ctx.author.id))
+    print(str(ctx.author.id))
+    print("\n\n\n\n\n")
 
     # Initialize variables
     channel = await ctx.author.create_dm()
-    event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
+    event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': '', 'loc': ''}
     events = []
     eventFlag = False
 
@@ -47,6 +49,7 @@ async def delete_event(ctx, client):
             event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
             event['type'] = row[4]
             event['desc'] = row[5]
+            event['location']=row[6]
             # dates = [event['startDate'], event['endDate']]
 
             events.append(event)
@@ -58,15 +61,20 @@ async def delete_event(ctx, client):
         if len(events) != 0:
             for e in events:
                 embed = discord.Embed(colour=discord.Colour.magenta(), timestamp=ctx.message.created_at,
-                                      title="Your Schedule:")
+                              title="Your Schedule:")
                 embed.set_footer(text=f"Requested by {ctx.author}")
                 embed.add_field(name="Event Name:", value=e['name'], inline=False)
                 embed.add_field(name="Start Time:", value=e['startTime'], inline=True)
                 embed.add_field(name="End Time:", value=e['endTime'], inline=True)
                 embed.add_field(name="Event Type:", value=e['type'], inline=False)
-                embed.add_field(name="Description:", value=e['desc'], inline=False)
-                await ctx.send(embed=embed)
-                # await channel.send(f"You have {e['name']} scheduled , from {e['startTime']} to {e['endTime']}")
+                #embed.add_field(name="Description:", value=e['desc'], inline=False)
+                if 'location' in e.keys():
+                    embed.add_field(name="Location:", value=e['location'], inline=False)
+                else:
+                    embed.add_field(name="Location:", value='None', inline=False)
+                
+                await channel.send(f"You have {e['name']} scheduled , from {e['startTime']} to {e['endTime']}")
+                #await ctx.send(embed=embed)
         else:
             await channel.send("You don't have any event scheduled..!!")
     else:
@@ -76,7 +84,7 @@ async def delete_event(ctx, client):
     # delete the event and event type
     if not eventFlag:
         await channel.send("Please enter the name of the event you want to delete")
-        event_msg = await client.wait_for("message", check=check)  # Waits for user input
+        event_msg = await arg.wait_for("message", check=check)  # Waits for user input
         event_msg = event_msg.content  # Strips message to just the text the user entered
         to_remove = []
 
