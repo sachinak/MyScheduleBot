@@ -137,6 +137,21 @@ When you look for available times, you now can use `!find` to find only the avai
   ```
   pip install -r requirements.txt
   ```
+  
+### Connect to Google Cloud
+  1. Create a Project 
+  2. Setup Billing 
+  3. Enable geocoding API and distancematrix API
+  4. Generate API key-
+      Refer to [this](https://developers.google.com/maps/documentation/geocoding/get-api-key) link for more information about the same.
+  5. Store the API key in the following format-
+      File name: key.json \
+      File Content: 
+      ```
+      {"key": "your api key here"}
+      ```
+  6. Key needs to be stored in the json folder.
+
 ### Run the schedulebot.py
   ```
   python3 schedulebot.py
@@ -201,13 +216,21 @@ Check out the [internal documentation](https://htmlpreview.github.io/?https://gi
 # What's new in V3:
 Following are the new features that we have implemented for version 3 : 
 
-#### 1. Connection to Google
+#### 1. Connection to Google: 
+We have added the functionality to connect the account to google calendar
 #### 2. Adding location of an event
+We are now storing the location data of the events
 #### 3. Adding travel time as a separate event before the actual event
+The bot adds a separate event to block of travel time to an event
 #### 4. Delete Event from schedule
+User can delete events from their schedule
 #### 5. Daily summary of scheduled events
+Ability to view the daily summary of events
 #### 6. Code Coverage improvement
-For this version, we have improved the roject's code coverage from 54% to .
+For this version, we have improved the project's code coverage from 54% to .
+#### 7. Viewing Google Calender events
+User can check their next 10 events in the google calendar
+
 
 ## Future features
 These are example features that could be added to ScheduleBot in the future.
