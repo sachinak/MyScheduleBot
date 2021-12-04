@@ -270,3 +270,15 @@ You can edit the event you created:
 ```
 !eventedit
 ```
+
+### Merge Discord events with Google Calendar
+Try to create a functionality to merge discord events with google calender.
+
+### Replace the current csv format for storing events with Google Calendar
+As of now, the events are stired in a csv format. In the future implementation ,a functionality can be added to store the events in Google Calendar. 
+
+### Edit google events
+In this project, you can edit the events from discord. For future implemetation, a new functionalty can be created to edit events directly from Google Calendar.
+
+### Add a "How to do" documentation for discord connection
+Help user understand the process of adding the Discord bot to their server.
