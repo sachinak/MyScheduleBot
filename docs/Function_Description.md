@@ -1,6 +1,6 @@
 ## schedulebot.py 
 ### async def help(ctx):
-    """
+      
     Function:
         help
     Description:
@@ -9,9 +9,9 @@
         ctx - Discord context window
     Output:
         An embed window sent to the context with all commands/descriptions
-    """
+    
 ### async def on_ready():
-    """
+    
     Function:
         on_ready
     Description:
@@ -21,9 +21,9 @@
         None
     Output:
         The welcome message sent to the ScheduleBot server
-    """
+    
 ### async def on_reaction_add(reaction, user):
-    """
+    
     Function: on_reaction_add
     Description: The bot sends a message to the user when reacting to the server startup message
     and runs the 'help' command
@@ -33,9 +33,9 @@
     Output:
         - A welcome message received as a direct message from the bot
         - The 'help' command is automatically run
-    """
+    
  ### async def schedule(ctx):
-    """
+    
     Function:
         schedule
     Description:
@@ -45,9 +45,9 @@
     Output:
         - A new event added to the user's calendar file
         - A message sent to the context saying an event was successfully created
-    """
+    
 ### async def find(ctx):
-    """
+    
     Function:
         find
     Description:
@@ -57,9 +57,9 @@
     Output:
         - A new event type is added to the users event_type file
         - Provides users with the time range for the given event
-    """
+    
  ### async def day(ctx, arg):
-    """
+    
     Function:
         get_highlight
     Description:
@@ -69,9 +69,9 @@
         arg - User input argument
     Output:
         - A message sent to the context with all the events that start and/or end today
-    """
+    
  ### async def exportfile(ctx):
-    """
+    
     Function:
         exportfile
     Description:
@@ -80,9 +80,9 @@
         ctx - Discord context window
     Output:
         - A CSV file sent to the context that contains a user's scheduled events.
-    """
+    
  ### async def importfile(ctx):
-    """
+    
     Function:
         importfile
     Description:
@@ -91,12 +91,12 @@
         ctx - Discord context window
     Output:
         - Events are added to a users profile.
-    """
+    
 
 ## event_type.py 
 
 ### def get_start_time(self):
-        """
+        
         Function:
             get_start_time
         Description:
@@ -105,9 +105,9 @@
             self - The current event_type object instance
         Output:
             A formatted string of the start time
-        """
+        
  ### def get_end_time(self):
-        """
+        
         Function:
             get_end_time
         Description:
@@ -116,9 +116,9 @@
             self - The current event_type object instance
         Output:
             A formatted string of end time
-        """
+        
 ### def to_list_event(self):
-        """
+        
         Function:
             to_list_event
         Description:
@@ -127,11 +127,11 @@
             self - The current event_type object instance
         Output:
             array - A list with each index being an attribute of the self event_type object
-        """
+        
 ## Event.py
 
 ### def __init__(self, name, start_date, end_date, priority, event_type, description,location="None"):
-        """
+        
         Function:
             __init__
         Description:
@@ -146,9 +146,9 @@
             description - Optional text field that contains any additional notes about an event (can be blank)
         Output:
             - A new Event object instance
-        """
+        
 ### def __lt__(self, other):
-        """
+        
         Function:
             __lt__
         Description:
@@ -159,9 +159,9 @@
         Output:
             True - self starts before other
             False - self starts after other
-        """
+        
 ### def __le__(self, other):
-        """
+        
         Function:
             __le__
         Description:
@@ -172,9 +172,9 @@
         Output:
             True - self starts before or at the same time as other
             False - self comes after other
-        """
+        
 ### def __gt__(self, other):
-        """
+        
         Function:
             __gt__
         Description:
@@ -185,9 +185,9 @@
         Output:
             True - self starts after other
             False - self comes before other
-        """
+        
 ### def intersect(self, other):
-        """
+        
         Function:
             intersect
         Description:
@@ -202,9 +202,9 @@
         Output:
             True - self intersects with other
             False - self does not intersect with other
-        """
+        
 ### def to_list(self):
-        """
+        
         Function:
             to_list
         Description:
@@ -213,5 +213,6 @@
             self - The current Event object instance
         Output:
             array - A list with each index being an attribute of the self Event object
-        """
         
+        
+
