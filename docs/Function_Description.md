@@ -257,7 +257,7 @@
     Output:
         - A reply saying whether the event was deleted or not
     """
-## DisplayFreeTIme.py
+## DisplayFreeTime.py
 
 ### async def get_free_time(ctx, bot):
     """
