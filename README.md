@@ -6,7 +6,7 @@
 [![Build Status](https://app.travis-ci.com/qchen59/ScheduleBot.svg?branch=main)](https://app.travis-ci.com/github/qchen59/ScheduleBot)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/qchen59/ScheduleBot)
 [![GitHub issues](https://img.shields.io/github/issues/qchen59/ScheduleBot)](https://github.com/qchen59/ScheduleBot/issues)
-[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/qchen59/ScheduleBot?include_prereleases)](https://github.com/qchen59/ScheduleBot/releases)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/qchen59/ScheduleBot?include_prereleases)](https://github.com/SEProjGrp5/ScheduleBot/releases)
 [![GitHub all releases](https://img.shields.io/github/downloads/qchen59/ScheduleBot/total)](https://github.com/qchen59/ScheduleBot/releases)
 [![Platform](https://img.shields.io/badge/platform-discord-blue)](https://discord.com/)
 [![codecov](https://codecov.io/gh/SEProjGrp5/ScheduleBot/branch/main/graph/badge.svg?token=Z53J2ZN227)](https://codecov.io/gh/SEProjGrp5/ScheduleBot)
