@@ -17,7 +17,7 @@ Sr. No| Notes|Self-assement|Evidence|
 12|Use of syntax checkers.|0.5|  Evidence in [checker folder](https://github.com/SEProjGrp5/ScheduleBot/tree/main/checkers)| 
 13| Issues reports: there are many|1| Evidence in [issue history](https://github.com/SEProjGrp5/ScheduleBot/projects/2)|
 14|	Use of code formatters. |0.5| Evidence in [checker folder](https://github.com/SEProjGrp5/ScheduleBot/tree/main/checkers) |
-15| Use of style checkers |0.5|Style checker implementation to check code style : Evidence in [Style checker yml file](https://github.com/SEProjGrp5/ScheduleBot/blob/main/checkers/PycharmStyleSyntax.xml)|
+15| Use of style checkers |0.5|Style checker implementation to check code style : Evidence in [Style checker yml file](https://github.com/SEProjGrp5/ScheduleBot/blob/main/checkers/PycharmStyleSyntax.xml) and badge in readme|
 16|	Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code. | 0.5 | Evidence in [readme.md](https://github.com/SEProjGrp5/ScheduleBot#schedulebot)|
 17| test cases exist |0.5| Test cases can be found in [test](https://github.com/SEProjGrp5/ScheduleBot/tree/main/test) folder|
 18| Use of code coverage|0.5|Evidence on [code coverage website](https://app.codecov.io/gh/SEProjGrp5/ScheduleBot) and badge added to readme|--
