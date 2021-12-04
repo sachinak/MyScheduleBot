@@ -137,6 +137,21 @@ When you look for available times, you now can use `!find` to find only the avai
   ```
   pip install -r requirements.txt
   ```
+  
+### Connect to Google Cloud
+  1. Create a Project 
+  2. Setup Billing 
+  3. Enable geocoding API and distancematrix API
+  4. Generate API key-
+      Refer to [this](https://developers.google.com/maps/documentation/geocoding/get-api-key) link for more information about the same.
+  5. Store the API key in the following format-
+      File name: key.json \
+      File Content: 
+      ```
+      {"key": "your api key here"}
+      ```
+  6. Key needs to be stored in the json folder.
+
 ### Run the schedulebot.py
   ```
   python3 schedulebot.py
