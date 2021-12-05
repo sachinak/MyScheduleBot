@@ -324,20 +324,146 @@
         - Provides a list of events associated with that day
     """
 ## FindAvailableTime.py 
-
-## Google.py
+### async def find_avaialbleTime(ctx, client):
+    """
+    Function:
+        find_avaialbleTime
+    Description:
+        Lets the user know about entered time range for event_type
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A new event type is added to the users event_type file
+        - Provides users with the time range for the given event
+    """
 
 ## GoogleEvent.py
+### async def get_events(ctx, arg):
+    '''
+    function oto extract events from google calendar
+    Parameters
+    ----------
+    ctx : Discord context window
+    arg : Discord bot user.
+    Returns
+    -------
+    None.
+    '''
+    
 
 ## create_event_type.py
+### async def create_event_type(ctx, client, event_msg):
+    """
+    Function:
+        create_event_type
+    Description:
+        Walks a user through the creation of types of event or updating time range for existing event types
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A new event type added to the user's calendar file or the time range will be update for the existing event type
+        - A message sent to the context saying an event type was successfully added or updated
+    """
+    
 
 ## delete_event_type.py
+### def delete_type(rows, msg_content):
+    """
+    Function:
+        delete_type
+    Description:
+        A existing event type is deleted from the user's calendar file   
+    Input:
+        rows: lsit of lines in calendar
+        msg_content: event type to be deleted
+    Output:
+        - A existing event type is deleted from the user's calendar file 
+    """
+### def print_type(calendar_lines):
+    """
+    Function:
+        print_type
+    Description:
+        Sends the lsit of all event type in csv file
+    Input:
+        calendar_lines - object for csv.reader for user's calendar file
+    Output:
+        -  Sends the lsit of all event types as list and string
+    """
+### async def delete_event_type(ctx, client):
+    """
+    Function:
+        delete_event_type
+    Description:
+        Walks a user through deleting the existing event types in the calender file
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A existing event type is deleted from the user's calendar file 
+        - A message sent to the context saying an event type was successfully deleted
+    """
+    
 
 ## distance.py
+### def get_key():
+    '''
+    Function to extract API key
+    Returns
+    -------
+    api_key_1 : reutrns the api key for google connection
+    '''
+### def get_lat_log( address,api_key_1):
+    """
+    This function converts a textual address to a set of coordinates
+    address : String
+        the location for which coordinates are needed.
+    Returns
+    -------
+    list
+        the latitude and longitude of the given address using google maps.
+    """
+### def get_distance( dest, src,mode):
+    """
+    this gets the distace matrix which includes the travel time to the event
+    Input:
+    dest : Takes address of location for event as a string.
+    src : Takes coordinates of source address as a list.
+    mode: Takes Mode of transport as a string.
+    Returns:
+    travel time in seconds.
+    """
+    
 
 ## export_file.py
+### async def export_file(ctx):
+    """
+    Function:
+        export_file
+    Description:
+        Sends the user a CSV file containing their scheduled events.
+    Input:
+        ctx - Discord context window
+    Output:
+        - A CSV file sent to the context that contains a user's scheduled events.
+    """
+    
 
 ## highlights.py 
+### async def get_highlight(ctx, arg):
+    """
+    Function:
+        get_highlight
+    Description:
+        Shows the events planned for the day by the user.
+    Input:
+        - ctx - Discord context window
+        - arg - The input arguments which specify the date
+    Output:
+        - A message sent to the context with all the events that start and/or end today
+    """
 
 ## import_file.py
     
