@@ -489,7 +489,7 @@
     Output:
         - the converted string
     """
-def get_ics_data(calendar):
+### def get_ics_data(calendar):
     """
     Function:
         get_ics_data
@@ -500,7 +500,7 @@ def get_ics_data(calendar):
     Output:
         - A pandas table containing the calendar data.
     """
-async def import_file(ctx, client):
+### async def import_file(ctx, client):
     """
     Function:
         importfile
