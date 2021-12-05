@@ -217,7 +217,7 @@
 ## AddEvent.py
 
 ### def check_complete(start, start_date, end, end_date, array):
-    """
+     
     Function:
         check_complete
     Description:
@@ -227,10 +227,10 @@
         end_date - end date
     Output:
         - True if both the date objects are created else False
-    """
+     
     
 ### async def add_event(ctx, client):
-    """
+     
     Function:
         add_event
     Description:
@@ -241,12 +241,12 @@
     Output:
         - A new event added to the user's calendar file
         - A message sent to the context saying an event was successfully created
-    """
+     
     
 ## Delete_Event.py
 
 ### async def delete_event(ctx, arg):
-    """
+     
     Function:
         delete_event
     Description:
@@ -256,11 +256,11 @@
         arg: the instance of the bot
     Output:
         - A reply saying whether the event was deleted or not
-    """
+     
 ## DisplayFreeTime.py
 
 ### async def get_free_time(ctx, bot):
-    """
+     
     Function:
         get_free_time
     Description:
@@ -270,9 +270,9 @@
         bot - Discord bot user
     Output:
         - A message sent to the user channel stating every free time slot that is avaliable today
-    """
+     
 ### def compute_free_time(calendarDates):
-    """
+     
     Function:
         compute_free_time
     Description:
@@ -281,11 +281,11 @@
         calendarDates - list of the events that the user has in the calendar
     Output:
         - a string stating every free time slot that is avaliable today
-    """
+     
 ## FinaAvailableTime.py
 
 ### async def find_avaialbleTime(ctx, client):
-    """
+     
     Function:
         find_avaialbleTime
     Description:
@@ -296,9 +296,9 @@
     Output:
         - A new event type is added to the users event_type file
         - Provides users with the time range for the given event
-    """
+     
 ### def findInter(next_event, event_atime, idx, end):
-    """
+     
     Function:
         findInter
     Description:
@@ -310,9 +310,9 @@
         end - lenght of the list
     Output:
         - A list of available time for the date
-    """
+     
 ### def getEventsOnDate(ctx, stdate):
-    """
+     
     Function:
         getEventsOnDate
     Description:
@@ -322,10 +322,10 @@
         yourdate - Date for which events to be pulled
     Output:
         - Provides a list of events associated with that day
-    """
+     
 ## FindAvailableTime.py 
 ### async def find_avaialbleTime(ctx, client):
-    """
+     
     Function:
         find_avaialbleTime
     Description:
@@ -336,7 +336,7 @@
     Output:
         - A new event type is added to the users event_type file
         - Provides users with the time range for the given event
-    """
+     
 
 ## GoogleEvent.py
 ### async def get_events(ctx, arg):
@@ -354,7 +354,7 @@
 
 ## create_event_type.py
 ### async def create_event_type(ctx, client, event_msg):
-    """
+     
     Function:
         create_event_type
     Description:
@@ -365,12 +365,12 @@
     Output:
         - A new event type added to the user's calendar file or the time range will be update for the existing event type
         - A message sent to the context saying an event type was successfully added or updated
-    """
+     
     
 
 ## delete_event_type.py
 ### def delete_type(rows, msg_content):
-    """
+     
     Function:
         delete_type
     Description:
@@ -380,9 +380,9 @@
         msg_content: event type to be deleted
     Output:
         - A existing event type is deleted from the user's calendar file 
-    """
+     
 ### def print_type(calendar_lines):
-    """
+     
     Function:
         print_type
     Description:
@@ -391,9 +391,9 @@
         calendar_lines - object for csv.reader for user's calendar file
     Output:
         -  Sends the lsit of all event types as list and string
-    """
+     
 ### async def delete_event_type(ctx, client):
-    """
+     
     Function:
         delete_event_type
     Description:
@@ -404,7 +404,7 @@
     Output:
         - A existing event type is deleted from the user's calendar file 
         - A message sent to the context saying an event type was successfully deleted
-    """
+     
     
 
 ## distance.py
@@ -416,7 +416,7 @@
     api_key_1 : reutrns the api key for google connection
     '''
 ### def get_lat_log( address,api_key_1):
-    """
+     
     This function converts a textual address to a set of coordinates
     address : String
         the location for which coordinates are needed.
@@ -424,9 +424,9 @@
     -------
     list
         the latitude and longitude of the given address using google maps.
-    """
+     
 ### def get_distance( dest, src,mode):
-    """
+     
     this gets the distace matrix which includes the travel time to the event
     Input:
     dest : Takes address of location for event as a string.
@@ -434,12 +434,12 @@
     mode: Takes Mode of transport as a string.
     Returns:
     travel time in seconds.
-    """
+     
     
 
 ## export_file.py
 ### async def export_file(ctx):
-    """
+     
     Function:
         export_file
     Description:
@@ -448,12 +448,12 @@
         ctx - Discord context window
     Output:
         - A CSV file sent to the context that contains a user's scheduled events.
-    """
+     
     
 
 ## highlights.py 
 ### async def get_highlight(ctx, arg):
-    """
+     
     Function:
         get_highlight
     Description:
@@ -463,12 +463,12 @@
         - arg - The input arguments which specify the date
     Output:
         - A message sent to the context with all the events that start and/or end today
-    """
+     
 
 ## import_file.py
     
 ### def verify_csv(data):
-    """
+     
     Function:
         verify_csv
     Description:
@@ -477,9 +477,9 @@
         data - A Pandas Dataframe of data pulled from a CSV
     Output:
         - True if the data matches the expectation, false otherwise
-    """
+     
 ### def convert_time(old_str):
-    """
+     
     Function:
         convert_time
     Description:
@@ -488,9 +488,9 @@
         old_str - The string to be converted
     Output:
         - the converted string
-    """
+     
 ### def get_ics_data(calendar):
-    """
+     
     Function:
         get_ics_data
     Description:
@@ -499,9 +499,9 @@
         calendar - The string to be converted
     Output:
         - A pandas table containing the calendar data.
-    """
+     
 ### async def import_file(ctx, client):
-    """
+     
     Function:
         importfile
     Description:
@@ -511,7 +511,7 @@
         client - The Discord chat bot
     Output:
         - Events are added to a users profile.
-    """
+     
     
     
     
@@ -519,4 +519,6 @@
  
         
         
+
+
 
