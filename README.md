@@ -236,18 +236,48 @@ Following are the new features that we have implemented for version 3 :
 
 #### 1. Connection to Google: 
 We have added the functionality to connect the account to google calendar
+
+
+https://user-images.githubusercontent.com/89954066/144730436-29f74af7-36f2-45d0-a8c1-e19b5271b584.mp4
+
+
 #### 2. Adding location of an event
 We are now storing the location data of the events
+
+
+https://user-images.githubusercontent.com/89954066/144730441-a65cbfae-80e5-402a-b362-901dd4f9884d.mp4
+
+
 #### 3. Adding travel time as a separate event before the actual event
 The bot adds a separate event to block of travel time to an event
+
+
+https://user-images.githubusercontent.com/89954066/144730454-1b4c36e7-8230-4f9d-a3df-f4f2d499cc07.mp4
+
+
 #### 4. Delete Event from schedule
 User can delete events from their schedule
+
+
+https://user-images.githubusercontent.com/89954066/144730459-1a12d11f-d9ad-44dc-a823-5e8acdae20c7.mp4
+
+
 #### 5. Added a new functionality to check daily summary
 Ability to view the daily summary of events
+
+
+https://user-images.githubusercontent.com/89954066/144730460-5bc5dca7-7758-4106-8ec1-5ccd287ef5c2.mp4
+
+
 #### 6. Code Coverage improvement
 For this version, we have improved the project's code coverage from 54% to 65%.
+
 #### 7. Viewing Google Calender events
 User can check their next 10 events in the google calendar
+
+
+https://user-images.githubusercontent.com/89954066/144730470-7700507e-b2e9-4175-88c0-749c15097702.mp4
+
 
 
 ## Future features
