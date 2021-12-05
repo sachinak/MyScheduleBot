@@ -39,7 +39,7 @@ With ScheduleBot you can quickly schedule events, state your prefered times for 
 ### Version 3 Submission Video
 Click on the image below to check out the video!
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/7fgGve9_EZc/0.jpg)](http://www.youtube.com/watch?v=7fgGve9_EZc "ScheduleBot CSC 510 Project Group 5 NSCU")
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/HxSX1o8rrgw/0.jpg)](http://www.youtube.com/watch?v=HxSX1o8rrgw "ScheduleBot CSC 510 Project Group 5 NSCU")
 
 ![Setup](docs/img/Startup.gif)
 
