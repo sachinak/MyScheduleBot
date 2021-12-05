@@ -22,7 +22,7 @@
   ::
   <a href="#thought_balloon-for-developers">For Developers</a>
   ::
-  <a href="#dizzy-whats-new-in-v2">What's new in V2</a>
+  <a href="#dizzy-features-in-v2">Features in V2</a>
   ::
   <a href="#muscle-whats-new-in-v3">What's new in V3</a>
 </p>
@@ -178,7 +178,7 @@ When you look for available times, you now can use `!find` to find only the avai
 -   [v2.1](https://github.com/qchen59/ScheduleBot/releases/tag/v2.1.0): Finalized version 2, check what's new in V2
 -   [v3.0](https://github.com/SEProjGrp5/ScheduleBot/releases) Finalized version 3, check out what's new in V3
 
-:dizzy: What's new in V2:
+:dizzy: Features in V2:
 ---
 
 Please note that this is not an exhaustive list, however it does include all major improvements. For a complete list of all changes and bug fixes, please see our closed github issues or commit history.
