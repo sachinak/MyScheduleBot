@@ -323,6 +323,69 @@
     Output:
         - Provides a list of events associated with that day
     """
+## FindAvailableTime.py 
+
+## Google.py
+
+## GoogleEvent.py
+
+## create_event_type.py
+
+## delete_event_type.py
+
+## distance.py
+
+## export_file.py
+
+## highlights.py 
+
+## import_file.py
+    
+### def verify_csv(data):
+    """
+    Function:
+        verify_csv
+    Description:
+        Verifies that CSV data retrieved through pandas matches the expected format
+    Input:
+        data - A Pandas Dataframe of data pulled from a CSV
+    Output:
+        - True if the data matches the expectation, false otherwise
+    """
+### def convert_time(old_str):
+    """
+    Function:
+        convert_time
+    Description:
+        Converts a time string from the YYYY-MM-DD HH:MM:SS format to the mm/dd/yy hh:mm am/pm format
+    Input:
+        old_str - The string to be converted
+    Output:
+        - the converted string
+    """
+def get_ics_data(calendar):
+    """
+    Function:
+        get_ics_data
+    Description:
+        Fethces relevant data from an ICS calendar
+    Input:
+        calendar - The string to be converted
+    Output:
+        - A pandas table containing the calendar data.
+    """
+async def import_file(ctx, client):
+    """
+    Function:
+        importfile
+    Description:
+        Reads a CSV file containing events submitted by the user, and adds those events
+    Input:
+        ctx - Discord context window
+        client - The Discord chat bot
+    Output:
+        - Events are added to a users profile.
+    """
     
     
     
