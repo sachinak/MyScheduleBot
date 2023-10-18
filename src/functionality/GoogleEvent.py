@@ -39,6 +39,7 @@ async def get_events(ctx, arg):
                                                maxResults=10, singleEvents=True, 
                                                orderBy='startTime').execute()
     events = events_result.get('items', [])
+    print(events)
 
     if not events:
         print('No upcoming events found.')

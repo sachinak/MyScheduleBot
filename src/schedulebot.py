@@ -16,8 +16,9 @@ from functionality.import_file import import_file
 from functionality.Google import connect_google
 from functionality.GoogleEvent import get_events
 from functionality.Delete_Event import delete_event
+from functionality.findFreeSlot import find_and_schedule_free_time
 
-bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
+bot = commands.Bot(command_prefix='!',intents=discord.Intents.all())   # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
 g_flag=0
 
@@ -306,6 +307,14 @@ async def freetime(ctx):
     """
     await get_free_time(ctx, bot)
 
+@bot.command()
+async def scheduleEvent(ctx, summary, duration):
+    try:
+        duration = int(duration)  # Convert duration to an integer
+        await find_and_schedule_free_time(ctx, summary=summary, duration=duration)
+    except Exception as e:
+        print(f"An error occurred in the schedule_event command: {e}")
+        await ctx.send(f"An error occurred: {e}")
 
 # Runs the bot (local machine)
 if __name__ == "__main__":
