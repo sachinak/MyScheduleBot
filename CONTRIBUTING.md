@@ -26,6 +26,12 @@ Give the following links a read to understand the working of the project and set
   ```
   pip install -r requirements.txt
   ```
+
+### Install dependencies for discord package
+  ```
+  pip install --pre discord
+  ```
+
 ### Run the schedulebot.py
   ```
   python3 schedulebot.py
