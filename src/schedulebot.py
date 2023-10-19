@@ -45,6 +45,7 @@ async def help(ctx):
     em.add_field(name="scheduleEvent", value="Creates an event for immediate next free slot in Google calendar.\n Here is the format: !scheduleEvent <type> <duration>", inline=False)
     em.add_field(name="ConnectGoogle", value="Connect to Google Calendar", inline=False)
     em.add_field(name="addGoogleEvent", value="Adds specified event to Google Calendar", inline=False)
+    em.add_field(name="gEvent today", value="Gets event from google calendar for today.", inline=False)
     em.add_field(name="freetime", value="Displays when you are available today", inline=False)
     em.add_field(name="day", value="Shows everything on your schedule for a specific date\nHere is the format you "
                                    "should follow:\n!day "
