@@ -168,7 +168,12 @@ When you look for available times, you now can use `!find` to find only the avai
   ```
   pip install -r requirements.txt
   ```
-  
+
+### Install dependencies for discord
+  ```
+  pip install --pre discord
+  ```
+
 ### Connect to Google Cloud
   1. Create a Project 
   2. Setup Billing 
