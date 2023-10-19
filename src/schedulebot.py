@@ -17,6 +17,7 @@ from functionality.Google import connect_google
 from functionality.GoogleEvent import get_events
 from functionality.Delete_Event import delete_event
 from functionality.findFreeSlot import find_and_schedule_free_time
+#from functionality.createGoogleEvent import add_event_to_calendar
 
 bot = commands.Bot(command_prefix='!',intents=discord.Intents.all())   # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
@@ -40,6 +41,7 @@ async def help(ctx):
     )
     em.add_field(name="help", value="Displays all commands and their descriptions", inline=False)
     em.add_field(name="schedule", value="Creates an event", inline=False)
+    em.add_field(name="scheduleEvent", value="Creates an event for immediate next free slot in Google calendar.\n Here is the format: !scheduleEvent <type> <duration>", inline=False)
     em.add_field(name="ConnectGoogle", value="Connect to Google Calendar", inline=False)
     em.add_field(name="freetime", value="Displays when you are available today", inline=False)
     em.add_field(name="day", value="Shows everything on your schedule for a specific date\nHere is the format you "
