@@ -326,7 +326,7 @@ async def scheduleEvent(ctx, summary, duration):
         await ctx.send(f"An error occurred: {e}")
 
 @bot.command(name='addGoogleEvent')
-async def add_event(ctx, summary, start_datetime, end_datetime, location=None):
+async def add_GoogleEvent(ctx, summary, start_datetime, end_datetime, location=None):
     await add_event_to_calendar(ctx, summary, start_datetime, end_datetime, location)
 
 @bot.command(name='gEvent', aliases=['today'])
