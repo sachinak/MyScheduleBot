@@ -137,7 +137,24 @@ When you look for available times, you now can use `!find` to find only the avai
 ---
 
 ### Get your Discord bot 
+ Steps to create your discord bot account. <br />
 
+ 
+ Step1:- Login in the [discord website](https://discord.com/login) or create your account. <br />
+ Step2:- Navigate to the [application page](https://discord.com/developers/applications). <br />
+ Step3:- Click on the “New Application” button. <br />
+ Step4:- Give the application a name and click “Create”. <br />
+ Step5:- Go to the “Bot” tab and then click “Add Bot”. You will have to confirm by clicking "Yes, do it!". <br />
+ Step6:- Keep the default settings for Public Bot (checked) and Require OAuth2 Code Grant (unchecked). <br />
+
+ Steps to invite the Bot to your server <br />
+ Step1:- Go to the "OAuth2" tab. Then select "bot" under the "scopes" section. <br />
+ Step2:- Choose the permissions you want for the bot like send messages, read text and manage channels.<br />
+ <img width="481" alt="Screen Shot 2021-11-03 at 10 15 04 PM" src="https://www.freecodecamp.org/news/content/images/2021/06/image-124.png"> <br />
+ Step3:- Copy the URL and Paste the URL into your browser, choose a server to invite the bot to, and click “Authorize”. <br />
+ Step4:- Add the bot, your account needs "Manage Server" permissions. <br />
+ 
+ 
  Follow this [tutorial](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/) to create your discord bot account.
 
 ### Token
