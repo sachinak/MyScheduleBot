@@ -18,6 +18,7 @@ from functionality.GoogleEvent import get_events
 from functionality.Delete_Event import delete_event
 from functionality.findFreeSlot import find_and_schedule_free_time
 from functionality.createGoogleEvent import add_event_to_calendar
+from functionality.gEvent_today import get_today_events
 
 bot = commands.Bot(command_prefix='!',intents=discord.Intents.all())   # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
@@ -323,6 +324,9 @@ async def scheduleEvent(ctx, summary, duration):
 async def add_event(ctx, summary, start_datetime, end_datetime, location=None):
     await add_event_to_calendar(ctx, summary, start_datetime, end_datetime, location)
 
+@bot.command(name='gEvent', aliases=['today'])
+async def gEvent_today(ctx):
+    await get_today_events(ctx)
 
 # Runs the bot (local machine)
 if __name__ == "__main__":
