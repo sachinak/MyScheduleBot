@@ -147,7 +147,9 @@ When you look for available times, you now can use `!find` to find only the avai
 
  Steps to invite the Bot to your server
  Step1:- Go to the "OAuth2" tab. Then select "bot" under the "scopes" section.
- Step2:- Choose the [permissions](https://www.freecodecamp.org/news/content/images/2021/06/image-124.png) you want for the bot like send messages, read text and manage channels. 
+ Step2:- Choose the permissions 
+ <img width="481" alt="Screen Shot 2021-11-03 at 10 15 04 PM" src="https://www.freecodecamp.org/news/content/images/2021/06/image-124.png">
+ you want for the bot like send messages, read text and manage channels. 
  Step3:- Copy the URL and Paste the URL into your browser, choose a server to invite the bot to, and click “Authorize”.
  Step4:- Add the bot, your account needs "Manage Server" permissions.
  
