@@ -106,6 +106,7 @@ celerybeat.pid
 user_data.json
 token.json
 key.json
+credentials.json
 
 # Environments
 .env
@@ -115,6 +116,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+bin/
 
 # Spyder project settings
 .spyderproject
@@ -143,6 +145,4 @@ schedulebot\ copy.py
 
 # .gitignore 
 config.py
-bin/
-json/credentials.json
 
