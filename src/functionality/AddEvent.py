@@ -177,10 +177,18 @@ async def add_event(ctx, client):
     await channel.send(
         "Tell me what type of event this is. Here are a list of event types I currently know:\n" + output
     )
+    await channel.send(
+        "\n \n Type 'skip' if you don't want to add event type" 
+    )
+    
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
-    await create_event_type(ctx, client, event_msg)  # Running event_type creation subroutine
-    event_array.append(event_msg)
+    if event_msg != "skip":
+        await create_event_type(ctx, client, event_msg)  # Running event_type creation subroutine
+        event_array.append(event_msg)
+    
+    else:
+        event_array.append("")  
     await channel.send("Is this an online event? Yes/No")
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content.lower()
