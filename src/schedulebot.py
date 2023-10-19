@@ -20,6 +20,7 @@ from functionality.findFreeSlot import find_and_schedule_free_time
 from functionality.createGoogleEvent import add_event_to_calendar
 from functionality.gEvent_today import get_today_events
 from functionality.gEvent_date import get_events_for_date
+from functionality.delete_gEvent import delete_google_event
 
 bot = commands.Bot(command_prefix='!',intents=discord.Intents.all())   # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
@@ -48,6 +49,7 @@ async def help(ctx):
     em.add_field(name="addGoogleEvent", value="Adds specified event to Google Calendar", inline=False)
     em.add_field(name="gEvent today", value="Gets event from google calendar for today.", inline=False)
     em.add_field(name="gEvent_date <date>", value="Gets event from google calendar for particular date.", inline=False)
+    em.add_field(name="delete_gEvent", value="Delete an event with particular name.", inline=False)
     em.add_field(name="freetime", value="Displays when you are available today", inline=False)
     em.add_field(name="day", value="Shows everything on your schedule for a specific date\nHere is the format you "
                                    "should follow:\n!day "
@@ -335,6 +337,9 @@ async def gEvent_today(ctx):
 async def gEvent_date(ctx,date_str: str):
     await get_events_for_date(ctx,date_str)
 
+@bot.command(name='delete_gEvent')
+async def delete_gEvent(ctx, event_title:str):
+    await delete_google_event(ctx, event_title)
 # Runs the bot (local machine)
 if __name__ == "__main__":
     from config import TOKEN
