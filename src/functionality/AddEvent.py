@@ -50,9 +50,13 @@ async def add_event(ctx, client):
         return m.content is not None and m.channel == channel and m.author == ctx.author
 
     event_array = []
-    await channel.send("Lets add an event!\n" + "First give me the name of your event:")
+    await channel.send("Lets add an event!\n" + "First give me the name of your event: \n(To exit from creating event type exit)")
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
-    event_msg = event_msg.content  # Strips message to just the text the user entered
+    msg_content = event_msg.content  # Strips message to just the text the user entered
+    if msg_content.lower() == "exit":
+        event_array = []
+        await channel.send("event creation is cancelled")
+        return
     event_array.append(event_msg)
     await channel.send(
         "Now give me the start & end dates for you event. "
@@ -62,7 +66,7 @@ async def add_event(ctx, client):
         + "Or mm/dd/yy hh:mm mm/dd/yy hh:mm (24-hour formatting)"
 
     )
-
+    
     event_dates = False
     # A loop that keeps running until a user enters correct start and end dates for their event following the required format
     # Adds start and end dates to the array if both are valid
@@ -76,6 +80,11 @@ async def add_event(ctx, client):
             event_msg = await client.wait_for("message", check=check)
             # Strips message to just the text the user entered
             msg_content = event_msg.content
+            if msg_content.lower() == "exit":
+                event_array = []
+                await channel.send("event creation is cancelled")
+                return
+            
 
         #print(" yesa  " + str(msg_content))
         if msg_content.__contains__("am") or msg_content.__contains__("pm") or msg_content.__contains__("AM") or msg_content.__contains__("PM"):
@@ -158,11 +167,15 @@ async def add_event(ctx, client):
         )
 
         event_msg = await client.wait_for("message", check=check)  # Waits for user input
-        event_msg = event_msg.content  # Strips message to just the text the user entered
+        msg_content = event_msg.content  # Strips message to just the text the user entered
+        if msg_content.lower() == "exit":
+            event_array = []
+            await channel.send("event creation is cancelled")
+            return
 
         try:
-            if 1 <= int(event_msg) <= 5:
-                event_array.append(event_msg)
+            if 1 <= int(msg_content) <= 5:
+                event_array.append(msg_content)
                 event_priority_set = True  # if entered value is in the range, loop exits
             else:
                 await channel.send(
@@ -182,29 +195,45 @@ async def add_event(ctx, client):
     )
     
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
-    event_msg = event_msg.content  # Strips message to just the text the user entered
-    if event_msg != "skip":
-        await create_event_type(ctx, client, event_msg)  # Running event_type creation subroutine
-        event_array.append(event_msg)    
+    msg_content = event_msg.content  # Strips message to just the text the user entered
+    if msg_content.lower() == "exit":
+        event_array = []
+        await channel.send("event creation is cancelled")
+        return
+    if msg_content.lower() != "skip":
+        await create_event_type(ctx, client, msg_content)  # Running event_type creation subroutine
+        event_array.append(msg_content)    
     else:
         event_array.append("")  
     await channel.send("Is this an online event? Yes/No")
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
-    event_msg = event_msg.content.lower()
-    if event_msg == "yes" or event_msg == "y" or event_msg == "yeah" or event_msg == "yup":
+    msg_content = event_msg.content.lower()
+    if msg_content == "exit":
+        event_array = []
+        await channel.send("event creation is cancelled")
+        return
+    if msg_content == "yes" or msg_content == "y" or msg_content == "yeah" or msg_content == "yup":
         await channel.send("Please enter the event url below.")
         event_msg = await client.wait_for("message", check=check)  # Waits for user input
-        event_msg = event_msg.content
+        msg_content = event_msg.content
+        if msg_content.lower() == "exit":
+            event_array = []
+            await channel.send("event creation is cancelled")
+            return
         valid_link = False
         while not valid_link:
-            valid_link = check_event_url(event_msg)
+            valid_link = check_event_url(msg_content)
             if not valid_link:
                 await channel.send("Please enter a valid event url.")
                 event_msg = await client.wait_for("message", check=check)  # Waits for user input
-                event_msg = event_msg.content
+                msg_content = event_msg.content
+            if msg_content.lower() == "exit":
+                event_array = []
+                await channel.send("event creation is cancelled")
+                return
             else:
                 break
-        event_array.append(event_msg)
+        event_array.append(msg_content)
         event_array.append("")
         event_array.append("")
     else:
@@ -213,27 +242,46 @@ async def add_event(ctx, client):
             "What is the location of the event?(Type None for no location)"
         )
         event_msg = await client.wait_for("message", check=check)  # Waits for user input
-        event_msg = event_msg.content  # Strips message to just the text the user entered
-        event_array.append(event_msg)
-        dest=event_msg
+        msg_content = event_msg.content  # Strips message to just the text the user entered
+        if msg_content.lower() == "exit":
+            event_array = []
+            await channel.send("event creation is cancelled")
+            return
+        event_array.append(msg_content)
+        dest=msg_content
         print(dest)
-        if event_msg !='None':
+        if msg_content !='None':
             await channel.send(
                 "Do you want to block travel time for this event?(Yes/No)"
             )
             event_msg = await client.wait_for("message", check=check)  # Waits for user input
+            msg_content = event_msg.content
+            if msg_content.lower() == "exit":
+                event_array = []
+                await channel.send("event creation is cancelled")
+                return
             travel_flag = event_msg.content
             if travel_flag =='Yes':
                 await channel.send(
                     "Enter exact string out of following modes:[DRIVING, WALKING, BICYCLING, TRANSIT])"
                 )
                 event_msg = await client.wait_for("message", check=check)  # Waits for user input
+                msg_content = event_msg.content
+                if msg_content.lower() == "exit":
+                    event_array = []
+                    await channel.send("event creation is cancelled")
+                    return
                 mode = event_msg.content
                 
                 await channel.send(
                     "Enter source address"
                 )
                 event_msg = await client.wait_for("message", check=check)  # Waits for user input
+                msg_content = event_msg.content
+                if msg_content.lower() == "exit":
+                    event_array = []
+                    await channel.send("event creation is cancelled")
+                    return
                 src = event_msg.content
                 travel_time=get_distance(dest,src,mode)
                 end=event_array[1]
@@ -252,8 +300,12 @@ async def add_event(ctx, client):
         
     await channel.send("Any additional description you want me to add about the event? If not, enter 'done'")
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
-    event_msg = event_msg.content  # Strips message to just the text the user entered
-    if event_msg.lower() == "done":
+    msg_content = event_msg.content  # Strips message to just the text the user entered
+    if msg_content.lower() == "exit":
+        event_array = []
+        await channel.send("event creation is cancelled")
+        return
+    if msg_content.lower() == "done":
         event_array.append("")
     else:
         event_array.append(event_msg)
