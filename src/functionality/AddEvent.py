@@ -177,7 +177,7 @@ async def add_event(ctx, client):
         "Tell me what type of event this is. Here are a list of event types I currently know:\n" + output
     )
     await channel.send(
-        "\n \n Enter skip to not add event type"
+        "\n \n Type 'skip' if you don't want to add event type" 
     )
     
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
