@@ -13,7 +13,7 @@ sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/../src"))
 import pytest
 from datetime import datetime
 
-from functionality.AddEvent import check_complete, add_event  # type: ignore
+from functionality.AddEvent import check_complete, add_event, check_event_url  # type: ignore
 
 
 @pytest.fixture
@@ -51,6 +51,13 @@ def bot(request, event_loop):
 async def test_add_event(bot):
     await test.message("!test_add")
     await asyncio.sleep(.25)
+
+@pytest.mark.asyncio
+async def test_check_event_url():
+    assert check_event_url(" https://ncsu.zoom.us")
+    assert not check_event_url("abc")
+    assert not check_event_url("a.b.c")
+
 
 
 def check_variables1():

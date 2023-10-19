@@ -16,8 +16,13 @@ from functionality.import_file import import_file
 from functionality.Google import connect_google
 from functionality.GoogleEvent import get_events
 from functionality.Delete_Event import delete_event
+from functionality.findFreeSlot import find_and_schedule_free_time
+from functionality.createGoogleEvent import add_event_to_calendar
+from functionality.gEvent_today import get_today_events
+from functionality.gEvent_date import get_events_for_date
+from functionality.delete_gEvent import delete_google_event
 
-bot = commands.Bot(command_prefix="!",intents=discord.Intents.all())  # Creates the bot with a command prefix of '!'
+bot = commands.Bot(command_prefix='!',intents=discord.Intents.all())   # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
 g_flag=0
 
@@ -39,7 +44,12 @@ async def help(ctx):
     )
     em.add_field(name="help", value="Displays all commands and their descriptions", inline=False)
     em.add_field(name="schedule", value="Creates an event", inline=False)
+    em.add_field(name="scheduleEvent", value="Creates an event for immediate next free slot in Google calendar.\n Here is the format: !scheduleEvent <type> <duration>", inline=False)
     em.add_field(name="ConnectGoogle", value="Connect to Google Calendar", inline=False)
+    em.add_field(name="addGoogleEvent", value="Adds specified event to Google Calendar", inline=False)
+    em.add_field(name="gEvent today", value="Gets event from google calendar for today.", inline=False)
+    em.add_field(name="gEvent_date <date>", value="Gets event from google calendar for particular date.", inline=False)
+    em.add_field(name="delete_gEvent", value="Delete an event with particular name.", inline=False)
     em.add_field(name="freetime", value="Displays when you are available today", inline=False)
     em.add_field(name="day", value="Shows everything on your schedule for a specific date\nHere is the format you "
                                    "should follow:\n!day "
@@ -112,7 +122,7 @@ async def on_reaction_add(reaction, user):
             )
             await help(user)
         except:
-            print(user.name + " (" + user.id + ") does not have DM permissions set correctly")
+            print(user.name + " does not have DM permissions set correctly")
             pass
         
 @bot.command()
@@ -306,7 +316,30 @@ async def freetime(ctx):
     """
     await get_free_time(ctx, bot)
 
+@bot.command()
+async def scheduleEvent(ctx, summary, duration):
+    try:
+        duration = int(duration)  # Convert duration to an integer
+        await find_and_schedule_free_time(ctx, summary=summary, duration=duration)
+    except Exception as e:
+        print(f"An error occurred in the schedule_event command: {e}")
+        await ctx.send(f"An error occurred: {e}")
 
+@bot.command(name='addGoogleEvent')
+async def add_GoogleEvent(ctx, summary, start_datetime, end_datetime, location=None):
+    await add_event_to_calendar(ctx, summary, start_datetime, end_datetime, location)
+
+@bot.command(name='gEvent', aliases=['today'])
+async def gEvent_today(ctx):
+    await get_today_events(ctx)
+
+@bot.command()
+async def gEvent_date(ctx,date_str: str):
+    await get_events_for_date(ctx,date_str)
+
+@bot.command(name='delete_gEvent')
+async def delete_gEvent(ctx, event_title:str):
+    await delete_google_event(ctx, event_title)
 # Runs the bot (local machine)
 if __name__ == "__main__":
     from config import TOKEN

@@ -77,13 +77,14 @@ async def get_highlight(ctx, arg):
         # If events are on schedule for today
         if len(events) != 0:
             for e in events:
+                event_link = '' if e['url'] is None or not e['url'] else "\n Link: " + e['url']
                 if e['flag'] == 1:
-                    await channel.send(f"You have {e['name']} scheduled , from {e['startTime']} to {e['endTime']} {'' if e['url'] is None or not e['url'] else "\n Link: " + e['url']}")
+                    await channel.send(f"You have {e['name']} scheduled , from {e['startTime']} to {e['endTime']} {event_link}")
                 elif e['flag'] == 2:
                     await channel.send(
-                        f"You have {e['name']} scheduled, from {e['startTime']} to {e['endTime']} on {e['endDate']} {'' if e['url'] is None or not e['url'] else "\n Link: " + e['url']}")
+                        f"You have {e['name']} scheduled, from {e['startTime']} to {e['endTime']} on {e['endDate']} {event_link}")
                 elif e['flag'] == 3:
-                    await channel.send(f"**You have {e['name']} scheduled, till {e['endTime']} {'' if e['url'] is None or not e['url'] else "\n Link: " + e['url']}**")
+                    await channel.send(f"**You have {e['name']} scheduled, till {e['endTime']} {event_link}**")
         else:
             if day is None:
                 await channel.send("Incorrect input format. \nHere is the format you should follow:\n!day "
