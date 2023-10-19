@@ -143,3 +143,6 @@ schedulebot\ copy.py
 
 # .gitignore 
 config.py
+bin/
+json/credentials.json
+
