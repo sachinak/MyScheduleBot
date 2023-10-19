@@ -3,7 +3,7 @@
 ![Python v3.11](https://img.shields.io/badge/python-v3.11-blue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/manali-teke/MyScheduleBot/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/429946635.svg)](https://zenodo.org/badge/latestdoi/429946635)
-![example workflow](https://github.com/SEProjGrp5/ScheduleBot/actions/workflows/python-app.yml/badge.svg)
+![example workflow](https://github.com/manali-teke/MyScheduleBot/actions/workflows/python-app.yml/badge.svg)
 [![example workflow](https://github.com/manali-teke/MyScheduleBot/actions/workflows/style_checker.yml/badge.svg)](https://github.com/manali-teke/MyScheduleBot/actions/workflows/style_checker.yml)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/manali-teke/MyScheduleBot)
 [![GitHub issues](https://img.shields.io/github/issues/manali-teke/MyScheduleBot)](https://github.com/manali-teke/MyScheduleBot/issues)
