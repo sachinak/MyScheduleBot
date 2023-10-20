@@ -57,3 +57,25 @@ Are e-mails to your support e-mail address received by more than one person? |	Y
 Does your project have a ticketing system to manage bug reports and feature requests? |	Yes | 	Users can report bugs by opening new issue in GH.
 Is your project's ticketing system publicly visible to your users, so they can view bug reports and feature requests? |	Yes |
 Is your software’s architecture and design modular? | 	Yes |	
+Does your software allow data to be imported and exported using open data formats? e.g. GIF, SVG, HTML, XML, tar, zip, CSV, JSON, NetCDF, or domain specific ones |	Yes |
+Does your software allow communications using open communications protocols? e.g. HTTP, FTP, XMPP, SOAP over HTTP,  or domain-specific ones |	No | 
+Is your software cross-platform compatible? |	Yes |
+Does your software adhere to appropriate accessibility conventions or standards? |	Yes |
+Does your documentation adhere to appropriate accessibility conventions or standards? |	Yes |
+Is your source code stored in a repository under revision control? |	Yes |
+Is each source code release a snapshot of the repository? |	Yes |
+Are releases tagged in the repository? |	Yes |
+Is there a branch of the repository that is always stable? (i.e. tests always pass, code always builds successfully) |	Yes |
+Do you provide publicly-available instructions for building your software from the source code? |	Yes |
+Can you build, or package, your software using an automated tool |	No |
+Do you provide publicly-available instructions for deploying your software? |	Yes |
+Does your documentation list all third-party dependencies?* |	Yes |
+Does your documentation list the version number for all third-party dependencies? |	Yes |
+Does your software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional? |	Yes |
+Can you download dependencies using a dependency management tool or package manager? |	Yes |
+Do you have tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful? |	Yes |
+Do you have an automated test suite for your software? | 	Yes |
+Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code? |	No |
+Do you use continuous integration, automatically running tests whenever changes are made to your source code? |	Yes |
+Are your test results publicly visible? |	Yes |
+Are all manually-run tests documented? |	No |
