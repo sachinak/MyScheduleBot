@@ -22,15 +22,13 @@
   ::
   <a href="#thought_balloon-for-developers">For Developers</a>
   ::
-  <a href="#dizzy-features-in-v2">Features in V2</a>
-  ::
-  <a href="#muscle-whats-new-in-v3">What's new in V3</a>
+  <a href="#muscle-whats-new-in-V3.0.2">What's new in V3.0.2</a> 
 </p>
 
-### Version 3 Submission Video
+### Version 3.0.2 Submission Video
 Click on the image below to check out the video!
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/3UVs0_7Tcxk/0.jpg)](http://www.youtube.com/watch?v=3UVs0_7Tcxk "ScheduleBot CSC 510 Project Group 5 NSCU")
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/3UVs0_7Tcxk/0.jpg)](https://youtu.be/qQlPuJNerMA "ScheduleBot CSC 510 Project Group 5 NSCU")
 
 ScheduleBot is a Python application that helps you calendarize events and work through a Discord bot. Want to try it out? Simply follow the steps outlined in the [For Developers](#For-Developers) section. ScheduleBot can be configured to run on your Discord server by adding just one line of code!
 
@@ -199,8 +197,9 @@ When you look for available times, you now can use `!find` to find only the avai
 -   [v2.0](https://github.com/qchen59/ScheduleBot/releases/tag/v2.0.0): First version 2 release with import/export events function, find available time feature, also supports 24 hour time format and event priority.
 -   [v2.1](https://github.com/qchen59/ScheduleBot/releases/tag/v2.1.0): Finalized version 2, check what's new in V2
 -   [v3.0](https://github.com/SEProjGrp5/ScheduleBot/releases) Finalized version 3, check out what's new in V3
+-   [v3.0.2](https://github.com/SEProjGrp5/ScheduleBot/releases) Finalized version 3, check out what's new in V3.0.2
 
-:dizzy: Features in V2:
+:dizzy: Features in V3:
 ---
 
 Please note that this is not an exhaustive list, however it does include all major improvements. For a complete list of all changes and bug fixes, please see our closed github issues or commit history.
@@ -249,68 +248,64 @@ Thank you for caring for this project and getting involved. To start, please che
 
 Check out the [internal documentation](https://htmlpreview.github.io/?https://github.com/qchen59/ScheduleBot/blob/main/docs/src/index.html) if you want to contribute or find out about the inner workings of ScheduleBot.
 
-:muscle: What's new in V3:
+:muscle: What's new in V3.0.2:
 ---
 Following are the new features that we have implemented for version 3 : 
 
-#### 1. Connection to Google: 
-We have added the functionality to connect the account to google calendar
+#### 1. Quick event creation: 
+We have added the functionality to add an event in immediate free slot in google calendar for the given duration.
 
 
-https://user-images.githubusercontent.com/89954066/144730436-29f74af7-36f2-45d0-a8c1-e19b5271b584.mp4
+https://github.com/manali-teke/MyScheduleBot/assets/67600147/73ed9e02-9350-4f4e-bca4-9dd1ed1f04a6
 
 
-#### 2. Adding location of an event
-We are now storing the location data of the events
+
+#### 2. Add Online event
+Added feature to add URLs when scheduling online events.
 
 
-https://user-images.githubusercontent.com/89954066/144730441-a65cbfae-80e5-402a-b362-901dd4f9884d.mp4
+https://github.com/manali-teke/MyScheduleBot/assets/67600147/e17db504-22c8-481f-9066-de581b2e106d
 
 
-#### 3. Adding travel time as a separate event before the actual event
-The bot adds a separate event to block of travel time to an event
+#### 3. Add Events to Google Calendar
+The bot adds a event directly to Google calendar.
 
 
-https://user-images.githubusercontent.com/89954066/144730454-1b4c36e7-8230-4f9d-a3df-f4f2d499cc07.mp4
+https://github.com/manali-teke/MyScheduleBot/assets/67600147/19aad285-6d9d-4e74-8527-6a07ffde27aa
 
 
-#### 4. Delete Event from schedule
-User can delete events from their schedule
+
+#### 4. Deleting Events from Google Calendar
+User can delete events from google calendar.
 
 
-https://user-images.githubusercontent.com/89954066/144730459-1a12d11f-d9ad-44dc-a823-5e8acdae20c7.mp4
+https://github.com/manali-teke/MyScheduleBot/assets/67600147/faa6be68-d874-4386-85a7-a8fd833a309e
 
 
-#### 5. Added a new functionality to check daily summary
-Ability to view the daily summary of events
+
+#### 5. Fetching events for today or particular date from Google calendar
+Users can check the events for today or any particular date from google calendar
+
+Check event for today
+
+https://github.com/manali-teke/MyScheduleBot/assets/67600147/6df00d31-b857-407a-a05b-b873c0df6cff
+
+Check event for a specific date
+
+https://github.com/manali-teke/MyScheduleBot/assets/67600147/f5edb98e-f2d7-45e7-a6ee-98d0a5fd9835
 
 
-https://user-images.githubusercontent.com/89954066/144730460-5bc5dca7-7758-4106-8ec1-5ccd287ef5c2.mp4
+#### 6. Cancelling event creation
+User can exit from while scheduling an event if they no longer want to continue.
 
 
-#### 6. Code Coverage improvement
-For this version, we have improved the project's code coverage from 54% to 65%.
-
-#### 7. Viewing Google Calender events
-User can check their next 10 events in the google calendar
-
-
-https://user-images.githubusercontent.com/89954066/144730470-7700507e-b2e9-4175-88c0-749c15097702.mp4
+https://github.com/manali-teke/MyScheduleBot/assets/67600147/481dc110-5184-42e0-9353-ac414e460571
 
 
 
 ## Future features
 These are example features that could be added to ScheduleBot in the future.
 
-### Quick event creation
-
-You can quickly create a new event with the command
-
-```
-!schedulefind type X
-```
-
-It will find and schedule the first available X contiguous hours, on your preferred hours of the specified `type`.
 
 ### Suggest event removals
 When Your entire day is scheduled
@@ -325,14 +320,9 @@ You can edit the event you created:
 !eventedit
 ```
 
-### Merge Discord events with Google Calendar
-Try to create a functionality to merge discord events with google calender.
+### Feature for creating repeating events
+### Send invite feature for group schedules
+### Feature to add reminder to an event
 
-### Replace the current csv format for storing events with Google Calendar
-As of now, the events are stired in a csv format. In the future implementation ,a functionality can be added to store the events in Google Calendar. 
 
-### Edit google events
-In this project, you can edit the events from discord. For future implemetation, a new functionalty can be created to edit events directly from Google Calendar.
 
-### Add a "How to do" documentation for discord connection
-Help user understand the process of adding the Discord bot to their server.
