@@ -1,4 +1,4 @@
-**A. Project 2 Video Demonstration** *[Youtube Link]()*
+**A. Project 2 Video Demonstration** *[Youtube Link](https://youtu.be/qQlPuJNerMA)*
 
  **B. RUBRIC SCORES**
 
