@@ -79,3 +79,25 @@ Do you have a framework to periodically (e.g. nightly) run your tests on the lat
 Do you use continuous integration, automatically running tests whenever changes are made to your source code? |	Yes |
 Are your test results publicly visible? |	Yes |
 Are all manually-run tests documented? |	No |
+Does your project have resources (e.g. blog, Twitter, RSS feed, Facebook page, wiki, mailing list) that are regularly updated with information about your software? |	No |	
+Does your website state how many projects and users are associated with your project? |	NA |	
+Do you provide success stories on your website? |	NA |	
+Do you list your important partners and collaborators on your website? |	NA |	
+Do you list your project's publications on your website or link to a resource where these are available?|	NA |	
+Do you list third-party publications that refer to your software on your website or link to a resource where these are available? |	NA |	
+Can users subscribe to notifications to changes to your source code repository?* |	Yes |	Using watching option on Github
+If your software is developed as an open source project (and, not just a project developing open source software), do you have a governance model? |	Yes |	
+Do you accept contributions (e.g. bug fixes, enhancements, documentation updates, tutorials) from people who are not part of your project? |	Yes |	
+Do you have a contributions policy? |	Yes |	
+Is your contributions' policy publicly available? |	Yes |	
+Do contributors keep the copyright/IP of their contributions?|	Yes |
+Does your website and documentation clearly state the copyright owners of your software and documentation? |	Yes |	
+Does each of your source code files include a copyright statement? |	No |	
+Does your website and documentation clearly state the licence of your software? |	Yes |	
+Is your software released under an open source licence? |	Yes |	MIT License
+Is your software released under an OSI-approved open-source licence? |	Yes |	
+Does each of your source code files include a licence header? |	No |	
+Do you have a recommended citation for your software?* |	Yes |
+Does your website or documentation include a project roadmap (a list of project and development milestones for the next 3, 6 and 12 months)? |	Yes |
+Does your website or documentation describe how your project is funded, and the period over which funding is guaranteed? |	NA |
+Do you make timely announcements of the deprecation of components, APIs, etc.? |	No |
