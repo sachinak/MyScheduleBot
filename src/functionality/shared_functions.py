@@ -4,7 +4,7 @@ from pathlib import Path
 from Event import Event
 from datetime import datetime
 from cryptography.fernet import Fernet
-
+from DAO.models.event import *
 
 def create_type_directory():
     """
@@ -102,6 +102,7 @@ def turn_types_to_string(user_id):
     return output
 
 
+#Discard
 def create_event_directory():
     """
     Function: create_event_directory
@@ -113,6 +114,7 @@ def create_event_directory():
         Path(os.path.expanduser("~/Documents/ScheduleBot/Event")).mkdir(parents=True, exist_ok=True)
 
 
+#Discard
 def create_event_file(user_id):
     """
     Function: create_event_file
@@ -122,6 +124,9 @@ def create_event_file(user_id):
     Output: Creates the calendar file if it doesn't exist
     """
     # Checks if the calendar file exists, and creates it if it doesn't
+    query = {"_id":user_id}
+    data = get_one_event_service(query)
+    
     if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv"):
         with open(
             os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv",
@@ -162,6 +167,8 @@ def read_event_file(user_id):
     """
 
     key = load_key(user_id)
+    query = {"user_id":user_id}
+    data = get_all_event_service(query)
     decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
 
     # Opens the current user's csv calendar file
