@@ -169,20 +169,35 @@ def read_event_file(user_id):
     key = load_key(user_id)
     query = {"user_id":user_id}
     data = get_all_event_service(query)
-    decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
+    rows = []
+    temp1 = []
+    temp2 = []
+    cnt = 0
+    for record in data:
+        temp3 = []
+        for key in record:
+            if cnt == 0:
+                temp1.append(key)
+                cnt+=1
+            temp3.append(data[key])
+        temp2.append(temp3)
+    
+    rows = [temp1, temp2]
 
-    # Opens the current user's csv calendar file
-    with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv", "r") as calendar_lines:
-        calendar_lines = csv.reader(calendar_lines, delimiter=",")
-        rows = []
-        # Stores the current row in an array of rows if the row is not a new-line character
-        # This check prevents an accidental empty lines from being kept in the updated file
-        for row in calendar_lines:
-            if len(row) > 0:
-                rows.append(row)
+    # decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
+
+    # # Opens the current user's csv calendar file
+    # with open(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv", "r") as calendar_lines:
+    #     calendar_lines = csv.reader(calendar_lines, delimiter=",")
+    #     rows = []
+    #     # Stores the current row in an array of rows if the row is not a new-line character
+    #     # This check prevents an accidental empty lines from being kept in the updated file
+    #     for row in calendar_lines:
+    #         if len(row) > 0:
+    #             rows.append(row)
 
 
-    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
+    # encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
     return rows
 
 def add_event_to_file(user_id, current):
