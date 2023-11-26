@@ -156,13 +156,19 @@ When you look for available times, you now can use `!find` to find only the avai
  Follow this [tutorial](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/) to create your discord bot account.
 
 ### Token
-  To "login" to your bot through our program, place a file named `config.py` in your src directory with the content:
   
+  #### Create an environment variable called `TOKEN` in your host machine with your Discord Bot Token 
+
+  OR
+
+  #### Navigate to `./src/config.py`. It looks like this
+  ```python
+import os
+TOKEN = os.getenv("TOKEN") if os.getenv("TOKEN") else "YOUR DISCORD BOT TOKEN" 
   ```
-  TOKEN = ************(your discord bot token)
-  ```
+  Replace `YOUR DISCORD API TOKEN` with your Discord Bot token.
   
-### Intall required packages
+### Install required packages
   ```
   pip install -r requirements.txt
   ```
@@ -191,7 +197,18 @@ When you look for available times, you now can use `!find` to find only the avai
   python3 schedulebot.py
   ```
   Then your scheduleBot should start working.
-  
+
+
+## Docker Support
+Navigate to `docker-build` directory and create `.env` file and configure the environment variables as per `env-example` file.
+
+### Create and run the build using docker-compose
+
+```
+docker-compose up -d
+```
+
+
 ## Releases
 -   [v1.1](https://github.com/lyonva/ScheduleBot/releases/tag/v1.1): First functional release
 -   [v2.0](https://github.com/qchen59/ScheduleBot/releases/tag/v2.0.0): First version 2 release with import/export events function, find available time feature, also supports 24 hour time format and event priority.

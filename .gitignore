@@ -109,6 +109,7 @@ key.json
 credentials.json
 
 # Environments
+.env
 .venv
 env/
 venv/
@@ -143,5 +144,4 @@ schedulebot\ copy.py
 .vscode
 
 # .gitignore 
-config.py
 

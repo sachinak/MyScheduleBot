@@ -144,4 +144,4 @@ schedulebot\ copy.py
 .vscode
 
 # .gitignore 
-config.py
+build_config

@@ -1,0 +1,10 @@
+version: '3.1'
+services:
+  schedule_bot_app:
+    build: ../
+    image: schedule_bot_app
+    container_name: schedule_bot_app
+    restart: always
+    environment:
+      TOKEN: ${TOKEN}
+

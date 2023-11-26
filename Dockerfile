@@ -8,8 +8,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-COPY .env ./src/config.py
-
-RUN rm .env 
-
 CMD [ "python", "/usr/src/app/src/schedulebot.py" ]
