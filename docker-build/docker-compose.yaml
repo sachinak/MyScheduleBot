@@ -5,18 +5,21 @@ services:
     image: schedule_bot_app
     container_name: schedule_bot_app
     restart: always
-    env_file:
-      - .env
+    environment:
+      - TOKEN: ${TOKEN}
+      - CONNECTION_STRING: "mongodb://${HANDLER}:${HANDLER_PASSWD}@mongo:27017/Schedulebot?authSource=admin"
+    depends_on:
+      - mongo
 
   mongo:
-    image: mongo:5.0.14
+    image: mongo:4.6.0
     container_name: mongo
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-      TASK_HANDLER: ${TASK_HANDLER}
-      TASK_HANDLER_PASSWORD: ${TASK_HANDLER_PASSWORD}
+      HANDLER: ${HANDLER}
+      HANDLER_PASSWD: ${HANDLER_PASSWD}
     volumes:
       - ./mongo-entrypoint/:/docker-entrypoint-initdb.d/
       - ../mongo-data:/data/db
