@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 log = logging.getLogger('dao_log')
 
 
-async def create_schedule_service(id, obj, tenant):
+async def create_schedule_service(id, obj, tenant="Schedulebot"):
     try:
         log.debug("Entering create_schedule_service")
         records_inserted = await insert_one_record('schedule', obj, tenant)
@@ -21,7 +21,7 @@ async def create_schedule_service(id, obj, tenant):
         return str(e)
 
 
-async def edit_schedule_service(id, updated_keys_obj, tenant):
+async def edit_schedule_service(id, updated_keys_obj, tenant="Schedulebot"):
     try:
         log.debug('Entering edit_schedule_service')
         obj_id = ObjectId(id)
@@ -36,7 +36,7 @@ async def edit_schedule_service(id, updated_keys_obj, tenant):
         log.error(str(e))
         return str(e)
 
-async def delete_schedule_service(id, tenant):
+async def delete_schedule_service(id, tenant="Schedulebot"):
     try:
         log.debug('Entering delete_schedule_service')
         obj_id = ObjectId(id)
@@ -51,7 +51,7 @@ async def delete_schedule_service(id, tenant):
         log.error(str(e))
         return str(e)
 
-async def get_one_schedule_service(query, tenant):
+async def get_one_schedule_service(query, tenant="Schedulebot"):
     try:
         log.debug("Entering get_one_schedule_service")
         if query.get('_id'):
@@ -69,7 +69,7 @@ async def get_one_schedule_service(query, tenant):
         log.error(str(e))
         return str(e)
 
-async def get_all_schedules_service(query, tenant, exclude_obj={}):
+async def get_all_schedules_service(query, tenant="Schedulebot", exclude_obj={}):
     try:
         log.debug("Entering get_all_schedules_service")
         if query.get('_id'):
