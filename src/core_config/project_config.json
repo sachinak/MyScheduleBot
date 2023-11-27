@@ -1,0 +1,5 @@
+{
+  "log_level": "DEBUG",
+  "mongo_url": "18.222.126.209",
+  "mongo_port": 37037
+}
