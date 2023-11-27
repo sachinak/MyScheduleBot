@@ -1,8 +1,5 @@
-set -e
-
 mongosh <<EOF
 use $MONGO_INITDB_DATABASE
-
 
 db.createCollection("Schedulebot")
 db.createUser({
