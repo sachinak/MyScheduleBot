@@ -1,4 +1,3 @@
-# ©<2021> - Wow Labz, Bangalore, India. All rights Reserved.
 import motor.motor_asyncio
 import logging
 from core_config.core_config import get_config_value

@@ -1,4 +1,3 @@
-# ©<2021> - Wow Labz, Bangalore, India. All rights Reserved.
 import logging
 from DAO.utils.database_utils import delete_one_record, find_all_records, find_one_record, insert_one_record, update_one_record
 from bson.objectid import ObjectId
