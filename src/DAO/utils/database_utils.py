@@ -7,7 +7,7 @@ from DAO.database_connector import client, db
 # MONGO_DETAILS = "mongodb://" + get_config_value('mongo_url') + ':' + str(get_config_value('mongo_port'))
 # client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 
-async def find_one_record(collection, query, tenant="db", exclude_obj={}):
+async def find_one_record(collection, query, tenant="Schedulebot", exclude_obj={}):
     try:
         log.debug("Entering find_one_record")
         database = db
@@ -27,7 +27,7 @@ async def find_one_record(collection, query, tenant="db", exclude_obj={}):
         raise ex
 
 
-async def insert_one_record(collection, data, tenant="db"):
+async def insert_one_record(collection, data, tenant="Schedulebot"):
     try:
         log.debug("Entering insert_one_record")
         database = db
@@ -40,7 +40,7 @@ async def insert_one_record(collection, data, tenant="db"):
         raise ex
 
 
-async def find_all_records(collection, query, tenant="db", exclude_obj={}):
+async def find_all_records(collection, query, tenant="Schedulebot", exclude_obj={}):
     try:
         log.debug("Entering find_all_records")
         data_list = []
@@ -59,7 +59,7 @@ async def find_all_records(collection, query, tenant="db", exclude_obj={}):
         raise ex
 
 
-async def update_one_record(collection, query, data, tenant="db"):
+async def update_one_record(collection, query, data, tenant="Schedulebot"):
     try:
         log.debug("Entering update_one_record")
         database = db
@@ -75,7 +75,7 @@ async def update_one_record(collection, query, data, tenant="db"):
         raise ex
 
 
-async def update_all_records(collection, query, data, tenant="db"):
+async def update_all_records(collection, query, data, tenant="Schedulebot"):
     try:
         log.debug("Entering update_all_records")
         database = db
@@ -91,7 +91,7 @@ async def update_all_records(collection, query, data, tenant="db"):
         raise ex
 
 
-async def delete_one_record(collection, query, tenant="db"):
+async def delete_one_record(collection, query, tenant="Schedulebot"):
     try:
         log.debug("Entering delete_one_record")
         database = db
@@ -106,7 +106,7 @@ async def delete_one_record(collection, query, tenant="db"):
         log.error("Exception occurred in delete_one_record: " + str(ex))
         raise ex
 
-async def delete_many_record(collection, query, tenant="db"):
+async def delete_many_record(collection, query, tenant="Schedulebot"):
     try:
         log.debug("Entering delete_many_record")
         database = db
