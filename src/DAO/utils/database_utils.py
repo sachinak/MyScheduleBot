@@ -3,9 +3,17 @@ import motor.motor_asyncio
 import logging
 from core_config.core_config import get_config_value
 log = logging.getLogger("dao_log")
-from DAO.database_connector import client, db
+from DAO.database_connector import create_db_connection
 # MONGO_DETAILS = "mongodb://" + get_config_value('mongo_url') + ':' + str(get_config_value('mongo_port'))
 # client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
+
+try:
+    db = create_db_connection()
+except Exception as ex:
+    log.error("Exception occured " + str(ex))
+    raise ex
+
+
 
 async def find_one_record(collection, query, tenant="Schedulebot", exclude_obj={}):
     try:

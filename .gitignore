@@ -143,4 +143,4 @@ schedulebot\ copy.py
 .vscode
 
 # .gitignore 
-
+mongo-data
