@@ -1,11 +1,7 @@
 import pymongo
-from config import connection_string, db_name
-
-
-client = pymongo.MongoClient(connection_string)
-db = client[db_name]
+from config import CONNECTION_STRING
 
 def create_db_connection():
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
+    client = pymongo.MongoClient(CONNECTION_STRING)
+    db = client["Schedulebot"]
     return db
