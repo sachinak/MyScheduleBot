@@ -1,3 +1,4 @@
+# MIT license
 class Event:
 
     def __init__(self, name, start_date, end_date, priority, event_type, event_url="",location="None", description=""):

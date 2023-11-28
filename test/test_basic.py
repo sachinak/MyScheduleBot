@@ -1,3 +1,4 @@
+# MIT license
 import pytest
 
 def test_python():

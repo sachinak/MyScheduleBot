@@ -1,3 +1,4 @@
+# MIT license
 class event_type:
 
     def __init__(self, event_name, start_time, end_time):

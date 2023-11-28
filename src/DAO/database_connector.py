@@ -1,3 +1,4 @@
+# MIT license
 import pymongo
 from config import CONNECTION_STRING
 

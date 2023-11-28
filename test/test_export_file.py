@@ -1,3 +1,4 @@
+# MIT license
 import sys, os
 import asyncio
 import discord
