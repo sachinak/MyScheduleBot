@@ -16,8 +16,9 @@ Kabirsingh Karamjeetsingh Bhatia (kbhatia@ncsu.edu)
 Arohan Ajit (aajit@ncsu.edu)
 Sachin Kanth (sakanth@ncsu.edu)
 
-Proj3 Demo Link: https://youtu.be/8GkJYRQYblc
+Proj3 Demo Link: https://youtu.be/Qs1I-oxVBGU
 
 # Summary
 - Migrated the application from using .csv files to using MongoDB.
 - Added docker support and GUI web interface for the database.
+- Improved handling of environment variables
