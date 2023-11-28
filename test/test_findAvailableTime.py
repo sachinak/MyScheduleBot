@@ -1,3 +1,4 @@
+# MIT license
 """
 TESTING Find available time based on the preferred time and events
 """

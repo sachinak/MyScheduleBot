@@ -1,3 +1,4 @@
+# MIT license
 # From https://stackoverflow.com/questions/25827160/importing-correctly-with-pytest
 # Change current working directory so test case can find the source files
 import sys, os

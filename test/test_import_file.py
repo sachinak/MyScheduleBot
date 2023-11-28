@@ -1,3 +1,4 @@
+# MIT license
 import asyncio
 import sys, os
 
