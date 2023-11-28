@@ -21,13 +21,9 @@ Use of style checkers|	3 | 	pylintrc, pycodestyle.config style checker files pre
 Use of code formatters |	3 |	PycharmStyleSyntax.xml format checker  files present - [GH Repo](https://github.com/sachinak/MyScheduleBot/actions)|
 Use of syntax checkers.|	3 |	PycharmStyleSyntax.xml format checker files present -[GH Repo](https://github.com/sachinak/MyScheduleBot/actions)|
 Use of code coverage |	2 |	travis.yml and codecoverage badge - [GH Repo](https://github.com/sachinak/MyScheduleBot/actions)|
-
 Other automated analysis tools |	3 |	CI/CD pipeline used - [GH Repo](https://github.com/sachinak/MyScheduleBot/actions)|
-
 Test cases exist |	3 |	Test cases in test directory - [GH repo](https://github.com/sachinak/MyScheduleBot/tree/main/test) |
-
 Test cases are routinely executed |	1 |	[GH repo](https://github.com/sachinak/MyScheduleBot/tree/main/test)|
-
 The files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up |	3  |	Added instructions about changing client_id, project_id and client_secret in credentials.json which caused errors - [GH repo](https://github.com/sachinak/MyScheduleBot) |
 Issues are discussed before they are closed |	3 | 	Regular discussions befroe and after raising issues | 
 Chat channel: exists |	3 |[[Link]](https://chat.whatsapp.com/HEyGX9EGA4MAcaqFAvoxrM) [[Screenshot]](https://github.com/sachinak/MyScheduleBot/blob/main/docs/chatChannel.png)|
