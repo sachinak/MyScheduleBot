@@ -24,7 +24,7 @@ def verify_csv(data):
         - True if the data matches the expectation, false otherwise
     """
 
-    if data.columns[0] != "ID":
+    if data.columns[0] != "DISCORD_ID":
         return False
     if data.columns[1] != "Name":
         return False
@@ -191,12 +191,12 @@ async def import_file(ctx, client):
         return
 
     # creates an event tree if one doesn't exist yet.
-    create_event_tree(str(ctx.author.id))
+    await create_event_tree(str(ctx.author.id))
 
     for index, row in data.iterrows():
         print(convert_time(row['Start Date']) + ' ' + convert_time(row['End Date']))
         time_period = parse_period(convert_time(row['Start Date']) + ' ' + convert_time(row['End Date']))
         current = Event(row['Name'], time_period[0], time_period[1], row['Priority'], row['Type'], row["Url"], row['Location'], row['Notes'])
-        add_event_to_file(str(ctx.author.id), current)
+        await add_event_to_file(str(ctx.author.id), current)
 
     await channel.send("Your events were successfully added!")

@@ -19,8 +19,8 @@ async def get_highlight(ctx, arg):
     day = get_date(arg)
 
     # Open and read user's calendar file
-    create_event_tree(str(ctx.author.id))
-    rows = read_event_file(str(ctx.author.id))
+    await create_event_tree(str(ctx.author.id))
+    rows = await read_event_file(str(ctx.author.id))
 
     print(str(ctx.author.id))
     print("\n\n\n\n\n")

@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 log = logging.getLogger('dao_log')
 
 
-async def create_event_service(id, obj, tenant="Schedulebot"):
+async def create_event_service(obj, tenant="Schedulebot"):
     try:
         log.debug("Entering create_event_service")
         records_inserted = await insert_one_record('event', obj, tenant)
@@ -50,13 +50,13 @@ async def delete_event_service(id, tenant="Schedulebot"):
         log.error(str(e))
         return str(e)
 
-def get_one_event_service(query, tenant="Schedulebot"):
+async def get_one_event_service(query, tenant="Schedulebot"):
     try:
         log.debug("Entering get_one_event_service")
         if query.get('_id'):
             query['_id'] = ObjectId(query['_id'])
         exclude_obj = {'_id':False}
-        record_fetched = find_one_record('event', query, tenant, exclude_obj)
+        record_fetched = await find_one_record('event', query, tenant, exclude_obj)
         if record_fetched:
             log.debug("Exiting get_one_event_service")
             record_fetched['_id'] = str(query['_id'])
@@ -68,13 +68,13 @@ def get_one_event_service(query, tenant="Schedulebot"):
         log.error(str(e))
         return str(e)
 
-def get_all_event_service(query, tenant="Schedulebot", exclude_obj={}):
+async def get_all_event_service(query, tenant="Schedulebot", exclude_obj={}):
     try:
         log.debug("Entering get_all_event_service")
         if query.get('_id'):
             query['_id'] = ObjectId(query['_id'])
         
-        record_fetched = find_all_records('event', query, tenant)
+        record_fetched = await find_all_records('event', query, tenant)
         if record_fetched:
             records = list(record_fetched)
             for record in records:

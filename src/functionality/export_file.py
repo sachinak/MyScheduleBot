@@ -26,7 +26,7 @@ async def export_file(ctx):
     # Checks if the calendar csv file exists, and creates it if it does not
     if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv"):
         create_event_directory()
-        create_event_file(user_id)
+        await create_event_file(user_id)
 
     key = load_key(user_id)
     decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")

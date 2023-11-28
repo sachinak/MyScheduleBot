@@ -290,8 +290,8 @@ async def add_event(ctx, client):
                 
                 current = Event("Travel",strt, end, "1", "", "", "")
                 await channel.send("Your Travel event was successfully created!")
-                create_event_tree(str(ctx.author.id))
-                add_event_to_file(str(ctx.author.id), current)
+                await create_event_tree(str(ctx.author.id))
+                await add_event_to_file(str(ctx.author.id), current)
             
             
             
@@ -318,8 +318,8 @@ async def add_event(ctx, client):
         print(event_array)
         current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4], event_array[5],event_array[6], event_array[7])
         await channel.send("Your event was successfully created!")
-        create_event_tree(str(ctx.author.id))
-        add_event_to_file(str(ctx.author.id), current)
+        await create_event_tree(str(ctx.author.id))
+        await add_event_to_file(str(ctx.author.id), current)
     except Exception as e:
         # Outputs an error message if the event could not be created
         print(e)

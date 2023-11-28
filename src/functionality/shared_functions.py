@@ -115,7 +115,7 @@ def create_event_directory():
 
 
 #Discard
-def create_event_file(user_id):
+async def create_event_file(user_id):
     """
     Function: create_event_file
     Description: Checks if the calendar file exists, and creates it if it doesn't
@@ -124,8 +124,9 @@ def create_event_file(user_id):
     Output: Creates the calendar file if it doesn't exist
     """
     # Checks if the calendar file exists, and creates it if it doesn't
-    query = {"_id":user_id}
-    data = get_one_event_service(query)
+    query = {"user_id":user_id}
+    # print("\n\n\n\ncreate_event_file QUery:", query)
+    data = await get_one_event_service(query)
     
     if not os.path.exists(os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv"):
         with open(
@@ -134,7 +135,7 @@ def create_event_file(user_id):
             newline="",
         ) as new_file:
             csvwriter = csv.writer(new_file, delimiter=",")
-            csvwriter.writerow(["ID", "Name", "Start Date", "End Date", "Priority", "Type", "Notes","Location"])
+            csvwriter.writerow(["DISCORD_ID", "Name", "Start Date", "End Date", "Priority", "Type", "Notes","Location"])
 
         key = check_key(user_id)
         encrypt_file(key , os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
@@ -144,7 +145,7 @@ def create_event_file(user_id):
 
 
 
-def create_event_tree(user_id):
+async def create_event_tree(user_id):
     """
     Function: create_event_tree
     Description: Checks if the calendar directory and file exists, and creates them if they don't
@@ -153,10 +154,10 @@ def create_event_tree(user_id):
     Output: Creates the calendar folder and file if they don't exist
     """
     create_event_directory()
-    create_event_file(user_id)
+    await create_event_file(user_id)
 
 
-def read_event_file(user_id):
+async def read_event_file(user_id):
     """
     Function: read_event_file
     Description: Reads the calendar file and creates a list of rows
@@ -168,19 +169,24 @@ def read_event_file(user_id):
 
     key = load_key(user_id)
     query = {"user_id":user_id}
-    data = get_all_event_service(query)
+    # print("\n\n\n\nuser_id", user_id)
+    # print("query:", query)
+    data = await get_all_event_service(query)
+    # print("\n\n\nData:", data)
     rows = []
     temp1 = []
     temp2 = []
     cnt = 0
-    for record in data:
-        temp3 = []
-        for key in record:
-            if cnt == 0:
-                temp1.append(key)
-                cnt+=1
-            temp3.append(data[key])
-        temp2.append(temp3)
+    if data:
+        for record in data:
+            temp3 = []
+            for key in record:
+                # print("\n\nKey:", key)
+                if cnt == 0:
+                    temp1.append(key)
+                    cnt+=1
+                temp3.append(record[key])
+            temp2.append(temp3)
     
     rows = [temp1, temp2]
 
@@ -200,7 +206,7 @@ def read_event_file(user_id):
     # encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
     return rows
 
-def add_event_to_file(user_id, current):
+async def add_event_to_file(user_id, current):
     """
     Function: add_event_to_file
     Description: Adds an event to the calendar file in chronological order
@@ -210,7 +216,9 @@ def add_event_to_file(user_id, current):
     Output: None
     """
     line_number = 0
-    rows = read_event_file(user_id)
+    # print("\n\n\n\n======>>>>>>>>>>>>>HEHEHEHEHEHEHEH")
+    # print("UserID==>", user_id)
+    rows = await read_event_file(user_id)
     # If the file already has events
     if len(rows) > 1:
         for i in rows:
@@ -249,11 +257,27 @@ def add_event_to_file(user_id, current):
         csvwriter = csv.writer(calendar_file)
         csvwriter.writerows(rows)
 
+
+    cur_list = current.to_list()
+    obj = {"user_id":user_id,
+           'DISCORD_ID':cur_list[0],
+            'Name':cur_list[1],
+            'Start Date':cur_list[2],
+            'End Date':cur_list[3],
+            'Priority':cur_list[4],
+            'Type':cur_list[5],
+            'Url':cur_list[6],
+            'Location':cur_list[7],
+            'Notes':cur_list[8]}
+    
+    # print("\n\n\n\n\n\n")
+    await create_event_service(obj)
+
     key = load_key(user_id)
     encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
 
-def delete_event_from_file(user_id, to_remove):
-    rows = read_event_file(user_id)
+async def delete_event_from_file(user_id, to_remove):
+    rows = await read_event_file(user_id)
     typeRows = read_type_file(user_id)
     print("Rowns: "+rows.__str__())
 

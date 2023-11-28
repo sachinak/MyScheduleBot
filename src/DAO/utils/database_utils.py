@@ -2,20 +2,28 @@ import motor.motor_asyncio
 import logging
 from core_config.core_config import get_config_value
 log = logging.getLogger("dao_log")
+import asyncio
+from motor.motor_asyncio import AsyncIOMotorClient
 from DAO.database_connector import client, db
 # MONGO_DETAILS = "mongodb://" + get_config_value('mongo_url') + ':' + str(get_config_value('mongo_port'))
 # client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 
-def find_one_record(collection, query, tenant="Schedulebot", exclude_obj={}):
+async def find_one_record(collection, query, tenant="Schedulebot", exclude_obj={}):
     try:
         log.debug("Entering find_one_record")
+        # client = AsyncIOMotorClient("mongodb://localhost:27017/")
+        # database = client["Schedulebot"]
+        # database = client['testDB']
         database = db
-        #database = client['testDB']
+        # print("\n\n\nDB:", db)
         collection_obj = database.get_collection(collection)
+        # print("\n\n\ncollection", collection_obj)
+        # print("\n\n\nCount", collection_obj.count())
         if exclude_obj:
-            obj_found = collection_obj.find_one(query, exclude_obj)
+            obj_found = await collection_obj.find_one(query, exclude_obj)
         else:
-            obj_found = collection_obj.find_one(query)
+            obj_found = await collection_obj.find_one(query)
+        # print("Object Foound:", obj_found)
         if obj_found:
             if obj_found.get('_id'):
                 obj_found['_id'] = str(obj_found['_id'])
@@ -39,24 +47,26 @@ async def insert_one_record(collection, data, tenant="Schedulebot"):
         raise ex
 
 
-def find_all_records(collection, query, tenant="Schedulebot", exclude_obj={}):
+async def find_all_records(collection, query, tenant="Schedulebot", exclude_obj={}):
     try:
         log.debug("Entering find_all_records")
         data_list = []
         database = db
         collection_obj = database.get_collection(collection)
-        if exclude_obj:
-            for obj_data in collection_obj.find(query, exclude_obj):
+        if exclude_obj: 
+            async for obj_data in collection_obj.find(query, exclude_obj):
+                data_list.append(obj_data)
+
+            async for obj_data in collection_obj.find(query, exclude_obj):
                 data_list.append(obj_data)
         else:
-            for obj_data in collection_obj.find(query):
+            async for obj_data in collection_obj.find(query):
                 data_list.append(obj_data)
         log.debug("Exiting find_all_records")
         return data_list
     except Exception as ex:
         log.error("Exception occurred in find_all_records: " + str(ex))
         raise ex
-
 
 async def update_one_record(collection, query, data, tenant="Schedulebot"):
     try:

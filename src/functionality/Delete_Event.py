@@ -24,8 +24,8 @@ async def delete_event(ctx, arg):
         return m.content is not None and m.channel == channel and m.author == ctx.author
 
     # Open and read user's calendar file
-    create_event_tree(str(ctx.author.id))
-    rows = read_event_file(str(ctx.author.id))
+    await create_event_tree(str(ctx.author.id))
+    rows = await read_event_file(str(ctx.author.id))
     print(str(ctx.author.id))
     print("\n\n\n\n\n")
 
@@ -102,7 +102,7 @@ async def delete_event(ctx, arg):
                     to_remove.append(e)
                     print("Attempting to delete")
                     print("Row to be deleted " + e.__str__())
-                    delete_event_from_file(str(ctx.author.id), e)
+                    await delete_event_from_file(str(ctx.author.id), e)
                     print("Deleted")
                     await channel.send(f"The event: {e['name']} was deleted..!!")
                 else:
