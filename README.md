@@ -6,7 +6,7 @@
 ![example workflow](https://github.com/manali-teke/MyScheduleBot/actions/workflows/python-app.yml/badge.svg)
 [![example workflow](https://github.com/manali-teke/MyScheduleBot/actions/workflows/style_checker.yml/badge.svg)](https://github.com/manali-teke/MyScheduleBot/actions/workflows/style_checker.yml)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/manali-teke/MyScheduleBot)
-[![GitHub issues](https://img.shields.io/github/issues/manali-teke/MyScheduleBot)](https://github.com/manali-teke/MyScheduleBot/issues)
+[![GitHub issues](https://img.shields.io/github/issues/sachinak/MyScheduleBot)](https://github.com/sachinak/MyScheduleBot/issues)
 [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/SEProjGrp5/ScheduleBot?display_name=release)](https://github.com/SEProjGrp5/ScheduleBot/releases)
 [![GitHub all releases](https://img.shields.io/github/downloads/SEProjGrp5/ScheduleBot/total)](https://github.com/SEProjGrp5/ScheduleBot/releases)
 [![Platform](https://img.shields.io/badge/platform-discord-blue)](https://discord.com/)
@@ -24,6 +24,11 @@
   ::
   <a href="#muscle-whats-new-in-V3.0.2">What's new in V3.0.2</a> 
 </p>
+
+
+### Version 3.0.3 Submission
+#### Check out Project 3 Directory
+
 
 ### Version 3.0.2 Submission Video
 Click on the image below to check out the video!
@@ -162,7 +167,7 @@ When you look for available times, you now can use `!find` to find only the avai
   TOKEN = ************(your discord bot token)
   ```
   
-### Intall required packages
+### Install required packages
   ```
   pip install -r requirements.txt
   ```
@@ -191,6 +196,15 @@ When you look for available times, you now can use `!find` to find only the avai
   python3 schedulebot.py
   ```
   Then your scheduleBot should start working.
+
+## Docker Support
+
+In `docker-build` directory, copy `env-example` into a `.env` file in the same directory and write the needed configurations.
+Then run
+```sh
+docker-compose up
+```
+
   
 ## Releases
 -   [v1.1](https://github.com/lyonva/ScheduleBot/releases/tag/v1.1): First functional release
