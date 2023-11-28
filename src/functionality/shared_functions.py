@@ -174,7 +174,6 @@ def read_event_file(user_id):
             if len(row) > 0:
                 rows.append(row)
 
-
     encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
     return rows
 

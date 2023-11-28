@@ -315,6 +315,7 @@ async def add_event(ctx, client):
 
     # Tries to create an Event object from the user input
     try:
+        print("EVENT ARRAY: ")
         print(event_array)
         current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4], event_array[5],event_array[6], event_array[7])
         await channel.send("Your event was successfully created!")

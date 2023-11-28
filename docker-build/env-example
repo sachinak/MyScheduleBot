@@ -1,0 +1,8 @@
+TOKEN= "DISCORD BOT TOKEN" # Your discord bot token
+MONGO_INITDB_ROOT_USERNAME="MONGO ROOT USERNAME" # Mongodb root username
+MONGO_INITDB_ROOT_PASSWORD="MONGO ROOT PASSWORD" # Mongodb root password
+MONGO_INITDB_USER="SchedulebotHandler" # Handler that interacts with the Mongodb on behalf of application
+MONGO_INITDB_PWD="SchedulebotPassword" # Handler password
+MONGO_EXPRESS_HOST_PORT=8081 # Where you want to host the mongo-express web interface
+ME_CONFIG_BASICAUTH_USERNAME="admin1" # mongo-express web interface username
+ME_CONFIG_BASICAUTH_PASSWORD="pass1" # mongo-express web interface password
