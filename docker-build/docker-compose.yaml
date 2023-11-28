@@ -20,7 +20,6 @@ services:
       MONGO_INITDB_DATABASE: Schedulebot
       MONGO_INITDB_USER: ${MONGO_INITDB_USER}
       MONGO_INITDB_PWD: ${MONGO_INITDB_PWD}
-
     volumes:
       - ./mongo-entrypoint/:/docker-entrypoint-initdb.d/
       - ./mongo-data:/data/db
@@ -36,3 +35,5 @@ services:
       ME_CONFIG_BASICAUTH_USERNAME: ${ME_CONFIG_BASICAUTH_USERNAME}
       ME_CONFIG_BASICAUTH_PASSWORD: ${ME_CONFIG_BASICAUTH_PASSWORD}
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/
+    depends_on:
+      - mongo
