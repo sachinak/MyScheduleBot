@@ -27,7 +27,7 @@ Test cases exist |	3 |	Test cases in test directory - [GH repo](https://github.c
 Test cases are routinely executed |	1 |	[GH repo](https://github.com/manali-teke/MyScheduleBot/tree/main/test)|
 The files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up |	3  |	Added instructions about changing client_id, project_id and client_secret in credentials.json which caused errors - [GH repo](https://github.com/SEProjGrp5/ScheduleBot) |
 Issues are discussed before they are closed |	3 | 	Regular discussions befroe and after raising issues | 
-Chat channel: exists |	NA |	-|
+Chat channel: exists |	Yes |[[Link]](https://chat.whatsapp.com/HEyGX9EGA4MAcaqFAvoxrM) [[Screenshot]](https://github.com/manali-teke/MyScheduleBot/blob/main/docs/chatChannel.png)|
 Test cases: a large proportion of the issues related to handling failing cases |	2 | 	Issues wih labels - [GH issues](https://github.com/manali-teke/MyScheduleBot/issues) | 
 Evidence that the whole team is using the same tools: everyone can get to all tools and files |	3 |	Commit history of files have different contributors  - [GH](https://github.com/manali-teke/MyScheduleBot) |
 Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people) |	 3 | 	Commit history - [GH](https://github.com/manali-teke/MyScheduleBot) |

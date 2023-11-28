@@ -345,6 +345,8 @@ if __name__ == "__main__":
     from config import TOKEN
     from DAO.database_connector import *
     create_db_connection()
+    from DAO.database_connector import *
+    create_db_connection()
     bot.run(TOKEN)
 
 # client.run(os.environ['TOKEN'])  # Runs the bot (repl.it)
