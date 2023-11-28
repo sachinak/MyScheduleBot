@@ -35,6 +35,7 @@ import pytz
 async def add_event_to_calendar(ctx, summary, start_datetime, end_datetime, location=None):
     # Load Google Calendar credentials
     SCOPES = ['https://www.googleapis.com/auth/calendar']
+    channel = await ctx.author.create_dm()
     
     token_file = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))), "json", "token.json")
