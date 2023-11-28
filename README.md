@@ -7,7 +7,8 @@
 [![example workflow](https://github.com/manali-teke/MyScheduleBot/actions/workflows/style_checker.yml/badge.svg)](https://github.com/manali-teke/MyScheduleBot/actions/workflows/style_checker.yml)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/manali-teke/MyScheduleBot)
 [![GitHub issues](https://img.shields.io/github/issues/sachinak/MyScheduleBot)](https://github.com/sachinak/MyScheduleBot/issues)
-[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/SEProjGrp5/ScheduleBot?display_name=release)](https://github.com/SEProjGrp5/ScheduleBot/releases)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/sachinak/MyScheduleBot
+)](https://github.com/sachinak/MyScheduleBot/releases)
 [![GitHub all releases](https://img.shields.io/github/downloads/SEProjGrp5/ScheduleBot/total)](https://github.com/SEProjGrp5/ScheduleBot/releases)
 [![Platform](https://img.shields.io/badge/platform-discord-blue)](https://discord.com/)
 [![codecov](https://codecov.io/gh/SEProjGrp5/ScheduleBot/branch/main/graph/badge.svg?token=Z53J2ZN227)](https://codecov.io/gh/SEProjGrp5/ScheduleBot)
