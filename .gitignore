@@ -137,6 +137,7 @@ dmypy.json
 .pyre/
 
 # Important Variables
+config.py
 schedulebot\ copy.py
 
 # VSCode
