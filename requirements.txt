@@ -21,3 +21,4 @@ google-resumable-media==1.2.0
 googleapis-common-protos==1.52.0
 googlemaps==4.5.3
 motor
+pymongo
