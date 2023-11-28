@@ -212,6 +212,7 @@ docker-compose up
 -   [v2.1](https://github.com/qchen59/ScheduleBot/releases/tag/v2.1.0): Finalized version 2, check what's new in V2
 -   [v3.0](https://github.com/SEProjGrp5/ScheduleBot/releases) Finalized version 3, check out what's new in V3
 -   [v3.0.2](https://github.com/SEProjGrp5/ScheduleBot/releases) Finalized version 3, check out what's new in V3.0.2
+-   [v3.0.3](https://github.com/sachinak/MyScheduleBot/releases) Finalized version 3.0.3
 
 :dizzy: Features in V3:
 ---
